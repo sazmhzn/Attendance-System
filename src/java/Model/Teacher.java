@@ -15,6 +15,10 @@ public class Teacher {
     
     public Teacher() {
     }
+
+    public Teacher(user user) {
+        this.user = user;
+    }
     
     public Teacher(user user, Subject[] subjects) {
         this.user = user;

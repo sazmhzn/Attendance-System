@@ -12,6 +12,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
     <title>Teacher</title>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <meta content="" name="description" />
     <meta content="" name="keywords" />
 
@@ -310,7 +311,7 @@
         </li><!-- End Student Nav -->
       
       <li class="nav-item">
-          <a class="nav-link collapsed" href="./AttendanceSheet.html">
+          <a class="nav-link" href="PageChange?page=Teacher">
             <i class="bi bi-person"></i>
             <span> Teacher</span>
           </a>
@@ -344,22 +345,65 @@
         <h1>Teacher</h1>
         <nav>
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="dashboard.html">Home</a></li>
-            <li class="breadcrumb-item"><a href="studentList.html">Students</a></li>
-            <li class="breadcrumb-item active">Add Students</li>
+            <li class="breadcrumb-item"><a href="dashboard.html">Teacher</a></li>
+            <li class="breadcrumb-item active">Teacher details</li>
+            <!--<li class="breadcrumb-item ">Add Students</li>-->
           </ol>
         </nav>
+        
+        <button class="btn btn-primary"> <a href="PageChange?page=addTeacher"> Add teacher </a>  </button>
       </div>
       <!-- End Page Title -->
 
       <section class="section dashboard">
         <div class="row">
-        
-          <div class="row">
-            <div class="col-lg-6">
-              
-            </div>
-          </div>
+             <!-- Top Selling -->
+            <div class="col-12">
+              <div class="card top-selling overflow-auto">
+
+                <div class="card-body pb-0">
+                  <h5 class="card-title">Teacher list </h5>
+
+                  <table class="table table-borderless">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Teacher name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Password</th>
+                        <th scope="col">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+               
+                      <tr>
+                        <th scope="row">1</th>
+                        <td><a href="#" class="text-primary fw-bold">Sus pisious</a></td>
+                        <td>sus@gmail.com</td>
+                        <td class="fw-bold">Patan, lalitpur</td>
+                        <td>98411223456</td>
+                        <td>sus</td>
+                        <td>picous</td>
+                        <td> <a href="UserServlet?page=teacherEdit&teach_id=1"> edit </a> <a href="UserServlet?page=teacherDelete&teach_id=1" class="text-danger"> delete </a>  </td>
+                      </tr>
+                      <c:forEach  items="${employeeList}" var="employee">
+                    <tr>
+                        <td >${employee.id}</td>
+                        <td>${employee.username}</td>
+                        <td>${employee.password}</td>
+                        <td><a href="RegisterServlet?page=userDetails&user=${employee.id}">user details</a></td>
+                    </tr>
+                </c:forEach>
+                    </tbody>
+                  </table>
+
+                </div>
+
+              </div>
+            </div><!-- End Top Selling -->
         </div>
       </section>
     </main>

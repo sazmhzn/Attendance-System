@@ -1,10 +1,5 @@
-<%-- 
-    Document   : AddTeacher
-    Created on : Mar 14, 2023, 9:27:23 AM
-    Author     : lenovo
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%-- Document : AddTeacher Created on : Mar 14, 2023, 9:27:23 AM Author : lenovo
+--%> <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -45,10 +40,7 @@
       rel="stylesheet"
     />
 
-    <link
-      href="Styling/assets/vendor/quill/quill.snow.css"
-      rel="stylesheet"
-    />
+    <link href="Styling/assets/vendor/quill/quill.snow.css" rel="stylesheet" />
 
     <link
       href="Styling/assets/vendor/quill/quill.bubble.css"
@@ -291,7 +283,7 @@
           </a>
         </li>
         <!-- End Profile Page Nav -->
-        
+
         <li class="nav-item">
           <a class="nav-link collapsed" href="pages-contact.html">
             <i class="bi bi-envelope"></i>
@@ -299,7 +291,7 @@
           </a>
         </li>
         <!-- End Report Page Nav -->
-        
+
         <li class="nav-heading">manage</li>
 
         <li class="nav-item">
@@ -307,24 +299,25 @@
             <i class="bi bi-person"></i>
             <span> Student</span>
           </a>
-        </li><!-- End Student Nav -->
-      
-      <li class="nav-item">
+        </li>
+        <!-- End Student Nav -->
+
+        <li class="nav-item">
           <a class="nav-link collapsed" href="PageChange?page=teacher">
             <i class="bi bi-person"></i>
             <span> Teacher</span>
           </a>
-        </li><!-- End Student Nav -->
-      
-      <li class="nav-item">
+        </li>
+        <!-- End Student Nav -->
+
+        <li class="nav-item">
           <a class="nav-link collapsed" href="./AttendanceSheet.html">
             <i class="bi bi-person"></i>
             <span>Subject</span>
           </a>
-        </li><!-- End Student Nav -->
+        </li>
+        <!-- End Student Nav -->
 
-        
-        
         <li class="nav-heading">Extra</li>
 
         <li class="nav-item">
@@ -345,7 +338,9 @@
         <nav>
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="dashboard.html">Home</a></li>
-            <li class="breadcrumb-item"><a href="studentList.html">Students</a></li>
+            <li class="breadcrumb-item">
+              <a href="studentList.html">Students</a>
+            </li>
             <li class="breadcrumb-item active">Add Students</li>
           </ol>
         </nav>
@@ -354,7 +349,6 @@
 
       <section class="section dashboard">
         <div class="row">
-        
           <div class="row">
             <div class="col-lg-6">
               <div class="card">
@@ -362,7 +356,11 @@
                   <h5 class="card-title">Teacher details Form</h5>
 
                   <!-- Floating Labels Form -->
-                  <form class="row g-3" action="UserServlet?page=addTeacher">
+                  <form
+                    class="row g-3"
+                    action="UserServlet?page=addTeacher"
+                    method="POST"
+                  >
                     <div class="col-md-12">
                       <div class="form-floating">
                         <input
@@ -375,20 +373,20 @@
                         <label for="floatingName">Full Name</label>
                       </div>
                     </div>
-                      
+
                     <div class="col-md-6">
                       <div class="form-floating">
                         <input
-                          type="email"
+                          type="text"
                           class="form-control"
                           id="floatingEmail"
                           placeholder="Teacher name"
-                          name="fullName"
+                          name="username"
                         />
                         <label for="floatingName">Username</label>
                       </div>
                     </div>
-                      
+
                     <div class="col-md-6">
                       <div class="form-floating">
                         <input
@@ -396,36 +394,37 @@
                           class="form-control"
                           id="floatingPassword"
                           placeholder="username"
-                          name="username"
+                          name="password"
                         />
                         <label for="floatingPassword">Password</label>
                       </div>
                     </div>
-                      
+
                     <div class="col-12">
-                        <div class="form-floating">
-                           <input
-                                class="form-control"
-                                placeholder="contact"
-                                id="floatingName"
-                                name="contact"
-                                >
-                            <label for="floatingTextarea">Contact no.</label>
-                        </div>
-                    </div> 
-                    
+                      <div class="form-floating">
+                        <input
+                          class="form-control"
+                          placeholder="contact"
+                          id="floatingName"
+                          name="contact"
+                        />
+                        <label for="floatingTextarea">Contact no.</label>
+                      </div>
+                    </div>
+
                     <div class="col-12">
-                        <div class="form-floating">
-                           <input
-                                class="form-control"
-                                placeholder="email"
-                                id="floatingEmail"
-                                name="Email"
-                                >
-                            <label for="floatingTextarea">Email</label>
-                        </div>
-                    </div>   
-                    
+                      <div class="form-floating">
+                        <input
+                          type="email"
+                          class="form-control"
+                          placeholder="email"
+                          id="floatingEmail"
+                          name="email"
+                        />
+                        <label for="floatingTextarea">Email</label>
+                      </div>
+                    </div>
+
                     <div class="col-12">
                       <div class="form-floating">
                         <input
@@ -433,11 +432,11 @@
                           placeholder="Address"
                           id="floatingTextarea"
                           name="address"
-                        >
+                        />
                         <label for="floatingTextarea">Address</label>
                       </div>
                     </div>
-                      
+
                     <div class="col-md-6">
                       <div class="form-floating mb-3">
                         <select
@@ -458,6 +457,7 @@
                           class="form-select"
                           id="floatingSelect"
                           aria-label="State"
+                          name="section"
                         >
                           <option value="all" selected>All</option>
                           <option value="A">A</option>
@@ -517,4 +517,3 @@
     </script>
   </body>
 </html>
-

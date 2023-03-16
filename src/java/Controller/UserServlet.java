@@ -8,7 +8,6 @@ import Model.Teacher;
 import Model.user;
 import Services.UserServices;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -69,23 +68,18 @@ public class UserServlet extends HttpServlet {
         String page = request.getParameter("page");
         
         if(page.equalsIgnoreCase("addTeacher")) {
-           System.out.println("===================\n\n");
-            String fullName = request.getParameter("fullname");
-            String email = request.getParameter("email");
-            String phone = request.getParameter("phone");
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
-            String address = request.getParameter("address");
-            String course = request.getParameter("course");
-            String section = request.getParameter("section");
+           System.out.println("\n\n===================");
+           System.out.println("addTeacher method\n");
             
             Teacher teacher = new Teacher();
             user u = new user();
             u.setRole("T");
             teacher.setUser(u);
-            teacher.setUser( new user( fullName, email, phone, address, section, course, username, password )); 
+            teacher.setUser( new user( request.getParameter("fullname"), request.getParameter("email"), request.getParameter("contact"), request.getParameter("address"), request.getParameter("section"), request.getParameter("course"), request.getParameter("username"), request.getParameter("password"), "T")); 
+            System.out.println(teacher.getUser().getFullName() + " " + teacher.getUser().getAddress() + " " + teacher.getUser().getUsername() +  " " + teacher.getUser().getPassword());
+            new UserServices().insertTeacher(teacher);
             
-//            new UserServices().in            
+            
         }
         
         

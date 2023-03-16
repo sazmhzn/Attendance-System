@@ -4,6 +4,8 @@
  */
 package Controller;
 
+import Model.Teacher;
+import Services.UserServices;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -11,6 +13,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  *
@@ -86,6 +89,19 @@ public class PageChange extends HttpServlet {
             rd.forward(request, response);
         }
         if (page.equalsIgnoreCase("Teacher")) {
+            
+            if( page.equalsIgnoreCase("ListUser") ) {
+            
+            Teacher model = new Teacher();
+            List<Teacher> employeeList = new UserServices().getUserList();
+            
+            request.setAttribute("employee", model);
+            request.setAttribute("employeeList", employeeList);
+            
+            RequestDispatcher rd = request.getRequestDispatcher("userList.jsp");
+            rd.forward(request, response);
+        }
+            
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/TeacherDetails.jsp");
             rd.forward(request, response);
         }

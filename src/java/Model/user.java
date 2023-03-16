@@ -38,7 +38,7 @@ public class user {
     }
 
     //teacher attributes constructor
-    public user(String fullName, String email, String phone, String address, String section, String course, String username, String password) {
+    public user(String fullName, String email, String phone, String address, String section, String course, String username, String password, String role) {
         this.fullName = fullName;
         this.email = email;
         this.phone = phone;
@@ -47,8 +47,8 @@ public class user {
         this.course = course;
         this.username = username;
         this.password = password;
+        this.role = role;
     }
-    
     
 //  signup constructor
     public user(String username, String password, String role) {

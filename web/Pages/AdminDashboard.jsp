@@ -322,7 +322,7 @@
       </li><!-- End Student Nav -->
       
       <li class="nav-item">
-          <a class="nav-link collapsed" href="PageChange?page=addTeacher">
+          <a class="nav-link collapsed" href="PageChange?page=Teacher">
             <i class="bi bi-person"></i>
             <span>Teacher</span>
           </a>
@@ -643,73 +643,54 @@
         <!-- Right side columns -->
         <div class="col-lg-4">
 
-          <!-- Top Selling -->
-          <div class="col-12">
-            <div class="card top-selling overflow-auto">
+          <!-- Recent Activity -->
+          <div class="card">
+            <div class="filter">
+              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                <li class="dropdown-header text-start">
+                  <h6>Filter</h6>
+                </li>
 
-              <div class="filter">
-                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                  <li class="dropdown-header text-start">
-                    <h6>Filter</h6>
-                  </li>
+                <li><a class="dropdown-item" href="#">Today</a></li>
+                <li><a class="dropdown-item" href="#">This Month</a></li>
+                <li><a class="dropdown-item" href="#">This Year</a></li>
+              </ul>
+            </div>
 
-                  <li><a class="dropdown-item" href="#">Today</a></li>
-                  <li><a class="dropdown-item" href="#">This Month</a></li>
-                  <li><a class="dropdown-item" href="#">This Year</a></li>
-                </ul>
-              </div>
+            <div class="card-body">
+              <h5 class="card-title">Recent Activity <span>| Today</span></h5>
 
-              <div class="card-body pb-0">
-                <h5 class="card-title">Top Attendance </h5>
+              <div class="activity">
 
-                <table class="table table-borderless">
-                  <thead>
-                    <tr>
-                      <th scope="col">ID</th>
-                      <th scope="col">Name</th>
-                      <th scope="col">Percentage</th>
-                      <th scope="col">Total</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row"><a href="#"><img src="Styling/assets/img/product-1.jpg" alt=""></a></th>
-                      <td><a href="#" class="text-primary fw-bold"> nulla</a></td>
-                      <td>90%</td>
-                      <td>26</td>
-                    </tr>
-                    <tr>
-                      <th scope="row"><a href="#"><img src="Styling/assets/img/product-2.jpg" alt=""></a></th>
-                      <td><a href="#" class="text-primary fw-bold"> doloremque</a></td>
-                      <td>90%</td>
-                      <td>23</td>
-                    </tr>
-                    <tr>
-                      <th scope="row"><a href="#"><img src="Styling/assets/img/product-3.jpg" alt=""></a></th>
-                      <td><a href="#" class="text-primary fw-bold">exercitationem</a></td>
-                      <td>90%</td>
-                      <td>20</td>
-                    </tr>
-                    <tr>
-                      <th scope="row"><a href="#"><img src="Styling/assets/img/product-4.jpg" alt=""></a></th>
-                      <td><a href="#" class="text-primary fw-bold">rerum error</a></td>
-                      <td>90%</td>
-                      <td>16</td>
-                    </tr>
-                    <tr>
-                      <th scope="row"><a href="#"><img src="Styling/assets/img/product-5.jpg" alt=""></a></th>
-                      <td><a href="#" class="text-primary fw-bold"> repellendus</a></td>
-                      <td>90%</td>
-                      <td>23</td>
-                    </tr>
-                  </tbody>
-                </table>
+                <div class="activity-item d-flex">
+                  <div class="activite-label">32 min</div>
+                  <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
+                  <div class="activity-content">
+                    New teacher created for <a href="#" class="fw-bold text-dark">Software engineering</a>
+                  </div>
+                </div><!-- End activity item-->
+
+                <div class="activity-item d-flex">
+                  <div class="activite-label">56 min</div>
+                  <i class='bi bi-circle-fill activity-badge text-danger align-self-start'></i>
+                  <div class="activity-content">
+                    Attendance Taken for Advance java
+                  </div>
+                </div><!-- End activity item-->
+
+                <div class="activity-item d-flex">
+                  <div class="activite-label">4 weeks</div>
+                  <i class='bi bi-circle-fill activity-badge text-muted align-self-start'></i>
+                  <div class="activity-content">
+                    Student details modified
+                  </div>
+                </div><!-- End activity item-->
 
               </div>
 
             </div>
-          </div><!-- End Top Selling -->
+          </div><!-- End Recent Activity -->
 
           <!-- Budget Report -->
           <div class="card">
