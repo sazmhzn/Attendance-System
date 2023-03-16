@@ -9,10 +9,12 @@ package Model;
  * @author lenovo
  */
 public class user {
+
     private int id;
     private String fullName;
     private String email;
     private String phone;
+    private String address;
     private String semester;
     private String section;
     private String course;
@@ -21,21 +23,8 @@ public class user {
     private String role;
 
     public user() {
-        
     }
 
-    
-//    Teacher attributes for creating it
-    public user(String fullName, String email, String phone, String course, String username, String password, String role) {
-        this.fullName = fullName;
-        this.email = email;
-        this.phone = phone;
-        this.course = course;
-        this.username = username;
-        this.password = password;
-        this.role = role;
-    }
-    
 //    Geetting the value of the teacher
     public user(int id, String fullName, String email, String phone, String semester, String username, String password, String role) {
         this.id = id;
@@ -47,38 +36,25 @@ public class user {
         this.password = password;
         this.role = role;
     }
+
+    //teacher attributes constructor
+    public user(String fullName, String email, String phone, String address, String section, String course, String username, String password) {
+        this.fullName = fullName;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        this.section = section;
+        this.course = course;
+        this.username = username;
+        this.password = password;
+    }
     
-    //Sign up construstor
+    
+//  signup constructor
     public user(String username, String password, String role) {
         this.username = username;
         this.password = password;
         this.role = role;
-    }
-    
-    
-    
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-    
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public int getId() {
@@ -113,15 +89,13 @@ public class user {
         this.phone = phone;
     }
 
-    public String getCourse() {
-        return course;
+    public String getAddress() {
+        return address;
     }
 
-    public void setCourse(String course) {
-        this.course = course;
+    public void setAddress(String address) {
+        this.address = address;
     }
-    
-    
 
     public String getSemester() {
         return semester;
@@ -130,7 +104,47 @@ public class user {
     public void setSemester(String semester) {
         this.semester = semester;
     }
+
+    public String getSection() {
+        return section;
+    }
+
+    public void setSection(String section) {
+        this.section = section;
+    }
+
+    public String getCourse() {
+        return course;
+    }
+
+    public void setCourse(String course) {
+        this.course = course;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
     
     
-    
+
 }

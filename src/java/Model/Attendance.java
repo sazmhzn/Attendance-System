@@ -10,14 +10,12 @@ import java.time.LocalDate;
  *
  * @author lenovo
  */
-public class Student {
-    private user user;
-    private String semester;
+public class Attendance {
+    private int att_id;
+    private int stud_id;
+    private LocalDate date;
+    private boolean status;
     
-            
-    public Student(user user) {
-        this.user = user;
-    }
     
     
 }

@@ -11,12 +11,12 @@ package Model;
 
 public class Teacher {
     private user user;
-    private String[] subjects;
-
+    private Subject[] subjects;
+    
     public Teacher() {
     }
     
-    public Teacher(user user, String[] subjects) {
+    public Teacher(user user, Subject[] subjects) {
         this.user = user;
         this.subjects = subjects;
     }
@@ -29,11 +29,11 @@ public class Teacher {
         this.user = user;
     }
 
-    public String[] getSubjects() {
+    public Subject[] getSubjects() {
         return subjects;
     }
 
-    public void setSubjects(String[] subjects) {
+    public void setSubjects(Subject[] subjects) {
         this.subjects = subjects;
     }
     

@@ -5,6 +5,8 @@
 package Controller;
 
 import Model.Teacher;
+import Model.user;
+import Services.UserServices;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -71,18 +73,19 @@ public class UserServlet extends HttpServlet {
             String fullName = request.getParameter("fullname");
             String email = request.getParameter("email");
             String phone = request.getParameter("phone");
+            String username = request.getParameter("username");
             String password = request.getParameter("password");
             String address = request.getParameter("address");
             String course = request.getParameter("course");
             String section = request.getParameter("section");
-            String role = "T";
             
             Teacher teacher = new Teacher();
+            user u = new user();
+            u.setRole("T");
+            teacher.setUser(u);
+            teacher.setUser( new user( fullName, email, phone, address, section, course, username, password )); 
             
-            teacher.setUser( fullName,  email,  phone,  semester,  course,  username,  password,  role); {
-            
-        }
-            
+//            new UserServices().in            
         }
         
         

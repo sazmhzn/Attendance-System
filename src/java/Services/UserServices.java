@@ -5,6 +5,7 @@
 package Services;
 
 import DBConnection.DBConnection;
+import Model.Subject;
 import Model.user;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -57,6 +58,38 @@ public class UserServices {
             pstm.setString(1, user.getUsername());
             pstm.setString(2, user.getPassword());
             pstm.setString(3, user.getRole());
+            
+            System.out.println(pstm);
+            
+            pstm.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    } //       insertUser method ends
+       
+       public void insertTeacher(user user) {
+        String query = "INSERT INTO `teacher`(`TEAC_NAME`, `TEAC_ADDRESS`, `TEAC_EMAIL`, `TEAC_PHONE`) VALUES (?,?,?,?)";
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+        try {
+            pstm.setString(1, user.getFullName());
+            pstm.setString(2, user.getAddress());
+            pstm.setString(3, user.getEmail());
+            pstm.setString(4, user.getPhone());
+            
+            System.out.println(pstm);
+            
+            pstm.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+       
+       public void insertSubject(Subject subject) {
+        String query = "INSERT INTO `subject`(`SUB_NAME`, `SUB_CODE`) VALUES (?,?)";
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+        try {
+            pstm.setString(1, subject.getSubject_name());
+            pstm.setString(2, subject.getSubject_code());
             
             System.out.println(pstm);
             
