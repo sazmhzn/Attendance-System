@@ -1,0 +1,55 @@
+
+@import 'values.scss';
+
+@mixin grid($display, $column-start, $column-end, $row-start, $row-end) {
+    display: $display;
+    grid-template-columns: $column-start $column-end;
+    grid-template-rows: $row-start $row-end;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    // outline: 1px solid green;
+}
+
+body {
+    min-height: 100vh;
+    font-family: 'poppins', sans-serif;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+    padding: 16px;
+
+    li {
+        
+        display: flex;
+
+        a {
+            width: 100%;
+        }
+    }
+}
+
+.login-container {
+    height: 80vh;
+}
+
+form {
+    .btn {
+        width: 100%;
+        
+    }
+}
+
+#example_filter, #example_paginate {
+    display: flex;
+    justify-content: flex-end;
+}
