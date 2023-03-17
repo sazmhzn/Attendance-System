@@ -5,6 +5,7 @@
 package Services;
 
 import DBConnection.DBConnection;
+import Model.Student;
 import Model.Teacher;
 import Model.user;
 import java.sql.PreparedStatement;
@@ -138,6 +139,68 @@ public class UserServices {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    
+    /**
+     * This method will insert student in student and account tables
+     * @param student 
+     */
+    public void insertStudent(Student student) {
+        insertUser(student.getUser()); //This method will insert the student details in Accout table
+
+        user newUser = getUser(student.getUser().getUsername(), student.getUser().getPassword());
+
+        System.out.println("\n\n The user id " + student.getUser().getId());
+
+        String query = "INSERT INTO `student`(`STUD_NAME`, `STUD_ADDRESS`, `STUD_EMAIL`, `STUD_SEMESTER`, `ACC_ID`) VALUES (?,?,?,?,?)";
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+        try {
+            pstm.setString(1, student.getUser().getFullName());
+            pstm.setString(2, student.getUser().getAddress());
+            pstm.setString(3, student.getUser().getEmail());
+            pstm.setString(4, student.getSemester());
+            pstm.setInt(5, newUser.getId());
+            System.out.println("insert Teacher query:" + pstm);
+
+            pstm.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    /**
+     * This method will get get the list of student 
+     * @return 
+     */
+    public List<user> getStudentList() {
+        List<user> userList = new ArrayList<>();
+        String query = "SELECT * FROM `teacher` LEFT JOIN `accounts` ON teacher.ACC_ID = accounts.ACC_ID";
+        System.out.println(query);
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+        try {
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                
+                //adding teacher details in user
+                user user = new user();
+                user.setId(rs.getInt("TEAC_ID"));
+                user.setFullName(rs.getString("TEAC_NAME"));
+                user.setAddress(rs.getString("TEAC_ADDRESS"));
+                user.setPhone(rs.getString("TEAC_PHONE"));
+                user.setEmail(rs.getString("TEAC_EMAIL"));
+                user.setUsername(rs.getString("ACC_USERNAME"));
+                user.setPassword(rs.getString("ACC_PASSWORD"));
+
+                Teacher teacher = new Teacher();
+                teacher.setUser(user);
+
+                userList.add(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return userList;
     }
 
 }

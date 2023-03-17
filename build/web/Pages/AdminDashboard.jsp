@@ -294,7 +294,7 @@
         <!-- End Profile Page Nav -->
         
         <li class="nav-item">
-          <a class="nav-link collapsed" href="pages-contact.html">
+          <a class="nav-link collapsed" href="PageChange?page=Report">
             <i class="bi bi-envelope"></i>
             <span>Report</span>
           </a>
@@ -304,22 +304,11 @@
         <li class="nav-heading">manage</li>
 
         <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#student-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-journal-text"></i><span>Students</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="student-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="forms-elements.html">
-              <i class="bi bi-circle"></i><span>Add students</span>
+            <a class="nav-link collapsed" href="PageChange?page=Student">
+                <i class="bi bi-journal-text"></i><span>Students</span>
             </a>
-          </li>
-          <li>
-            <a href="forms-layouts.html">
-              <i class="bi bi-circle"></i><span>Student List</span>
-            </a>
-          </li>
-        </ul>
-      </li><!-- End Student Nav -->
+
+        </li><!-- End Student Nav -->
       
       <li class="nav-item">
           <a class="nav-link collapsed" href="PageChange?page=Teacher">

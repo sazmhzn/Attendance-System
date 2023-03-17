@@ -294,7 +294,7 @@
         <!-- End Profile Page Nav -->
         
         <li class="nav-item">
-          <a class="nav-link collapsed" href="pages-contact.html">
+          <a class="nav-link collapsed" href="PageChange?page=Report">
             <i class="bi bi-envelope"></i>
             <span>Report</span>
           </a>
@@ -304,7 +304,7 @@
         <li class="nav-heading">manage</li>
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="./AttendanceSheet.html">
+          <a class="nav-link collapsed" href="PageChange?page=Student">
             <i class="bi bi-person"></i>
             <span> Student</span>
           </a>
@@ -372,28 +372,54 @@
                         <th scope="col">Email</th>
                         <th scope="col">Address</th>
                         <th scope="col">Phone</th>
-                        <th scope="col">Username</th>
-                        <th scope="col">Password</th>
+                        
                         <th scope="col">Action</th>
                       </tr>
                     </thead>
                     <tbody>
                
-                      <c:forEach  items="${employeeList}" var="employee">
-                    <tr>
-                        <td  scope="row">${employee.id}</td>
-                        <td>${employee.fullName}</td>
-                        <td>${employee.email}</td>
-                        <td>${employee.address}</td>
-                        <td>${employee.phone}</td>
-                        <td>${employee.username}</td>
-                        <td>${employee.password}</td>
-                        <td>
-                            <a href="UserServet?page=editTeacher&userId=${employee.id}">edit</a>
-                            <a href="UserServet?page=deleteTeacher&userId=${employee.id}" class=text-danger>delete</a>
-                        </td>
-                    </tr>
-                </c:forEach>
+                        <c:forEach  items="${employeeList}" var="employee">
+                            <tr>
+                                <td  scope="row">${employee.id}</td>
+                                <td>${employee.fullName}</td>
+                                <td>${employee.email}</td>
+                                <td>${employee.address}</td>
+                                <td>${employee.phone}</td>
+                                <td>
+                                    
+                                    <button type="button" class="btn btn-primary" >
+                                      <a href="UserServet?page=editTeacher&userId=${employee.id}" class="text-light">edit</a>  
+                                    </button>
+                                    
+                                    
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        Delete
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Are you sure?</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    You cannot undo this action
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Nope</button>
+                                                    <button type="button" class="btn btn-primary">
+                                                        <a href="UserServet?page=editTeacher&userId=${employee.id}" class="text-light">Sure</a> 
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </c:forEach>
                     </tbody>
                   </table>
 
@@ -432,9 +458,15 @@
 
     <!-- Custome JS File -->
     <script>
-      $(document).ready(function () {
-        $("#example").DataTable();
-      });
+//      $(document).ready(function () {
+//        $("#example").DataTable();
+//      });
+var myModal = document.getElementById('myModal')
+var myInput = document.getElementById('myInput')
+
+myModal.addEventListener('shown.bs.modal', function () {
+  myInput.focus()
+})
     </script>
   </body>
 </html>
