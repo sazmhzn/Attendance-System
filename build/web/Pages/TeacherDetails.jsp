@@ -379,22 +379,19 @@
                     </thead>
                     <tbody>
                
-                      <tr>
-                        <th scope="row">1</th>
-                        <td><a href="#" class="text-primary fw-bold">Sus pisious</a></td>
-                        <td>sus@gmail.com</td>
-                        <td class="fw-bold">Patan, lalitpur</td>
-                        <td>98411223456</td>
-                        <td>sus</td>
-                        <td>picous</td>
-                        <td> <a href="UserServlet?page=teacherEdit&teach_id=1"> edit </a> <a href="UserServlet?page=teacherDelete&teach_id=1" class="text-danger"> delete </a>  </td>
-                      </tr>
                       <c:forEach  items="${employeeList}" var="employee">
                     <tr>
-                        <td >${employee.id}</td>
+                        <td  scope="row">${employee.id}</td>
+                        <td>${employee.fullName}</td>
+                        <td>${employee.email}</td>
+                        <td>${employee.address}</td>
+                        <td>${employee.phone}</td>
                         <td>${employee.username}</td>
                         <td>${employee.password}</td>
-                        <td><a href="RegisterServlet?page=userDetails&user=${employee.id}">user details</a></td>
+                        <td>
+                            <a href="UserServet?page=editTeacher&userId=${employee.id}">edit</a>
+                            <a href="UserServet?page=deleteTeacher&userId=${employee.id}" class=text-danger>delete</a>
+                        </td>
                     </tr>
                 </c:forEach>
                     </tbody>

@@ -4,6 +4,7 @@
  */
 package Controller;
 
+import Hashing.HashingPassword;
 import Model.Teacher;
 import Model.user;
 import Services.UserServices;
@@ -33,7 +34,7 @@ public class UserServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -64,27 +65,36 @@ public class UserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        
+
         String page = request.getParameter("page");
+
+        user u = new user();// initializing a user as the user is all
+
+        /**
+         * This condition check if the page is to add a teacher
+         */
+        if (page.equalsIgnoreCase("addTeacher")) {
+            System.out.println("\n\n===================");
+            System.out.println("addTeacher method\n");
+            
+            HashingPassword h = new HashingPassword();
+            
+            Teacher teacher = new Teacher(); //initializing a new teacher
+
+            teacher.setUser(new user(request.getParameter("fullname"), request.getParameter("email"), request.getParameter("contact"), request.getParameter("address"), request.getParameter("section"), request.getParameter("course"), request.getParameter("username"), h.hashPassword(request.getParameter("password")) , "T"));
+            System.out.println(teacher.getUser().getFullName() + " " + teacher.getUser().getAddress() + " " + teacher.getUser().getUsername() + " " + teacher.getUser().getPassword());
+            new UserServices().insertTeacher(teacher);
+        }
         
-        if(page.equalsIgnoreCase("addTeacher")) {
-           System.out.println("\n\n===================");
-           System.out.println("addTeacher method\n");
+        if (page.equalsIgnoreCase("deleteTeacher")) {
+            System.out.println("\n\n===================");
+            System.out.println("addTeacher method\n");
             
             Teacher teacher = new Teacher();
-            user u = new user();
-            u.setRole("T");
-            teacher.setUser(u);
-            teacher.setUser( new user( request.getParameter("fullname"), request.getParameter("email"), request.getParameter("contact"), request.getParameter("address"), request.getParameter("section"), request.getParameter("course"), request.getParameter("username"), request.getParameter("password"), "T")); 
-            System.out.println(teacher.getUser().getFullName() + " " + teacher.getUser().getAddress() + " " + teacher.getUser().getUsername() +  " " + teacher.getUser().getPassword());
-            new UserServices().insertTeacher(teacher);
             
             
         }
-        
-        
-        
-        
+
     }
 
     /**
