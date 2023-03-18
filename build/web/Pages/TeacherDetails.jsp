@@ -380,15 +380,15 @@
                
                         <c:forEach  items="${employeeList}" var="employee">
                             <tr>
-                                <td  scope="row">${employee.id}</td>
-                                <td>${employee.fullName}</td>
-                                <td>${employee.email}</td>
-                                <td>${employee.address}</td>
-                                <td>${employee.phone}</td>
+                                <td  scope="row">${employee.user.id}</td>
+                                <td>${employee.user.fullName}</td>
+                                <td>${employee.user.email}</td>
+                                <td>${employee.user.address}</td>
+                                <td>${employee.user.phone}</td>
                                 <td>
                                     
                                     <button type="button" class="btn btn-primary" >
-                                      <a href="UserServet?page=editTeacher&userId=${employee.id}" class="text-light">edit</a>  
+                                      <a href="UserServet?page=editTeacher&userId=${employee.user.id}" class="text-light">edit</a>  
                                     </button>
                                     
                                     
@@ -411,7 +411,7 @@
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Nope</button>
                                                     <button type="button" class="btn btn-primary">
-                                                        <a href="UserServet?page=editTeacher&userId=${employee.id}" class="text-light">Sure</a> 
+                                                        <a href="UserServlet?page=editTeacher&accId=${employee.user.id}" class="text-light">Sure</a> 
                                                     </button>
                                                 </div>
                                             </div>
@@ -461,12 +461,12 @@
 //      $(document).ready(function () {
 //        $("#example").DataTable();
 //      });
-var myModal = document.getElementById('myModal')
-var myInput = document.getElementById('myInput')
+var myModal = document.getElementById('myModal');
+var myInput = document.getElementById('myInput');
 
 myModal.addEventListener('shown.bs.modal', function () {
-  myInput.focus()
-})
+  myInput.focus();
+});
     </script>
   </body>
 </html>

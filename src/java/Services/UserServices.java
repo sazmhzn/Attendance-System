@@ -78,13 +78,26 @@ public class UserServices {
             e.printStackTrace();
         }
     }
+    
+    public void deleteUser(int acc_id) {
+        String query = "DELETE FROM `user` WHERE ACC_ID = ?";
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+        try {
+            pstm.setInt(1, acc_id);
+            System.out.println("insert user query:" + pstm);
 
+            pstm.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
     /**
      * This method will get user from database
      * @return userList
      */
-    public List<user> getTeacherList() {
-        List<user> userList = new ArrayList<>();
+    public List<Teacher> getTeacherList() {
+        List<Teacher> userList = new ArrayList<>();
         String query = "SELECT * FROM `teacher` LEFT JOIN `accounts` ON teacher.ACC_ID = accounts.ACC_ID";
         System.out.println(query);
         PreparedStatement pstm = new DBConnection().getStatement(query);
@@ -92,20 +105,11 @@ public class UserServices {
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
                 
-                //adding teacher details in user
-                user user = new user();
-                user.setId(rs.getInt("TEAC_ID"));
-                user.setFullName(rs.getString("TEAC_NAME"));
-                user.setAddress(rs.getString("TEAC_ADDRESS"));
-                user.setPhone(rs.getString("TEAC_PHONE"));
-                user.setEmail(rs.getString("TEAC_EMAIL"));
-                user.setUsername(rs.getString("ACC_USERNAME"));
-                user.setPassword(rs.getString("ACC_PASSWORD"));
-
                 Teacher teacher = new Teacher();
-                teacher.setUser(user);
-
-                userList.add(user);
+       
+                teacher.setUser(new user(rs.getInt("TEAC_ID"), rs.getString("TEAC_NAME"), rs.getString("TEAC_PHONE"), rs.getString("TEAC_ADDRESS"),rs.getString("TEAC_EMAIL") ));
+                System.out.println(" " + teacher.getUser().getId());
+                userList.add(teacher);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -134,6 +138,24 @@ public class UserServices {
             pstm.setString(4, teacher.getUser().getPhone());
             pstm.setInt(5, newUser.getId());
             System.out.println("insert Teacher query:" + pstm);
+
+            pstm.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    /**
+     * This method will delete the teacher from teacher and account table
+     * @param acc_id 
+     */
+    public void deleteTeacher(int acc_id) {
+        deleteUser(acc_id);
+        String query = "DELETE FROM `teacher` WHERE ACC_ID = ?";
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+        try {
+            pstm.setInt(1, acc_id);
+            System.out.println("insert user query:" + pstm);
 
             pstm.execute();
         } catch (SQLException e) {
@@ -172,29 +194,20 @@ public class UserServices {
      * This method will get get the list of student 
      * @return 
      */
-    public List<user> getStudentList() {
-        List<user> userList = new ArrayList<>();
-        String query = "SELECT * FROM `teacher` LEFT JOIN `accounts` ON teacher.ACC_ID = accounts.ACC_ID";
+    public List<Student> getStudentList() {
+        List<Student> userList = new ArrayList<>();
+        String query = "SELECT * FROM `student`";
         System.out.println(query);
         PreparedStatement pstm = new DBConnection().getStatement(query);
         try {
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
-                
-                //adding teacher details in user
-                user user = new user();
-                user.setId(rs.getInt("TEAC_ID"));
-                user.setFullName(rs.getString("TEAC_NAME"));
-                user.setAddress(rs.getString("TEAC_ADDRESS"));
-                user.setPhone(rs.getString("TEAC_PHONE"));
-                user.setEmail(rs.getString("TEAC_EMAIL"));
-                user.setUsername(rs.getString("ACC_USERNAME"));
-                user.setPassword(rs.getString("ACC_PASSWORD"));
 
-                Teacher teacher = new Teacher();
-                teacher.setUser(user);
+                Student student = new Student();
 
-                userList.add(user);
+                student.setUser(new user(rs.getInt("STUD_ID"), rs.getString("STUD_NAME"), rs.getString("STUD_EMAIL"), rs.getString("STUD_PHONE"), rs.getString("STUD_ADDRESS"), rs.getString("SEM_NAME"), rs.getString("SECT_NAME"), rs.getString("STUD_COURSE")));
+
+                userList.add(student);
             }
         } catch (SQLException e) {
             e.printStackTrace();

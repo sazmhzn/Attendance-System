@@ -19,6 +19,9 @@ public class Student {
         this.user = user;
     }
 
+    public Student() {
+    }
+
     public Student(user user, String semester, String matrix_no) {
         this.user = user;
         this.semester = semester;

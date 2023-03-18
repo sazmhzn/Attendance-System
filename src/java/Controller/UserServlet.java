@@ -8,6 +8,7 @@ import Hashing.HashingPassword;
 import Model.Teacher;
 import Model.user;
 import Services.UserServices;
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -84,14 +85,21 @@ public class UserServlet extends HttpServlet {
             teacher.setUser(new user(request.getParameter("fullname"), request.getParameter("email"), request.getParameter("contact"), request.getParameter("address"), request.getParameter("section"), request.getParameter("course"), request.getParameter("username"), h.hashPassword(request.getParameter("password")) , "T"));
             System.out.println(teacher.getUser().getFullName() + " " + teacher.getUser().getAddress() + " " + teacher.getUser().getUsername() + " " + teacher.getUser().getPassword());
             new UserServices().insertTeacher(teacher);
+            
+            RequestDispatcher rd = request.getRequestDispatcher("Pages/AddTeacher.jsp");
+            rd.forward(request, response);
         }
         
+        /**
+         * This condition will be take for delete teacher
+         */
         if (page.equalsIgnoreCase("deleteTeacher")) {
             System.out.println("\n\n===================");
-            System.out.println("addTeacher method\n");
+            System.out.println("deleteTeacher condition\n");
             
-            Teacher teacher = new Teacher();
+            int acc_id = Integer.parseInt( request.getParameter("accId") ) ;
             
+            System.out.println("The teacher accout ID to delete is: " + acc_id);
             
         }
 

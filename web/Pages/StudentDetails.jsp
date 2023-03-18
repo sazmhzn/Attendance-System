@@ -378,27 +378,24 @@
                       </tr>
                     </thead>
                     <tbody>
-               
-                      <c:forEach  items="${employeeList}" var="employee">
-                    <tr>
-                        <td  scope="row">${employee.id}</td>
-                        <td>${employee.fullName}</td>
-                        <td>${employee.email}</td>
-                        <td>${employee.address}</td>
-                        <td>${employee.phone}</td>
-                        <td>${employee.username}</td>
-                        <td>${employee.password}</td>
-                        <td>
-                            <a href="UserServet?page=editTeacher&userId=${employee.id}">edit</a>
-                            <a href="UserServet?page=deleteTeacher&userId=${employee.id}" class=text-danger>delete</a>
-                        </td>
-                    </tr>
-                </c:forEach>
+                        <c:forEach  items="${employeeList}" var="employee">
+                            <tr>
+                                <td  scope="row">${employee.user.id}</td>
+                                <td>${employee.user.fullName}</td>
+                                <td>${employee.user.email}</td>
+                                <td>${employee.user.address}</td>
+                                <td>${employee.user.phone}</td>
+                                <td>${employee.user.username}</td>
+                                <td>${employee.user.password}</td>
+                                <td>
+                                    <a href="UserServet?page=editStudent&userId=${employee.user.id}">edit</a>
+                                    <a href="UserServet?page=deleteStudent&userId=${employee.user.id}" class=text-danger>delete</a>
+                                </td>
+                            </tr>
+                        </c:forEach>
                     </tbody>
                   </table>
-
                 </div>
-
               </div>
             </div><!-- End Top Selling -->
         </div>

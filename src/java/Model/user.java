@@ -24,30 +24,43 @@ public class user {
 
     public user() {
     }
-
-//    Geetting the value of the teacher
-    public user(int id, String fullName, String email, String phone, String semester, String username, String password, String role) {
+    
+    /**
+     * this constructor will help the user
+     * @param id
+     * @param fullName
+     * @param email
+     * @param phone
+     * @param address 
+     */
+    public user(int id, String fullName, String email, String phone, String address) {
         this.id = id;
         this.fullName = fullName;
         this.email = email;
         this.phone = phone;
-        this.semester = semester;
-        this.username = username;
-        this.password = password;
-        this.role = role;
+        this.address = address;
     }
-
-    //teacher attributes constructor
-    public user(String fullName, String email, String phone, String address, String section, String course, String username, String password, String role) {
+    
+    /**
+     * This constructor will get the Student details
+     * @param id
+     * @param fullName
+     * @param email
+     * @param phone
+     * @param address
+     * @param semester
+     * @param section
+     * @param course 
+     */
+    public user(int id, String fullName, String email, String phone, String address, String semester, String section, String course) {
+        this.id = id;
         this.fullName = fullName;
         this.email = email;
         this.phone = phone;
         this.address = address;
+        this.semester = semester;
         this.section = section;
         this.course = course;
-        this.username = username;
-        this.password = password;
-        this.role = role;
     }
     
 //  signup constructor

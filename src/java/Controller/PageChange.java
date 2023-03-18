@@ -4,6 +4,7 @@
  */
 package Controller;
 
+import Model.Student;
 import Model.Teacher;
 import Model.user;
 import Services.UserServices;
@@ -92,10 +93,13 @@ public class PageChange extends HttpServlet {
         
         if (page.equalsIgnoreCase("Teacher")) {
             
-            user model = new user();
-            List<user> employeeList = new UserServices().getTeacherList();
+//            Teacher model = new Teacher();
+            List<Teacher> employeeList = new UserServices().getTeacherList();
             
-            request.setAttribute("employee", model);
+            for( Teacher e : employeeList ) {
+                System.out.println("so: " + e.getUser().getFullName());
+            }
+//            request.setAttribute("employee", model);
             request.setAttribute("employeeList", employeeList);
             
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/TeacherDetails.jsp");
@@ -105,12 +109,12 @@ public class PageChange extends HttpServlet {
         if (page.equalsIgnoreCase("Student")) {
             
             user model = new user();
-            List<user> employeeList = new UserServices().getStudentList();
+            List<Student> employeeList = new UserServices().getStudentList();
             
             request.setAttribute("employee", model);
             request.setAttribute("employeeList", employeeList);
             
-            RequestDispatcher rd = request.getRequestDispatcher("/Pages/TeacherDetails.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("/Pages/StudentDetails.jsp");
             rd.forward(request, response);
         }
         
