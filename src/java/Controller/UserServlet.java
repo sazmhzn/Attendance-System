@@ -6,7 +6,7 @@ package Controller;
 
 import Hashing.HashingPassword;
 import Model.Teacher;
-import Model.user;
+import Model.User;
 import Services.UserServices;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
@@ -69,7 +69,7 @@ public class UserServlet extends HttpServlet {
 
         String page = request.getParameter("page");
 
-        user u = new user();// initializing a user as the user is all
+        User u = new User();// initializing a User as the User is all
 
         /**
          * This condition check if the page is to add a teacher
@@ -82,7 +82,7 @@ public class UserServlet extends HttpServlet {
             
             Teacher teacher = new Teacher(); //initializing a new teacher
 
-            teacher.setUser(new user(request.getParameter("fullname"), request.getParameter("email"), request.getParameter("contact"), request.getParameter("address"), request.getParameter("section"), request.getParameter("course"), request.getParameter("username"), h.hashPassword(request.getParameter("password")) , "T"));
+            teacher.setUser(new User(request.getParameter("fullname"), request.getParameter("email"), request.getParameter("contact"), request.getParameter("address"), request.getParameter("section"), request.getParameter("course"), request.getParameter("username"), h.hashPassword(request.getParameter("password")) , "T"));
             System.out.println(teacher.getUser().getFullName() + " " + teacher.getUser().getAddress() + " " + teacher.getUser().getUsername() + " " + teacher.getUser().getPassword());
             new UserServices().insertTeacher(teacher);
             

@@ -7,7 +7,7 @@ package Services;
 import DBConnection.DBConnection;
 import Model.Student;
 import Model.Teacher;
-import Model.user;
+import Model.User;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,16 +21,14 @@ import java.util.List;
 public class UserServices {
 
     /**
-     * This will get the user from account table
+     * This will get the User from account table
      *
      * @param username
      * @param password
      * @return
      */
-    public user getUser(String username, String password) {
-
-        System.out.println("The password and user" + username + " " + password);
-        user user = new user();
+    public User getUser(String username, String password) {
+        User user = null;
         String query = "select * from accounts where ACC_USERNAME=? and ACC_PASSWORD=?";
 
         PreparedStatement pstm = new DBConnection().getStatement(query);
@@ -43,7 +41,7 @@ public class UserServices {
             System.out.println("get User query:" + pstm);
             while (rs.next()) {
                 System.out.println("This is a user");
-//              user = new user();
+                user = new User();
                 user.setId(rs.getInt("ACC_ID"));
                 user.setUsername(rs.getString("ACC_USERNAME"));
                 user.setPassword(rs.getString("ACC_PASSWORD"));
@@ -59,10 +57,10 @@ public class UserServices {
     }
 
     /**
-     * This method will insert user in accounts table
+     * This method will insert User in accounts table
      * @param user 
      */
-    public void insertUser(user user) {
+    public void insertUser(User user) {
         String query = "insert into accounts (ACC_USERNAME,ACC_PASSWORD,ACC_ROLE)"
                 + "values(?,?,?)";
         PreparedStatement pstm = new DBConnection().getStatement(query);
@@ -93,7 +91,7 @@ public class UserServices {
     }
     
     /**
-     * This method will get user from database
+     * This method will get User from database
      * @return userList
      */
     public List<Teacher> getTeacherList() {
@@ -107,8 +105,9 @@ public class UserServices {
                 
                 Teacher teacher = new Teacher();
        
-                teacher.setUser(new user(rs.getInt("TEAC_ID"), rs.getString("TEAC_NAME"), rs.getString("TEAC_PHONE"), rs.getString("TEAC_ADDRESS"),rs.getString("TEAC_EMAIL") ));
+                teacher.setUser(new User(rs.getInt("TEAC_ID"), rs.getString("TEAC_NAME"), rs.getString("TEAC_EMAIL"), rs.getString("TEAC_PHONE"),rs.getString("TEAC_ADDRESS") ));
                 System.out.println(" " + teacher.getUser().getId());
+                teacher.setAcc_id(rs.getInt("ACC_ID"));
                 userList.add(teacher);
             }
         } catch (SQLException e) {
@@ -125,7 +124,7 @@ public class UserServices {
     public void insertTeacher(Teacher teacher) {
         insertUser(teacher.getUser()); //This method will insert the teacher details in Accout table
 
-        user newUser = getUser(teacher.getUser().getUsername(), teacher.getUser().getPassword());
+        User newUser = getUser(teacher.getUser().getUsername(), teacher.getUser().getPassword());
 
         System.out.println("\n\n The user id " + teacher.getUser().getId());
 
@@ -170,7 +169,7 @@ public class UserServices {
     public void insertStudent(Student student) {
         insertUser(student.getUser()); //This method will insert the student details in Accout table
 
-        user newUser = getUser(student.getUser().getUsername(), student.getUser().getPassword());
+        User newUser = getUser(student.getUser().getUsername(), student.getUser().getPassword());
 
         System.out.println("\n\n The user id " + student.getUser().getId());
 
@@ -205,7 +204,7 @@ public class UserServices {
 
                 Student student = new Student();
 
-                student.setUser(new user(rs.getInt("STUD_ID"), rs.getString("STUD_NAME"), rs.getString("STUD_EMAIL"), rs.getString("STUD_PHONE"), rs.getString("STUD_ADDRESS"), rs.getString("SEM_NAME"), rs.getString("SECT_NAME"), rs.getString("STUD_COURSE")));
+                student.setUser(new User(rs.getInt("STUD_ID"), rs.getString("STUD_NAME"), rs.getString("STUD_EMAIL"), rs.getString("STUD_PHONE"), rs.getString("STUD_ADDRESS"), rs.getString("SEM_NAME"), rs.getString("SECT_NAME"), rs.getString("STUD_COURSE")));
 
                 userList.add(student);
             }

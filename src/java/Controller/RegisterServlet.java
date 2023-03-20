@@ -5,7 +5,7 @@
 package Controller;
 
 import Hashing.HashingPassword;
-import Model.user;
+import Model.User;
 import Services.UserServices;
 import jakarta.servlet.RequestDispatcher;
 
@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.Objects;
 import org.apache.jasper.tagplugins.jstl.core.ForEach;
 
 /**
@@ -74,44 +75,37 @@ public class RegisterServlet extends HttpServlet {
         System.out.println("Page: " + page );
         
         if(page.equalsIgnoreCase("existing")) {
-            
+            System.out.println("\n\n==============");
             String username = request.getParameter("username");
             String password = HashingPassword.hashPassword(request.getParameter("password"));
-//            String role = request.getParameter("role");
             
-            user user = new UserServices().getUser(username, password);
-            
-            HttpSession session = request.getSession();
-            
-            if (user == null) {
-                
-                System.out.println("The pasword wrong clause");
-                session.setAttribute("msg", "Invalid username or password");
-                RequestDispatcher rd = request.getRequestDispatcher("Pages/login.jsp");
-                rd.forward(request, response);
-                
-            } else {
-                
+            User user = new UserServices().getUser(username, password); //check if there is User in dadtabse account table
+            if (user != null) {
+                HttpSession session = request.getSession();
                 session.setAttribute("uid", user.getId());
                 session.setAttribute("fullName", user.getUsername());
                 session.setAttribute("role", user.getRole());
                 request.setAttribute("msg", "Login Successful!");
                 System.out.println(request.getAttribute("msg"));
+                System.out.println("Role" + user.getRole());
                 
-                
-                if (session.getAttribute("role").equals("T")) {
-                    RequestDispatcher rd = request.getRequestDispatcher("Pages/AttendanceSheet.jsp");
-                    rd.forward(request, response);
-                } else {
-                    RequestDispatcher rd = request.getRequestDispatcher("Pages/AdminDashboard.jsp");
-                    rd.forward(request, response);
-                }
-     
+                    if (session.getAttribute("role").equals("T")) {
+                        RequestDispatcher rd = request.getRequestDispatcher("Pages/AttendanceSheet.jsp");
+                        rd.forward(request, response);
+                    } else {
+                        RequestDispatcher rd = request.getRequestDispatcher("Pages/AdminDashboard.jsp");
+                        rd.forward(request, response);
+                    }
+            } else {
+                HttpSession session = request.getSession();
+                session.setAttribute("error_msg", "Invalid username or passowrd");
+                RequestDispatcher rd = request.getRequestDispatcher("Pages/login.jsp");
+                rd.forward(request, response);
             } 
         } // --------- existing page ends here --------- 
         
          if (page.equalsIgnoreCase("newUser")) {
-            user user = new user();
+            User user = new User();
             user.setFullName(request.getParameter("fname") + " " + request.getParameter("lname"));
             user.setUsername(request.getParameter("username"));
             user.setPassword(HashingPassword.hashPassword(request.getParameter("password")));

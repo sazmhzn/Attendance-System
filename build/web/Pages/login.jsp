@@ -83,10 +83,11 @@
                           </div>  
                       </div>
                       
-                      <% if(session.getAttribute("msg") != null)  {%>
+                      <% if(session.getAttribute("error_msg") != null)  {%>
 
-                      <div class="alert alert-danger" role="alert">
-                          <%=session.getAttribute("msg")%>
+                      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                          <%=session.getAttribute("error_msg")%>
+                          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                       </div>
 
                       <% } %>
@@ -116,22 +117,6 @@
                           class="form-control"
                           required
                         />
-                      </div>
-
-                      <!-- Checkbox -->
-                      <div
-                        class="form-check d-flex justify-content-center mb-4"
-                      >
-                        <input
-                          class="form-check-input me-2"
-                          type="checkbox"
-                          value=""
-                          id="form2Example33"
-                          checked
-                        />
-                        <label class="form-check-label" for="form2Example33">
-                          Remember me
-                        </label>
                       </div>
 
                       <!-- Submit button -->

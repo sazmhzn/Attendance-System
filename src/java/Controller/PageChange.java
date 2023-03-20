@@ -6,7 +6,7 @@ package Controller;
 
 import Model.Student;
 import Model.Teacher;
-import Model.user;
+import Model.User;
 import Services.UserServices;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
@@ -93,13 +93,12 @@ public class PageChange extends HttpServlet {
         
         if (page.equalsIgnoreCase("Teacher")) {
             
-//            Teacher model = new Teacher();
             List<Teacher> employeeList = new UserServices().getTeacherList();
             
             for( Teacher e : employeeList ) {
                 System.out.println("so: " + e.getUser().getFullName());
             }
-//            request.setAttribute("employee", model);
+            
             request.setAttribute("employeeList", employeeList);
             
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/TeacherDetails.jsp");
@@ -108,7 +107,7 @@ public class PageChange extends HttpServlet {
         
         if (page.equalsIgnoreCase("Student")) {
             
-            user model = new user();
+            User model = new User();
             List<Student> employeeList = new UserServices().getStudentList();
             
             request.setAttribute("employee", model);

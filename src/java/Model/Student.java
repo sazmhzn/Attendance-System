@@ -11,28 +11,28 @@ import java.time.LocalDate;
  * @author lenovo
  */
 public class Student {
-    private user user;
+    private User user;
     private String semester;
     private String matrix_no;
             
-    public Student(user user) {
+    public Student(User user) {
         this.user = user;
     }
 
     public Student() {
     }
 
-    public Student(user user, String semester, String matrix_no) {
+    public Student(User user, String semester, String matrix_no) {
         this.user = user;
         this.semester = semester;
         this.matrix_no = matrix_no;
     }
 
-    public user getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(user user) {
+    public void setUser(User user) {
         this.user = user;
     }
 

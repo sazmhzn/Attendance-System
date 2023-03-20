@@ -10,26 +10,37 @@ package Model;
  */
 
 public class Teacher {
-    private user user;
+    private int acc_id;
+    private User user;
     private Subject[] subjects;
     
     public Teacher() {
     }
 
-    public Teacher(user user) {
+    public Teacher(User user) {
         this.user = user;
-    }
-    
-    public Teacher(user user, Subject[] subjects) {
-        this.user = user;
-        this.subjects = subjects;
     }
 
-    public user getUser() {
+    public Teacher(int acc_id, User user) {
+        this.acc_id = acc_id;
+        this.user = user;
+    }
+
+    public int getAcc_id() {
+        return acc_id;
+    }
+
+    public void setAcc_id(int acc_id) {
+        this.acc_id = acc_id;
+    }
+
+    
+    
+    public User getUser() {
         return user;
     }
 
-    public void setUser(user user) {
+    public void setUser(User user) {
         this.user = user;
     }
 

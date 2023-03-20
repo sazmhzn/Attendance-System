@@ -351,7 +351,7 @@
           </ol>
         </nav>
         
-        <button class="btn btn-primary"> <a href="PageChange?page=addTeacher"> Add teacher </a>  </button>
+        <button class="btn btn-primary"> <a href="PageChange?page=addTeacher" class="text-light"> <i class="bi bi-plus"></i> Add teacher </a>  </button>
       </div>
       <!-- End Page Title -->
 
@@ -386,19 +386,18 @@
                                 <td>${employee.user.address}</td>
                                 <td>${employee.user.phone}</td>
                                 <td>
-                                    
                                     <button type="button" class="btn btn-primary" >
-                                      <a href="UserServet?page=editTeacher&userId=${employee.user.id}" class="text-light">edit</a>  
+                                      <a href="UserServlet?page=editTeacher&userId=${employee.user.id}" class="text-light"> <i class="bi bi-pencil"></i> edit</a>  
                                     </button>
                                     
                                     
                                     <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                        Delete
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal${employee.user.id}">
+                                        <i class="bi bi-trash3"></i> Delete
                                     </button>
 
                                     <!-- Modal -->
-                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="exampleModal${employee.user.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -411,7 +410,7 @@
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Nope</button>
                                                     <button type="button" class="btn btn-primary">
-                                                        <a href="UserServlet?page=editTeacher&accId=${employee.user.id}" class="text-light">Sure</a> 
+                                                        <a href="UserServlet?page=editTeacher&accId=${employee.acc_id}" class="text-light">Sure</a> 
                                                     </button>
                                                 </div>
                                             </div>

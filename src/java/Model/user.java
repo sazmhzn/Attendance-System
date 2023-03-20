@@ -8,7 +8,7 @@ package Model;
  *
  * @author lenovo
  */
-public class user {
+public class User {
 
     private int id;
     private String fullName;
@@ -22,7 +22,7 @@ public class user {
     private String password;
     private String role;
 
-    public user() {
+    public User() {
     }
     
     /**
@@ -33,7 +33,7 @@ public class user {
      * @param phone
      * @param address 
      */
-    public user(int id, String fullName, String email, String phone, String address) {
+    public User(int id, String fullName, String email, String phone, String address) {
         this.id = id;
         this.fullName = fullName;
         this.email = email;
@@ -52,7 +52,7 @@ public class user {
      * @param section
      * @param course 
      */
-    public user(int id, String fullName, String email, String phone, String address, String semester, String section, String course) {
+    public User(int id, String fullName, String email, String phone, String address, String semester, String section, String course) {
         this.id = id;
         this.fullName = fullName;
         this.email = email;
@@ -63,8 +63,20 @@ public class user {
         this.course = course;
     }
     
+    public User(String fullName, String email, String phone, String address, String section, String course, String username, String password, String role) {    
+        this.fullName = fullName;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        this.section = section;
+        this.course = course;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
+
 //  signup constructor
-    public user(String username, String password, String role) {
+    public User(String username, String password, String role) {
         this.username = username;
         this.password = password;
         this.role = role;
