@@ -410,7 +410,7 @@
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Nope</button>
                                                     <button type="button" class="btn btn-primary">
-                                                        <a href="UserServlet?page=editTeacher&accId=${employee.acc_id}" class="text-light">Sure</a> 
+                                                        <a href="UserServlet?page=deleteTeacher&accId=${employee.acc_id}" class="text-light">Sure</a> 
                                                     </button>
                                                 </div>
                                             </div>

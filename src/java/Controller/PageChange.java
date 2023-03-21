@@ -117,6 +117,18 @@ public class PageChange extends HttpServlet {
             rd.forward(request, response);
         }
         
+        if (page.equalsIgnoreCase("Subject")) {
+            
+            User model = new User();
+            List<Student> employeeList = new UserServices().getStudentList();
+            
+            request.setAttribute("employee", model);
+            request.setAttribute("employeeList", employeeList);
+            
+            RequestDispatcher rd = request.getRequestDispatcher("/Pages/StudentDetails.jsp");
+            rd.forward(request, response);
+        }
+        
         if (page.equalsIgnoreCase("adminDashboard")) {
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/AdminDashboard.jsp");
             rd.forward(request, response);

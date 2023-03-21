@@ -342,16 +342,16 @@
     <!-- ======= Main ======= -->
     <main id="main" class="main">
       <div class="pagetitle">
-        <h1>Teacher</h1>
+        <h1>Student</h1>
         <nav>
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="dashboard.html">Teacher</a></li>
-            <li class="breadcrumb-item active">Teacher details</li>
+            <li class="breadcrumb-item"><a href="dashboard.html">Student</a></li>
+            <li class="breadcrumb-item active">All students</li>
             <!--<li class="breadcrumb-item ">Add Students</li>-->
           </ol>
         </nav>
         
-        <button class="btn btn-primary"> <a href="PageChange?page=addTeacher"> Add teacher </a>  </button>
+        <button class="btn btn-primary"> <a href="PageChange?page=addTeacher" class="text-light"> Add Student </a>  </button>
       </div>
       <!-- End Page Title -->
 
@@ -362,18 +362,17 @@
               <div class="card top-selling overflow-auto">
 
                 <div class="card-body pb-0">
-                  <h5 class="card-title">Teacher list </h5>
+                  <h5 class="card-title">Student list </h5>
 
-                  <table class="table table-borderless">
+                  <table class="table table-borderless datatable">
                     <thead>
                       <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Teacher name</th>
+                        <th scope="col">Student name</th>
                         <th scope="col">Email</th>
                         <th scope="col">Address</th>
                         <th scope="col">Phone</th>
-                        <th scope="col">Username</th>
-                        <th scope="col">Password</th>
+                      
                         <th scope="col">Action</th>
                       </tr>
                     </thead>

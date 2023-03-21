@@ -15,6 +15,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  *
@@ -98,9 +99,31 @@ public class UserServlet extends HttpServlet {
             System.out.println("deleteTeacher condition\n");
             
             int acc_id = Integer.parseInt( request.getParameter("accId") ) ;
-            
+//            new UserServices().deleteTeacher(acc_id);
             System.out.println("The teacher accout ID to delete is: " + acc_id);
             
+            RequestDispatcher rd = request.getRequestDispatcher("PageChange?page=Teacher");
+            rd.forward(request, response);
+        }
+        
+        if (page.equalsIgnoreCase("editTeacher")) {
+            System.out.println("\n\n===================");
+            System.out.println("editTeacher condition\n");
+            
+            int id = Integer.parseInt( request.getParameter("id") ) ;
+//            new UserServices().deleteTeacher(acc_id);
+            System.out.println("The teacher accout ID to edit is: " + id);
+            
+            List<Teacher> employeeList = new UserServices().getTeacherList();
+            
+            for( Teacher e : employeeList ) {
+                System.out.println("so: " + e.getUser().getFullName());
+            }
+            
+            request.setAttribute("employeeList", employeeList);
+            
+            RequestDispatcher rd = request.getRequestDispatcher("/Pages/AddTeacher.jsp");
+            rd.forward(request, response);
         }
 
     }

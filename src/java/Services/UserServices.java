@@ -77,6 +77,10 @@ public class UserServices {
         }
     }
     
+    /**
+     * This method will delete a user from account table
+     * @param acc_id 
+     */
     public void deleteUser(int acc_id) {
         String query = "DELETE FROM `user` WHERE ACC_ID = ?";
         PreparedStatement pstm = new DBConnection().getStatement(query);
@@ -91,7 +95,7 @@ public class UserServices {
     }
     
     /**
-     * This method will get User from database
+     * This method will get teacher from database
      * @return userList
      */
     public List<Teacher> getTeacherList() {
@@ -160,6 +164,64 @@ public class UserServices {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    
+    public User getUserRow(int id){
+        User user = new User();
+        String query = "select * from users where id=?";
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+        try {
+            pstm.setInt(1,id);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()){
+                user.setId(rs.getInt("id"));
+                user.setFullName(rs.getString("full_name"));
+                user.setUsername(rs.getString("username"));
+                user.setPassword(rs.getString("password"));
+                user.setRole(rs.getString("role"));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return user;
+    }
+    
+    public User getTeacherRow(int id){
+        Teacher teacher = new Teacher();
+        User user = new User();
+        String query = "SELECT * FROM `teacher` LEFT JOIN `accounts` ON teacher.ACC_ID = accounts.ACC_ID where id=?";
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+        try {
+            pstm.setInt(1,id);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()){
+                
+//                teacher.setUser(new User( rs.getInt("id"), rs.getString("full_name"), rs.getString("username"), rs.getString("password") ));
+
+                
+                user.setId(rs.getInt("id"));
+                user.setFullName(rs.getString("full_name"));
+                user.setUsername(rs.getString("username"));
+                user.setPassword(rs.getString("password"));
+                user.setRole(rs.getString("role"));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return user;
+    }
+    
+    public void editUser(int id, User user) throws SQLException {
+
+        String query = "update users set ACC_USERNAME=?,ACC_PASSWORD=?," +
+                "ACC_ROLE=? where ACC_ID=?";
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+        pstm.setString(2, user.getUsername());
+        pstm.setString(3, user.getPassword());
+        pstm.setString(4, user.getRole());
+        pstm.setInt(5, user.getId());
+
+        pstm.execute();
     }
     
     /**

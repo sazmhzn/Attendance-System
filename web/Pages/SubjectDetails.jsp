@@ -1,17 +1,25 @@
+<%-- 
+    Document   : StudentDetails
+    Created on : Mar 17, 2023, 10:31:18 AM
+    Author     : lenovo
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-    <title>Dashboard - Template</title>
+    <title>Teacher</title>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <meta content="" name="description" />
     <meta content="" name="keywords" />
 
     <!-- Favicons -->
-    <link href="styling/assets/img/favicon.png" rel="icon" />
+    <link href="Styling/assets/img/favicon.png" rel="icon" />
     <link
-      href="styling/assets/img/apple-touch-icon.png"
+      href="Styling/assets/img/apple-touch-icon.png"
       rel="apple-touch-icon"
     />
 
@@ -24,45 +32,42 @@
 
     <!-- Vendor CSS Files -->
     <link
-      href="styling/assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      href="Styling/assets/vendor/bootstrap-icons/bootstrap-icons.css"
       rel="stylesheet"
     />
 
     <link
-      href="styling/assets/vendor/boxicons/css/boxicons.min.css"
+      href="Styling/assets/vendor/boxicons/css/boxicons.min.css"
       rel="stylesheet"
     />
 
     <link
-      href="styling/assets/vendor/bootstrap/css/bootstrap.min.css"
+      href="Styling/assets/vendor/bootstrap/css/bootstrap.min.css"
       rel="stylesheet"
     />
 
     <link
-      href="styling/assets/vendor/quill/quill.snow.css"
+      href="Styling/assets/vendor/quill/quill.snow.css"
       rel="stylesheet"
     />
 
     <link
-      href="styling/assets/vendor/quill/quill.bubble.css"
+      href="Styling/assets/vendor/quill/quill.bubble.css"
       rel="stylesheet"
     />
 
     <link
-      href="styling/assets/vendor/remixicon/remixicon.css"
+      href="Styling/assets/vendor/remixicon/remixicon.css"
       rel="stylesheet"
     />
 
     <link
-      href="styling/assets/vendor/simple-datatables/style.css"
+      href="Styling/assets/vendor/simple-datatables/style.css"
       rel="stylesheet"
     />
 
     <!-- Template Main CSS File -->
-    <link href="styling/assets/css/style.css" rel="stylesheet" />
-
-    <link rel="stylesheet" href="styling/style.css">
-
+    <link href="Styling/assets/css/style.css" rel="stylesheet" />
   </head>
 
   <body>
@@ -71,7 +76,7 @@
       <div class="d-flex align-items-center justify-content-between">
         <a href="index.html" class="logo d-flex align-items-center">
           <img src="assets/img/logo.png" alt="" />
-          <span class="d-none d-lg-block">NiceAdmin</span>
+          <span class="d-none d-lg-block">Attendify</span>
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
       </div>
@@ -185,98 +190,6 @@
           </li>
           <!-- End Notification Nav -->
 
-          <li class="nav-item dropdown">
-            <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-              <i class="bi bi-chat-left-text"></i>
-              <span class="badge bg-success badge-number">3</span> </a
-            ><!-- End Messages Icon -->
-
-            <ul
-              class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages"
-            >
-              <li class="dropdown-header">
-                You have 3 new messages
-                <a href="#"
-                  ><span class="badge rounded-pill bg-primary p-2 ms-2"
-                    >View all</span
-                  ></a
-                >
-              </li>
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
-
-              <li class="message-item">
-                <a href="#">
-                  <img
-                    src="assets/img/messages-1.jpg"
-                    alt=""
-                    class="rounded-circle"
-                  />
-                  <div>
-                    <h4>Maria Hudson</h4>
-                    <p>
-                      Velit asperiores et ducimus soluta repudiandae labore
-                      officia est ut...
-                    </p>
-                    <p>4 hrs. ago</p>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
-
-              <li class="message-item">
-                <a href="#">
-                  <img
-                    src="assets/img/messages-2.jpg"
-                    alt=""
-                    class="rounded-circle"
-                  />
-                  <div>
-                    <h4>Anna Nelson</h4>
-                    <p>
-                      Velit asperiores et ducimus soluta repudiandae labore
-                      officia est ut...
-                    </p>
-                    <p>6 hrs. ago</p>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
-
-              <li class="message-item">
-                <a href="#">
-                  <img
-                    src="assets/img/messages-3.jpg"
-                    alt=""
-                    class="rounded-circle"
-                  />
-                  <div>
-                    <h4>David Muldon</h4>
-                    <p>
-                      Velit asperiores et ducimus soluta repudiandae labore
-                      officia est ut...
-                    </p>
-                    <p>8 hrs. ago</p>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
-
-              <li class="dropdown-footer">
-                <a href="#">Show all messages</a>
-              </li>
-            </ul>
-            <!-- End Messages Dropdown Items -->
-          </li>
-          <!-- End Messages Nav -->
-
           <li class="nav-item dropdown pe-3">
             <a
               class="nav-link nav-profile d-flex align-items-center pe-0"
@@ -363,7 +276,7 @@
     <aside id="sidebar" class="sidebar">
       <ul class="sidebar-nav" id="sidebar-nav">
         <li class="nav-item">
-          <a class="nav-link collapsed" href="dashboard.html">
+          <a class="nav-link collapsed" href="PageChange?page=adminDashboard">
             <i class="bi bi-grid"></i>
             <span>Dashboard</span>
           </a>
@@ -379,38 +292,49 @@
           </a>
         </li>
         <!-- End Profile Page Nav -->
-
+        
         <li class="nav-item">
-          <a class="nav-link" href="./studentList.html">
-            <i class="bi bi-question-circle"></i>
-            <span>Student</span>
-          </a>
-        </li>
-        <!-- End F.A.Q Page Nav -->
-
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="pages-contact.html">
+          <a class="nav-link collapsed" href="PageChange?page=Report">
             <i class="bi bi-envelope"></i>
             <span>Report</span>
           </a>
         </li>
-        <!-- End Contact Page Nav -->
+        <!-- End Report Page Nav -->
+        
+        <li class="nav-heading">manage</li>
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="pages-register.html">
-            <i class="bi bi-card-list"></i>
-            <span>Register</span>
+          <a class="nav-link collapsed" href="PageChange?page=Student">
+            <i class="bi bi-person"></i>
+            <span> Student</span>
           </a>
-        </li>
-        <!-- End Register Page Nav -->
+        </li><!-- End Student Nav -->
+      
+      <li class="nav-item">
+          <a class="nav-link" href="PageChange?page=Teacher">
+            <i class="bi bi-person"></i>
+            <span> Teacher</span>
+          </a>
+        </li><!-- End Student Nav -->
+      
+      <li class="nav-item">
+          <a class="nav-link collapsed" href="PageChange?page=Subject">
+            <i class="bi bi-person"></i>
+            <span>Subject</span>
+          </a>
+        </li><!-- End Student Nav -->
+
+        
+        
+        <li class="nav-heading">Extra</li>
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="pages-login.html">
+          <a class="nav-link collapsed" href="PageChange?page=Logout">
             <i class="bi bi-box-arrow-in-right"></i>
-            <span>Login</span>
+            <span>Logout</span>
           </a>
         </li>
-        <!-- End Login Page Nav -->
+        <!-- End Logout Page Nav -->
       </ul>
     </aside>
     <!-- End Sidebar-->
@@ -418,80 +342,61 @@
     <!-- ======= Main ======= -->
     <main id="main" class="main">
       <div class="pagetitle">
-        <h1>Dashboard</h1>
+        <h1>Student</h1>
         <nav>
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="dashboard.html">Home</a></li>
-            <li class="breadcrumb-item active">Students</li>
+            <li class="breadcrumb-item"><a href="dashboard.html">Student</a></li>
+            <li class="breadcrumb-item active">All students</li>
+            <!--<li class="breadcrumb-item ">Add Students</li>-->
           </ol>
         </nav>
+        
+        <button class="btn btn-primary"> <a href="PageChange?page=addTeacher" class="text-light"> Add Student </a>  </button>
       </div>
       <!-- End Page Title -->
 
       <section class="section dashboard">
         <div class="row">
-          <!-- Left side columns -->
-          <div class="col-lg-12">
-            <form class="row g-3 align-items-bottom">
-              <div class="col-auto">
-                <select
-                  class="form-select form-select-md"
-                  aria-label=".form-select-sm example"
-                >
-                  <option selected>Semester menu</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
-                  <option value="3">Four</option>
-                  <option value="3">Five</option>
-                </select>
-              </div>
-              <div class="col-auto">
-                <select
-                  class="form-select form-select-md"
-                  aria-label=".form-select-sm example"
-                >
-                  <option selected>Section</option>
-                  <option value="1">A</option>
-                  <option value="2">B</option>
-                  <option value="3">All</option>
-                </select>
-              </div>
+             <!-- Top Selling -->
+            <div class="col-12">
+              <div class="card top-selling overflow-auto">
 
-              <div class="col-auto mb-8">
-                <button type="submit" class="btn btn-primary mb-3">
-                  Show list
-                </button>
-              </div>
-            </form>
-          </div>
-          <!-- End Left side columns -->
+                <div class="card-body pb-0">
+                  <h5 class="card-title">Student list </h5>
 
-          <div class="row">
-       
-            <table class="table bg-white" id="example">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Full Name</th>
-                  <th scope="col">Address</th>
-                  <th scope="col">Contact</th>
-                  <th scope="col">Email</th>
-                  <th scope="col">Password</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                  <td>sam.smith@gmail.com</td>
-                  <td>helo</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+                  <table class="table table-borderless datatable">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Student name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Phone</th>
+                      
+                        <th scope="col">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach  items="${employeeList}" var="employee">
+                            <tr>
+                                <td  scope="row">${employee.user.id}</td>
+                                <td>${employee.user.fullName}</td>
+                                <td>${employee.user.email}</td>
+                                <td>${employee.user.address}</td>
+                                <td>${employee.user.phone}</td>
+                                <td>${employee.user.username}</td>
+                                <td>${employee.user.password}</td>
+                                <td>
+                                    <a href="UserServet?page=editStudent&userId=${employee.user.id}">edit</a>
+                                    <a href="UserServet?page=deleteStudent&userId=${employee.user.id}" class=text-danger>delete</a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div><!-- End Top Selling -->
         </div>
       </section>
     </main>
@@ -509,17 +414,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-bs5/1.13.3/dataTables.bootstrap5.min.js"></script>
 
     <!-- Vendor JS Files -->
-    <script src="styling/assets/vendor/apexcharts/apexcharts.min.js"></script>
-    <script src="styling/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="styling/assets/vendor/chart.js/chart.umd.js"></script>
-    <script src="styling/assets/vendor/echarts/echarts.min.js"></script>
-    <script src="styling/assets/vendor/quill/quill.min.js"></script>
-    <script src="styling/assets/vendor/simple-datatables/simple-datatables.js"></script>
-    <script src="styling/assets/vendor/tinymce/tinymce.min.js"></script>
-    <script src="styling/assets/vendor/php-email-form/validate.js"></script>
+    <script src="Styling/assets/vendor/apexcharts/apexcharts.min.js"></script>
+    <script src="Styling/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="Styling/assets/vendor/chart.js/chart.umd.js"></script>
+    <script src="Styling/assets/vendor/echarts/echarts.min.js"></script>
+    <script src="Styling/assets/vendor/quill/quill.min.js"></script>
+    <script src="Styling/assets/vendor/simple-datatables/simple-datatables.js"></script>
+    <script src="Styling/assets/vendor/tinymce/tinymce.min.js"></script>
+    <script src="Styling/assets/vendor/php-email-form/validate.js"></script>
 
     <!-- Template Main JS File -->
-    <script src="styling/assets/js/main.js"></script>
+    <script src="Styling/assets/js/main.js"></script>
 
     <!-- Custome JS File -->
     <script>
@@ -529,3 +434,4 @@
     </script>
   </body>
 </html>
+
