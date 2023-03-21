@@ -1,10 +1,5 @@
-<%-- 
-    Document   : StudentDetails
-    Created on : Mar 17, 2023, 10:31:18 AM
-    Author     : lenovo
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%-- Document : AddTeacher Created on : Mar 14, 2023, 9:27:23 AM Author : lenovo
+--%> <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -46,10 +41,7 @@
       rel="stylesheet"
     />
 
-    <link
-      href="Styling/assets/vendor/quill/quill.snow.css"
-      rel="stylesheet"
-    />
+    <link href="Styling/assets/vendor/quill/quill.snow.css" rel="stylesheet" />
 
     <link
       href="Styling/assets/vendor/quill/quill.bubble.css"
@@ -292,44 +284,45 @@
           </a>
         </li>
         <!-- End Profile Page Nav -->
-        
+
         <li class="nav-item">
-          <a class="nav-link collapsed" href="PageChange?page=Report">
+          <a class="nav-link collapsed" href="pages-contact.html">
             <i class="bi bi-envelope"></i>
             <span>Report</span>
           </a>
         </li>
         <!-- End Report Page Nav -->
-        
+
         <li class="nav-heading">manage</li>
 
         <li class="nav-item">
-          <a class="nav-link " href="PageChange?page=Student">
+          <a class="nav-link collapsed" href="./AttendanceSheet.html">
             <i class="bi bi-person"></i>
             <span> Student</span>
           </a>
-        </li><!-- End Student Nav -->
-      
-      <li class="nav-item">
-          <a class="nav-link collapsed" href="PageChange?page=Teacher">
+        </li>
+        <!-- End Student Nav -->
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="PageChange?page=teacher">
             <i class="bi bi-person"></i>
             <span> Teacher</span>
           </a>
-        </li><!-- End Student Nav -->
-      
-      <li class="nav-item">
-          <a class="nav-link collapsed" href="PageChange?page=Subject">
+        </li>
+        <!-- End Student Nav -->
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="./AttendanceSheet.html">
             <i class="bi bi-person"></i>
             <span>Subject</span>
           </a>
-        </li><!-- End Student Nav -->
+        </li>
+        <!-- End Student Nav -->
 
-        
-        
         <li class="nav-heading">Extra</li>
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="PageChange?page=Logout">
+          <a class="nav-link collapsed" href="pages-login.html">
             <i class="bi bi-box-arrow-in-right"></i>
             <span>Logout</span>
           </a>
@@ -342,61 +335,156 @@
     <!-- ======= Main ======= -->
     <main id="main" class="main">
       <div class="pagetitle">
-        <h1>Student</h1>
+        <h1>Teacher</h1>
         <nav>
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="dashboard.html">Student</a></li>
-            <li class="breadcrumb-item active">All students</li>
-            <!--<li class="breadcrumb-item ">Add Students</li>-->
+            <li class="breadcrumb-item"><a href="dashboard.html">Home</a></li>
+            <li class="breadcrumb-item">
+              <a href="studentList.html">Teacher</a>
+            </li>
+            <li class="breadcrumb-item active">Edit Teacher</li>
           </ol>
         </nav>
-        
-        <button class="btn btn-primary"> <a href="PageChange?page=addTeacher" class="text-light"> Add Student </a>  </button>
       </div>
       <!-- End Page Title -->
 
       <section class="section dashboard">
         <div class="row">
-             <!-- Top Selling -->
-            <div class="col-12">
-              <div class="card top-selling overflow-auto">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Teacher details Form</h5>
 
-                <div class="card-body pb-0">
-                  <h5 class="card-title">Student list </h5>
+                  <!-- Floating Labels Form -->
+                  <form
+                    class="row g-3"
+                    action="UserServlet?page=addTeacher"
+                    method="POST"
+                  >
+                    <div class="col-md-12">
+                      <div class="form-floating">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="floatingName"
+                          placeholder="Your Name"
+                          name="fullname"
+                          value="${teacher.fullName}"
+                        />
+                        <label for="floatingName">Full Name</label>
+                      </div>
+                    </div>
 
-                  <table class="table table-borderless datatable">
-                    <thead>
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Student name</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Address</th>
-                        <th scope="col">Phone</th>
-                      
-                        <th scope="col">Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach  items="${employeeList}" var="employee">
-                            <tr>
-                                <td  scope="row">${employee.user.id}</td>
-                                <td>${employee.user.fullName}</td>
-                                <td>${employee.user.email}</td>
-                                <td>${employee.user.address}</td>
-                                <td>${employee.user.phone}</td>
-                                <td>${employee.user.username}</td>
-                                <td>${employee.user.password}</td>
-                                <td>
-                                    <a href="UserServet?page=editStudent&userId=${employee.user.id}">edit</a>
-                                    <a href="UserServet?page=deleteStudent&userId=${employee.user.id}" class=text-danger>delete</a>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                    </tbody>
-                  </table>
+                    <div class="col-md-6">
+                      <div class="form-floating">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="floatingEmail"
+                          placeholder="Teacher name"
+                          name="username"
+                        />
+                        <label for="floatingName">Username</label>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-floating">
+                        <input
+                          type="password"
+                          class="form-control"
+                          id="floatingPassword"
+                          placeholder="username"
+                          name="password"
+                        />
+                        <label for="floatingPassword">Password</label>
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <div class="form-floating">
+                        <input
+                          class="form-control"
+                          placeholder="contact"
+                          id="floatingName"
+                          name="contact"
+                          value="${teacher.phone}"
+                        />
+                        <label for="floatingTextarea">Contact no.</label>
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <div class="form-floating">
+                        <input
+                          type="email"
+                          class="form-control"
+                          placeholder="email"
+                          id="floatingEmail"
+                          name="email"
+                          value="${teacher.email}"
+                        />
+                        <label for="floatingTextarea">Email</label>
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <div class="form-floating">
+                        <input
+                          class="form-control"
+                          placeholder="Address"
+                          id="floatingTextarea"
+                          name="address"
+                          value="${teacher.address}"
+                        />
+                        <label for="floatingTextarea">Address</label>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-floating mb-3">
+                        <select
+                          class="form-select"
+                          id="floatingSelect"
+                          aria-label="course"
+                          name="course"
+                        >
+                          <option value="BICT" selected>BICT</option>
+                          <option value="MBA">MBA</option>
+                        </select>
+                        <label for="floatingSelect">Course</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-floating mb-3">
+                        <select
+                          class="form-select"
+                          id="floatingSelect"
+                          aria-label="State"
+                          name="section"
+                        >
+                          <option value="all" selected>All</option>
+                          <option value="A">A</option>
+                          <option value="B">B</option>
+                        </select>
+                        <label for="floatingSelect">Section</label>
+                      </div>
+                    </div>
+                    <div class="text-left">
+                      <button type="submit" class="btn btn-primary">
+                        Submit
+                      </button>
+                      <button type="reset" class="btn btn-secondary">
+                        Reset
+                      </button>
+                    </div>
+                  </form>
+                  <!-- End floating Labels Form -->
                 </div>
               </div>
-            </div><!-- End Top Selling -->
+            </div>
+          </div>
         </div>
       </section>
     </main>
@@ -434,4 +522,3 @@
     </script>
   </body>
 </html>
-

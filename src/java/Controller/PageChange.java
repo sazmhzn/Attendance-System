@@ -125,7 +125,7 @@ public class PageChange extends HttpServlet {
             request.setAttribute("employee", model);
             request.setAttribute("employeeList", employeeList);
             
-            RequestDispatcher rd = request.getRequestDispatcher("/Pages/StudentDetails.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("/Pages/SubjectDetails.jsp");
             rd.forward(request, response);
         }
         

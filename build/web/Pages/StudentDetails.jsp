@@ -304,14 +304,14 @@
         <li class="nav-heading">manage</li>
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="PageChange?page=Student">
+          <a class="nav-link " href="PageChange?page=Student">
             <i class="bi bi-person"></i>
             <span> Student</span>
           </a>
         </li><!-- End Student Nav -->
       
       <li class="nav-item">
-          <a class="nav-link" href="PageChange?page=Teacher">
+          <a class="nav-link collapsed" href="PageChange?page=Teacher">
             <i class="bi bi-person"></i>
             <span> Teacher</span>
           </a>

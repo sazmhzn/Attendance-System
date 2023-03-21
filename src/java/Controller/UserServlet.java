@@ -53,6 +53,7 @@ public class UserServlet extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         doPost(request, response);
+        doPost(request, response);
     }
 
     /**
@@ -110,19 +111,16 @@ public class UserServlet extends HttpServlet {
             System.out.println("\n\n===================");
             System.out.println("editTeacher condition\n");
             
-            int id = Integer.parseInt( request.getParameter("id") ) ;
+            int id = Integer.parseInt( request.getParameter("userId") ) ;
 //            new UserServices().deleteTeacher(acc_id);
             System.out.println("The teacher accout ID to edit is: " + id);
+            User user =  new UserServices().getUserRow(id);
             
-            List<Teacher> employeeList = new UserServices().getTeacherList();
+            System.out.println(" ===== \n " + user.getFullName() + " " + user.getAddress());
             
-            for( Teacher e : employeeList ) {
-                System.out.println("so: " + e.getUser().getFullName());
-            }
+            request.setAttribute("teacher", user);
             
-            request.setAttribute("employeeList", employeeList);
-            
-            RequestDispatcher rd = request.getRequestDispatcher("/Pages/AddTeacher.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("/Pages/EditTeacher.jsp");
             rd.forward(request, response);
         }
 

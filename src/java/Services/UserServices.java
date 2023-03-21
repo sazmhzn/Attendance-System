@@ -168,17 +168,17 @@ public class UserServices {
     
     public User getUserRow(int id){
         User user = new User();
-        String query = "select * from users where id=?";
+        String query = "select * from teacher where TEAC_ID=?";
         PreparedStatement pstm = new DBConnection().getStatement(query);
         try {
             pstm.setInt(1,id);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()){
-                user.setId(rs.getInt("id"));
-                user.setFullName(rs.getString("full_name"));
-                user.setUsername(rs.getString("username"));
-                user.setPassword(rs.getString("password"));
-                user.setRole(rs.getString("role"));
+                user.setId(rs.getInt("TEAC_ID"));
+                user.setFullName(rs.getString("TEAC_NAME"));
+                user.setPhone(rs.getString("TEAC_PHONE"));
+                user.setEmail(rs.getString("TEAC_EMAIL"));
+                user.setAddress(rs.getString("TEAC_ADDRESS"));
             }
         }catch (SQLException e){
             e.printStackTrace();

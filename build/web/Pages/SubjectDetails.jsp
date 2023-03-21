@@ -311,14 +311,14 @@
         </li><!-- End Student Nav -->
       
       <li class="nav-item">
-          <a class="nav-link" href="PageChange?page=Teacher">
+          <a class="nav-link collapsed" href="PageChange?page=Teacher">
             <i class="bi bi-person"></i>
             <span> Teacher</span>
           </a>
         </li><!-- End Student Nav -->
       
       <li class="nav-item">
-          <a class="nav-link collapsed" href="PageChange?page=Subject">
+          <a class="nav-link " href="PageChange?page=Subject">
             <i class="bi bi-person"></i>
             <span>Subject</span>
           </a>
@@ -342,16 +342,16 @@
     <!-- ======= Main ======= -->
     <main id="main" class="main">
       <div class="pagetitle">
-        <h1>Student</h1>
+        <h1>Subject</h1>
         <nav>
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="dashboard.html">Student</a></li>
-            <li class="breadcrumb-item active">All students</li>
+            <li class="breadcrumb-item"><a href="dashboard.html">Subject</a></li>
+            <li class="breadcrumb-item active">All subjects</li>
             <!--<li class="breadcrumb-item ">Add Students</li>-->
           </ol>
         </nav>
         
-        <button class="btn btn-primary"> <a href="PageChange?page=addTeacher" class="text-light"> Add Student </a>  </button>
+        <button class="btn btn-primary"> <a href="PageChange?page=addTeacher" class="text-light"> Add subject </a>  </button>
       </div>
       <!-- End Page Title -->
 
@@ -362,16 +362,15 @@
               <div class="card top-selling overflow-auto">
 
                 <div class="card-body pb-0">
-                  <h5 class="card-title">Student list </h5>
+                  <h5 class="card-title">Subject list </h5>
 
                   <table class="table table-borderless datatable">
                     <thead>
                       <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Student name</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Address</th>
-                        <th scope="col">Phone</th>
+                        <th scope="col">Subject name</th>
+                        <th scope="col">Subject code</th>
+                        <th scope="col">Assigned teacher</th>
                       
                         <th scope="col">Action</th>
                       </tr>
@@ -379,13 +378,12 @@
                     <tbody>
                         <c:forEach  items="${employeeList}" var="employee">
                             <tr>
-                                <td  scope="row">${employee.user.id}</td>
-                                <td>${employee.user.fullName}</td>
-                                <td>${employee.user.email}</td>
-                                <td>${employee.user.address}</td>
-                                <td>${employee.user.phone}</td>
-                                <td>${employee.user.username}</td>
-                                <td>${employee.user.password}</td>
+                                <td  scope="row"></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                           
                                 <td>
                                     <a href="UserServet?page=editStudent&userId=${employee.user.id}">edit</a>
                                     <a href="UserServet?page=deleteStudent&userId=${employee.user.id}" class=text-danger>delete</a>

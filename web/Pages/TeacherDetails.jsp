@@ -318,7 +318,7 @@
         </li><!-- End Student Nav -->
       
       <li class="nav-item">
-          <a class="nav-link collapsed" href="./AttendanceSheet.html">
+          <a class="nav-link collapsed" href="PageChange?page=Subject">
             <i class="bi bi-person"></i>
             <span>Subject</span>
           </a>
