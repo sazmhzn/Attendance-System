@@ -12,6 +12,7 @@ import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -79,6 +80,8 @@ public class RegisterServlet extends HttpServlet {
             String username = request.getParameter("username");
             String password = HashingPassword.hashPassword(request.getParameter("password"));
             
+            
+            
             User user = new UserServices().getUser(username, password); //check if there is User in dadtabse account table
             if (user != null) {
                 HttpSession session = request.getSession();
@@ -88,6 +91,11 @@ public class RegisterServlet extends HttpServlet {
                 request.setAttribute("msg", "Login Successful!");
                 System.out.println(request.getAttribute("msg"));
                 System.out.println("Role" + user.getRole());
+                
+                //creating cookie to store the id of user
+                //Used for editing the profile of the user
+                Cookie ck = new Cookie("id", String.valueOf(user.getId()));
+                response.addCookie(ck);
                 
                     if (session.getAttribute("role").equals("T")) {
                         RequestDispatcher rd = request.getRequestDispatcher("Pages/AttendanceSheet.jsp");

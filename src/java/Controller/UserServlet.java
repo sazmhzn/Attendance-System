@@ -12,6 +12,7 @@ import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -108,10 +109,18 @@ public class UserServlet extends HttpServlet {
         }
         
         if (page.equalsIgnoreCase("editTeacher")) {
+            
+            
+            
             System.out.println("\n\n===================");
             System.out.println("editTeacher condition\n");
-            
-            int id = Integer.parseInt( request.getParameter("userId") ) ;
+            int id = 0;
+            Cookie[] cookie = request.getCookies();
+            for(Cookie ck:cookie){
+                if(ck.getName().equalsIgnoreCase("Id")){
+                    id = Integer.parseInt(ck.getValue());
+                }
+            }
 //            new UserServices().deleteTeacher(acc_id);
             System.out.println("The teacher accout ID to edit is: " + id);
             User user =  new UserServices().getUserRow(id);

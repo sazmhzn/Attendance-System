@@ -135,6 +135,8 @@ public class PageChange extends HttpServlet {
         }
         
         if (page.equalsIgnoreCase("Profile")) {
+            
+            
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/TeacherProfile.jsp");
             rd.forward(request, response);
         }

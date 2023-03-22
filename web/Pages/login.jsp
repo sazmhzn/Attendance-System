@@ -66,22 +66,6 @@
                 <div class="card">
                   <div class="card-body py-5 px-md-5">
                     <form action="RegisterServlet?page=existing" method="POST">
-                      <!-- Email input -->
-                      
-                      <div class="form-outline mb-4 d-flex gap-3">
-                          <div class="form-check">
-                              <input class="form-check-input" type="radio" name="role" value="T" id="flexRadioDefault1" for>
-                              <label class="form-check-label" for="flexRadioDefault1">
-                                  Teacher
-                              </label>
-                          </div>
-                          <div class="form-check">
-                              <input class="form-check-input" type="radio" name="role" value="A" id="flexRadioDefault2" checked>
-                              <label class="form-check-label" for="flexRadioDefault2">
-                                  Admin
-                              </label>
-                          </div>  
-                      </div>
                       
                       <% if(session.getAttribute("error_msg") != null)  {%>
 
@@ -92,6 +76,7 @@
 
                       <% } %>
                       
+                      <!-- Username input -->
                       <div class="form-outline mb-4">
                         <label class="form-label" for="form3Example3"
                           >Username</label

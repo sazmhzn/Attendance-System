@@ -12,6 +12,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
     <title>Attendify</title>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <meta content="" name="description" />
     <meta content="" name="keywords" />
 
@@ -376,7 +377,7 @@
     <!-- ======= Main ======= -->
     <main id="main" class="main">
       <div class="pagetitle">
-        <h1>Dashboard</h1>
+        <h1>Subject</h1>
         <nav>
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="dashboard.html">Home</a></li>
@@ -446,10 +447,10 @@
                     <input type="checkbox" class="check-all" />
                   </th>
                   <th scope="col">#</th>
-                  <th scope="col">Full Name</th>
-                  <th scope="col">Total Attendance</th>
+                  <th scope="col">Subject Name</th>
+                  <th scope="col">Subject Code</th>
                   <th scope="col">Last Attendance</th>
-                  <th scope="col">Notes</th>
+                  <th scope="col">Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -463,7 +464,7 @@
                     />
                   </th>
                   <th>1</th>
-                  <td>Mark</td>
+                  <td></td>
                   <td>-</td>
                   <td>-</td>
                   <td>-</td>

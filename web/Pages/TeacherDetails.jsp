@@ -120,7 +120,7 @@
               class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications"
             >
               <li class="dropdown-header">
-                You have 4 new notifications
+                You have 0 new notifications
                 <a href="#"
                   ><span class="badge rounded-pill bg-primary p-2 ms-2"
                     >View all</span
@@ -129,15 +129,6 @@
               </li>
               <li>
                 <hr class="dropdown-divider" />
-              </li>
-
-              <li class="notification-item">
-                <i class="bi bi-exclamation-circle text-warning"></i>
-                <div>
-                  <h4>Lorem Ipsum</h4>
-                  <p>Quae dolorem earum veritatis oditseno</p>
-                  <p>30 min. ago</p>
-                </div>
               </li>
 
               <li>
