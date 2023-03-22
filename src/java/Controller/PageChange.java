@@ -133,6 +133,11 @@ public class PageChange extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/AdminDashboard.jsp");
             rd.forward(request, response);
         }
+        
+        if (page.equalsIgnoreCase("Profile")) {
+            RequestDispatcher rd = request.getRequestDispatcher("/Pages/TeacherProfile.jsp");
+            rd.forward(request, response);
+        }
 
     }
 

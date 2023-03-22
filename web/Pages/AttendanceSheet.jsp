@@ -94,10 +94,7 @@
             >
               <li class="dropdown-header">
                 You have 4 new notifications
-                <a href="#"
-                  ><span class="badge rounded-pill bg-primary p-2 ms-2"
-                    >View all</span
-                  ></a
+                <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a
                 >
               </li>
               <li>
@@ -225,24 +222,6 @@
               <li>
                 <hr class="dropdown-divider" />
               </li>
-
-              <li class="message-item">
-                <a href="#">
-                  <img
-                    src="assets/img/messages-3.jpg"
-                    alt=""
-                    class="rounded-circle"
-                  />
-                  <div>
-                    <h4>David Muldon</h4>
-                    <p>
-                      Velit asperiores et ducimus soluta repudiandae labore
-                      officia est ut...
-                    </p>
-                    <p>8 hrs. ago</p>
-                  </div>
-                </a>
-              </li>
               <li>
                 <hr class="dropdown-divider" />
               </li>
@@ -286,7 +265,7 @@
               <li>
                 <a
                   class="dropdown-item d-flex align-items-center"
-                  href="users-profile.html"
+                  href="PageChange?page=Profile"
                 >
                   <i class="bi bi-person"></i>
                   <span>My Profile</span>
