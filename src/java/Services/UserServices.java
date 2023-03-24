@@ -125,7 +125,7 @@ public class UserServices {
      * This method will insert teacher details in account and teacher table
      * @param teacher 
      */
-    public void insertTeacher(Teacher teacher) {
+    public void insertUser(Teacher teacher) {
         insertUser(teacher.getUser()); //This method will insert the teacher details in Accout table
 
         User newUser = getUser(teacher.getUser().getUsername(), teacher.getUser().getPassword());
@@ -228,11 +228,11 @@ public class UserServices {
      * This method will insert student in student and account tables
      * @param student 
      */
-    public void insertStudent(Student student) {
+    public void insertUser(Student student) {
         insertUser(student.getUser()); //This method will insert the student details in Accout table
 
         User newUser = getUser(student.getUser().getUsername(), student.getUser().getPassword());
-
+        
         System.out.println("\n\n The user id " + student.getUser().getId());
 
         String query = "INSERT INTO `student`(`STUD_NAME`, `STUD_ADDRESS`, `STUD_EMAIL`, `STUD_SEMESTER`, `ACC_ID`) VALUES (?,?,?,?,?)";
@@ -243,7 +243,7 @@ public class UserServices {
             pstm.setString(3, student.getUser().getEmail());
             pstm.setString(4, student.getSemester());
             pstm.setInt(5, newUser.getId());
-            System.out.println("insert Teacher query:" + pstm);
+            System.out.println("insert Student query:" + pstm);
 
             pstm.execute();
         } catch (SQLException e) {

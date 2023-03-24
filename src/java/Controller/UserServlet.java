@@ -5,6 +5,7 @@
 package Controller;
 
 import Hashing.HashingPassword;
+import Model.Student;
 import Model.Teacher;
 import Model.User;
 import Services.UserServices;
@@ -87,7 +88,7 @@ public class UserServlet extends HttpServlet {
 
             teacher.setUser(new User(request.getParameter("fullname"), request.getParameter("email"), request.getParameter("contact"), request.getParameter("address"), request.getParameter("section"), request.getParameter("course"), request.getParameter("username"), h.hashPassword(request.getParameter("password")) , "T"));
             System.out.println(teacher.getUser().getFullName() + " " + teacher.getUser().getAddress() + " " + teacher.getUser().getUsername() + " " + teacher.getUser().getPassword());
-            new UserServices().insertTeacher(teacher);
+            new UserServices().insertUser(teacher);
             
             RequestDispatcher rd = request.getRequestDispatcher("Pages/AddTeacher.jsp");
             rd.forward(request, response);
@@ -130,6 +131,26 @@ public class UserServlet extends HttpServlet {
             request.setAttribute("teacher", user);
             
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/EditTeacher.jsp");
+            rd.forward(request, response);
+        }
+        
+        /**
+         * This condition will run when the admin wants to add a student
+         */
+        if (page.equalsIgnoreCase("addStudent")) {
+            System.out.println("\n\n===================");
+            System.out.println("addStudent method\n");
+            
+            HashingPassword h = new HashingPassword();
+            
+            Student student = new Student(); //initializing a new teacher
+
+            student.setUser(new User(request.getParameter("fullname"), request.getParameter("email"), request.getParameter("contact"), request.getParameter("address"), request.getParameter("section"), request.getParameter("course"), request.getParameter("username"), h.hashPassword(request.getParameter("password")) , "S"));
+            System.out.println(student.getUser().getFullName() + " " + student.getUser().getAddress() + " " + student.getUser().getUsername() + " " + student.getUser().getPassword());
+            
+            new UserServices().insertUser(student);
+            
+            RequestDispatcher rd = request.getRequestDispatcher("Pages/AddTeacher.jsp");
             rd.forward(request, response);
         }
 
