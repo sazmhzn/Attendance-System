@@ -303,7 +303,7 @@
         <!-- End Student Nav -->
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="PageChange?page=teacher">
+          <a class="nav-link" href="PageChange?page=teacher">
             <i class="bi bi-person"></i>
             <span> Teacher</span>
           </a>
@@ -339,9 +339,9 @@
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="dashboard.html">Home</a></li>
             <li class="breadcrumb-item">
-              <a href="studentList.html">Students</a>
+              <a href="PageChange?page=Teacher">Teacher</a>
             </li>
-            <li class="breadcrumb-item active">Add Students</li>
+            <li class="breadcrumb-item active">Add Teacher</li>
           </ol>
         </nav>
       </div>
