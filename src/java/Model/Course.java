@@ -11,8 +11,14 @@ package Model;
 public class Course {
     private int course_id;
     private String course_name;
+    private String section;
     private Subject[] subjects;
-    
+
+    public Course(int course_id, String course_name) {
+        this.course_id = course_id;
+        this.course_name = course_name;
+    }
+
     //The course details
     public Course(int course_id, String course_name, Subject[] subjects) {
         this.course_id = course_id;
@@ -34,6 +40,14 @@ public class Course {
 
     public void setCourse_name(String course_name) {
         this.course_name = course_name;
+    }
+
+    public String getSection() {
+        return section;
+    }
+
+    public void setSection(String section) {
+        this.section = section;
     }
 
     public Subject[] getSubjects() {

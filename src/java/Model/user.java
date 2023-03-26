@@ -9,7 +9,7 @@ package Model;
  * @author lenovo
  */
 public class User {
-
+ 
     private int id;
     private String fullName;
     private String email;

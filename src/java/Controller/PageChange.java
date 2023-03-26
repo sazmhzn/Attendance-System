@@ -4,6 +4,7 @@
  */
 package Controller;
 
+import Model.College;
 import Model.Student;
 import Model.Teacher;
 import Model.User;
@@ -88,13 +89,15 @@ public class PageChange extends HttpServlet {
             rd.forward(request, response);
         }
         if (page.equalsIgnoreCase("addTeacher")) {
+            List<College> collegeList = new UserServices().getCourse();
+            request.setAttribute("collegeList", collegeList);
+            
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/AddTeacher.jsp");
             rd.forward(request, response);
         }
               
         if (page.equalsIgnoreCase("Teacher")) {
             List<Teacher> employeeList = new UserServices().getTeacherList();
-            
             request.setAttribute("employeeList", employeeList);
             
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/TeacherDetails.jsp");

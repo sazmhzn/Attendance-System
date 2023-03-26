@@ -5,6 +5,8 @@
 package Services;
 
 import DBConnection.DBConnection;
+import Model.College;
+import Model.Course;
 import Model.Student;
 import Model.Teacher;
 import Model.User;
@@ -247,6 +249,8 @@ public class UserServices {
         }
     }
     
+    
+    
     /**
      * This method will get get the list of student 
      * @return 
@@ -272,5 +276,28 @@ public class UserServices {
 
         return userList;
     }
+    
+    
+    //methods for courses
+        public List<College> getCourse() {
+        List<College> collegeList = new ArrayList<>();
+        String query = "SELECT * FROM `course`";
+        System.out.println(query);
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+        try {
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                College college = new College();
+                college.setCourse(new Course(rs.getInt("C_ID"), rs.getString("COURSE_NAME")));
+                collegeList.add(college);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return collegeList;
+    }
+
+    
 
 }

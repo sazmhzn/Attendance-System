@@ -7,6 +7,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
     <title>Teacher</title>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <meta content="" name="description" />
     <meta content="" name="keywords" />
 
@@ -439,14 +440,16 @@
 
                     <div class="col-md-6">
                       <div class="form-floating mb-3">
+                          ${collegeList.course.course_name}
                         <select
                           class="form-select"
                           id="floatingSelect"
                           aria-label="course"
                           name="course"
                         >
-                          <option value="BICT" selected>BICT</option>
-                          <option value="MBA">MBA</option>
+                            
+                          <option value="MBA">Manage Course</option>
+                          <option value="MBA"></option>
                         </select>
                         <label for="floatingSelect">Course</label>
                       </div>
