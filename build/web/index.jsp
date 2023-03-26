@@ -89,22 +89,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                         />
                       </div>
 
-                      <!-- Checkbox -->
-                      <div
-                        class="form-check d-flex justify-content-center mb-4"
-                      >
-                        <input
-                          class="form-check-input me-2"
-                          type="checkbox"
-                          value=""
-                          id="form2Example33"
-                          checked
-                        />
-                        <label class="form-check-label" for="form2Example33">
-                          Remember me
-                        </label>
-                      </div>
-
                       <!-- Submit button -->
                       <button type="submit" class="btn btn-primary btn-block mb-2">Sign in</button>
 

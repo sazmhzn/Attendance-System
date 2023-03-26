@@ -107,9 +107,6 @@
                       <!-- Submit button -->
                       <button type="submit" class="btn btn-primary btn-block mb-2">Sign in</button>
 
-                      <p class="small mb-5 pb-lg-2">
-                        <a class="text-muted" href="#!">Forgot password?</a>
-                      </p>
                       <p>
                         Don't have an account?
                         <a href="PageChange?page=register" class="link-info">Register here</a>

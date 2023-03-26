@@ -22,7 +22,7 @@ public class UserServices {
 
     /**
      * This will get the User from account table
-     *
+     * This is used for authentication in login jsp
      * @param username
      * @param password
      * @return
@@ -46,7 +46,7 @@ public class UserServices {
                 user.setUsername(rs.getString("ACC_USERNAME"));
                 user.setPassword(rs.getString("ACC_PASSWORD"));
                 user.setRole(rs.getString("ACC_ROLE"));
-                System.out.println("Role id" + user.getId());
+                System.out.println("Role id " + user.getId());
             }
 
         } catch (SQLException e) {
@@ -56,48 +56,6 @@ public class UserServices {
         return user;
     }
 
-    /**
-     * This method will insert User in accounts table
-     * @param user 
-     */
-    public void insertUser(User user) {
-        String query = "insert into accounts (ACC_USERNAME,ACC_PASSWORD,ACC_ROLE)"
-                + "values(?,?,?)";
-        PreparedStatement pstm = new DBConnection().getStatement(query);
-        try {
-            pstm.setString(1, user.getUsername());
-            pstm.setString(2, user.getPassword());
-            pstm.setString(3, user.getRole());
-
-            System.out.println("insert user query:" + pstm);
-
-            pstm.execute();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-    
-    /**
-     * This method will delete a user from account table
-     * @param acc_id 
-     */
-    public void deleteUser(int acc_id) {
-        String query = "DELETE FROM `user` WHERE ACC_ID = ?";
-        PreparedStatement pstm = new DBConnection().getStatement(query);
-        try {
-            pstm.setInt(1, acc_id);
-            System.out.println("insert user query:" + pstm);
-
-            pstm.execute();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-    
-    /**
-     * This method will get teacher from database
-     * @return userList
-     */
     public List<Teacher> getTeacherList() {
         List<Teacher> userList = new ArrayList<>();
         String query = "SELECT * FROM `teacher` LEFT JOIN `accounts` ON teacher.ACC_ID = accounts.ACC_ID";
@@ -119,6 +77,72 @@ public class UserServices {
         }
 
         return userList;
+    }
+
+    public User getUserRow(int id){
+        User user = new User();
+        String query = "select * from teacher where TEAC_ID=?";
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+        try {
+            pstm.setInt(1,id);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()){
+                user.setId(rs.getInt("TEAC_ID"));
+                user.setFullName(rs.getString("TEAC_NAME"));
+                user.setPhone(rs.getString("TEAC_PHONE"));
+                user.setEmail(rs.getString("TEAC_EMAIL"));
+                user.setAddress(rs.getString("TEAC_ADDRESS"));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return user;
+    }
+    
+    /**
+     * This method will get a teacher row
+     * @param id
+     * @return 
+     */
+      public Teacher getTeacherRow(int id){
+        Teacher teacher = new Teacher();
+        String query = "SELECT * FROM `teacher` LEFT JOIN `accounts` ON teacher.ACC_ID = accounts.ACC_ID where id=?";
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+        try {
+            pstm.setInt(1,id);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()){
+    
+                teacher.setUser(new User( rs.getInt("TEAC_ID"), rs.getString("TEAC_NAME"), rs.getString("TEAC_EMAIL"), rs.getString("TEAC_PHONE"), rs.getString("TEAC_ADDRESS") ));
+                System.out.println("teacher from get Teahcer Row:");
+                System.out.println("Full name: " + teacher.getUser().getFullName());
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return teacher;
+    }
+    
+    /**
+     * This method will insert User in accounts table
+     *  This method is used in addTeacher jsp
+     * @param user 
+     */
+    public void insertUser(User user) {
+        String query = "insert into accounts (ACC_USERNAME,ACC_PASSWORD,ACC_ROLE)"
+                + "values(?,?,?)";
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+        try {
+            pstm.setString(1, user.getUsername());
+            pstm.setString(2, user.getPassword());
+            pstm.setString(3, user.getRole());
+
+            System.out.println("insert user query:" + pstm);
+
+            pstm.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -146,6 +170,23 @@ public class UserServices {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }    
+    
+    /**
+     * This method will delete a user from account table
+     * @param acc_id 
+     */
+    public void deleteUser(int acc_id) {
+        String query = "DELETE FROM `user` WHERE ACC_ID = ?";
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+        try {
+            pstm.setInt(1, acc_id);
+            System.out.println("insert user query:" + pstm);
+
+            pstm.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
     
     /**
@@ -166,60 +207,15 @@ public class UserServices {
         }
     }
     
-    public User getUserRow(int id){
-        User user = new User();
-        String query = "select * from teacher where TEAC_ID=?";
-        PreparedStatement pstm = new DBConnection().getStatement(query);
-        try {
-            pstm.setInt(1,id);
-            ResultSet rs = pstm.executeQuery();
-            while (rs.next()){
-                user.setId(rs.getInt("TEAC_ID"));
-                user.setFullName(rs.getString("TEAC_NAME"));
-                user.setPhone(rs.getString("TEAC_PHONE"));
-                user.setEmail(rs.getString("TEAC_EMAIL"));
-                user.setAddress(rs.getString("TEAC_ADDRESS"));
-            }
-        }catch (SQLException e){
-            e.printStackTrace();
-        }
-        return user;
-    }
-    
-    public User getTeacherRow(int id){
-        Teacher teacher = new Teacher();
-        User user = new User();
-        String query = "SELECT * FROM `teacher` LEFT JOIN `accounts` ON teacher.ACC_ID = accounts.ACC_ID where id=?";
-        PreparedStatement pstm = new DBConnection().getStatement(query);
-        try {
-            pstm.setInt(1,id);
-            ResultSet rs = pstm.executeQuery();
-            while (rs.next()){
-                
-//                teacher.setUser(new User( rs.getInt("id"), rs.getString("full_name"), rs.getString("username"), rs.getString("password") ));
-
-                
-                user.setId(rs.getInt("id"));
-                user.setFullName(rs.getString("full_name"));
-                user.setUsername(rs.getString("username"));
-                user.setPassword(rs.getString("password"));
-                user.setRole(rs.getString("role"));
-            }
-        }catch (SQLException e){
-            e.printStackTrace();
-        }
-        return user;
-    }
-    
     public void editUser(int id, User user) throws SQLException {
 
         String query = "update users set ACC_USERNAME=?,ACC_PASSWORD=?," +
                 "ACC_ROLE=? where ACC_ID=?";
         PreparedStatement pstm = new DBConnection().getStatement(query);
-        pstm.setString(2, user.getUsername());
-        pstm.setString(3, user.getPassword());
-        pstm.setString(4, user.getRole());
-        pstm.setInt(5, user.getId());
+        pstm.setString(1, user.getUsername());
+        pstm.setString(2, user.getPassword());
+        pstm.setString(3, user.getRole());
+        pstm.setInt(4, user.getId());
 
         pstm.execute();
     }

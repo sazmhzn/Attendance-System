@@ -378,7 +378,7 @@
                                 <td>${employee.user.phone}</td>
                                 <td>
                                     <button type="button" class="btn btn-primary" >
-                                      <a href="UserServlet?page=editTeacher&userId=${employee.user.id}" class="text-light"> <i class="bi bi-pencil"></i> edit</a>  
+                                      <a href="PageChange?page=editTeacher&userId=${employee.user.id}" class="text-light"> <i class="bi bi-pencil"></i> edit</a>  
                                     </button>
                                     
                                     

@@ -359,7 +359,7 @@
                   <!-- Floating Labels Form -->
                   <form
                     class="row g-3"
-                    action="UserServlet?page=addTeacher"
+                    action="UserServlet?page=editTeacher"
                     method="POST"
                   >
                     <div class="col-md-12">

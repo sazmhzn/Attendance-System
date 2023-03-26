@@ -12,6 +12,7 @@ import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -92,16 +93,28 @@ public class PageChange extends HttpServlet {
         }
               
         if (page.equalsIgnoreCase("Teacher")) {
-            
             List<Teacher> employeeList = new UserServices().getTeacherList();
-            
-            for( Teacher e : employeeList ) {
-                System.out.println("so: " + e.getUser().getFullName());
-            }
             
             request.setAttribute("employeeList", employeeList);
             
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/TeacherDetails.jsp");
+            rd.forward(request, response);
+        }
+        
+        if (page.equalsIgnoreCase("editTeacher")) {
+            System.out.println("\n\n===================");
+            System.out.println("editTeacher condition\n");
+            int id = 0;
+            Cookie[] cookie = request.getCookies();
+            for(Cookie ck:cookie){
+                if(ck.getName().equalsIgnoreCase("Id")){
+                    id = Integer.parseInt(ck.getValue());
+                }
+            }
+            User user =  new UserServices().getUserRow(id); //This will be displayed on the form field
+            request.setAttribute("teacher", user);
+            
+            RequestDispatcher rd = request.getRequestDispatcher("/Pages/EditTeacher.jsp");
             rd.forward(request, response);
         }
         

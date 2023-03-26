@@ -5,6 +5,7 @@
 package Controller;
 
 import Hashing.HashingPassword;
+import Model.Teacher;
 import Model.User;
 import Services.UserServices;
 import jakarta.servlet.RequestDispatcher;
@@ -17,8 +18,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.Objects;
-import org.apache.jasper.tagplugins.jstl.core.ForEach;
+
 
 /**
  *
@@ -55,7 +55,6 @@ public class RegisterServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        
         doPost(request, response);
     }
 
@@ -91,11 +90,13 @@ public class RegisterServlet extends HttpServlet {
                 request.setAttribute("msg", "Login Successful!");
                 System.out.println(request.getAttribute("msg"));
                 System.out.println("Role" + user.getRole());
-                
+                                                
                 //creating cookie to store the id of user
                 //Used for editing the profile of the user
                 Cookie ck = new Cookie("id", String.valueOf(user.getId()));
+                Cookie ckName = new Cookie("name", String.valueOf(user.getUsername()));
                 response.addCookie(ck);
+                response.addCookie(ckName);
                 
                     if (session.getAttribute("role").equals("T")) {
                         RequestDispatcher rd = request.getRequestDispatcher("Pages/AttendanceSheet.jsp");

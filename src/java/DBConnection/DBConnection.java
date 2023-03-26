@@ -41,7 +41,7 @@ public class DBConnection {
 
         try {
             preparedStatement = connection.prepareStatement(query);
-            preparedStatement.execute();
+          preparedStatement.execute();
 
         } catch (SQLException e) {
             e.printStackTrace();

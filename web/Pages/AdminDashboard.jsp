@@ -318,7 +318,6 @@
         </li>
       
       <li class="nav-item">
-        <a class="nav-link collapsed" href="PageChange?page=Subject">
           <i class="bi bi-journal-text"></i><span>Subject</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
        

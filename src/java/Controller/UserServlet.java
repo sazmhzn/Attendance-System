@@ -55,7 +55,6 @@ public class UserServlet extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         doPost(request, response);
-        doPost(request, response);
     }
 
     /**
@@ -85,7 +84,7 @@ public class UserServlet extends HttpServlet {
             HashingPassword h = new HashingPassword();
             
             Teacher teacher = new Teacher(); //initializing a new teacher
-
+  
             teacher.setUser(new User(request.getParameter("fullname"), request.getParameter("email"), request.getParameter("contact"), request.getParameter("address"), request.getParameter("section"), request.getParameter("course"), request.getParameter("username"), h.hashPassword(request.getParameter("password")) , "T"));
             System.out.println(teacher.getUser().getFullName() + " " + teacher.getUser().getAddress() + " " + teacher.getUser().getUsername() + " " + teacher.getUser().getPassword());
             new UserServices().insertUser(teacher);
@@ -109,31 +108,6 @@ public class UserServlet extends HttpServlet {
             rd.forward(request, response);
         }
         
-        if (page.equalsIgnoreCase("editTeacher")) {
-            
-            
-            
-            System.out.println("\n\n===================");
-            System.out.println("editTeacher condition\n");
-            int id = 0;
-            Cookie[] cookie = request.getCookies();
-            for(Cookie ck:cookie){
-                if(ck.getName().equalsIgnoreCase("Id")){
-                    id = Integer.parseInt(ck.getValue());
-                }
-            }
-//            new UserServices().deleteTeacher(acc_id);
-            System.out.println("The teacher accout ID to edit is: " + id);
-            User user =  new UserServices().getUserRow(id);
-            
-            System.out.println(" ===== \n " + user.getFullName() + " " + user.getAddress());
-            
-            request.setAttribute("teacher", user);
-            
-            RequestDispatcher rd = request.getRequestDispatcher("/Pages/EditTeacher.jsp");
-            rd.forward(request, response);
-        }
-        
         /**
          * This condition will run when the admin wants to add a student
          */
@@ -143,12 +117,12 @@ public class UserServlet extends HttpServlet {
             
             HashingPassword h = new HashingPassword();
             
-            Student student = new Student(); //initializing a new teacher
+            Student student = new Student(); //initializing a new student
 
             student.setUser(new User(request.getParameter("fullname"), request.getParameter("email"), request.getParameter("contact"), request.getParameter("address"), request.getParameter("section"), request.getParameter("course"), request.getParameter("username"), h.hashPassword(request.getParameter("password")) , "S"));
             System.out.println(student.getUser().getFullName() + " " + student.getUser().getAddress() + " " + student.getUser().getUsername() + " " + student.getUser().getPassword());
             
-            new UserServices().insertUser(student);
+            new UserServices().insertUser(student); //inserting into user table
             
             RequestDispatcher rd = request.getRequestDispatcher("Pages/AddTeacher.jsp");
             rd.forward(request, response);
