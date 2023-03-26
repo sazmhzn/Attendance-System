@@ -106,9 +106,7 @@ public class PageChange extends HttpServlet {
         }
         
         if (page.equalsIgnoreCase("editTeacher")) {
-            System.out.println("\n\n===================");
-            System.out.println("editTeacher condition\n");
-            int id = 0;
+            int id =Integer.parseInt(request.getParameter("userId")) ;
             Cookie[] cookie = request.getCookies();
             for(Cookie ck:cookie){
                 if(ck.getName().equalsIgnoreCase("Id")){

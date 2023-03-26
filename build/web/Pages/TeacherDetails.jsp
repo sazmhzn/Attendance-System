@@ -376,7 +376,6 @@
                                 <td>${employee.user.email}</td>
                                 <td>${employee.user.address}</td>
                                 <td>${employee.user.phone}</td>
-                        <rd>  </td>
                                 <td>
                                     <button type="button" class="btn btn-primary" >
                                       <a href="PageChange?page=editTeacher&userId=${employee.user.id}" class="text-light"> <i class="bi bi-pencil"></i> edit</a>  

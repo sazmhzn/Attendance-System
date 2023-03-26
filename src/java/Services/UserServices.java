@@ -293,23 +293,22 @@ public class UserServices {
         return collegeList;
     }
         
-        public List<College> getSectionList() {
-        List<College> collegeList = new ArrayList<>();
+        public List<Section> getSectionList() {
+        List<Section> sectionList = new ArrayList<>();
         String query = "SELECT * FROM `section`";
         System.out.println(query);
         PreparedStatement pstm = new DBConnection().getStatement(query);
         try {
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
-                College college = new College();
-                college.setCourse(new Section(rs.getInt("C_ID"), rs.getString("COURSE_NAME")));
-                collegeList.add(college);
+                Section section = new Section(rs.getInt("C_ID"), rs.getString("COURSE_NAME"));
+                sectionList.add(section);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return collegeList;
+        return sectionList;
     }
 
 }
