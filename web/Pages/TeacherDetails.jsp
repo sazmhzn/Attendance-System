@@ -376,11 +376,11 @@
                                 <td>${employee.user.email}</td>
                                 <td>${employee.user.address}</td>
                                 <td>${employee.user.phone}</td>
+                        <rd>  </td>
                                 <td>
                                     <button type="button" class="btn btn-primary" >
                                       <a href="PageChange?page=editTeacher&userId=${employee.user.id}" class="text-light"> <i class="bi bi-pencil"></i> edit</a>  
                                     </button>
-                                    
                                     
                                     <!-- Button trigger modal -->
                                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal${employee.user.id}">
@@ -412,9 +412,11 @@
                         </c:forEach>
                     </tbody>
                   </table>
-
+                  <c:forEach items="${collegeList}" var="college">
+                      <p> ${college.course.name} </p>
+                  </c:forEach>
                 </div>
-
+                 
               </div>
             </div><!-- End Top Selling -->
         </div>

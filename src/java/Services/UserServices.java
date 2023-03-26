@@ -7,6 +7,7 @@ package Services;
 import DBConnection.DBConnection;
 import Model.College;
 import Model.Course;
+import Model.Section;
 import Model.Student;
 import Model.Teacher;
 import Model.User;
@@ -70,7 +71,6 @@ public class UserServices {
                 Teacher teacher = new Teacher();
        
                 teacher.setUser(new User(rs.getInt("TEAC_ID"), rs.getString("TEAC_NAME"), rs.getString("TEAC_EMAIL"), rs.getString("TEAC_PHONE"),rs.getString("TEAC_ADDRESS") ));
-                System.out.println(" " + teacher.getUser().getId());
                 teacher.setAcc_id(rs.getInt("ACC_ID"));
                 userList.add(teacher);
             }
@@ -249,8 +249,6 @@ public class UserServices {
         }
     }
     
-    
-    
     /**
      * This method will get get the list of student 
      * @return 
@@ -263,11 +261,8 @@ public class UserServices {
         try {
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
-
                 Student student = new Student();
-
                 student.setUser(new User(rs.getInt("STUD_ID"), rs.getString("STUD_NAME"), rs.getString("STUD_EMAIL"), rs.getString("STUD_PHONE"), rs.getString("STUD_ADDRESS"), rs.getString("SEM_NAME"), rs.getString("SECT_NAME"), rs.getString("STUD_COURSE")));
-
                 userList.add(student);
             }
         } catch (SQLException e) {
@@ -279,7 +274,7 @@ public class UserServices {
     
     
     //methods for courses
-        public List<College> getCourse() {
+        public List<College> getCourseList() {
         List<College> collegeList = new ArrayList<>();
         String query = "SELECT * FROM `course`";
         System.out.println(query);
@@ -297,7 +292,24 @@ public class UserServices {
 
         return collegeList;
     }
+        
+        public List<College> getSectionList() {
+        List<College> collegeList = new ArrayList<>();
+        String query = "SELECT * FROM `section`";
+        System.out.println(query);
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+        try {
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                College college = new College();
+                college.setCourse(new Section(rs.getInt("C_ID"), rs.getString("COURSE_NAME")));
+                collegeList.add(college);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
-    
+        return collegeList;
+    }
 
 }

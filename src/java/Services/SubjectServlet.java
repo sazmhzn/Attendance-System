@@ -37,7 +37,7 @@ public class SubjectServlet {
         String query = "INSERT INTO `subject`(`COURSE_NAME`) VALUES (?)";
         PreparedStatement pstm = new DBConnection().getStatement(query);
         try {
-            pstm.setString(1, course.getCourse_name());
+            pstm.setString(1, course.getName());
 
             System.out.println(pstm);
 

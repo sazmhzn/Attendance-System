@@ -34,8 +34,6 @@ public class Teacher {
         this.acc_id = acc_id;
     }
 
-    
-    
     public User getUser() {
         return user;
     }
@@ -51,7 +49,5 @@ public class Teacher {
     public void setSubjects(Subject[] subjects) {
         this.subjects = subjects;
     }
-    
-    
 }
 

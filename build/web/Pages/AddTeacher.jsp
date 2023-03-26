@@ -284,40 +284,37 @@
           </a>
         </li>
         <!-- End Profile Page Nav -->
-
+        
         <li class="nav-item">
-          <a class="nav-link collapsed" href="pages-contact.html">
+          <a class="nav-link collapsed" href="PageChange?page=Report">
             <i class="bi bi-envelope"></i>
             <span>Report</span>
           </a>
         </li>
         <!-- End Report Page Nav -->
-
+        
         <li class="nav-heading">manage</li>
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="./AttendanceSheet.html">
+          <a class="nav-link collapsed" href="PageChange?page=Student">
             <i class="bi bi-person"></i>
             <span> Student</span>
           </a>
-        </li>
-        <!-- End Student Nav -->
-
-        <li class="nav-item">
-          <a class="nav-link" href="PageChange?page=teacher">
+        </li><!-- End Student Nav -->
+      
+      <li class="nav-item">
+          <a class="nav-link" href="PageChange?page=Teacher">
             <i class="bi bi-person"></i>
             <span> Teacher</span>
           </a>
-        </li>
-        <!-- End Student Nav -->
-
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="./AttendanceSheet.html">
+        </li><!-- End Student Nav -->
+      
+      <li class="nav-item">
+          <a class="nav-link collapsed" href="PageChange?page=Subject">
             <i class="bi bi-person"></i>
             <span>Subject</span>
           </a>
-        </li>
-        <!-- End Student Nav -->
+        </li><!-- End Student Nav -->
 
         <li class="nav-heading">Extra</li>
 
@@ -440,20 +437,21 @@
 
                     <div class="col-md-6">
                       <div class="form-floating mb-3">
-                          ${collegeList.course.course_name}
+                          
                         <select
                           class="form-select"
                           id="floatingSelect"
                           aria-label="course"
                           name="course"
                         >
-                            
-                          <option value="MBA">Manage Course</option>
-                          <option value="MBA"></option>
+                            <c:forEach items="${collegeList}" var="college">
+                                <option value="${college.course.id}">${college.course.name}</option>
+                            </c:forEach>
                         </select>
                         <label for="floatingSelect">Course</label>
                       </div>
                     </div>
+                    
                     <div class="col-md-6">
                       <div class="form-floating mb-3">
                         <select

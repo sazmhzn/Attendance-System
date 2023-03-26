@@ -8,22 +8,16 @@ package Model;
  *
  * @author lenovo
  */
-public class Course {
+public class Section {
     private int id;
     private String name;
-    private Section section;
-    private Subject[] subjects;
 
-    public Course() {
+    public Section() {
     }
-    
-    public Course(int id, String name) {
+
+    public Section(int id, String name) {
         this.id = id;
         this.name = name;
-    }
-
-    public Course(Section section) {
-        this.section = section;
     }
 
     public int getId() {
@@ -41,21 +35,5 @@ public class Course {
     public void setName(String name) {
         this.name = name;
     }
-
-    public Section getSection() {
-        return section;
-    }
-
-    public void setSection(Section section) {
-        this.section = section;
-    }
-
-    public Subject[] getSubjects() {
-        return subjects;
-    }
-
-    public void setSubjects(Subject[] subjects) {
-        this.subjects = subjects;
-    }
-
+    
 }
