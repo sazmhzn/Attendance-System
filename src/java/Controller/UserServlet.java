@@ -101,7 +101,7 @@ public class UserServlet extends HttpServlet {
             System.out.println("deleteTeacher condition\n");
             
             int acc_id = Integer.parseInt( request.getParameter("accId") ) ;
-//            new UserServices().deleteTeacher(acc_id);
+            new UserServices().deleteTeacher(acc_id);
             System.out.println("The teacher accout ID to delete is: " + acc_id);
             
             RequestDispatcher rd = request.getRequestDispatcher("PageChange?page=Teacher");
