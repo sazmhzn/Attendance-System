@@ -124,13 +124,20 @@ public class PageChange extends HttpServlet {
         
         if (page.equalsIgnoreCase("Student")) {
             
-            User model = new User();
             List<Student> employeeList = new UserServices().getStudentList();
-            
-            request.setAttribute("employee", model);
             request.setAttribute("employeeList", employeeList);
+            List<College> collegeList = new UserServices().getCourseList();
+            request.setAttribute("collegeList", collegeList);
             
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/StudentDetails.jsp");
+            rd.forward(request, response);
+        }
+        
+        if (page.equalsIgnoreCase("addStudent")) {
+            List<College> collegeList = new UserServices().getCourseList();
+            request.setAttribute("collegeList", collegeList);
+            
+            RequestDispatcher rd = request.getRequestDispatcher("/Pages/AddStudent.jsp");
             rd.forward(request, response);
         }
         

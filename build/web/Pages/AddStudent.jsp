@@ -439,7 +439,7 @@
                       </div>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                       <div class="form-floating mb-3">
                           
                         <select
@@ -456,7 +456,23 @@
                       </div>
                     </div>
                     
-                    <div class="col-md-6">
+                    <div class="col-md-4">
+                      <div class="form-floating mb-3">
+                        <select
+                          class="form-select"
+                          id="floatingSelect"
+                          aria-label="State"
+                          name="Semester"
+                        >
+                          <option value="1" selected>First</option>
+                          <option value="2">Second</option>
+                          <option value="3">Third</option>
+                        </select>
+                        <label for="floatingSelect">Semester</label>
+                      </div>
+                    </div>
+                      
+                      <div class="col-md-4">
                       <div class="form-floating mb-3">
                         <select
                           class="form-select"

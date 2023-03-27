@@ -256,14 +256,14 @@ public class UserServices {
      */
     public List<Student> getStudentList() {
         List<Student> userList = new ArrayList<>();
-        String query = "SELECT * FROM `student`";
+        String query = "SELECT * FROM `student` left JOIN course on student.C_ID = course.C_ID LEFT JOIN semester ON semester.SEM_ID = student.SEM_ID LEFT JOIN section on student.SEC_ID = section.SECTION_ID; ";
         System.out.println(query);
         PreparedStatement pstm = new DBConnection().getStatement(query);
         try {
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
                 Student student = new Student();
-                student.setUser(new User(rs.getInt("STUD_ID"), rs.getString("STUD_NAME"), rs.getString("STUD_EMAIL"), rs.getString("STUD_PHONE"), rs.getString("STUD_ADDRESS"), rs.getString("SEM_NAME"), rs.getString("SECT_NAME"), rs.getString("STUD_COURSE")));
+                student.setUser(new User(rs.getInt("STUD_ID"), rs.getString("STUD_NAME"), rs.getString("STUD_EMAIL"), rs.getString("STUD_PHONE"), rs.getString("STUD_ADD"), rs.getString("SEM_NAME"), rs.getString("SECTION_NAME"), rs.getString("COURSE_NAME")));
                 userList.add(student);
             }
         } catch (SQLException e) {

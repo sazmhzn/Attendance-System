@@ -13,11 +13,9 @@ import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
 
 /**
  *
@@ -80,13 +78,11 @@ public class UserServlet extends HttpServlet {
         if (page.equalsIgnoreCase("addTeacher")) {
             System.out.println("\n\n===================");
             System.out.println("addTeacher method\n");
-            
             HashingPassword h = new HashingPassword();
             
             Teacher teacher = new Teacher(); //initializing a new teacher
   
             teacher.setUser(new User(request.getParameter("fullname"), request.getParameter("email"), request.getParameter("contact"), request.getParameter("address"), request.getParameter("section"), request.getParameter("course"), request.getParameter("username"), h.hashPassword(request.getParameter("password")) , "T"));
-            System.out.println(teacher.getUser().getFullName() + " " + teacher.getUser().getAddress() + " " + teacher.getUser().getUsername() + " " + teacher.getUser().getPassword());
             new UserServices().insertUser(teacher);
             
             RequestDispatcher rd = request.getRequestDispatcher("Pages/AddTeacher.jsp");

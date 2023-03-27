@@ -4,8 +4,6 @@
  */
 package Model;
 
-import java.time.LocalDate;
-
 /**
  *
  * @author lenovo
@@ -13,7 +11,7 @@ import java.time.LocalDate;
 public class Student {
     private User user;
     private String semester;
-    private String matrix_no;
+    private String section;
             
     public Student(User user) {
         this.user = user;
@@ -22,10 +20,10 @@ public class Student {
     public Student() {
     }
 
-    public Student(User user, String semester, String matrix_no) {
+    public Student(User user, String semester, String section) {
         this.user = user;
         this.semester = semester;
-        this.matrix_no = matrix_no;
+        this.section = section;
     }
 
     public User getUser() {
@@ -36,6 +34,14 @@ public class Student {
         this.user = user;
     }
 
+    public String getSection() {
+        return section;
+    }
+
+    public void setSection(String section) {
+        this.section = section;
+    }
+
     public String getSemester() {
         return semester;
     }
@@ -43,16 +49,4 @@ public class Student {
     public void setSemester(String semester) {
         this.semester = semester;
     }
-
-    public String getMatrix_no() {
-        return matrix_no;
-    }
-
-    public void setMatrix_no(String matrix_no) {
-        this.matrix_no = matrix_no;
-    }
-    
-    
-    
-    
 }
