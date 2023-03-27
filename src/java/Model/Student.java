@@ -10,7 +10,6 @@ package Model;
  */
 public class Student {
     private User user;
-    private String semester;
     private String section;
             
     public Student(User user) {
@@ -20,9 +19,8 @@ public class Student {
     public Student() {
     }
 
-    public Student(User user, String semester, String section) {
+    public Student(User user, String section) {
         this.user = user;
-        this.semester = semester;
         this.section = section;
     }
 
@@ -40,13 +38,5 @@ public class Student {
 
     public void setSection(String section) {
         this.section = section;
-    }
-
-    public String getSemester() {
-        return semester;
-    }
-
-    public void setSemester(String semester) {
-        this.semester = semester;
     }
 }

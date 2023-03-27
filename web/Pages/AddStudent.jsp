@@ -462,31 +462,31 @@
                           class="form-select"
                           id="floatingSelect"
                           aria-label="State"
-                          name="Semester"
+                          name="semester"
                         >
-                          <option value="1" selected>First</option>
-                          <option value="2">Second</option>
-                          <option value="3">Third</option>
+                            <c:forEach items="${semesterList}" var="college">
+                                <option value="${college.semester.id}">${college.semester.name}</option>
+                            </c:forEach>
                         </select>
                         <label for="floatingSelect">Semester</label>
                       </div>
                     </div>
                       
                       <div class="col-md-4">
-                      <div class="form-floating mb-3">
-                        <select
-                          class="form-select"
-                          id="floatingSelect"
-                          aria-label="State"
-                          name="section"
-                        >
-                          <option value="all" selected>All</option>
-                          <option value="A">A</option>
-                          <option value="B">B</option>
-                        </select>
-                        <label for="floatingSelect">Section</label>
+                          <div class="form-floating mb-3">
+                              <select
+                                class="form-select"
+                                id="floatingSelect"
+                                aria-label="State"
+                                name="section"
+                                >
+                                  <option value="all" selected>All</option>
+                                  <option value="1">A</option>
+                                  <option value="2">B</option>
+                              </select>
+                              <label for="floatingSelect">Section</label>
+                          </div>
                       </div>
-                    </div>
                     <div class="text-left">
                       <button type="submit" class="btn btn-primary">
                         Submit

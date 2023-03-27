@@ -75,6 +75,19 @@ public class User {
         this.role = role;
     }
 
+    public User(String fullName, String email, String phone, String address, String semester, String section, String course, String username, String password, String role) {
+        this.fullName = fullName;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        this.semester = semester;
+        this.section = section;
+        this.course = course;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
+
 //  signup constructor
     public User(int id, String username, String password, String role) {
         this.id = id;

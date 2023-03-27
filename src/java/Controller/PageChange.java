@@ -5,6 +5,7 @@
 package Controller;
 
 import Model.College;
+import Model.Section;
 import Model.Student;
 import Model.Teacher;
 import Model.User;
@@ -104,11 +105,7 @@ public class PageChange extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/TeacherDetails.jsp");
             rd.forward(request, response);
         }
-        
-        
-        
-        
-        
+       
         if (page.equalsIgnoreCase("editTeacher")) {
             
             Teacher teacher =  new UserServices().getTeacherRow( Integer.parseInt(request.getParameter("userId")) ); //This will be displayed on the form field
@@ -119,10 +116,7 @@ public class PageChange extends HttpServlet {
             rd.forward(request, response);
             
         }
-        
-        
-        
-        
+         
         if (page.equalsIgnoreCase("Student")) {
             
             List<Student> employeeList = new UserServices().getStudentList();
@@ -137,6 +131,9 @@ public class PageChange extends HttpServlet {
         if (page.equalsIgnoreCase("addStudent")) {
             List<College> collegeList = new UserServices().getCourseList();
             request.setAttribute("collegeList", collegeList);
+            
+            List<College> semesterList = new UserServices().getSemesterList();
+            request.setAttribute("semesterList", semesterList);
             
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/AddStudent.jsp");
             rd.forward(request, response);

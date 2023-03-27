@@ -8,6 +8,7 @@ import DBConnection.DBConnection;
 import Model.College;
 import Model.Course;
 import Model.Section;
+import Model.Semester;
 import Model.Student;
 import Model.Teacher;
 import Model.User;
@@ -205,19 +206,16 @@ public class UserServices {
      */
     public void insertUser(Student student) {
         insertUser(student.getUser()); //This method will insert the student details in Accout table
-
         User newUser = getUser(student.getUser().getUsername(), student.getUser().getPassword());
         
-        System.out.println("\n\n The user id " + student.getUser().getId());
-
-        String query = "INSERT INTO `student`(`STUD_NAME`, `STUD_ADDRESS`, `STUD_EMAIL`, `STUD_SEMESTER`, `ACC_ID`) VALUES (?,?,?,?,?)";
+        String query = "INSERT INTO `student`(`STUD_NAME`, `STUD_ADD`, `STUD_EMAIL`, `ACC_ID`) VALUES (?,?,?,?)";
         PreparedStatement pstm = new DBConnection().getStatement(query);
         try {
             pstm.setString(1, student.getUser().getFullName());
             pstm.setString(2, student.getUser().getAddress());
             pstm.setString(3, student.getUser().getEmail());
-            pstm.setString(4, student.getSemester());
-            pstm.setInt(5, newUser.getId());
+            pstm.setInt(4, newUser.getId());
+            
             System.out.println("insert Student query:" + pstm);
 
             pstm.execute();
@@ -327,6 +325,25 @@ public class UserServices {
         return collegeList;
     }
         
+        public List<College> getSemesterList() {
+            
+        List<College> semesterList = new ArrayList<>();
+        String query = "SELECT * FROM `semester`";
+        System.out.println(query);
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+        try {
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                College college = new College(( new Semester(rs.getInt("SEM_ID"), rs.getString("SEM_NAME"))));
+                semesterList.add(college);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return semesterList;
+            
+        }
+        
         public List<Section> getSectionList() {
         List<Section> sectionList = new ArrayList<>();
         String query = "SELECT * FROM `section`";
@@ -341,7 +358,6 @@ public class UserServices {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return sectionList;
     }
 

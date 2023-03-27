@@ -5,6 +5,7 @@
 package Controller;
 
 import Hashing.HashingPassword;
+import Model.Semester;
 import Model.Student;
 import Model.Teacher;
 import Model.User;
@@ -16,7 +17,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.sql.SQLException;
 
 /**
  *
@@ -129,23 +129,27 @@ public class UserServlet extends HttpServlet {
             rd.forward(request, response);
         }
         
+        
         /**
          * This condition will run when the admin wants to add a student
          */
         if (page.equalsIgnoreCase("addStudent")) {
-            System.out.println("\n\n===================");
             System.out.println("addStudent method\n");
             
             HashingPassword h = new HashingPassword();
             
             Student student = new Student(); //initializing a new student
 
-            student.setUser(new User(request.getParameter("fullname"), request.getParameter("email"), request.getParameter("contact"), request.getParameter("address"), request.getParameter("section"), request.getParameter("course"), request.getParameter("username"), h.hashPassword(request.getParameter("password")) , "S"));
-            System.out.println(student.getUser().getFullName() + " " + student.getUser().getAddress() + " " + student.getUser().getUsername() + " " + student.getUser().getPassword());
+            student.setUser(new User(request.getParameter("fullname"), request.getParameter("email"), request.getParameter("contact"), request.getParameter("address"), request.getParameter("semester"), request.getParameter("section"), request.getParameter("course"), request.getParameter("username"), h.hashPassword(request.getParameter("password")) , "S"));
+            System.out.println(
+                        student.getUser().getFullName() + " " + student.getUser().getAddress() + " " + 
+                        student.getUser().getUsername() + " " + student.getUser().getPassword() +  " " +
+                        student.getUser().getEmail() +  " " + student.getUser().getCourse() +  " " + 
+                        student.getUser().getSection() +  " " + student.getUser().getSemester());
             
-            new UserServices().insertUser(student); //inserting into user table
+//            new UserServices().insertUser(student); //inserting into user table
             
-            RequestDispatcher rd = request.getRequestDispatcher("Pages/AddTeacher.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("PageChange?page=addStudent");
             rd.forward(request, response);
         }
 

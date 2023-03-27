@@ -11,6 +11,7 @@ package Model;
 public class College {
     private Subject subject;
     private Course course;
+    private Semester semester;
 
     public College() {
     }
@@ -23,6 +24,19 @@ public class College {
         this.course = course;
     }
 
+    public College(Semester semester) {
+        this.semester = semester;
+    }
+
+    public Semester getSemester() {
+        return semester;
+    }
+
+    public void setSemester(Semester semester) {
+        this.semester = semester;
+    }
+
+    
     public Subject getSubject() {
         return subject;
     }
