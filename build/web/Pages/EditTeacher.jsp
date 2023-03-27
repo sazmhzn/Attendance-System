@@ -315,6 +315,19 @@
                     action="UserServlet?page=editTeacher"
                     method="POST"
                   >
+                      <div class="col-md-12">
+                      <div class="form-floating">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="floatingName"
+                          placeholder="Your Name"
+                          name="id"
+                          value="${teacher.user.id}"
+                        />
+                        <label for="floatingName">ID</label>
+                      </div>
+                    </div>
                     <div class="col-md-12">
                       <div class="form-floating">
                         <input

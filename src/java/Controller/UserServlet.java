@@ -17,8 +17,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -92,17 +90,10 @@ public class UserServlet extends HttpServlet {
             rd.forward(request, response);
         }
         
-        
-        
-        
-        
-        
-        
-        
         if (page.equalsIgnoreCase("editTeacher")) {
          
             Teacher teacher = new Teacher(); //initializing a new teacher
-            teacher.setAcc_id( Integer.parseInt(request.getParameter("userID")) );
+            teacher.setAcc_id( Integer.parseInt(request.getParameter("id")) );
             teacher.setUser( new User(
                     request.getParameter("fullname"),
                     request.getParameter("email"),
@@ -114,35 +105,14 @@ public class UserServlet extends HttpServlet {
                     "", 
                     "T"));
             
-            int acc_id = Integer.parseInt(request.getParameter("userID"));
-  
             
-            System.out.println("Name: " + teacher.getUser().getFullName());
+            System.out.println("\nUserServices\n===========\n");
+            new UserServices().editUser( teacher);
+            System.out.println("Acc_ID: " + teacher.getAcc_id() + " Name: " + teacher.getUser().getFullName() + " \n==========");
             
-            try {
-                new UserServices().editUser(acc_id, teacher);
-            } catch (SQLException ex) {
-                
-            }
-           
-            
-            RequestDispatcher rd = request.getRequestDispatcher("Pages/EditTeacher.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("PageChange?page=Teacher");
             rd.forward(request, response);
         }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         
         /**
          * This condition will be take for delete teacher

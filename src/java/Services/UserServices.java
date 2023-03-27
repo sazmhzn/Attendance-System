@@ -115,8 +115,10 @@ public class UserServices {
             System.out.println("Query: " + pstm);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()){
+                teacher.setAcc_id( rs.getInt("ACC_ID") );
                 teacher.setUser(new User( rs.getInt("TEAC_ID"), rs.getString("TEAC_NAME"), rs.getString("TEAC_EMAIL"), rs.getString("TEAC_PHONE"), rs.getString("TEAC_ADDRESS") ));
             }
+            
         }catch (SQLException e){
             e.printStackTrace();
         }
@@ -177,7 +179,6 @@ public class UserServices {
      */
     public void insertUser(Teacher teacher) {
         insertUser(teacher.getUser()); //This method will insert the teacher details in Accout table
-
         User newUser = getUser(teacher.getUser().getUsername(), teacher.getUser().getPassword());
 
         System.out.println("\n\n The user id " + teacher.getUser().getId());
@@ -238,7 +239,6 @@ public class UserServices {
         try {
             pstm.setInt(1, acc_id);
             System.out.println("insert user query:" + pstm);
-
             pstm.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -266,36 +266,40 @@ public class UserServices {
     
     
     
-    public void editUser(int id, User user) throws SQLException {
+    public void editUser(int id, User user) {
 
-        String query = "update users set ACC_USERNAME=?,ACC_PASSWORD=?," +
-                "ACC_ROLE=? where ACC_ID=?";
+        String query = "update users set ACC_USERNAME=?,ACC_PASSWORD=?, ACC_ROLE=? where ACC_ID=?";
         PreparedStatement pstm = new DBConnection().getStatement(query);
+        try {
         pstm.setString(1, user.getUsername());
         pstm.setString(2, user.getPassword());
         pstm.setString(3, user.getRole());
         pstm.setInt(4, user.getId());
 
         pstm.execute();
-    }
-    
-    public void editUser(int id, Teacher teacher) throws SQLException {
-
-        String query = "UPDATE `teacher` SET `TEAC_NAME`=?,`TEAC_ADDRESS`=?,`TEAC_EMAIL`=?,`TEAC_PHONE`=? WHERE ACC_ID=" + id;
-        PreparedStatement pstm = new DBConnection().getStatement(query);
-        
-        try{ 
-            pstm.setString(1, teacher.getUser().getFullName());
-        pstm.setString(2, teacher.getUser().getAddress());
-        pstm.setString(3, teacher.getUser().getEmail());
-        pstm.setString(4, teacher.getUser().getPhone());
-        
-            System.out.println("The Update query: " + pstm);
-        pstm.execute();
-        } catch( SQLException e ) {
+        } catch(SQLException e) {
             e.printStackTrace();
         }
+    }
+    
+    
+    public void editUser(Teacher teacher) {
+
+        String query = "UPDATE `teacher` SET `TEAC_NAME`=?,`TEAC_ADDRESS`=?,`TEAC_EMAIL`=?,`TEAC_PHONE`=? WHERE ACC_ID=?";
+        PreparedStatement pstm = new DBConnection().getStatement(query);
         
+        try {
+            pstm.setString(1, teacher.getUser().getFullName());
+            pstm.setString(2, teacher.getUser().getAddress());
+            pstm.setString(3, teacher.getUser().getEmail());
+            pstm.setString(4, teacher.getUser().getPhone());
+            pstm.setInt(5, teacher.getAcc_id());
+            
+            System.out.println("The Update query: " + pstm);
+            pstm.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         
     }
    
