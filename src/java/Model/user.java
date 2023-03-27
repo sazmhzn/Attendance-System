@@ -1,4 +1,4 @@
-/*
+  /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -26,7 +26,7 @@ public class User {
     }
     
     /**
-     * this constructor will help the user
+     * this constructor will be used to insert a teacher in table
      * @param id
      * @param fullName
      * @param email

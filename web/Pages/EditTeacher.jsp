@@ -63,6 +63,7 @@
   </head>
 
   <body>
+      
     <!-- ======= Header ======= -->
     <header id="header" class="header fixed-top d-flex align-items-center">
       <div class="d-flex align-items-center justify-content-between">
@@ -85,7 +86,15 @@
             name="query"
             placeholder="Search"
             title="Enter search keyword"
+            list="student"
           />
+          <datalist id="student">
+              <option value="Angeels">
+              <option value="Surohan">
+              <option value="Mithlesh">
+              <option value="Susmit">
+              <option value="Subin">
+          </datalist>
           <button type="submit" title="Search">
             <i class="bi bi-search"></i>
           </button>
@@ -124,19 +133,6 @@
               </li>
 
               <li class="notification-item">
-                <i class="bi bi-exclamation-circle text-warning"></i>
-                <div>
-                  <h4>Lorem Ipsum</h4>
-                  <p>Quae dolorem earum veritatis oditseno</p>
-                  <p>30 min. ago</p>
-                </div>
-              </li>
-
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
-
-              <li class="notification-item">
                 <i class="bi bi-x-circle text-danger"></i>
                 <div>
                   <h4>Atque rerum nesciunt</h4>
@@ -158,25 +154,7 @@
                 </div>
               </li>
 
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
 
-              <li class="notification-item">
-                <i class="bi bi-info-circle text-primary"></i>
-                <div>
-                  <h4>Dicta reprehenderit</h4>
-                  <p>Quae dolorem earum veritatis oditseno</p>
-                  <p>4 hrs. ago</p>
-                </div>
-              </li>
-
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
-              <li class="dropdown-footer">
-                <a href="#">Show all notifications</a>
-              </li>
             </ul>
             <!-- End Notification Dropdown Items -->
           </li>
@@ -194,20 +172,13 @@
                 class="rounded-circle"
               />
               <span class="d-none d-md-block dropdown-toggle ps-2"
-                >K. Anderson</span
+                ><%=session.getAttribute("username")%></span
               > </a
             ><!-- End Profile Iamge Icon -->
 
             <ul
               class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile"
             >
-              <li class="dropdown-header">
-                <h6>Kevin Anderson</h6>
-                <span>Web Designer</span>
-              </li>
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
 
               <li>
                 <a
@@ -223,27 +194,9 @@
               </li>
 
               <li>
-                <a
-                  class="dropdown-item d-flex align-items-center"
-                  href="users-profile.html"
-                >
-                  <i class="bi bi-gear"></i>
-                  <span>Account Settings</span>
-                </a>
-              </li>
-              <li>
                 <hr class="dropdown-divider" />
               </li>
 
-              <li>
-                <a
-                  class="dropdown-item d-flex align-items-center"
-                  href="pages-faq.html"
-                >
-                  <i class="bi bi-question-circle"></i>
-                  <span>Need Help?</span>
-                </a>
-              </li>
               <li>
                 <hr class="dropdown-divider" />
               </li>
@@ -340,7 +293,7 @@
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="dashboard.html">Home</a></li>
             <li class="breadcrumb-item">
-              <a href="studentList.html">Teacher</a>
+              <a href="PageChange?page=Teacher">Teacher</a>
             </li>
             <li class="breadcrumb-item active">Edit Teacher</li>
           </ol>
@@ -373,34 +326,6 @@
                           value="${teacher.user.fullName}"
                         />
                         <label for="floatingName">Full Name</label>
-                      </div>
-                    </div>
-
-                    <div class="col-md-6">
-                      <div class="form-floating">
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="floatingEmail"
-                          placeholder="Teacher name"
-                          value="${teacher.user.username}"
-                          name="username"
-                        />
-                        <label for="floatingName">Username</label>
-                      </div>
-                    </div>
-
-                    <div class="col-md-6">
-                      <div class="form-floating">
-                        <input
-                          type="password"
-                          class="form-control"
-                          id="floatingPassword"
-                          placeholder="username"
-                          value="${teacher.user.password}"
-                          name="password"
-                        />
-                        <label for="floatingPassword">Password</label>
                       </div>
                     </div>
 
@@ -444,20 +369,6 @@
                       </div>
                     </div>
 
-                    <div class="col-md-6">
-                      <div class="form-floating mb-3">
-                        <select
-                          class="form-select"
-                          id="floatingSelect"
-                          aria-label="course"
-                          name="course"
-                        >
-                          <option value="BICT" selected>BICT</option>
-                          <option value="MBA">MBA</option>
-                        </select>
-                        <label for="floatingSelect">Course</label>
-                      </div>
-                    </div>
                     <div class="col-md-6">
                       <div class="form-floating mb-3">
                         <select
@@ -522,5 +433,6 @@
         $("#example").DataTable();
       });
     </script>
+    
   </body>
 </html>

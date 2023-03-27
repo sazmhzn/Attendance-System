@@ -93,7 +93,15 @@
             name="query"
             placeholder="Search"
             title="Enter search keyword"
+            list="student"
           />
+          <datalist id="student">
+              <option value="Angeels">
+              <option value="Surohan">
+              <option value="Mithlesh">
+              <option value="Susmit">
+              <option value="Subin">
+          </datalist>
           <button type="submit" title="Search">
             <i class="bi bi-search"></i>
           </button>
@@ -132,19 +140,6 @@
               </li>
 
               <li class="notification-item">
-                <i class="bi bi-exclamation-circle text-warning"></i>
-                <div>
-                  <h4>Lorem Ipsum</h4>
-                  <p>Quae dolorem earum veritatis oditseno</p>
-                  <p>30 min. ago</p>
-                </div>
-              </li>
-
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
-
-              <li class="notification-item">
                 <i class="bi bi-x-circle text-danger"></i>
                 <div>
                   <h4>Atque rerum nesciunt</h4>
@@ -166,25 +161,7 @@
                 </div>
               </li>
 
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
 
-              <li class="notification-item">
-                <i class="bi bi-info-circle text-primary"></i>
-                <div>
-                  <h4>Dicta reprehenderit</h4>
-                  <p>Quae dolorem earum veritatis oditseno</p>
-                  <p>4 hrs. ago</p>
-                </div>
-              </li>
-
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
-              <li class="dropdown-footer">
-                <a href="#">Show all notifications</a>
-              </li>
             </ul>
             <!-- End Notification Dropdown Items -->
           </li>
@@ -209,6 +186,18 @@
             <ul
               class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile"
             >
+                <li>
+                <a
+                  class="dropdown-item d-flex align-items-center"
+                  href="users-profile.html"
+                >
+                  <i class="bi bi-person"></i>
+                  <span>
+                      
+                      <%=session.getAttribute("role")%>
+                  </span>
+                </a>
+              </li>
 
               <li>
                 <a
@@ -303,7 +292,7 @@
         <li class="nav-heading">Extra</li>
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="PageChange?page=login">
+          <a class="nav-link collapsed" href="RegisterServlet?page=logout">
             <i class="bi bi-box-arrow-in-right"></i>
             <span>Logout</span>
           </a>

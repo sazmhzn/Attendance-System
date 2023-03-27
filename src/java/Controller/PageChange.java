@@ -109,15 +109,16 @@ public class PageChange extends HttpServlet {
             int id =Integer.parseInt(request.getParameter("userId"));
             System.out.println("The id in editTeacher is: " + id);
             
-            Cookie[] cookie = request.getCookies();
-            for(Cookie ck:cookie){
-                if(ck.getName().equalsIgnoreCase("Id")){
-                    int Adminid = Integer.parseInt(ck.getValue());
-                }
-            }
+//            Cookie[] cookie = request.getCookies();
+//            for(Cookie ck:cookie){
+//                if(ck.getName().equalsIgnoreCase("Id")){
+//                    int Adminid = Integer.parseInt(ck.getValue());
+//                }
+//            }
             
             Teacher teacher =  new UserServices().getTeacherRow(id); //This will be displayed on the form field
             request.setAttribute("teacher", teacher);
+            System.out.println("The user name is: " + teacher.getUser().getUsername());
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/EditTeacher.jsp");
             rd.forward(request, response);
         }
@@ -165,13 +166,6 @@ public class PageChange extends HttpServlet {
             rd.forward(request, response);
         }
         
-        if (page.equalsIgnoreCase("logout")) {
-            
-            
-            RequestDispatcher rd = request.getRequestDispatcher("/Pages/login.jsp");
-            rd.forward(request, response);
-        }
-
     }
 
     /**

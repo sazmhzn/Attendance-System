@@ -16,6 +16,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -88,6 +91,58 @@ public class UserServlet extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("Pages/AddTeacher.jsp");
             rd.forward(request, response);
         }
+        
+        
+        
+        
+        
+        
+        
+        
+        if (page.equalsIgnoreCase("editTeacher")) {
+         
+            Teacher teacher = new Teacher(); //initializing a new teacher
+            teacher.setAcc_id( Integer.parseInt(request.getParameter("userID")) );
+            teacher.setUser( new User(
+                    request.getParameter("fullname"),
+                    request.getParameter("email"),
+                    request.getParameter("contact"),
+                    request.getParameter("address"),
+                    request.getParameter("section"), 
+                    "", 
+                    request.getParameter("username"),
+                    "", 
+                    "T"));
+            
+            int acc_id = Integer.parseInt(request.getParameter("userID"));
+  
+            
+            System.out.println("Name: " + teacher.getUser().getFullName());
+            
+            try {
+                new UserServices().editUser(acc_id, teacher);
+            } catch (SQLException ex) {
+                
+            }
+           
+            
+            RequestDispatcher rd = request.getRequestDispatcher("Pages/EditTeacher.jsp");
+            rd.forward(request, response);
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         /**
          * This condition will be take for delete teacher

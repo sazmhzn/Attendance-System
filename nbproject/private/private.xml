@@ -5,6 +5,7 @@
         <group>
             <file>file:/D:/java/Attendance%20System/web/Pages/EditTeacher.jsp</file>
             <file>file:/D:/java/Attendance%20System/src/java/Controller/PageChange.java</file>
+            <file>file:/D:/java/Attendance%20System/src/java/Controller/UserServlet.java</file>
             <file>file:/D:/java/Attendance%20System/src/java/Services/UserServices.java</file>
         </group>
     </open-files>

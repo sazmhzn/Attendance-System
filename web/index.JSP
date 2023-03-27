@@ -20,8 +20,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
     <link rel="stylesheet" href="styling/style.css" />
 
     <title>Login!</title>
+    
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+   <meta name="google-signin-client_id" content="195264512525-id5ar30ajin7n31hckpbtoblhj23g538.apps.googleusercontent.com">
+    
   </head>
-  <body>
+  
+  
+   
     <div class="container-fluid">
       <!-- Just an image -->
       <nav class="navbar navbar-light bg-light">
@@ -62,6 +68,20 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
               <div class="col-lg-6 mb-5 mb-lg-0">
                 <div class="card">
                   <div class="card-body py-5 px-md-5">
+                      <body>
+                          <div class="g-signin2" data-onsuccess="onSignIn" id="myP"></div>
+                          <img id="myImg"><br>
+                          <p id="name"></p>
+                          <div id="status">
+                          </div>
+
+                          <button onclick="myFunction()">Sign Out</button>
+                          <script>
+                             function myFunction() {
+                             gapi.auth2.getAuthInstance().disconnect();
+                             location.reload();
+                          }
+                          </script>
                     <form action="RegisterServlet?page=existing" method="POST">
                       <!-- Email input -->
                       <div class="form-outline mb-4">
@@ -111,6 +131,20 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
       <!-- Section: Design Block -->
     </div>
 
+   <script type="text/javascript">
+      function onSignIn(googleUser) {
+      // window.location.href='success.jsp';
+      var profile = googleUser.getBasicProfile();
+      var imagurl=profile.getImageUrl();
+      var name=profile.getName();
+      var email=profile.getEmail();
+      document.getElementById("myImg").src = imagurl;
+      document.getElementById("name").innerHTML = name;
+      document.getElementById("myP").style.visibility = "hidden";
+      document.getElementById("status").innerHTML = 'Welcome '+name+'!<a href=Page/dashboard.jsp?                  
+      email='+email+'&name='+name+'/>Continue with Google login</a></p>'
+   }
+   </script>
     
 
     <!-- Option 1: Bootstrap Bundle with Popper -->

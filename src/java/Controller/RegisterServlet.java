@@ -74,27 +74,31 @@ public class RegisterServlet extends HttpServlet {
         String page = request.getParameter("page");
         System.out.println("Page: " + page );
         
+        HttpSession session = request.getSession();
+        
         if(page.equalsIgnoreCase("existing")) {
             System.out.println("\n\n==============");
             String username = request.getParameter("username");
             String password = HashingPassword.hashPassword(request.getParameter("password"));
             
-            User user = new UserServices().getUser(username, password); //check if there is User in dadtabse account table
+            User user = new UserServices().getUser(username, password);
+            //check if there is User in dadtabse account table
             if (user != null) {
-                HttpSession session = request.getSession();
+                
                 session.setAttribute("uid", user.getId());
                 session.setAttribute("username", user.getUsername());
                 session.setAttribute("role", user.getRole());
                 request.setAttribute("msg", "Login Successful!");
                 System.out.println(request.getAttribute("msg"));
-                System.out.println("Role" + user.getRole());
-                                                
+                
+                
+                
                 //creating cookie to store the id of user
                 //Used for editing the profile of the user
-                Cookie ck = new Cookie("id", String.valueOf(user.getId()));
-                Cookie ckName = new Cookie("name", String.valueOf(user.getUsername()));
-                response.addCookie(ck);
-                response.addCookie(ckName);
+//                Cookie ck = new Cookie("id", String.valueOf(user.getId()));
+//                Cookie ckName = new Cookie("name", String.valueOf(user.getUsername()));
+//                response.addCookie(ck);
+//                response.addCookie(ckName);
                 
                     if (session.getAttribute("role").equals("T")) {
                         RequestDispatcher rd = request.getRequestDispatcher("Pages/AttendanceSheet.jsp");
@@ -104,7 +108,6 @@ public class RegisterServlet extends HttpServlet {
                         rd.forward(request, response);
                     }
             } else {
-                HttpSession session = request.getSession();
                 session.setAttribute("error_msg", "Invalid username or passowrd");
                 RequestDispatcher rd = request.getRequestDispatcher("Pages/login.jsp");
                 rd.forward(request, response);
@@ -126,6 +129,11 @@ public class RegisterServlet extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/login.jsp");
             rd.forward(request, response);
         }
+         
+         if( page.equalsIgnoreCase("logout") ) {
+             session.invalidate();
+             response.sendRedirect("PageChange?page=login");
+         }
         
         
     }

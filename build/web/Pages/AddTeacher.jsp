@@ -85,7 +85,15 @@
             name="query"
             placeholder="Search"
             title="Enter search keyword"
+            list="student"
           />
+          <datalist id="student">
+              <option value="Angeels">
+              <option value="Surohan">
+              <option value="Mithlesh">
+              <option value="Susmit">
+              <option value="Subin">
+          </datalist>
           <button type="submit" title="Search">
             <i class="bi bi-search"></i>
           </button>

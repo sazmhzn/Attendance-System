@@ -24,7 +24,7 @@
     <title>Login!</title>
   </head>
   <body>
-    <div class="container-fluid">
+    <div class="container-fluid h-100">
       <!-- Just an image -->
       <nav class="navbar navbar-light bg-light">
         <div class="container">
@@ -35,7 +35,7 @@
               alt="MDB Logo"
               loading="lazy"
             />-->
-            AFY
+            Attendify
           </a>
         </div>
       </nav>
@@ -45,7 +45,7 @@
         <!-- Jumbotron -->
         <div
           class="px-4 py-5 px-md-5 text-center text-lg-start"
-          style="background-color: hsl(0, 0%, 96%)"
+          style="background-color: hsl(0, 0%, 96%); min-height:90vh;"
         >
           <div class="container login-container">
             <div class="row gx-lg-5 align-items-center">
@@ -65,7 +65,7 @@
               <div class="col-lg-6 mb-5 mb-lg-0">
                 <div class="card">
                   <div class="card-body py-5 px-md-5">
-                    <form action="RegisterServlet?page=existing" method="POST">
+                    <form action="RegisterServlet?page=existing" onsubmit ="return verifyPassword()" method="POST">
                       
                       <% if(session.getAttribute("error_msg") != null)  {%>
 
@@ -86,7 +86,7 @@
                           id="form3Example3"
                           name="username"
                           class="form-control"
-                          required
+                          
                         />
                       </div>
 
@@ -97,10 +97,10 @@
                         >
                         <input
                           type="password"
-                          id="form3Example4"
+                          id="form3Example4 pswd"
                           name="password"
                           class="form-control"
-                          required
+                          
                         />
                       </div>
 
@@ -131,5 +131,31 @@
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
       crossorigin="anonymous"
     ></script>
+    <script>  
+function verifyPassword() {  
+  var pw = document.getElementById("pswd").value;  
+  //check empty password field  
+  if(pw == "") {  
+     document.getElementById("message").innerHTML = "**Fill the password please!";  
+     return false;  
+  }  
+   
+ //minimum password length validation  
+  if(pw.length < 8) {  
+     document.getElementById("message").innerHTML = "**Password length must be atleast 8 characters";  
+     return false;  
+  }  
+  
+//maximum length of password validation  
+  if(pw.length > 15) {  
+     document.getElementById("message").innerHTML = "**Password length must not exceed 15 characters";  
+     return false;  
+  } else {  
+     alert("Password is correct");  
+  }  
+}  
+
+
+</script>  
   </body>
 </html>

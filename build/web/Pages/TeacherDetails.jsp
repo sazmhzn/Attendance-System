@@ -93,7 +93,15 @@
             name="query"
             placeholder="Search"
             title="Enter search keyword"
+            list="student"
           />
+          <datalist id="student">
+              <option value="Angeels">
+              <option value="Surohan">
+              <option value="Mithlesh">
+              <option value="Susmit">
+              <option value="Subin">
+          </datalist>
           <button type="submit" title="Search">
             <i class="bi bi-search"></i>
           </button>
@@ -120,17 +128,13 @@
               class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications"
             >
               <li class="dropdown-header">
-                You have 0 new notifications
+                You have 4 new notifications
                 <a href="#"
                   ><span class="badge rounded-pill bg-primary p-2 ms-2"
                     >View all</span
                   ></a
                 >
               </li>
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
-
               <li>
                 <hr class="dropdown-divider" />
               </li>
@@ -157,25 +161,7 @@
                 </div>
               </li>
 
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
 
-              <li class="notification-item">
-                <i class="bi bi-info-circle text-primary"></i>
-                <div>
-                  <h4>Dicta reprehenderit</h4>
-                  <p>Quae dolorem earum veritatis oditseno</p>
-                  <p>4 hrs. ago</p>
-                </div>
-              </li>
-
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
-              <li class="dropdown-footer">
-                <a href="#">Show all notifications</a>
-              </li>
             </ul>
             <!-- End Notification Dropdown Items -->
           </li>
@@ -193,20 +179,13 @@
                 class="rounded-circle"
               />
               <span class="d-none d-md-block dropdown-toggle ps-2"
-                >K. Anderson</span
+                ><%=session.getAttribute("username")%></span
               > </a
             ><!-- End Profile Iamge Icon -->
 
             <ul
               class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile"
             >
-              <li class="dropdown-header">
-                <h6>Kevin Anderson</h6>
-                <span>Web Designer</span>
-              </li>
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
 
               <li>
                 <a
@@ -222,27 +201,9 @@
               </li>
 
               <li>
-                <a
-                  class="dropdown-item d-flex align-items-center"
-                  href="users-profile.html"
-                >
-                  <i class="bi bi-gear"></i>
-                  <span>Account Settings</span>
-                </a>
-              </li>
-              <li>
                 <hr class="dropdown-divider" />
               </li>
 
-              <li>
-                <a
-                  class="dropdown-item d-flex align-items-center"
-                  href="pages-faq.html"
-                >
-                  <i class="bi bi-question-circle"></i>
-                  <span>Need Help?</span>
-                </a>
-              </li>
               <li>
                 <hr class="dropdown-divider" />
               </li>

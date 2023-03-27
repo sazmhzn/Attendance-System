@@ -115,16 +115,39 @@ public class UserServices {
             System.out.println("Query: " + pstm);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()){
-    
                 teacher.setUser(new User( rs.getInt("TEAC_ID"), rs.getString("TEAC_NAME"), rs.getString("TEAC_EMAIL"), rs.getString("TEAC_PHONE"), rs.getString("TEAC_ADDRESS") ));
-                System.out.println("teacher from get Teahcer Row:");
-                System.out.println("Full name: " + teacher.getUser().getFullName());
             }
         }catch (SQLException e){
             e.printStackTrace();
         }
         return teacher;
     }
+    
+      /**
+     * This method will get get the list of student 
+     * @return 
+     */
+    public List<Student> getStudentList() {
+        List<Student> userList = new ArrayList<>();
+        String query = "SELECT * FROM `student` left JOIN course on student.C_ID = course.C_ID LEFT JOIN semester ON semester.SEM_ID = student.SEM_ID LEFT JOIN section on student.SEC_ID = section.SECTION_ID; ";
+        System.out.println(query);
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+        try {
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                Student student = new Student();
+                student.setUser(new User(rs.getInt("STUD_ID"), rs.getString("STUD_NAME"), rs.getString("STUD_EMAIL"), rs.getString("STUD_PHONE"), rs.getString("STUD_ADD"), rs.getString("SEM_NAME"), rs.getString("SECTION_NAME"), rs.getString("COURSE_NAME")));
+                userList.add(student);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return userList;
+    }
+      
+    
+    
     
     /**
      * This method will insert User in accounts table
@@ -175,6 +198,36 @@ public class UserServices {
         }
     }    
     
+     /**
+     * This method will insert student in student and account tables
+     * @param student 
+     */
+    public void insertUser(Student student) {
+        insertUser(student.getUser()); //This method will insert the student details in Accout table
+
+        User newUser = getUser(student.getUser().getUsername(), student.getUser().getPassword());
+        
+        System.out.println("\n\n The user id " + student.getUser().getId());
+
+        String query = "INSERT INTO `student`(`STUD_NAME`, `STUD_ADDRESS`, `STUD_EMAIL`, `STUD_SEMESTER`, `ACC_ID`) VALUES (?,?,?,?,?)";
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+        try {
+            pstm.setString(1, student.getUser().getFullName());
+            pstm.setString(2, student.getUser().getAddress());
+            pstm.setString(3, student.getUser().getEmail());
+            pstm.setString(4, student.getSemester());
+            pstm.setInt(5, newUser.getId());
+            System.out.println("insert Student query:" + pstm);
+
+            pstm.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    
+    
+    
     /**
      * This method will delete a user from account table
      * @param acc_id 
@@ -210,6 +263,9 @@ public class UserServices {
         }
     }
     
+    
+    
+    
     public void editUser(int id, User user) throws SQLException {
 
         String query = "update users set ACC_USERNAME=?,ACC_PASSWORD=?," +
@@ -223,55 +279,28 @@ public class UserServices {
         pstm.execute();
     }
     
-    /**
-     * This method will insert student in student and account tables
-     * @param student 
-     */
-    public void insertUser(Student student) {
-        insertUser(student.getUser()); //This method will insert the student details in Accout table
+    public void editUser(int id, Teacher teacher) throws SQLException {
 
-        User newUser = getUser(student.getUser().getUsername(), student.getUser().getPassword());
+        String query = "UPDATE `teacher` SET `TEAC_NAME`=?,`TEAC_ADDRESS`=?,`TEAC_EMAIL`=?,`TEAC_PHONE`=? WHERE ACC_ID=" + id;
+        PreparedStatement pstm = new DBConnection().getStatement(query);
         
-        System.out.println("\n\n The user id " + student.getUser().getId());
-
-        String query = "INSERT INTO `student`(`STUD_NAME`, `STUD_ADDRESS`, `STUD_EMAIL`, `STUD_SEMESTER`, `ACC_ID`) VALUES (?,?,?,?,?)";
-        PreparedStatement pstm = new DBConnection().getStatement(query);
-        try {
-            pstm.setString(1, student.getUser().getFullName());
-            pstm.setString(2, student.getUser().getAddress());
-            pstm.setString(3, student.getUser().getEmail());
-            pstm.setString(4, student.getSemester());
-            pstm.setInt(5, newUser.getId());
-            System.out.println("insert Student query:" + pstm);
-
-            pstm.execute();
-        } catch (SQLException e) {
+        try{ 
+            pstm.setString(1, teacher.getUser().getFullName());
+        pstm.setString(2, teacher.getUser().getAddress());
+        pstm.setString(3, teacher.getUser().getEmail());
+        pstm.setString(4, teacher.getUser().getPhone());
+        
+            System.out.println("The Update query: " + pstm);
+        pstm.execute();
+        } catch( SQLException e ) {
             e.printStackTrace();
         }
+        
+        
     }
+   
     
-    /**
-     * This method will get get the list of student 
-     * @return 
-     */
-    public List<Student> getStudentList() {
-        List<Student> userList = new ArrayList<>();
-        String query = "SELECT * FROM `student` left JOIN course on student.C_ID = course.C_ID LEFT JOIN semester ON semester.SEM_ID = student.SEM_ID LEFT JOIN section on student.SEC_ID = section.SECTION_ID; ";
-        System.out.println(query);
-        PreparedStatement pstm = new DBConnection().getStatement(query);
-        try {
-            ResultSet rs = pstm.executeQuery();
-            while (rs.next()) {
-                Student student = new Student();
-                student.setUser(new User(rs.getInt("STUD_ID"), rs.getString("STUD_NAME"), rs.getString("STUD_EMAIL"), rs.getString("STUD_PHONE"), rs.getString("STUD_ADD"), rs.getString("SEM_NAME"), rs.getString("SECTION_NAME"), rs.getString("COURSE_NAME")));
-                userList.add(student);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return userList;
-    }
+    
     
     
     //methods for courses
@@ -302,7 +331,7 @@ public class UserServices {
         try {
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
-                Section section = new Section(rs.getInt("C_ID"), rs.getString("COURSE_NAME"));
+                Section section = new Section(rs.getInt("SECTION_ID"), rs.getString("SECTION_NAME"));
                 sectionList.add(section);
             }
         } catch (SQLException e) {

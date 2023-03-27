@@ -222,12 +222,12 @@
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2"><%=session.getAttribute("fullName")%></span>
+            <span class="d-none d-md-block dropdown-toggle ps-2"><%=session.getAttribute("username")%></span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6>Kevin Anderson</h6>
+              <h6><%=session.getAttribute("username")%></h6>
               <span>Web Designer</span>
             </li>
             <li>
@@ -317,7 +317,7 @@
       </li><!-- End Contact Page Nav -->
    
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-login.html">
+        <a class="nav-link collapsed" href="RegisterServlet?page=logout">
           <i class="bi bi-box-arrow-in-right"></i>
           <span>Logout</span>
         </a>
