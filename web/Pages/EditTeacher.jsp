@@ -370,7 +370,7 @@
                           id="floatingName"
                           placeholder="Your Name"
                           name="fullname"
-                          value="${teacher.fullName}"
+                          value="${teacher.user.fullName}"
                         />
                         <label for="floatingName">Full Name</label>
                       </div>
@@ -383,6 +383,7 @@
                           class="form-control"
                           id="floatingEmail"
                           placeholder="Teacher name"
+                          value="${teacher.user.username}"
                           name="username"
                         />
                         <label for="floatingName">Username</label>
@@ -396,6 +397,7 @@
                           class="form-control"
                           id="floatingPassword"
                           placeholder="username"
+                          value="${teacher.user.password}"
                           name="password"
                         />
                         <label for="floatingPassword">Password</label>
@@ -409,7 +411,7 @@
                           placeholder="contact"
                           id="floatingName"
                           name="contact"
-                          value="${teacher.phone}"
+                          value="${teacher.user.phone}"
                         />
                         <label for="floatingTextarea">Contact no.</label>
                       </div>
@@ -423,7 +425,7 @@
                           placeholder="email"
                           id="floatingEmail"
                           name="email"
-                          value="${teacher.email}"
+                          value="${teacher.user.email}"
                         />
                         <label for="floatingTextarea">Email</label>
                       </div>
@@ -436,7 +438,7 @@
                           placeholder="Address"
                           id="floatingTextarea"
                           name="address"
-                          value="${teacher.address}"
+                          value="${teacher.user.address}"
                         />
                         <label for="floatingTextarea">Address</label>
                       </div>

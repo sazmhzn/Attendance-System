@@ -79,13 +79,11 @@ public class RegisterServlet extends HttpServlet {
             String username = request.getParameter("username");
             String password = HashingPassword.hashPassword(request.getParameter("password"));
             
-            
-            
             User user = new UserServices().getUser(username, password); //check if there is User in dadtabse account table
             if (user != null) {
                 HttpSession session = request.getSession();
                 session.setAttribute("uid", user.getId());
-                session.setAttribute("fullName", user.getUsername());
+                session.setAttribute("username", user.getUsername());
                 session.setAttribute("role", user.getRole());
                 request.setAttribute("msg", "Login Successful!");
                 System.out.println(request.getAttribute("msg"));

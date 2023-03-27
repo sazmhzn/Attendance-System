@@ -83,17 +83,17 @@ public class UserServices {
 
     public User getUserRow(int id){
         User user = new User();
-        String query = "select * from teacher where TEAC_ID=?";
+        String query = "select * from account where ACC_ID=?";
         PreparedStatement pstm = new DBConnection().getStatement(query);
         try {
             pstm.setInt(1,id);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()){
+                
                 user.setId(rs.getInt("TEAC_ID"));
-                user.setFullName(rs.getString("TEAC_NAME"));
-                user.setPhone(rs.getString("TEAC_PHONE"));
-                user.setEmail(rs.getString("TEAC_EMAIL"));
-                user.setAddress(rs.getString("TEAC_ADDRESS"));
+                user.setUsername(rs.getString("ACC_USERNAME"));
+                user.setPassword(rs.getString("ACC_PASSWORD"));
+                user.setRole(rs.getString("ACC_ROLE"));
             }
         }catch (SQLException e){
             e.printStackTrace();
@@ -108,10 +108,11 @@ public class UserServices {
      */
       public Teacher getTeacherRow(int id){
         Teacher teacher = new Teacher();
-        String query = "SELECT * FROM `teacher` LEFT JOIN `accounts` ON teacher.ACC_ID = accounts.ACC_ID where id=?";
+        String query = "SELECT * FROM `teacher` LEFT JOIN `accounts` ON teacher.ACC_ID = accounts.ACC_ID where teacher.ACC_ID=?";
         PreparedStatement pstm = new DBConnection().getStatement(query);
         try {
             pstm.setInt(1,id);
+            System.out.println("Query: " + pstm);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()){
     
