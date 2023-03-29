@@ -208,13 +208,17 @@ public class UserServices {
         insertUser(student.getUser()); //This method will insert the student details in Accout table
         User newUser = getUser(student.getUser().getUsername(), student.getUser().getPassword());
         
-        String query = "INSERT INTO `student`(`STUD_NAME`, `STUD_ADD`, `STUD_EMAIL`, `ACC_ID`) VALUES (?,?,?,?)";
+        String query = "INSERT INTO `student`(`STUD_NAME`, `STUD_ADD`, `STUD_EMAIL`, `STUD_PHONE`, `SEM_ID`, `C_ID`, `SEC_ID`, `ACC_ID`) VALUES (?,?,?,?,?,?,?,?)";
         PreparedStatement pstm = new DBConnection().getStatement(query);
         try {
             pstm.setString(1, student.getUser().getFullName());
             pstm.setString(2, student.getUser().getAddress());
             pstm.setString(3, student.getUser().getEmail());
-            pstm.setInt(4, newUser.getId());
+            pstm.setString(4, student.getUser().getPhone());
+            pstm.setString(5, student.getUser().getSemester());
+            pstm.setString(6, student.getUser().getCourse());
+            pstm.setString(7, student.getUser().getSection());
+            pstm.setInt(8, newUser.getId());
             
             System.out.println("insert Student query:" + pstm);
 
@@ -223,9 +227,6 @@ public class UserServices {
             e.printStackTrace();
         }
     }
-    
-    
-    
     
     /**
      * This method will delete a user from account table
@@ -260,8 +261,24 @@ public class UserServices {
             e.printStackTrace();
         }
     }
-    
-    
+  
+    /**
+     * This method is used for deleting a student completely
+     * @param acc_id 
+     */
+    public void deleteStudent(int acc_id) {
+        deleteUser(acc_id);
+        String query = "DELETE FROM `student` WHERE ACC_ID = ?";
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+        try {
+            pstm.setInt(1, acc_id);
+            System.out.println("insert user query:" + pstm);
+
+            pstm.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     
     
     public void editUser(int id, User user) {
@@ -301,64 +318,4 @@ public class UserServices {
         
     }
    
-    
-    
-    
-    
-    //methods for courses
-        public List<College> getCourseList() {
-        List<College> collegeList = new ArrayList<>();
-        String query = "SELECT * FROM `course`";
-        System.out.println(query);
-        PreparedStatement pstm = new DBConnection().getStatement(query);
-        try {
-            ResultSet rs = pstm.executeQuery();
-            while (rs.next()) {
-                College college = new College();
-                college.setCourse(new Course(rs.getInt("C_ID"), rs.getString("COURSE_NAME")));
-                collegeList.add(college);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return collegeList;
-    }
-        
-        public List<College> getSemesterList() {
-            
-        List<College> semesterList = new ArrayList<>();
-        String query = "SELECT * FROM `semester`";
-        System.out.println(query);
-        PreparedStatement pstm = new DBConnection().getStatement(query);
-        try {
-            ResultSet rs = pstm.executeQuery();
-            while (rs.next()) {
-                College college = new College(( new Semester(rs.getInt("SEM_ID"), rs.getString("SEM_NAME"))));
-                semesterList.add(college);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return semesterList;
-            
-        }
-        
-        public List<Section> getSectionList() {
-        List<Section> sectionList = new ArrayList<>();
-        String query = "SELECT * FROM `section`";
-        System.out.println(query);
-        PreparedStatement pstm = new DBConnection().getStatement(query);
-        try {
-            ResultSet rs = pstm.executeQuery();
-            while (rs.next()) {
-                Section section = new Section(rs.getInt("SECTION_ID"), rs.getString("SECTION_NAME"));
-                sectionList.add(section);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return sectionList;
-    }
-
 }

@@ -413,6 +413,7 @@
                           placeholder="contact"
                           id="floatingName"
                           name="contact"
+                          maxlength="10"
                         />
                         <label for="floatingTextarea">Contact no.</label>
                       </div>

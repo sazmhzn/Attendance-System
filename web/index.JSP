@@ -28,7 +28,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
   
   
    
-    <div class="container-fluid">
+    <div class="container-fluid"> 
       <!-- Just an image -->
       <nav class="navbar navbar-light bg-light">
         <div class="container">

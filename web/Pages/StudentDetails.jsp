@@ -329,7 +329,7 @@
         <li class="nav-heading">Extra</li>
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="PageChange?page=Logout">
+          <a class="nav-link collapsed" href="RegisterServlet?page=Logout">
             <i class="bi bi-box-arrow-in-right"></i>
             <span>Logout</span>
           </a>
@@ -391,7 +391,7 @@
                                 <td>${employee.user.section}</td>
                                 <td>
                                     <button type="button" class="btn btn-primary" >
-                                      <a href="PageChange?page=editTeacher&userId=${employee.user.id}" class="text-light"> <i class="bi bi-pencil"></i> edit</a>  
+                                      <a href="PageChange?page=editStudent&userId=${employee.user.id}" class="text-light"> <i class="bi bi-pencil"></i> edit</a>  
                                     </button>
                                     
                                     <!-- Button trigger modal -->
@@ -413,7 +413,7 @@
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Nope</button>
                                                     <button type="button" class="btn btn-primary">
-                                                        <a href="UserServlet?page=deleteTeacher&accId=${employee.user.id}" class="text-light">Sure</a> 
+                                                        <a href="UserServlet?page=deleteStudent&accId=${employee.user.id}" class="text-light">Sure</a> 
                                                     </button>
                                                 </div>
                                             </div>
@@ -462,6 +462,7 @@
         $("#example").DataTable();
       });
     </script>
+    
   </body>
 </html>
 

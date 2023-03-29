@@ -9,6 +9,7 @@ import Model.Section;
 import Model.Student;
 import Model.Teacher;
 import Model.User;
+import Services.SubjectServices;
 import Services.UserServices;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
@@ -90,7 +91,7 @@ public class PageChange extends HttpServlet {
             rd.forward(request, response);
         }
         if (page.equalsIgnoreCase("addTeacher")) {
-            List<College> collegeList = new UserServices().getCourseList();
+            List<College> collegeList = new SubjectServices().getCourseList();
             request.setAttribute("collegeList", collegeList);
             
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/AddTeacher.jsp");
@@ -100,7 +101,7 @@ public class PageChange extends HttpServlet {
         if (page.equalsIgnoreCase("Teacher")) {
             List<Teacher> employeeList = new UserServices().getTeacherList();
             request.setAttribute("employeeList", employeeList);
-            List<College> collegeList = new UserServices().getCourseList();
+            List<College> collegeList = new SubjectServices().getCourseList();
             request.setAttribute("collegeList", collegeList);
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/TeacherDetails.jsp");
             rd.forward(request, response);
@@ -121,7 +122,7 @@ public class PageChange extends HttpServlet {
             
             List<Student> employeeList = new UserServices().getStudentList();
             request.setAttribute("employeeList", employeeList);
-            List<College> collegeList = new UserServices().getCourseList();
+            List<College> collegeList = new SubjectServices().getCourseList();
             request.setAttribute("collegeList", collegeList);
             
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/StudentDetails.jsp");
@@ -129,10 +130,10 @@ public class PageChange extends HttpServlet {
         }
         
         if (page.equalsIgnoreCase("addStudent")) {
-            List<College> collegeList = new UserServices().getCourseList();
+            List<College> collegeList = new SubjectServices().getCourseList();
             request.setAttribute("collegeList", collegeList);
             
-            List<College> semesterList = new UserServices().getSemesterList();
+            List<College> semesterList = new SubjectServices().getSemesterList();
             request.setAttribute("semesterList", semesterList);
             
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/AddStudent.jsp");

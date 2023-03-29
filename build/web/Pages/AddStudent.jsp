@@ -323,7 +323,7 @@
         <li class="nav-heading">Extra</li>
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="pages-login.html">
+          <a class="nav-link collapsed" href="RegisterServlet?page=logout">
             <i class="bi bi-box-arrow-in-right"></i>
             <span>Logout</span>
           </a>
@@ -409,6 +409,7 @@
                           placeholder="contact"
                           id="floatingName"
                           name="contact"
+                          maxlength="10"
                         />
                         <label for="floatingTextarea">Contact no.</label>
                       </div>
@@ -480,8 +481,7 @@
                                 aria-label="State"
                                 name="section"
                                 >
-                                  <option value="all" selected>All</option>
-                                  <option value="1">A</option>
+                                  <option value="1" selected>A</option>
                                   <option value="2">B</option>
                               </select>
                               <label for="floatingSelect">Section</label>
