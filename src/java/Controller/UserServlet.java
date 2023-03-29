@@ -94,7 +94,7 @@ public class UserServlet extends HttpServlet {
          
             Teacher teacher = new Teacher(); //initializing a new teacher
             teacher.setAcc_id( Integer.parseInt(request.getParameter("id")) );
-            teacher.setUser( new User(
+            teacher.setUser(new User(
                     request.getParameter("fullname"),
                     request.getParameter("email"),
                     request.getParameter("contact"),
@@ -150,6 +150,42 @@ public class UserServlet extends HttpServlet {
             new UserServices().insertUser(student); //inserting into user table
             
             RequestDispatcher rd = request.getRequestDispatcher("PageChange?page=addStudent");
+            rd.forward(request, response);
+        }
+        
+        if (page.equalsIgnoreCase("editStudent")) {
+         
+            Student student = new Student(); //initializing a new teacher
+            student.setRoll(Integer.parseInt(request.getParameter("id")) );
+            student.setUser(new User(
+                    request.getParameter("fullname"),
+                    request.getParameter("email"),
+                    request.getParameter("contact"),
+                    request.getParameter("address"),
+                    request.getParameter("section"), 
+                    "", 
+                    request.getParameter("username"),
+                    "", 
+                    "T"));
+            
+            
+            System.out.println("\nUserServices\n===========\n");
+            new UserServices().editUser(student);
+            System.out.println("Roll: " + student.getRoll() + " Name: " + student.getUser().getFullName() + " \n===========\n");
+            
+            RequestDispatcher rd = request.getRequestDispatcher("PageChange?page=Student");
+            rd.forward(request, response);
+        }
+        
+        if (page.equalsIgnoreCase("deleteStudent")) {
+            System.out.println("\n\n===================");
+            System.out.println("deleteStudent condition\n");
+            
+            int acc_id = Integer.parseInt( request.getParameter("accId") ) ;
+            new UserServices().deleteStudent(acc_id);
+            System.out.println("The student accout ID to delete is: " + acc_id);
+            
+            RequestDispatcher rd = request.getRequestDispatcher("PageChange?page=Student");
             rd.forward(request, response);
         }
 

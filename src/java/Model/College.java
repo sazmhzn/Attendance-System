@@ -12,6 +12,7 @@ public class College {
     private Subject subject;
     private Course course;
     private Semester semester;
+    private Section section;
 
     public College() {
     }
@@ -52,6 +53,13 @@ public class College {
     public void setCourse(Course course) {
         this.course = course;
     }
-    
+
+    public Section getSection() {
+        return section;
+    }
+
+    public void setSection(Section section) {
+        this.section = section;
+    }
     
 }

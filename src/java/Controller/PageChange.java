@@ -110,12 +110,10 @@ public class PageChange extends HttpServlet {
         if (page.equalsIgnoreCase("editTeacher")) {
             
             Teacher teacher =  new UserServices().getTeacherRow( Integer.parseInt(request.getParameter("userId")) ); //This will be displayed on the form field
-            
             request.setAttribute("teacher", teacher);
             
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/EditTeacher.jsp");
             rd.forward(request, response);
-            
         }
          
         if (page.equalsIgnoreCase("Student")) {
@@ -137,6 +135,15 @@ public class PageChange extends HttpServlet {
             request.setAttribute("semesterList", semesterList);
             
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/AddStudent.jsp");
+            rd.forward(request, response);
+        }
+        
+        if (page.equalsIgnoreCase("editStudent")) {
+            
+            Student student =  new UserServices().getStudentRow( Integer.parseInt(request.getParameter("userId")) ); //This will be displayed on the form field
+            request.setAttribute("student", student);
+            
+            RequestDispatcher rd = request.getRequestDispatcher("/Pages/EditStudent.jsp");
             rd.forward(request, response);
         }
         

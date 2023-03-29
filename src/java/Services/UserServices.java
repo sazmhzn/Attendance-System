@@ -5,10 +5,6 @@
 package Services;
 
 import DBConnection.DBConnection;
-import Model.College;
-import Model.Course;
-import Model.Section;
-import Model.Semester;
 import Model.Student;
 import Model.Teacher;
 import Model.User;
@@ -26,7 +22,7 @@ public class UserServices {
 
     /**
      * This will get the User from account table
-     * This is used for authentication in login jsp
+ This is used for authentication in login jsp
      * @param username
      * @param password
      * @return
@@ -60,6 +56,10 @@ public class UserServices {
         return user;
     }
 
+    /**
+     * This method will return the list of teacher from database
+     * @return userList
+     */
     public List<Teacher> getTeacherList() {
         List<Teacher> userList = new ArrayList<>();
         String query = "SELECT * FROM `teacher` LEFT JOIN `accounts` ON teacher.ACC_ID = accounts.ACC_ID";
@@ -125,6 +125,28 @@ public class UserServices {
         }
         return teacher;
     }
+      
+      
+      
+      public Student getStudentRow(int id){
+        Student student = new Student();
+        String query = "SELECT * FROM `student` left JOIN course on student.C_ID = course.C_ID LEFT JOIN semester ON semester.SEM_ID = student.SEM_ID LEFT JOIN section on student.SEC_ID = section.SECTION_ID where student.ACC_ID=?";
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+        try {
+            pstm.setInt(1,id);
+            System.out.println("Query: " + pstm);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()){
+                student.setRoll(rs.getInt("ACC_ID") );
+                student.setUser(new User( rs.getInt("TEAC_ID"), rs.getString("TEAC_NAME"), rs.getString("TEAC_EMAIL"), rs.getString("TEAC_PHONE"), rs.getString("TEAC_ADDRESS") ));
+            }
+            
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return student;
+    }
+      
     
       /**
      * This method will get get the list of student 
@@ -138,8 +160,19 @@ public class UserServices {
         try {
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
+                
+                 /**
+                 *
+                 * @param fullName
+                 * @param email
+                 * @param phone
+                 * @param address
+                 * @param college
+                 */
+
                 Student student = new Student();
-                student.setUser(new User(rs.getInt("STUD_ID"), rs.getString("STUD_NAME"), rs.getString("STUD_EMAIL"), rs.getString("STUD_PHONE"), rs.getString("STUD_ADD"), rs.getString("SEM_NAME"), rs.getString("SECTION_NAME"), rs.getString("COURSE_NAME")));
+                student.setUser(new User(
+                        rs.getInt("STUD_ID"), rs.getString("STUD_NAME"), rs.getString("STUD_EMAIL"), rs.getString("STUD_PHONE"), rs.getString("STUD_ADD"), rs.getString("SEM_NAME"), rs.getString("SECTION_NAME"), rs.getString("COURSE_NAME")));
                 userList.add(student);
             }
         } catch (SQLException e) {
@@ -150,11 +183,9 @@ public class UserServices {
     }
       
     
-    
-    
     /**
      * This method will insert User in accounts table
-     *  This method is used in addTeacher jsp
+  This method is used in addTeacher jsp
      * @param user 
      */
     public void insertUser(User user) {
@@ -315,7 +346,28 @@ public class UserServices {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
     }
    
+    public void editUser(Student student) {
+// (`STUD_NAME`, `STUD_ADD`, `STUD_EMAIL`, `STUD_PHONE`, `SEM_ID`, `C_ID`, `SEC_ID`, `ACC_ID`)
+        String query = "UPDATE `teacher` SET `STUD_NAME`=?,`STUD_ADDRESS`=?,`STUD_EMAIL`=?,`STUD_PHONE`=?, `SEM_ID`=?, `C_ID`=?, `SEC_ID`=? WHERE `ACC_ID`=?";
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+        
+        try {
+            pstm.setString(1, student.getUser().getFullName());
+            pstm.setString(2, student.getUser().getAddress());
+            pstm.setString(3, student.getUser().getEmail());
+            pstm.setString(4, student.getUser().getPhone());
+            pstm.setString(5, student.getUser().getSemester());
+            pstm.setString(6, student.getUser().getCourse());
+            pstm.setString(7, student.getUser().getSection());
+            pstm.setInt(8, student.getUser().getId());
+            
+            System.out.println("The Update query: " + pstm);
+            pstm.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
 }

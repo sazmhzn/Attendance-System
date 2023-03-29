@@ -9,21 +9,24 @@ package Model;
  * @author lenovo
  */
 public class Student {
+    private int roll;
     private User user;
-    private String section;
-            
+          
+    public Student() {
+    }
+    
     public Student(User user) {
         this.user = user;
     }
 
-    public Student() {
+    public int getRoll() {
+        return roll;
     }
 
-    public Student(User user, String section) {
-        this.user = user;
-        this.section = section;
+    public void setRoll(int roll) {
+        this.roll = roll;
     }
-
+    
     public User getUser() {
         return user;
     }
@@ -32,11 +35,4 @@ public class Student {
         this.user = user;
     }
 
-    public String getSection() {
-        return section;
-    }
-
-    public void setSection(String section) {
-        this.section = section;
-    }
 }
