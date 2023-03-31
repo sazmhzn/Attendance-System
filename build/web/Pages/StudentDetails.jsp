@@ -386,9 +386,9 @@
                                 <td>${employee.user.email}</td>
                                 <td>${employee.user.address}</td>
                                 <td>${employee.user.phone}</td>
-                                <td>${employee.user.semester}</td>
-                                <td>${employee.user.course}</td>
-                                <td>${employee.user.section}</td>
+                                <td>${employee.college.semester.name}</td>
+                                <td>${employee.college.course.name}</td>
+                                <td>${employee.college.section.name}</td>
                                 <td>
                                     <button type="button" class="btn btn-primary" >
                                       <a href="PageChange?page=editStudent&userId=${employee.user.id}" class="text-light"> <i class="bi bi-pencil"></i> edit</a>  

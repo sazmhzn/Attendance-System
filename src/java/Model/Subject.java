@@ -12,6 +12,7 @@ public class Subject {
     private int subject_id;
     private String subject_name;
     private String subject_code;
+    private Teacher teacher;
 
     public Subject() {
     }
@@ -21,9 +22,11 @@ public class Subject {
         this.subject_name = subject_name;
         this.subject_code = subject_code;
     }
-    
-    
 
+    public Subject(Teacher teacher) {
+        this.teacher = teacher;
+    }
+    
     public int getSubject_id() {
         return subject_id;
     }
@@ -46,6 +49,14 @@ public class Subject {
 
     public void setSubject_code(String subject_code) {
         this.subject_code = subject_code;
+    }
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
     }
     
     

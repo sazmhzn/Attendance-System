@@ -90,8 +90,7 @@ public class RegisterServlet extends HttpServlet {
                 session.setAttribute("role", user.getRole());
                 request.setAttribute("msg", "Login Successful!");
                 System.out.println(request.getAttribute("msg"));
-                
-                
+               
                 
                 //creating cookie to store the id of user
                 //Used for editing the profile of the user
@@ -104,7 +103,7 @@ public class RegisterServlet extends HttpServlet {
                         RequestDispatcher rd = request.getRequestDispatcher("Pages/AttendanceSheet.jsp");
                         rd.forward(request, response);
                     } else {
-                        RequestDispatcher rd = request.getRequestDispatcher("Pages/AdminDashboard.jsp");
+                        RequestDispatcher rd = request.getRequestDispatcher("PageChange?page=adminDashboard");
                         rd.forward(request, response);
                     }
             } else {

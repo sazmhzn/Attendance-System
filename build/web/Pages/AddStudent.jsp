@@ -381,11 +381,11 @@
                         <input
                           type="text"
                           class="form-control"
-                          id="floatingEmail"
+                          id="floatingUsername"
                           placeholder="Student name"
                           name="username"
                         />
-                        <label for="floatingName">Username</label>
+                        <label for="floatingUsername">Username</label>
                       </div>
                     </div>
 
@@ -405,13 +405,14 @@
                     <div class="col-12">
                       <div class="form-floating">
                         <input
+                          type="tel"
                           class="form-control"
                           placeholder="contact"
-                          id="floatingName"
+                          id="floatingNumber"
                           name="contact"
                           maxlength="10"
                         />
-                        <label for="floatingTextarea">Contact no.</label>
+                        <label for="floatingNumber">Contact no</label>
                       </div>
                     </div>
 
@@ -531,6 +532,10 @@
     <script src="Styling/assets/js/main.js"></script>
 
     <!-- Custome JS File -->
+    
+    <script> 
+        </script>
+    
     <script>
       $(document).ready(function () {
         $("#example").DataTable();

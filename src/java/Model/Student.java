@@ -11,12 +11,17 @@ package Model;
 public class Student {
     private int roll;
     private User user;
+    private College college;
           
     public Student() {
     }
     
     public Student(User user) {
         this.user = user;
+    }
+
+    public Student(College college) {
+        this.college = college;
     }
 
     public int getRoll() {
@@ -33,6 +38,14 @@ public class Student {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public College getCollege() {
+        return college;
+    }
+
+    public void setCollege(College college) {
+        this.college = college;
     }
 
 }

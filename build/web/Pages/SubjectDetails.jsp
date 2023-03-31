@@ -378,15 +378,41 @@
                     <tbody>
                         <c:forEach  items="${employeeList}" var="employee">
                             <tr>
-                                <td  scope="row"></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td  scope="row">${employee.subject_id}</td>
+                                <td>${employee.subject_name}</td>
+                                <td>${employee.subject_code}</td>
+                                <td>${employee.teacher.user.fullName}</td>
                            
                                 <td>
-                                    <a href="UserServet?page=editStudent&userId=${employee.user.id}">edit</a>
-                                    <a href="UserServet?page=deleteStudent&userId=${employee.user.id}" class=text-danger>delete</a>
+                                    <button type="button" class="btn btn-primary" >
+                                      <a href="PageChange?page=editSubject&subjectId=${employee.subject_id}" class="text-light"> <i class="bi bi-pencil"></i> edit</a>  
+                                    </button>
+                                    
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal${employee.subject_id}">
+                                        <i class="bi bi-trash3"></i> Delete
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModal${employee.subject_id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Are you sure?</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    You cannot undo this action
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Nope</button>
+                                                    <button type="button" class="btn btn-primary">
+                                                        <a href="UserServlet?page=deleteSubject&subjectId=${employee.subject_id}" class="text-light">Sure</a> 
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                         </c:forEach>

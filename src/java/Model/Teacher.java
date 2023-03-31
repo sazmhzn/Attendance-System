@@ -12,7 +12,7 @@ package Model;
 public class Teacher {
     private int acc_id;
     private User user;
-    private Subject[] subjects;
+    private Subject[] subject;
     
     public Teacher() {
     }
@@ -43,11 +43,11 @@ public class Teacher {
     }
 
     public Subject[] getSubjects() {
-        return subjects;
+        return subject;
     }
 
     public void setSubjects(Subject[] subjects) {
-        this.subjects = subjects;
+        this.subject = subjects;
     }
 }
 

@@ -16,6 +16,12 @@ public class College {
 
     public College() {
     }
+
+    public College(Course course, Semester semester, Section section) {
+        this.course = course;
+        this.semester = semester;
+        this.section = section;
+    }
     
     public College(Subject subject) {
         this.subject = subject;

@@ -5,7 +5,12 @@
 package Services;
 
 import DBConnection.DBConnection;
+import Model.College;
+import Model.Course;
+import Model.Section;
+import Model.Semester;
 import Model.Student;
+import Model.Subject;
 import Model.Teacher;
 import Model.User;
 import java.sql.PreparedStatement;
@@ -103,6 +108,42 @@ public class UserServices {
     }
     
     /**
+     * This will return the all the subjects from the database
+     * @return 
+     */
+    public List<Subject> getSubjectList() {
+        List<Subject> userList = new ArrayList<>();
+        String query = "SELECT * FROM `subject` LEFT JOIN teacher ON subject.TEAC_ID = teacher.TEAC_ID; ";
+        System.out.println(query);
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+        try {
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                
+                Teacher teacher = new Teacher();
+                Subject subject = new Subject( 
+                        rs.getInt("SUB_ID"), 
+                        rs.getString("SUB_NAME"), 
+                        rs.getString("SUB_CODE")
+                );
+                
+                teacher.setUser(new User(rs.getInt("TEAC_ID"), 
+                        rs.getString("TEAC_NAME"), 
+                        rs.getString("TEAC_EMAIL"),
+                        rs.getString("TEAC_PHONE"), 
+                        rs.getString("TEAC_ADDRESS")));
+//                teacher.setSubjects(new Subject[] {subject});
+                subject.setTeacher(teacher);
+                userList.add(subject);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return userList;
+    }
+    
+    /**
      * This method will get a teacher row
      * @param id
      * @return 
@@ -138,7 +179,16 @@ public class UserServices {
             ResultSet rs = pstm.executeQuery();
             while (rs.next()){
                 student.setRoll(rs.getInt("ACC_ID") );
-                student.setUser(new User( rs.getInt("TEAC_ID"), rs.getString("TEAC_NAME"), rs.getString("TEAC_EMAIL"), rs.getString("TEAC_PHONE"), rs.getString("TEAC_ADDRESS") ));
+                student.setUser(new User( 
+                        rs.getInt("STUD_ID"), rs.getString("STUD_NAME"), 
+                        rs.getString("STUD_EMAIL"), rs.getString("STUD_PHONE"), 
+                        rs.getString("STUD_ADD")));
+                
+                student.setCollege(new College(
+                        (new Course(rs.getInt("C_ID"), rs.getString("COURSE_NAME"))),
+                        (new Semester(rs.getInt("SEM_ID"), rs.getString("SEMESTER_NAME"))), 
+                        (new Section(rs.getInt("SEC_ID"), rs.getString("SEC_NAME")))
+                ));
             }
             
         }catch (SQLException e){
@@ -160,19 +210,21 @@ public class UserServices {
         try {
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
-                
-                 /**
-                 *
-                 * @param fullName
-                 * @param email
-                 * @param phone
-                 * @param address
-                 * @param college
-                 */
-
+                College college = new College();
                 Student student = new Student();
                 student.setUser(new User(
-                        rs.getInt("STUD_ID"), rs.getString("STUD_NAME"), rs.getString("STUD_EMAIL"), rs.getString("STUD_PHONE"), rs.getString("STUD_ADD"), rs.getString("SEM_NAME"), rs.getString("SECTION_NAME"), rs.getString("COURSE_NAME")));
+                        rs.getInt("STUD_ID"), 
+                        rs.getString("STUD_NAME"), 
+                        rs.getString("STUD_EMAIL"), 
+                        rs.getString("STUD_PHONE"), 
+                        rs.getString("STUD_ADD")
+                ));
+                student.setCollege(new College(
+                        (new Course(rs.getInt("C_ID"), rs.getString("COURSE_NAME"))), 
+                        (new Semester(rs.getInt("SEM_ID"), rs.getString("SEM_NAME"))), 
+                        (new Section( rs.getInt("SEC_ID"), rs.getString("SECTION_NAME") ))
+                ));
+                
                 userList.add(student);
             }
         } catch (SQLException e) {

@@ -7,6 +7,7 @@ package Controller;
 import Model.College;
 import Model.Section;
 import Model.Student;
+import Model.Subject;
 import Model.Teacher;
 import Model.User;
 import Services.SubjectServices;
@@ -120,8 +121,10 @@ public class PageChange extends HttpServlet {
             
             List<Student> employeeList = new UserServices().getStudentList();
             request.setAttribute("employeeList", employeeList);
-            List<College> collegeList = new SubjectServices().getCourseList();
-            request.setAttribute("collegeList", collegeList);
+            
+            for( Student c : employeeList ) {
+                System.out.println("College: " + c.getUser().getFullName());
+            }
             
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/StudentDetails.jsp");
             rd.forward(request, response);
@@ -133,7 +136,7 @@ public class PageChange extends HttpServlet {
             
             List<College> semesterList = new SubjectServices().getSemesterList();
             request.setAttribute("semesterList", semesterList);
-            
+          
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/AddStudent.jsp");
             rd.forward(request, response);
         }
@@ -149,17 +152,33 @@ public class PageChange extends HttpServlet {
         
         if (page.equalsIgnoreCase("Subject")) {
             
-            User model = new User();
-            List<Student> employeeList = new UserServices().getStudentList();
-            
-            request.setAttribute("employee", model);
+            List<Subject> employeeList = new UserServices().getSubjectList();
             request.setAttribute("employeeList", employeeList);
+            
+            for(Subject t : employeeList) {
+                System.out.println("\nM: " + t.getTeacher().getUser().getFullName() + " Subject: " + t.getSubject_code());
+                
+            }
             
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/SubjectDetails.jsp");
             rd.forward(request, response);
         }
         
         if (page.equalsIgnoreCase("adminDashboard")) {
+            
+            List<Teacher> teacherList = new UserServices().getTeacherList();
+            request.setAttribute("totalTeacher", teacherList.size());
+            request.setAttribute("teacherList", teacherList);
+            
+            List<Student> studentList = new UserServices().getStudentList();
+            request.setAttribute("studentList", studentList);
+            request.setAttribute("totalStudent", studentList.size());
+            
+            
+            for(Student s : studentList) {
+                System.out.println("student: " + s.getUser().getFullName());
+            }
+            
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/AdminDashboard.jsp");
             rd.forward(request, response);
         }

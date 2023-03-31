@@ -22,8 +22,54 @@
     <link rel="stylesheet" href="styling/style.css" />
 
     <title>Login!</title>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <!-- Favicons -->
+  <link rel="icon" href="Styling/assets/img/favicon.png"/>
+  <link href="Styling/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="Styling/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="Styling/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="Styling/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="Styling/assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="Styling/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="Styling/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="Styling/assets/vendor/simple-datatables/style.css" rel="stylesheet">
+  
+  <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.css">-->
+  
+  <link rel="stylesheet" href="Styling/style.css"/>
+  
+  <!-- Template Main CSS File -->
+  <link href="Styling/assets/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: NiceAdmin - v2.5.0
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+
   </head>
   <body>
+      <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        <img src="assets/img/logo.png" alt="">
+        <span class="d-none d-lg-block">Attendify</span>
+      </a>
+    </div><!-- End Logo -->
+
+   
+  </header><!-- End Header -->
     <div class="container-fluid h-100">
       <!-- Just an image -->
       <nav class="navbar navbar-light bg-light">
@@ -65,7 +111,7 @@
               <div class="col-lg-6 mb-5 mb-lg-0">
                 <div class="card">
                   <div class="card-body py-5 px-md-5">
-                    <form action="RegisterServlet?page=existing" onsubmit ="return verifyPassword()" method="POST">
+                    <form action="RegisterServlet?page=existing" method="POST">
                       
                       <% if(session.getAttribute("error_msg") != null)  {%>
 
@@ -100,12 +146,12 @@
                           id="form3Example4 pswd"
                           name="password"
                           class="form-control"
-                          
+                          id="pswd"
                         />
                       </div>
 
                       <!-- Submit button -->
-                      <button type="submit" class="btn btn-primary btn-block mb-2">Sign in</button>
+                      <button type="submit" onclick ="verifyPassword()" class="btn btn-primary btn-block mb-2">Sign in</button>
 
                       <p>
                         Don't have an account?
@@ -124,6 +170,19 @@
     </div>
 
     
+                      
+                      <!-- Vendor JS Files -->
+  <script src="Styling/assets/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="Styling/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="Styling/assets/vendor/chart.js/chart.umd.js"></script>
+  <script src="Styling/assets/vendor/echarts/echarts.min.js"></script>
+  <script src="Styling/assets/vendor/quill/quill.min.js"></script>
+  <script src="Styling/assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="Styling/assets/vendor/tinymce/tinymce.min.js"></script>
+  <script src="Styling/assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="Styling/assets/js/main.js"></script>
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script
@@ -131,25 +190,30 @@
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
       crossorigin="anonymous"
     ></script>
+    
     <script>  
+        const btn = document.querySelector(".btn");
+        
+        btn.addEventListener("click", verifyPassword);
+        
 function verifyPassword() {  
   var pw = document.getElementById("pswd").value;  
+  console.log("inside a function");
   //check empty password field  
-  if(pw == "") {  
+  if(pw === "") {  
      document.getElementById("message").innerHTML = "**Fill the password please!";  
-     return false;  
+     console.log("Less than 8");
   }  
    
  //minimum password length validation  
   if(pw.length < 8) {  
+      
      document.getElementById("message").innerHTML = "**Password length must be atleast 8 characters";  
-     return false;  
   }  
   
 //maximum length of password validation  
   if(pw.length > 15) {  
      document.getElementById("message").innerHTML = "**Password length must not exceed 15 characters";  
-     return false;  
   } else {  
      alert("Password is correct");  
   }  
@@ -157,5 +221,8 @@ function verifyPassword() {
 
 
 </script>  
+
+
+
   </body>
 </html>

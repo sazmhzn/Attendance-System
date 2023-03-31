@@ -21,6 +21,8 @@ public class User {
     private String username;
     private String password;
     private String role;
+    private College college;
+
 
     public User() {
     }
@@ -40,6 +42,31 @@ public class User {
         this.phone = phone;
         this.address = address;
     }
+
+    /**
+     * 
+     * @param id 
+     * @param fullName
+     * @param email
+     * @param phone
+     * @param address
+     * @param college 
+     */
+    public User(int id, String fullName, String email, String phone, String address, College college) {
+        this.id = id;
+        this.fullName = fullName;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        this.college = college;
+    }
+
+    public User(College college) {
+        this.college = college;
+    }
+
+    
+    
     
     /**
      * This constructor will get the Student details
@@ -52,6 +79,7 @@ public class User {
      * @param section
      * @param course 
      */
+    
     public User(int id, String fullName, String email, String phone, String address, String semester, String section, String course) {
         this.id = id;
         this.fullName = fullName;
@@ -74,7 +102,20 @@ public class User {
         this.password = password;
         this.role = role;
     }
-
+    
+    /**
+     * This constructor will be used for student
+     * @param fullName
+     * @param email
+     * @param phone
+     * @param address
+     * @param semester
+     * @param section
+     * @param course
+     * @param username
+     * @param password
+     * @param role 
+     */
     public User(String fullName, String email, String phone, String address, String semester, String section, String course, String username, String password, String role) {
         this.fullName = fullName;
         this.email = email;
@@ -142,6 +183,22 @@ public class User {
         this.address = address;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public String getSemester() {
         return semester;
     }
@@ -166,22 +223,6 @@ public class User {
         this.course = course;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getRole() {
         return role;
     }
@@ -189,7 +230,13 @@ public class User {
     public void setRole(String role) {
         this.role = role;
     }
-    
-    
 
+    public College getCollege() {
+        return college;
+    }
+
+    public void setCollege(College college) {
+        this.college = college;
+    }
+    
 }

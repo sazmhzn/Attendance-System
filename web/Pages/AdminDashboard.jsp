@@ -13,6 +13,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
     <title>Teacher</title>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <meta content="" name="description" />
     <meta content="" name="keywords" />
 
@@ -32,9 +33,9 @@
 
     <!-- Vendor CSS Files -->
     <link
-      href="Styling/assets/vendor/bootstrap-icons/bootstrap-icons.css"
-      rel="stylesheet"
-    />
+        href="Styling/assets/vendor/bootstrap-icons/bootstrap-icons.css"
+        rel="stylesheet"
+        />
 
     <link
       href="Styling/assets/vendor/boxicons/css/boxicons.min.css"
@@ -88,6 +89,7 @@
           method="POST"
           action="#"
         >
+            
           <input
             type="text"
             name="query"
@@ -96,11 +98,13 @@
             list="student"
           />
           <datalist id="student">
-              <option value="Angeels">
-              <option value="Surohan">
-              <option value="Mithlesh">
-              <option value="Susmit">
-              <option value="Subin">
+              <c:forEach items="${teacherList}" var="teacher">
+                  <option value="${teacher.user.fullName} (T)">
+              </c:forEach> 
+              
+              <c:forEach items="${studentList}" var="student">
+                  <option value="${student.user.fullName} ">
+              </c:forEach> 
           </datalist>
           <button type="submit" title="Search">
             <i class="bi bi-search"></i>
@@ -326,14 +330,16 @@
               <div class="card info-card sales-card">
 
                 <div class="card-body">
-                  <h5 class="card-title">Present <span>| Today</span></h5>
+                  <h5 class="card-title">Teachers 
+                      <!--<span>| Today</span>-->
+                  </h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                       <i class="bi bi-bookmark-check"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>145</h6>
+                      <h6> ${totalTeacher} </h6>
                       <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
 
                     </div>
@@ -348,7 +354,9 @@
               <div class="card info-card revenue-card">
 
                 <div class="card-body">
-                  <h5 class="card-title">Absence <span>| This Month</span></h5>
+                  <h5 class="card-title">Student 
+                      <!--<span>| This Month</span>-->
+                  </h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -356,7 +364,7 @@
 
                     </div>
                     <div class="ps-3">
-                      <h6>264</h6>
+                      <h6>${totalStudent}</h6>
                       <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span>
 
                     </div>
@@ -372,14 +380,16 @@
               <div class="card info-card customers-card">
 
                 <div class="card-body">
-                  <h5 class="card-title">Attendance <span>| This Year</span></h5>
+                  <h5 class="card-title">Total 
+                      <!--<span>| This Year</span>-->
+                  </h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                       <i class="bi bi-bookmark-fill"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>409</h6>
+                      <h6> ${totalStudent + totalTeacher} </h6>
                       <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
 
                     </div>
