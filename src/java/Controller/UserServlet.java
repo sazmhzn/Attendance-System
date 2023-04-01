@@ -5,11 +5,15 @@
 package Controller;
 
 import Hashing.HashingPassword;
+import Model.College;
+import Model.Course;
+import Model.Section;
 import Model.Semester;
 import Model.Student;
 import Model.Teacher;
 import Model.User;
 import Services.UserServices;
+import com.mysql.cj.Session;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -17,6 +21,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
@@ -154,24 +159,31 @@ public class UserServlet extends HttpServlet {
         }
         
         if (page.equalsIgnoreCase("editStudent")) {
-         
-            Student student = new Student(); //initializing a new teacher
+            Student student = new Student(); //initializing a new student
             student.setRoll(Integer.parseInt(request.getParameter("id")) );
             student.setUser(new User(
-                    request.getParameter("fullname"),
-                    request.getParameter("email"),
-                    request.getParameter("contact"),
-                    request.getParameter("address"),
-                    request.getParameter("section"), 
-                    "", 
-                    request.getParameter("username"),
-                    "", 
-                    "T"));
-            
+                    Integer.parseInt(request.getParameter("id") ), 
+                    request.getParameter("fullname"), 
+                    request.getParameter("email"), 
+                    request.getParameter("contact"), 
+                    request.getParameter("address")
+                    ));
+            student.setCollege(new College(
+                    (new Course( Integer.parseInt( request.getParameter("course") ) , "")), 
+                    (new Semester(Integer.parseInt( request.getParameter("semester") ) , "")), 
+                    (new Section(Integer.parseInt( request.getParameter("section") ) , ""))
+                    ));
             
             System.out.println("\nUserServices\n===========\n");
-            new UserServices().editUser(student);
-            System.out.println("Roll: " + student.getRoll() + " Name: " + student.getUser().getFullName() + " \n===========\n");
+            boolean result = new UserServices().editUser(student);
+            if( !result ) {
+                HttpSession session = request.getSession();
+                session.setMaxInactiveInterval(1); 
+                session.setAttribute("success", "Edited succsdully");
+            } else {
+                HttpSession session = request.getSession();
+                session.setAttribute("fail", "Failed to edit");
+            }
             
             RequestDispatcher rd = request.getRequestDispatcher("PageChange?page=Student");
             rd.forward(request, response);

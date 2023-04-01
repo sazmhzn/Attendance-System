@@ -3,7 +3,7 @@
     Created on : Mar 17, 2023, 10:31:18 AM
     Author     : lenovo
 --%>
-
+<%@page import="jakarta.servlet.http.HttpSession" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -354,6 +354,22 @@
       </div>
       <!-- End Page Title -->
 
+      <% if(session.getAttribute("success") != null)  {%>
+      
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <%=session.getAttribute("success")%>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+
+      <% } %> 
+       <% if(session.getAttribute("fail") != null)  {%>
+
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <%=session.getAttribute("fail")%>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+
+      <% } %> 
       <section class="section dashboard">
         <div class="row">
              <!-- Top Selling -->
@@ -461,7 +477,9 @@
         $("#example").DataTable();
       });
     </script>
-    
+    <script> 
+    $('.alert').alert()
+    </script>
   </body>
 </html>
 

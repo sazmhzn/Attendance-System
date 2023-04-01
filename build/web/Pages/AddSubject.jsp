@@ -1,10 +1,5 @@
-<%-- 
-    Document   : StudentDetails
-    Created on : Mar 17, 2023, 10:31:18 AM
-    Author     : lenovo
---%>
-<%@page import="jakarta.servlet.http.HttpSession" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%-- Document : AddTeacher Created on : Mar 14, 2023, 9:27:23 AM Author : lenovo
+--%> <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -46,10 +41,7 @@
       rel="stylesheet"
     />
 
-    <link
-      href="Styling/assets/vendor/quill/quill.snow.css"
-      rel="stylesheet"
-    />
+    <link href="Styling/assets/vendor/quill/quill.snow.css" rel="stylesheet" />
 
     <link
       href="Styling/assets/vendor/quill/quill.bubble.css"
@@ -93,7 +85,15 @@
             name="query"
             placeholder="Search"
             title="Enter search keyword"
+            list="student"
           />
+          <datalist id="student">
+              <option value="Angeels">
+              <option value="Surohan">
+              <option value="Mithlesh">
+              <option value="Susmit">
+              <option value="Subin">
+          </datalist>
           <button type="submit" title="Search">
             <i class="bi bi-search"></i>
           </button>
@@ -272,7 +272,7 @@
     </header>
     <!-- End Header -->
 
-    <!-- ======= Sidebar ======= -->
+   <!-- ======= Sidebar ======= -->
     <aside id="sidebar" class="sidebar">
       <ul class="sidebar-nav" id="sidebar-nav">
         <li class="nav-item">
@@ -304,14 +304,14 @@
         <li class="nav-heading">manage</li>
 
         <li class="nav-item">
-            <a class="nav-link " href="PageChange?page=Student">
+            <a class="nav-link collapsed" href="PageChange?page=Student">
                 <i class="bi bi-journal-text"></i><span>Students</span>
             </a>
 
         </li><!-- End Student Nav -->
       
       <li class="nav-item">
-          <a class="nav-link collapsed" href="PageChange?page=Teacher">
+          <a class="nav-link" href="PageChange?page=Teacher">
             <i class="bi bi-person"></i>
             <span>Teacher</span>
           </a>
@@ -337,111 +337,160 @@
       </ul>
     </aside>
     <!-- End Sidebar-->
-    
+
     <!-- ======= Main ======= -->
     <main id="main" class="main">
       <div class="pagetitle">
-        <h1>Student</h1>
+        <h1>Teacher</h1>
         <nav>
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="dashboard.html">Student</a></li>
-            <li class="breadcrumb-item active">All students</li>
-            <!--<li class="breadcrumb-item ">Add Students</li>-->
+            <li class="breadcrumb-item"><a href="dashboard.html">Home</a></li>
+            <li class="breadcrumb-item">
+              <a href="PageChange?page=Teacher">Teacher</a>
+            </li>
+            <li class="breadcrumb-item active">Add Teacher</li>
           </ol>
         </nav>
-        
-        <button class="btn btn-primary"> <a href="PageChange?page=addStudent" class="text-light"> Add Student </a>  </button>
       </div>
       <!-- End Page Title -->
 
-      <% if(session.getAttribute("success") != null)  {%>
-      
-      <div class="alert alert-success alert-dismissible fade show" role="alert">
-          <%=session.getAttribute("success")%>
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-
-      <% } %> 
-       <% if(session.getAttribute("fail") != null)  {%>
-
-      <div class="alert alert-danger alert-dismissible fade show" role="alert">
-          <%=session.getAttribute("fail")%>
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-
-      <% } %> 
       <section class="section dashboard">
         <div class="row">
-             <!-- Top Selling -->
-            <div class="col-12">
-              <div class="card top-selling overflow-auto">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Teacher details Form</h5>
 
-                <div class="card-body pb-0">
-                  <h5 class="card-title">Student list </h5>
+                  <!-- Floating Labels Form -->
+                  <form
+                    class="row g-3"
+                    action="UserServlet?page=addTeacher"
+                    method="POST"
+                  >
+                    <div class="col-md-12">
+                      <div class="form-floating">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="floatingName"
+                          placeholder="Your Name"
+                          name="fullname"
+                        />
+                        <label for="floatingName">Full Name</label>
+                      </div>
+                    </div>
 
-                  <table class="table table-borderless datatable">
-                    <thead>
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Student name</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Address</th>
-                        <th scope="col">Phone</th>
-                        <th scope="col">Semester</th>
-                        <th scope="col">Course</th>
-                        <th scope="col">Section</th>
-                        <th scope="col">Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach  items="${employeeList}" var="employee">
-                            <tr>
-                                <td  scope="row">${employee.user.id}</td>
-                                <td>${employee.user.fullName}</td>
-                                <td>${employee.user.email}</td>
-                                <td>${employee.user.address}</td>
-                                <td>${employee.user.phone}</td>
-                                <td>${employee.college.semester.name}</td>
-                                <td>${employee.college.course.name}</td>
-                                <td>${employee.college.section.name}</td>
-                                <td>
-                                    <button type="button" class="btn btn-primary" >
-                                      <a href="PageChange?page=editStudent&userId=${employee.user.id}" class="text-light"> <i class="bi bi-pencil"></i> edit</a>  
-                                    </button>
-                                    
-                                    <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal${employee.user.id}">
-                                        <i class="bi bi-trash3"></i> Delete
-                                    </button>
+                    <div class="col-md-6">
+                      <div class="form-floating">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="floatingEmail"
+                          placeholder="Teacher name"
+                          name="username"
+                        />
+                        <label for="floatingName">Username</label>
+                      </div>
+                    </div>
 
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="exampleModal${employee.user.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Are you sure?</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    You cannot undo this action
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Nope</button>
-                                                    <button type="button" class="btn btn-primary">
-                                                        <a href="UserServlet?page=deleteStudent&accId=${employee.roll}" class="text-light">Sure</a> 
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                    </tbody>
-                  </table>
+                    <div class="col-md-6">
+                      <div class="form-floating">
+                        <input
+                          type="password"
+                          class="form-control"
+                          id="floatingPassword"
+                          placeholder="username"
+                          name="password"
+                        />
+                        <label for="floatingPassword">Password</label>
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <div class="form-floating">
+                        <input
+                          class="form-control"
+                          placeholder="contact"
+                          id="floatingName"
+                          name="contact"
+                          maxlength="10"
+                        />
+                        <label for="floatingTextarea">Contact no.</label>
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <div class="form-floating">
+                        <input
+                          type="email"
+                          class="form-control"
+                          placeholder="email"
+                          id="floatingEmail"
+                          name="email"
+                        />
+                        <label for="floatingTextarea">Email</label>
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <div class="form-floating">
+                        <input
+                          class="form-control"
+                          placeholder="Address"
+                          id="floatingTextarea"
+                          name="address"
+                        />
+                        <label for="floatingTextarea">Address</label>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-floating mb-3">
+                          
+                        <select
+                          class="form-select"
+                          id="floatingSelect"
+                          aria-label="course"
+                          name="course"
+                        >
+                            <c:forEach items="${collegeList}" var="college">
+                                <option value="${college.course.id}">${college.course.name}</option>
+                            </c:forEach>
+                        </select>
+                        <label for="floatingSelect">Course</label>
+                      </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                      <div class="form-floating mb-3">
+                        <select
+                          class="form-select"
+                          id="floatingSelect"
+                          aria-label="State"
+                          name="section"
+                        >
+                          <option value="all" selected>All</option>
+                          <option value="A">A</option>
+                          <option value="B">B</option>
+                        </select>
+                        <label for="floatingSelect">Section</label>
+                      </div>
+                    </div>
+                    <div class="text-left">
+                      <button type="submit" class="btn btn-primary">
+                        Submit
+                      </button>
+                      <button type="reset" class="btn btn-secondary">
+                        Reset
+                      </button>
+                    </div>
+                  </form>
+                  <!-- End floating Labels Form -->
                 </div>
               </div>
-            </div><!-- End Top Selling -->
+            </div>
+          </div>
         </div>
       </section>
     </main>
@@ -477,9 +526,5 @@
         $("#example").DataTable();
       });
     </script>
-    <script> 
-    $('.alert').alert()
-    </script>
   </body>
 </html>
-

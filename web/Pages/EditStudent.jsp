@@ -310,9 +310,22 @@
                   <!-- Floating Labels Form -->
                   <form
                     class="row g-3"
-                    action="UserServlet?page=addStudent"
+                    action="UserServlet?page=editStudent"
                     method="POST"
                   >
+                      <div class="col-md-12">
+                      <div class="form-floating">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="floatingName"
+                          placeholder="Your Name"
+                          name="id"
+                          value="${student.user.id}"
+                        />
+                        <label for="floatingName">ID</label>
+                      </div>
+                    </div>
                     <div class="col-md-12">
                       <div class="form-floating">
                         <input
@@ -321,8 +334,9 @@
                           id="floatingName"
                           placeholder="Your Name"
                           name="fullname"
+                          value="${student.user.fullName}"
                         />
-                        <label for="floatingName"> ${student.user.fullName} </label>
+                        <label for="floatingName">Full Name</label>
                       </div>
                     </div>
 
@@ -335,8 +349,9 @@
                           id="floatingNumber"
                           name="contact"
                           maxlength="10"
+                          value="${student.user.phone}"
                         />
-                        <label for="floatingNumber">${student.user.phone}</label>
+                        <label for="floatingNumber">Phone</label>
                       </div>
                     </div>
 
@@ -348,8 +363,9 @@
                           placeholder="email"
                           id="floatingEmail"
                           name="email"
+                          value="${student.user.email}"
                         />
-                        <label for="floatingTextarea">${student.user.email}</label>
+                        <label for="floatingTextarea">Email</label>
                       </div>
                     </div>
 
@@ -360,9 +376,10 @@
                           placeholder="Address"
                           id="floatingTextarea"
                           name="address"
+                          value="${student.user.address}"
                           required
                         />
-                        <label for="floatingTextarea">${student.user.address}</label>
+                        <label for="floatingTextarea">Address</label>
                       </div>
                     </div>
 
@@ -374,6 +391,7 @@
                           aria-label="course"
                           name="course"
                         >
+                          <option value="${student.college.course.id}" selected> ${student.college.course.name} </option>
                           <c:forEach items="${collegeList}" var="college">
                             <option value="${college.course.id}">
                               ${college.course.name}
@@ -392,6 +410,7 @@
                           aria-label="State"
                           name="semester"
                         >
+                           <option value="${student.college.semester.id}" selected> ${student.college.semester.name} </option>
                           <c:forEach items="${semesterList}" var="semester">
                             <option value="${semester.semester.id}">
                               ${semester.semester.name}
@@ -410,8 +429,8 @@
                           aria-label="State"
                           name="section"
                         >
-                           
-                          <option value="1" selected>A</option>
+                          <option value="${student.college.section.id}" selected> ${student.college.section.name} </option>
+                          <option value="1">A</option>
                           <option value="2">B</option>
                         </select>
                         <label for="floatingSelect">Section</label>

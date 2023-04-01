@@ -75,32 +75,6 @@
       </div>
       <!-- End Logo -->
 
-      <div class="search-bar">
-        <form
-          class="search-form d-flex align-items-center"
-          method="POST"
-          action="#"
-        >
-          <input
-            type="text"
-            name="query"
-            placeholder="Search"
-            title="Enter search keyword"
-            list="student"
-          />
-          <datalist id="student">
-              <option value="Angeels">
-              <option value="Surohan">
-              <option value="Mithlesh">
-              <option value="Susmit">
-              <option value="Subin">
-          </datalist>
-          <button type="submit" title="Search">
-            <i class="bi bi-search"></i>
-          </button>
-        </form>
-      </div>
-      <!-- End Search Bar -->
 
       <nav class="header-nav ms-auto">
         <ul class="d-flex align-items-center">
@@ -316,14 +290,14 @@
                       <div class="col-md-12">
                       <div class="form-floating">
                         <input
-                          type="text"
+                          type="hidden"
                           class="form-control"
                           id="floatingName"
                           placeholder="Your Name"
                           name="id"
                           value="${teacher.user.id}"
                         />
-                        <label for="floatingName">ID</label>
+<!--                        <label for="floatingName">ID</label>-->
                       </div>
                     </div>
                     <div class="col-md-12">

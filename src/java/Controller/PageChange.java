@@ -122,12 +122,6 @@ public class PageChange extends HttpServlet {
             List<Student> employeeList = new UserServices().getStudentList();
             request.setAttribute("employeeList", employeeList);
             
-            for( Student c : employeeList ) {
-                System.out.println("College: " + c.getUser().getFullName());
-                System.out.println("Roll: " + c.getRoll());
-                System.out.println("ID: " + c.getUser().getId());
-            }
-            
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/StudentDetails.jsp");
             rd.forward(request, response);
         }
@@ -153,6 +147,8 @@ public class PageChange extends HttpServlet {
             
             List<College> semester = new SubjectServices().getSemesterList();
             request.setAttribute("semesterList", semester);
+            
+            System.out.println("\nseemster: " + student.getCollege().getSemester().getName());
             
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/EditStudent.jsp");
             rd.forward(request, response);

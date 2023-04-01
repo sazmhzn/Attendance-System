@@ -178,7 +178,7 @@ public class UserServices {
             System.out.println("Query: " + pstm);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()){
-                
+                System.out.println("    query : " + pstm);
                 student.setRoll(rs.getInt("ACC_ID") );
                 student.setUser(new User( 
                         rs.getInt("STUD_ID"), rs.getString("STUD_NAME"), 
@@ -187,8 +187,8 @@ public class UserServices {
                 
                 student.setCollege(new College(
                         (new Course(rs.getInt("C_ID"), rs.getString("COURSE_NAME"))),
-                        (new Semester(rs.getInt("SEM_ID"), rs.getString("SEMESTER_NAME"))), 
-                        (new Section(rs.getInt("SEC_ID"), rs.getString("SEC_NAME")))
+                        (new Semester(rs.getInt("SEM_ID"), rs.getString("SEM_NAME"))), 
+                        (new Section(rs.getInt("SEC_ID"), rs.getString("SECTION_NAME")))
                 ));
             }
             
@@ -402,9 +402,8 @@ public class UserServices {
         }
     }
    
-    public void editUser(Student student) {
-// (`STUD_NAME`, `STUD_ADD`, `STUD_EMAIL`, `STUD_PHONE`, `SEM_ID`, `C_ID`, `SEC_ID`, `ACC_ID`)
-        String query = "UPDATE `teacher` SET `STUD_NAME`=?,`STUD_ADDRESS`=?,`STUD_EMAIL`=?,`STUD_PHONE`=?, `SEM_ID`=?, `C_ID`=?, `SEC_ID`=? WHERE `ACC_ID`=?";
+    public boolean editUser(Student student) {
+        String query = "UPDATE `student` SET `STUD_NAME`=?,`STUD_ADD`=?,`STUD_EMAIL`=?,`STUD_PHONE`=?, `SEM_ID`=?, `C_ID`=?, `SEC_ID`=? WHERE `STUD_ID`=?";
         PreparedStatement pstm = new DBConnection().getStatement(query);
         
         try {
@@ -412,16 +411,18 @@ public class UserServices {
             pstm.setString(2, student.getUser().getAddress());
             pstm.setString(3, student.getUser().getEmail());
             pstm.setString(4, student.getUser().getPhone());
-            pstm.setString(5, student.getUser().getSemester());
-            pstm.setString(6, student.getUser().getCourse());
-            pstm.setString(7, student.getUser().getSection());
+            pstm.setInt(5, student.getCollege().getSemester().getId());
+            pstm.setInt(6, student.getCollege().getCourse().getId());
+            pstm.setInt (7, student.getCollege().getSection().getId());
             pstm.setInt(8, student.getUser().getId());
             
             System.out.println("The Update query: " + pstm);
-            pstm.execute();
+            boolean i = pstm.execute();
+            return i;
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return false;
     }
     
 }
