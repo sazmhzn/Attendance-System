@@ -276,7 +276,7 @@
     <aside id="sidebar" class="sidebar">
       <ul class="sidebar-nav" id="sidebar-nav">
         <li class="nav-item">
-          <a class="nav-link collapsed" href="PageChange?page=adminDashboard">
+          <a class="nav-link collapsed " href="PageChange?page=adminDashboard">
             <i class="bi bi-grid"></i>
             <span>Dashboard</span>
           </a>
@@ -304,20 +304,19 @@
         <li class="nav-heading">manage</li>
 
         <li class="nav-item">
-          <a class="nav-link " href="PageChange?page=Student">
-            <i class="bi bi-person"></i>
-            <span> Student</span>
-          </a>
+            <a class="nav-link " href="PageChange?page=Student">
+                <i class="bi bi-journal-text"></i><span>Students</span>
+            </a>
+
         </li><!-- End Student Nav -->
       
       <li class="nav-item">
           <a class="nav-link collapsed" href="PageChange?page=Teacher">
             <i class="bi bi-person"></i>
-            <span> Teacher</span>
+            <span>Teacher</span>
           </a>
-        </li><!-- End Student Nav -->
-      
-      <li class="nav-item">
+        </li>
+        <li class="nav-item">
           <a class="nav-link collapsed" href="PageChange?page=Subject">
             <i class="bi bi-person"></i>
             <span>Subject</span>
@@ -329,7 +328,7 @@
         <li class="nav-heading">Extra</li>
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="RegisterServlet?page=Logout">
+          <a class="nav-link collapsed" href="RegisterServlet?page=logout">
             <i class="bi bi-box-arrow-in-right"></i>
             <span>Logout</span>
           </a>
@@ -338,7 +337,7 @@
       </ul>
     </aside>
     <!-- End Sidebar-->
-
+    
     <!-- ======= Main ======= -->
     <main id="main" class="main">
       <div class="pagetitle">
@@ -413,7 +412,7 @@
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Nope</button>
                                                     <button type="button" class="btn btn-primary">
-                                                        <a href="UserServlet?page=deleteStudent&accId=${employee.user.id}" class="text-light">Sure</a> 
+                                                        <a href="UserServlet?page=deleteStudent&accId=${employee.roll}" class="text-light">Sure</a> 
                                                     </button>
                                                 </div>
                                             </div>

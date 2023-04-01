@@ -217,11 +217,11 @@
     </header>
     <!-- End Header -->
 
-    <!-- ======= Sidebar ======= -->
+  <!-- ======= Sidebar ======= -->
     <aside id="sidebar" class="sidebar">
       <ul class="sidebar-nav" id="sidebar-nav">
         <li class="nav-item">
-          <a class="nav-link collapsed" href="PageChange?page=adminDashboard">
+          <a class="nav-link collapsed " href="PageChange?page=adminDashboard">
             <i class="bi bi-grid"></i>
             <span>Dashboard</span>
           </a>
@@ -237,45 +237,43 @@
           </a>
         </li>
         <!-- End Profile Page Nav -->
-
+        
         <li class="nav-item">
-          <a class="nav-link collapsed" href="pages-contact.html">
+          <a class="nav-link collapsed" href="PageChange?page=Report">
             <i class="bi bi-envelope"></i>
             <span>Report</span>
           </a>
         </li>
         <!-- End Report Page Nav -->
-
+        
         <li class="nav-heading">manage</li>
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="./AttendanceSheet.html">
+            <a class="nav-link collapsed" href="PageChange?page=Student">
+                <i class="bi bi-journal-text"></i><span>Students</span>
+            </a>
+
+        </li><!-- End Student Nav -->
+      
+      <li class="nav-item">
+          <a class="nav-link " href="PageChange?page=Teacher">
             <i class="bi bi-person"></i>
-            <span> Student</span>
+            <span>Teacher</span>
           </a>
         </li>
-        <!-- End Student Nav -->
-
         <li class="nav-item">
-          <a class="nav-link collapsed" href="PageChange?page=teacher">
-            <i class="bi bi-person"></i>
-            <span> Teacher</span>
-          </a>
-        </li>
-        <!-- End Student Nav -->
-
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="./AttendanceSheet.html">
+          <a class="nav-link collapsed" href="PageChange?page=Subject">
             <i class="bi bi-person"></i>
             <span>Subject</span>
           </a>
-        </li>
-        <!-- End Student Nav -->
+        </li><!-- End Student Nav -->
 
+        
+        
         <li class="nav-heading">Extra</li>
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="pages-login.html">
+          <a class="nav-link collapsed" href="RegisterServlet?page=logout">
             <i class="bi bi-box-arrow-in-right"></i>
             <span>Logout</span>
           </a>

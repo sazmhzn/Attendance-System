@@ -224,11 +224,11 @@
     </header>
     <!-- End Header -->
 
-    <!-- ======= Sidebar ======= -->
+   <!-- ======= Sidebar ======= -->
     <aside id="sidebar" class="sidebar">
       <ul class="sidebar-nav" id="sidebar-nav">
         <li class="nav-item">
-          <a class="nav-link collapsed" href="PageChange?page=adminDashboard">
+          <a class="nav-link collapsed " href="PageChange?page=adminDashboard">
             <i class="bi bi-grid"></i>
             <span>Dashboard</span>
           </a>
@@ -256,20 +256,19 @@
         <li class="nav-heading">manage</li>
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="PageChange?page=Student">
-            <i class="bi bi-person"></i>
-            <span> Student</span>
-          </a>
+            <a class="nav-link collapsed" href="PageChange?page=Student">
+                <i class="bi bi-journal-text"></i><span>Students</span>
+            </a>
+
         </li><!-- End Student Nav -->
       
       <li class="nav-item">
-          <a class="nav-link" href="PageChange?page=Teacher">
+          <a class="nav-link " href="PageChange?page=Teacher">
             <i class="bi bi-person"></i>
-            <span> Teacher</span>
+            <span>Teacher</span>
           </a>
-        </li><!-- End Student Nav -->
-      
-      <li class="nav-item">
+        </li>
+        <li class="nav-item">
           <a class="nav-link collapsed" href="PageChange?page=Subject">
             <i class="bi bi-person"></i>
             <span>Subject</span>
@@ -281,7 +280,7 @@
         <li class="nav-heading">Extra</li>
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="pages-login.html">
+          <a class="nav-link collapsed" href="RegisterServlet?page=logout">
             <i class="bi bi-box-arrow-in-right"></i>
             <span>Logout</span>
           </a>

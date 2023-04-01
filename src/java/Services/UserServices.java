@@ -171,13 +171,14 @@ public class UserServices {
       
       public Student getStudentRow(int id){
         Student student = new Student();
-        String query = "SELECT * FROM `student` left JOIN course on student.C_ID = course.C_ID LEFT JOIN semester ON semester.SEM_ID = student.SEM_ID LEFT JOIN section on student.SEC_ID = section.SECTION_ID where student.ACC_ID=?";
+        String query = "SELECT * FROM `student` left JOIN course on student.C_ID = course.C_ID LEFT JOIN semester ON semester.SEM_ID = student.SEM_ID LEFT JOIN section on student.SEC_ID = section.SECTION_ID where STUD_ID=?";
         PreparedStatement pstm = new DBConnection().getStatement(query);
         try {
             pstm.setInt(1,id);
             System.out.println("Query: " + pstm);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()){
+                
                 student.setRoll(rs.getInt("ACC_ID") );
                 student.setUser(new User( 
                         rs.getInt("STUD_ID"), rs.getString("STUD_NAME"), 
@@ -212,6 +213,7 @@ public class UserServices {
             while (rs.next()) {
                 College college = new College();
                 Student student = new Student();
+                student.setRoll(rs.getInt("ACC_ID"));
                 student.setUser(new User(
                         rs.getInt("STUD_ID"), 
                         rs.getString("STUD_NAME"), 
@@ -316,7 +318,7 @@ public class UserServices {
      * @param acc_id 
      */
     public void deleteUser(int acc_id) {
-        String query = "DELETE FROM `user` WHERE ACC_ID = ?";
+        String query = "DELETE FROM `accounts` WHERE ACC_ID = ?";
         PreparedStatement pstm = new DBConnection().getStatement(query);
         try {
             pstm.setInt(1, acc_id);

@@ -1,9 +1,5 @@
-<%-- 
-    Document   : AddStudent
-    Created on : Mar 27, 2023, 3:53:08 PM
-    Author     : lenovo
---%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%-- Document : AddStudent Created on : Mar 27, 2023, 3:53:08 PM Author : lenovo
+--%> <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -268,11 +264,11 @@
     </header>
     <!-- End Header -->
 
-    <!-- ======= Sidebar ======= -->
+     <!-- ======= Sidebar ======= -->
     <aside id="sidebar" class="sidebar">
       <ul class="sidebar-nav" id="sidebar-nav">
         <li class="nav-item">
-          <a class="nav-link collapsed" href="PageChange?page=adminDashboard">
+          <a class="nav-link collapsed " href="PageChange?page=adminDashboard">
             <i class="bi bi-grid"></i>
             <span>Dashboard</span>
           </a>
@@ -300,26 +296,27 @@
         <li class="nav-heading">manage</li>
 
         <li class="nav-item">
-          <a class="nav-link" href="PageChange?page=Student">
-            <i class="bi bi-person"></i>
-            <span> Student</span>
-          </a>
+            <a class="nav-link " href="PageChange?page=Student">
+                <i class="bi bi-journal-text"></i><span>Students</span>
+            </a>
+
         </li><!-- End Student Nav -->
       
       <li class="nav-item">
           <a class="nav-link collapsed" href="PageChange?page=Teacher">
             <i class="bi bi-person"></i>
-            <span> Teacher</span>
+            <span>Teacher</span>
           </a>
-        </li><!-- End Student Nav -->
-      
-      <li class="nav-item">
+        </li>
+        <li class="nav-item">
           <a class="nav-link collapsed" href="PageChange?page=Subject">
             <i class="bi bi-person"></i>
             <span>Subject</span>
           </a>
         </li><!-- End Student Nav -->
 
+        
+        
         <li class="nav-heading">Extra</li>
 
         <li class="nav-item">
@@ -332,6 +329,7 @@
       </ul>
     </aside>
     <!-- End Sidebar-->
+
 
     <!-- ======= Main ======= -->
     <main id="main" class="main">
@@ -384,6 +382,7 @@
                           id="floatingUsername"
                           placeholder="Student name"
                           name="username"
+                          required
                         />
                         <label for="floatingUsername">Username</label>
                       </div>
@@ -397,6 +396,7 @@
                           id="floatingPassword"
                           placeholder="username"
                           name="password"
+                          required
                         />
                         <label for="floatingPassword">Password</label>
                       </div>
@@ -405,7 +405,7 @@
                     <div class="col-12">
                       <div class="form-floating">
                         <input
-                          type="tel"
+                          
                           class="form-control"
                           placeholder="contact"
                           id="floatingNumber"
@@ -436,6 +436,7 @@
                           placeholder="Address"
                           id="floatingTextarea"
                           name="address"
+                          required
                         />
                         <label for="floatingTextarea">Address</label>
                       </div>
@@ -443,21 +444,22 @@
 
                     <div class="col-md-4">
                       <div class="form-floating mb-3">
-                          
                         <select
                           class="form-select"
                           id="floatingSelect"
                           aria-label="course"
                           name="course"
                         >
-                            <c:forEach items="${collegeList}" var="college">
-                                <option value="${college.course.id}">${college.course.name}</option>
-                            </c:forEach>
+                          <c:forEach items="${collegeList}" var="college">
+                            <option value="${college.course.id}">
+                              ${college.course.name}
+                            </option>
+                          </c:forEach>
                         </select>
                         <label for="floatingSelect">Course</label>
                       </div>
                     </div>
-                    
+
                     <div class="col-md-4">
                       <div class="form-floating mb-3">
                         <select
@@ -466,30 +468,36 @@
                           aria-label="State"
                           name="semester"
                         >
-                            <c:forEach items="${semesterList}" var="college">
-                                <option value="${college.semester.id}">${college.semester.name}</option>
-                            </c:forEach>
+                          <c:forEach items="${semesterList}" var="college">
+                            <option value="${college.semester.id}">
+                              ${college.semester.name}
+                            </option>
+                          </c:forEach>
                         </select>
                         <label for="floatingSelect">Semester</label>
                       </div>
                     </div>
-                      
-                      <div class="col-md-4">
-                          <div class="form-floating mb-3">
-                              <select
-                                class="form-select"
-                                id="floatingSelect"
-                                aria-label="State"
-                                name="section"
-                                >
-                                  <option value="1" selected>A</option>
-                                  <option value="2">B</option>
-                              </select>
-                              <label for="floatingSelect">Section</label>
-                          </div>
+
+                    <div class="col-md-4">
+                      <div class="form-floating mb-3">
+                        <select
+                          class="form-select"
+                          id="floatingSelect"
+                          aria-label="State"
+                          name="section"
+                        >
+                          <option value="1" selected>A</option>
+                          <option value="2">B</option>
+                        </select>
+                        <label for="floatingSelect">Section</label>
                       </div>
+                    </div>
                     <div class="text-left">
-                      <button type="submit" class="btn btn-primary">
+                      <button
+                        type="submit"
+                        id="submitBtn"
+                        class="btn btn-primary"
+                      >
                         Submit
                       </button>
                       <button type="reset" class="btn btn-secondary">
@@ -532,10 +540,24 @@
     <script src="Styling/assets/js/main.js"></script>
 
     <!-- Custome JS File -->
-    
-    <script> 
-        </script>
-    
+
+    <script>
+      const contactField = document.getElementById("floatingNumber");
+      const btn = document.querySelector("#submitBtn");
+      const inputField = document.querySelectorAll()
+
+      btn.addEventListener("click", function () {
+        console.log("The button s clicked");
+        if (contactField.value.length === 0) {
+          alert("Enter contact detailas");
+          console.log("The contact field is empty");
+        }
+        //  else if (contactField.value.length < 10) {
+        //   alert("Enter a valid number")
+        // }
+      });
+    </script>
+
     <script>
       $(document).ready(function () {
         $("#example").DataTable();

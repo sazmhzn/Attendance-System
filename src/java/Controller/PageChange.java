@@ -124,6 +124,8 @@ public class PageChange extends HttpServlet {
             
             for( Student c : employeeList ) {
                 System.out.println("College: " + c.getUser().getFullName());
+                System.out.println("Roll: " + c.getRoll());
+                System.out.println("ID: " + c.getUser().getId());
             }
             
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/StudentDetails.jsp");
@@ -145,6 +147,12 @@ public class PageChange extends HttpServlet {
             
             Student student =  new UserServices().getStudentRow( Integer.parseInt(request.getParameter("userId")) ); //This will be displayed on the form field
             request.setAttribute("student", student);
+
+            List<College> college = new SubjectServices().getCourseList();
+            request.setAttribute("collegeList", college);
+            
+            List<College> semester = new SubjectServices().getSemesterList();
+            request.setAttribute("semesterList", semester);
             
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/EditStudent.jsp");
             rd.forward(request, response);

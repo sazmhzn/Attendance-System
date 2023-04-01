@@ -221,7 +221,7 @@
     <aside id="sidebar" class="sidebar">
       <ul class="sidebar-nav" id="sidebar-nav">
         <li class="nav-item">
-          <a class="nav-link collapsed" href="PageChange?page=adminDashboard">
+          <a class="nav-link collapsed " href="PageChange?page=adminDashboard">
             <i class="bi bi-grid"></i>
             <span>Dashboard</span>
           </a>
@@ -237,45 +237,43 @@
           </a>
         </li>
         <!-- End Profile Page Nav -->
-
+        
         <li class="nav-item">
-          <a class="nav-link collapsed" href="pages-contact.html">
+          <a class="nav-link collapsed" href="PageChange?page=Report">
             <i class="bi bi-envelope"></i>
             <span>Report</span>
           </a>
         </li>
         <!-- End Report Page Nav -->
-
+        
         <li class="nav-heading">manage</li>
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="PageChange?page=student">
+            <a class="nav-link " href="PageChange?page=Student">
+                <i class="bi bi-journal-text"></i><span>Students</span>
+            </a>
+
+        </li><!-- End Student Nav -->
+      
+      <li class="nav-item">
+          <a class="nav-link collapsed" href="PageChange?page=Teacher">
             <i class="bi bi-person"></i>
-            <span> Student</span>
+            <span>Teacher</span>
           </a>
         </li>
-        <!-- End Student Nav -->
-
         <li class="nav-item">
-          <a class="nav-link collapsed" href="PageChange?page=teacher">
-            <i class="bi bi-person"></i>
-            <span> Teacher</span>
-          </a>
-        </li>
-        <!-- End Student Nav -->
-
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="./AttendanceSheet.html">
+          <a class="nav-link collapsed" href="PageChange?page=Subject">
             <i class="bi bi-person"></i>
             <span>Subject</span>
           </a>
-        </li>
-        <!-- End Student Nav -->
+        </li><!-- End Student Nav -->
 
+        
+        
         <li class="nav-heading">Extra</li>
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="pages-login.html">
+          <a class="nav-link collapsed" href="RegisterServlet?page=logout">
             <i class="bi bi-box-arrow-in-right"></i>
             <span>Logout</span>
           </a>
@@ -307,27 +305,14 @@
             <div class="col-lg-6">
               <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">student details Form</h5>
+                  <h5 class="card-title">Student details Form</h5>
 
                   <!-- Floating Labels Form -->
                   <form
                     class="row g-3"
-                    action="UserServlet?page=editstudent"
+                    action="UserServlet?page=addStudent"
                     method="POST"
                   >
-                      <div class="col-md-12">
-                      <div class="form-floating">
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="floatingName"
-                          placeholder="Your Name"
-                          name="id"
-                          value="${student.user.id}"
-                        />
-                        <label for="floatingName">ID</label>
-                      </div>
-                    </div>
                     <div class="col-md-12">
                       <div class="form-floating">
                         <input
@@ -336,22 +321,22 @@
                           id="floatingName"
                           placeholder="Your Name"
                           name="fullname"
-                          value="${student.user.fullName}"
                         />
-                        <label for="floatingName">Full Name</label>
+                        <label for="floatingName"> ${student.user.fullName} </label>
                       </div>
                     </div>
 
                     <div class="col-12">
                       <div class="form-floating">
                         <input
+                          
                           class="form-control"
                           placeholder="contact"
-                          id="floatingName"
+                          id="floatingNumber"
                           name="contact"
-                          value="${student.user.phone}"
+                          maxlength="10"
                         />
-                        <label for="floatingTextarea">Contact no.</label>
+                        <label for="floatingNumber">${student.user.phone}</label>
                       </div>
                     </div>
 
@@ -363,9 +348,8 @@
                           placeholder="email"
                           id="floatingEmail"
                           name="email"
-                          value="${student.user.email}"
                         />
-                        <label for="floatingTextarea">Email</label>
+                        <label for="floatingTextarea">${student.user.email}</label>
                       </div>
                     </div>
 
@@ -376,13 +360,49 @@
                           placeholder="Address"
                           id="floatingTextarea"
                           name="address"
-                          value="${student.user.address}"
+                          required
                         />
-                        <label for="floatingTextarea">Address</label>
+                        <label for="floatingTextarea">${student.user.address}</label>
                       </div>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-4">
+                      <div class="form-floating mb-3">
+                        <select
+                          class="form-select"
+                          id="floatingSelect"
+                          aria-label="course"
+                          name="course"
+                        >
+                          <c:forEach items="${collegeList}" var="college">
+                            <option value="${college.course.id}">
+                              ${college.course.name}
+                            </option>
+                          </c:forEach>
+                        </select>
+                        <label for="floatingSelect">Course</label>
+                      </div>
+                    </div>
+
+                    <div class="col-md-4">
+                      <div class="form-floating mb-3">
+                        <select
+                          class="form-select"
+                          id="floatingSelect"
+                          aria-label="State"
+                          name="semester"
+                        >
+                          <c:forEach items="${semesterList}" var="semester">
+                            <option value="${semester.semester.id}">
+                              ${semester.semester.name}
+                            </option>
+                          </c:forEach>
+                        </select>
+                        <label for="floatingSelect">Semester</label>
+                      </div>
+                    </div>
+
+                    <div class="col-md-4">
                       <div class="form-floating mb-3">
                         <select
                           class="form-select"
@@ -390,15 +410,19 @@
                           aria-label="State"
                           name="section"
                         >
-                          <option value="all" selected>All</option>
-                          <option value="A">A</option>
-                          <option value="B">B</option>
+                           
+                          <option value="1" selected>A</option>
+                          <option value="2">B</option>
                         </select>
                         <label for="floatingSelect">Section</label>
                       </div>
                     </div>
                     <div class="text-left">
-                      <button type="submit" class="btn btn-primary">
+                      <button
+                        type="submit"
+                        id="submitBtn"
+                        class="btn btn-primary"
+                      >
                         Submit
                       </button>
                       <button type="reset" class="btn btn-secondary">
