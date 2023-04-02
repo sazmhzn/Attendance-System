@@ -5,21 +5,19 @@
 package Controller;
 
 import Model.College;
-import Model.Section;
 import Model.Student;
 import Model.Subject;
 import Model.Teacher;
-import Model.User;
 import Services.SubjectServices;
 import Services.UserServices;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -122,6 +120,9 @@ public class PageChange extends HttpServlet {
             List<Student> employeeList = new UserServices().getStudentList();
             request.setAttribute("employeeList", employeeList);
             
+            HttpSession session = request.getSession();
+            session.invalidate();
+            
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/StudentDetails.jsp");
             rd.forward(request, response);
         }
@@ -159,14 +160,34 @@ public class PageChange extends HttpServlet {
             List<Subject> employeeList = new UserServices().getSubjectList();
             request.setAttribute("employeeList", employeeList);
             
-            for(Subject t : employeeList) {
-                System.out.println("\nM: " + t.getTeacher().getUser().getFullName() + " Subject: " + t.getSubject_code());
-                
-            }
-            
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/SubjectDetails.jsp");
             rd.forward(request, response);
         }
+        
+        if (page.equalsIgnoreCase("addSubject")) {
+            List<College> collegeList = new SubjectServices().getCourseList();
+            request.setAttribute("collegeList", collegeList);
+            
+            List<College> semesterList = new SubjectServices().getSemesterList();
+            request.setAttribute("semesterList", semesterList);
+          
+            List<Teacher> teacherList = new UserServices().getTeacherList();
+            request.setAttribute("teacherList", teacherList);
+            
+            RequestDispatcher rd = request.getRequestDispatcher("/Pages/AddSubject.jsp");
+            rd.forward(request, response);
+        }          
+        
+        
+        if (page.equalsIgnoreCase("editSubject")) {
+            
+            College college = new SubjectServices().getSubjectRow();
+            request.setAttribute();
+            
+            RequestDispatcher rd = request.getRequestDispatcher("/Pages/EditTeacher.jsp");
+            rd.forward(request, response);
+        }
+        
         
         if (page.equalsIgnoreCase("adminDashboard")) {
             

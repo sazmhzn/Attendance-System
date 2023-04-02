@@ -10,10 +10,11 @@ import Model.Course;
 import Model.Section;
 import Model.Semester;
 import Model.Student;
+import Model.Subject;
 import Model.Teacher;
 import Model.User;
+import Services.SubjectServices;
 import Services.UserServices;
-import com.mysql.cj.Session;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -76,8 +77,8 @@ public class UserServlet extends HttpServlet {
 
         String page = request.getParameter("page");
 
-        User u = new User();// initializing a User as the User is all
-
+        HttpSession session = request.getSession();
+        
         /**
          * This condition check if the page is to add a teacher
          */
@@ -176,14 +177,6 @@ public class UserServlet extends HttpServlet {
             
             System.out.println("\nUserServices\n===========\n");
             boolean result = new UserServices().editUser(student);
-            if( !result ) {
-                HttpSession session = request.getSession();
-                session.setMaxInactiveInterval(1); 
-                session.setAttribute("success", "Edited succsdully");
-            } else {
-                HttpSession session = request.getSession();
-                session.setAttribute("fail", "Failed to edit");
-            }
             
             RequestDispatcher rd = request.getRequestDispatcher("PageChange?page=Student");
             rd.forward(request, response);
@@ -200,9 +193,35 @@ public class UserServlet extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("PageChange?page=Student");
             rd.forward(request, response);
         }
+        
+        
+        
+        if( page.equals("addSubject") ) {
+            Teacher teacher = new UserServices().getTeacherRow( request.getParameter("teacher"));
+            
+            if (teacher != null) {
+                College college = new College();
+                college.setSubject(new Subject(
+                        request.getParameter("subject_name"),
+                        request.getParameter("subject_code"),
+                        teacher));
+                college.setCourse(new Course(Integer.parseInt(request.getParameter("course"))));
+                college.setSemester(new Semester(Integer.parseInt( request.getParameter("semester") ), "" ));
+                                
+                new SubjectServices().insertSubject(college);
+
+                session.setAttribute("status", "success");
+                session.setAttribute("msg", "Added succesfully");
+            }
+                        
+            RequestDispatcher rd = request.getRequestDispatcher("PageChange?page=Subject");
+            rd.forward(request, response);
+        }
 
     }
 
+    
+    
     /**
      * Returns a short description of the servlet.
      *

@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-    <title>Teacher</title>
+    <title>Subject</title>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <meta content="" name="description" />
     <meta content="" name="keywords" />
@@ -341,14 +341,14 @@
     <!-- ======= Main ======= -->
     <main id="main" class="main">
       <div class="pagetitle">
-        <h1>Teacher</h1>
+        <h1>Subject</h1>
         <nav>
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="dashboard.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="dashboard.html">Manage</a></li>
             <li class="breadcrumb-item">
-              <a href="PageChange?page=Teacher">Teacher</a>
+              <a href="PageChange?page=Subject">Subject</a>
             </li>
-            <li class="breadcrumb-item active">Add Teacher</li>
+            <li class="breadcrumb-item active">Add Subject</li>
           </ol>
         </nav>
       </div>
@@ -360,12 +360,12 @@
             <div class="col-lg-6">
               <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">Teacher details Form</h5>
+                  <h5 class="card-title">Subject details Form</h5>
 
                   <!-- Floating Labels Form -->
                   <form
-                    class="row g-3"
-                    action="UserServlet?page=addTeacher"
+                    class="row g-3 needs-validation"
+                    action="UserServlet?page=addSubject"
                     method="POST"
                   >
                     <div class="col-md-12">
@@ -374,10 +374,10 @@
                           type="text"
                           class="form-control"
                           id="floatingName"
-                          placeholder="Your Name"
-                          name="fullname"
+                          placeholder="Subject Name"
+                          name="subject_name"
                         />
-                        <label for="floatingName">Full Name</label>
+                        <label for="floatingName">Subject Name</label>
                       </div>
                     </div>
 
@@ -386,68 +386,16 @@
                         <input
                           type="text"
                           class="form-control"
-                          id="floatingEmail"
-                          placeholder="Teacher name"
-                          name="username"
-                        />
-                        <label for="floatingName">Username</label>
-                      </div>
-                    </div>
-
-                    <div class="col-md-6">
-                      <div class="form-floating">
-                        <input
-                          type="password"
-                          class="form-control"
-                          id="floatingPassword"
-                          placeholder="username"
-                          name="password"
-                        />
-                        <label for="floatingPassword">Password</label>
-                      </div>
-                    </div>
-
-                    <div class="col-12">
-                      <div class="form-floating">
-                        <input
-                          class="form-control"
-                          placeholder="contact"
                           id="floatingName"
-                          name="contact"
-                          maxlength="10"
+                          placeholder="Subject code"
+                          name="subject_code"
                         />
-                        <label for="floatingTextarea">Contact no.</label>
-                      </div>
-                    </div>
-
-                    <div class="col-12">
-                      <div class="form-floating">
-                        <input
-                          type="email"
-                          class="form-control"
-                          placeholder="email"
-                          id="floatingEmail"
-                          name="email"
-                        />
-                        <label for="floatingTextarea">Email</label>
-                      </div>
-                    </div>
-
-                    <div class="col-12">
-                      <div class="form-floating">
-                        <input
-                          class="form-control"
-                          placeholder="Address"
-                          id="floatingTextarea"
-                          name="address"
-                        />
-                        <label for="floatingTextarea">Address</label>
+                        <label for="floatingName">Subject code</label>
                       </div>
                     </div>
 
                     <div class="col-md-6">
                       <div class="form-floating mb-3">
-                          
                         <select
                           class="form-select"
                           id="floatingSelect"
@@ -461,20 +409,38 @@
                         <label for="floatingSelect">Course</label>
                       </div>
                     </div>
-                    
-                    <div class="col-md-6">
+                      <div class="col-md-6">
                       <div class="form-floating mb-3">
                         <select
                           class="form-select"
                           id="floatingSelect"
-                          aria-label="State"
-                          name="section"
+                          name="semester"
                         >
-                          <option value="all" selected>All</option>
-                          <option value="A">A</option>
-                          <option value="B">B</option>
+                            <c:forEach items="${semesterList}" var="college">
+                                <option value="${college.semester.id}">${college.semester.name}</option>
+                            </c:forEach>
                         </select>
-                        <label for="floatingSelect">Section</label>
+                        <label for="floatingSelect">Semester</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-floating mb-3">
+                        <input
+                            type="text"
+                          class="form-control"
+                          id="floatingName"
+                          list="teacherList"
+                          name="teacher"
+                          autocomplete="on"
+                        >
+                        <dataList id="teacherList">
+                            <c:forEach items="${teacherList}" var="teacher">
+                                <option value="${teacher.user.fullName}">
+                            </c:forEach>
+                        </dataList>
+                            
+                        <!--</select>-->
+                        <label for="floatingName">Assign Teacher</label>
                       </div>
                     </div>
                     <div class="text-left">
@@ -526,5 +492,14 @@
         $("#example").DataTable();
       });
     </script>
+    
+    <script> 
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+(function () {
+  'use strict';
+
+
+
+        </script>
   </body>
 </html>

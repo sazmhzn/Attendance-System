@@ -167,6 +167,26 @@ public class UserServices {
         return teacher;
     }
       
+      public Teacher getTeacherRow(String name){
+        Teacher teacher = new Teacher();
+        String query = "SELECT * FROM `teacher` LEFT JOIN `accounts` ON teacher.ACC_ID = accounts.ACC_ID where teacher.TEAC_NAME=?";
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+        try {
+            pstm.setString(1,name);
+            System.out.println("Query: " + pstm);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()){
+                teacher.setAcc_id( rs.getInt("ACC_ID") );
+                teacher.setUser(new User( rs.getInt("TEAC_ID"), rs.getString("TEAC_NAME"), rs.getString("TEAC_EMAIL"), rs.getString("TEAC_PHONE"), rs.getString("TEAC_ADDRESS") ));
+            }
+            
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return teacher;
+    }
+    
+    
       
       
       public Student getStudentRow(int id){

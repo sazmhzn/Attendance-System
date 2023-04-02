@@ -1,17 +1,12 @@
-<%-- 
-    Document   : StudentDetails
-    Created on : Mar 17, 2023, 10:31:18 AM
-    Author     : lenovo
---%>
-<%@page import="jakarta.servlet.http.HttpSession" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%-- Document : AddTeacher Created on : Mar 14, 2023, 9:27:23 AM Author : lenovo
+--%> <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-    <title>Subject</title>
+    <title>Teacher</title>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <meta content="" name="description" />
     <meta content="" name="keywords" />
@@ -46,10 +41,7 @@
       rel="stylesheet"
     />
 
-    <link
-      href="Styling/assets/vendor/quill/quill.snow.css"
-      rel="stylesheet"
-    />
+    <link href="Styling/assets/vendor/quill/quill.snow.css" rel="stylesheet" />
 
     <link
       href="Styling/assets/vendor/quill/quill.bubble.css"
@@ -65,16 +57,13 @@
       href="Styling/assets/vendor/simple-datatables/style.css"
       rel="stylesheet"
     />
-    <link
-        href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css"
-        rel="stylesheet"
-        />
 
     <!-- Template Main CSS File -->
     <link href="Styling/assets/css/style.css" rel="stylesheet" />
   </head>
 
   <body>
+      
     <!-- ======= Header ======= -->
     <header id="header" class="header fixed-top d-flex align-items-center">
       <div class="d-flex align-items-center justify-content-between">
@@ -86,24 +75,6 @@
       </div>
       <!-- End Logo -->
 
-      <div class="search-bar">
-        <form
-          class="search-form d-flex align-items-center"
-          method="POST"
-          action="#"
-        >
-          <input
-            type="text"
-            name="query"
-            placeholder="Search"
-            title="Enter search keyword"
-          />
-          <button type="submit" title="Search">
-            <i class="bi bi-search"></i>
-          </button>
-        </form>
-      </div>
-      <!-- End Search Bar -->
 
       <nav class="header-nav ms-auto">
         <ul class="d-flex align-items-center">
@@ -136,19 +107,6 @@
               </li>
 
               <li class="notification-item">
-                <i class="bi bi-exclamation-circle text-warning"></i>
-                <div>
-                  <h4>Lorem Ipsum</h4>
-                  <p>Quae dolorem earum veritatis oditseno</p>
-                  <p>30 min. ago</p>
-                </div>
-              </li>
-
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
-
-              <li class="notification-item">
                 <i class="bi bi-x-circle text-danger"></i>
                 <div>
                   <h4>Atque rerum nesciunt</h4>
@@ -170,25 +128,7 @@
                 </div>
               </li>
 
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
 
-              <li class="notification-item">
-                <i class="bi bi-info-circle text-primary"></i>
-                <div>
-                  <h4>Dicta reprehenderit</h4>
-                  <p>Quae dolorem earum veritatis oditseno</p>
-                  <p>4 hrs. ago</p>
-                </div>
-              </li>
-
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
-              <li class="dropdown-footer">
-                <a href="#">Show all notifications</a>
-              </li>
             </ul>
             <!-- End Notification Dropdown Items -->
           </li>
@@ -206,20 +146,13 @@
                 class="rounded-circle"
               />
               <span class="d-none d-md-block dropdown-toggle ps-2"
-                >K. Anderson</span
+                ><%=session.getAttribute("username")%></span
               > </a
             ><!-- End Profile Iamge Icon -->
 
             <ul
               class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile"
             >
-              <li class="dropdown-header">
-                <h6>Kevin Anderson</h6>
-                <span>Web Designer</span>
-              </li>
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
 
               <li>
                 <a
@@ -235,27 +168,9 @@
               </li>
 
               <li>
-                <a
-                  class="dropdown-item d-flex align-items-center"
-                  href="users-profile.html"
-                >
-                  <i class="bi bi-gear"></i>
-                  <span>Account Settings</span>
-                </a>
-              </li>
-              <li>
                 <hr class="dropdown-divider" />
               </li>
 
-              <li>
-                <a
-                  class="dropdown-item d-flex align-items-center"
-                  href="pages-faq.html"
-                >
-                  <i class="bi bi-question-circle"></i>
-                  <span>Need Help?</span>
-                </a>
-              </li>
               <li>
                 <hr class="dropdown-divider" />
               </li>
@@ -276,7 +191,7 @@
     </header>
     <!-- End Header -->
 
-   <!-- ======= Sidebar ======= -->
+  <!-- ======= Sidebar ======= -->
     <aside id="sidebar" class="sidebar">
       <ul class="sidebar-nav" id="sidebar-nav">
         <li class="nav-item">
@@ -315,13 +230,13 @@
         </li><!-- End Student Nav -->
       
       <li class="nav-item">
-          <a class="nav-link collapsed" href="PageChange?page=Teacher">
+          <a class="nav-link " href="PageChange?page=Teacher">
             <i class="bi bi-person"></i>
             <span>Teacher</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="PageChange?page=Subject">
+          <a class="nav-link collapsed" href="PageChange?page=Subject">
             <i class="bi bi-person"></i>
             <span>Subject</span>
           </a>
@@ -344,87 +259,123 @@
 
     <!-- ======= Main ======= -->
     <main id="main" class="main">
-     
       <div class="pagetitle">
-        <h1>Subject</h1>
+        <h1>Teacher</h1>
         <nav>
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="PageChange?page=subject">Subject</a></li>
-            <li class="breadcrumb-item active">All subjects</li>
-            <!--<li class="breadcrumb-item ">Add Students</li>-->
+            <li class="breadcrumb-item"><a href="dashboard.html">Manage</a></li>
+            <li class="breadcrumb-item">
+              <a href="PageChange?page=Subject">Subject</a>
+            </li>
+            <li class="breadcrumb-item active">Edit Subject</li>
           </ol>
         </nav>
-        
-        <button class="btn btn-primary"> <a href="PageChange?page=addSubject" class="text-light"> Add subject </a>  </button>
       </div>
       <!-- End Page Title -->
 
       <section class="section dashboard">
         <div class="row">
-             <!-- Top Selling -->
-            <div class="col-12">
-              <div class="card top-selling overflow-auto">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Subject details Form</h5>
 
-                <div class="card-body pb-0">
-                  <h5 class="card-title">Subject list </h5>
+                  <!-- Floating Labels Form -->
+                  <form
+                    class="row g-3 needs-validation"
+                    action="UserServlet?page=addSubject"
+                    method="POST"
+                  >
+                    <div class="col-md-12">
+                      <div class="form-floating">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="floatingName"
+                          placeholder="Subject Name"
+                          name="subject_name"
+                        />
+                        <label for="floatingName">Subject Name</label>
+                      </div>
+                    </div>
 
-                  <table class="table table-borderless datatable">
-                    <thead>
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Subject name</th>
-                        <th scope="col">Subject code</th>
-                        <th scope="col">Assigned teacher</th>
-                      
-                        <th scope="col">Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach  items="${employeeList}" var="employee">
-                            <tr>
-                                <td  scope="row">${employee.subject_id}</td>
-                                <td>${employee.subject_name}</td>
-                                <td>${employee.subject_code}</td>
-                                <td>${employee.teacher.user.fullName}</td>
-                           
-                                <td>
-                                    <button type="button" class="btn btn-primary" >
-                                      <a href="PageChange?page=editSubject&subjectId=${employee.subject_id}" class="text-light"> <i class="bi bi-pencil"></i> edit</a>  
-                                    </button>
-                                    
-                                    <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal${employee.subject_id}">
-                                        <i class="bi bi-trash3"></i> Delete
-                                    </button>
+                    <div class="col-md-6">
+                      <div class="form-floating">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="floatingName"
+                          placeholder="Subject code"
+                          name="subject_code"
+                        />
+                        <label for="floatingName">Subject code</label>
+                      </div>
+                    </div>
 
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="exampleModal${employee.subject_id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Are you sure?</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    You cannot undo this action
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Nope</button>
-                                                    <button type="button" class="btn btn-primary">
-                                                        <a href="UserServlet?page=deleteSubject&subjectId=${employee.subject_id}" class="text-light">Sure</a> 
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                    </tbody>
-                  </table>
+                    <div class="col-md-6">
+                      <div class="form-floating mb-3">
+                        <select
+                          class="form-select"
+                          id="floatingSelect"
+                          aria-label="course"
+                          name="course"
+                        >
+                            <c:forEach items="${collegeList}" var="college">
+                                <option value="${college.course.id}">${college.course.name}</option>
+                            </c:forEach>
+                        </select>
+                        <label for="floatingSelect">Course</label>
+                      </div>
+                    </div>
+                      <div class="col-md-6">
+                      <div class="form-floating mb-3">
+                        <select
+                          class="form-select"
+                          id="floatingSelect"
+                          name="semester"
+                        >
+                            <c:forEach items="${semesterList}" var="college">
+                                <option value="${college.semester.id}">${college.semester.name}</option>
+                            </c:forEach>
+                        </select>
+                        <label for="floatingSelect">Semester</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-floating mb-3">
+                        <input
+                            type="text"
+                          class="form-control"
+                          id="floatingName"
+                          list="teacherList"
+                          name="teacher"
+                          autocomplete="on"
+                        >
+                        <dataList id="teacherList">
+                            <c:forEach items="${teacherList}" var="teacher">
+                                <option value="${teacher.user.fullName}">
+                            </c:forEach>
+                        </dataList>
+                            
+                        <!--</select>-->
+                        <label for="floatingName">Assign Teacher</label>
+                      </div>
+                    </div>
+                    <div class="text-left">
+                      <button type="submit" class="btn btn-primary">
+                        Submit
+                      </button>
+                      <button type="reset" class="btn btn-secondary">
+                        Reset
+                      </button>
+                    </div>
+                  </form>
+                  <!-- End floating Labels Form -->
                 </div>
               </div>
-            </div><!-- End Top Selling -->
+            </div>
+          </div>
         </div>
       </section>
     </main>
@@ -454,20 +405,5 @@
     <!-- Template Main JS File -->
     <script src="Styling/assets/js/main.js"></script>
 
-    <!-- Custome JS File -->
-    <script>
-      $(document).ready(function () {
-        $("#example").DataTable();
-      });
-    </script>
-    
-    <script>
-        $(".alert-dismissible").fadeTo(2000, 500).slideUp(500, function(){
-    $(".alert-dismissible").alert('close');
-});
-    </script>
-    
-    
   </body>
 </html>
-

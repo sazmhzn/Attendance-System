@@ -23,6 +23,12 @@ public class Subject {
         this.subject_code = subject_code;
     }
 
+    public Subject(String subject_name, String subject_code, Teacher teacher) {
+        this.subject_name = subject_name;
+        this.subject_code = subject_code;
+        this.teacher = teacher;
+    }
+    
     public Subject(Teacher teacher) {
         this.teacher = teacher;
     }

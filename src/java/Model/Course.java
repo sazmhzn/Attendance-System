@@ -22,6 +22,10 @@ public class Course {
         this.name = name;
     }
 
+    public Course(int id) {
+        this.id = id;
+    }
+    
     public Course(Section section) {
         this.section = section;
     }

@@ -60,7 +60,7 @@ public class SubjectServices {
             
         }
         
-        public List<Section> getSectionList() {
+    public List<Section> getSectionList() {
         List<Section> sectionList = new ArrayList<>();
         String query = "SELECT * FROM `section`";
         System.out.println(query);
@@ -78,13 +78,16 @@ public class SubjectServices {
     }
     
      //This method will insert subject in subject
-    public void insertSubject(Subject subject) {
-        String query = "INSERT INTO `subject`(`SUB_NAME`, `SUB_CODE`) VALUES (?,?)";
+    public void insertSubject(College college) {
+        String query = "INSERT INTO `subject`(`SUB_NAME`, `SUB_CODE`, `TEAC_ID`, `C_ID`, `SEM_id`) VALUES (?,?,?,?,?)";
         PreparedStatement pstm = new DBConnection().getStatement(query);
         try {
-            pstm.setString(1, subject.getSubject_name());
-            pstm.setString(2, subject.getSubject_code());
-
+            pstm.setString(1, college.getSubject().getSubject_name());
+            pstm.setString(2, college.getSubject().getSubject_code());
+            pstm.setInt(3, college.getSubject().getTeacher().getUser().getId());
+            pstm.setInt(4, college.getCourse().getId());
+            pstm.setInt(5, college.getSemester().getId());
+            
             System.out.println(pstm);
 
             pstm.execute();

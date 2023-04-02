@@ -362,7 +362,7 @@
       </div>
 
       <% } %> 
-       <% if(session.getAttribute("fail") != null)  {%>
+       <%else if(session.getAttribute("fail") != null)  {%>
 
       <div class="alert alert-danger alert-dismissible fade show" role="alert">
           <%=session.getAttribute("fail")%>

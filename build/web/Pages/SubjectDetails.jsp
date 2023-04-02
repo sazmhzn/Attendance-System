@@ -3,7 +3,7 @@
     Created on : Mar 17, 2023, 10:31:18 AM
     Author     : lenovo
 --%>
-
+<%@page import="jakarta.servlet.http.HttpSession" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,7 +11,7 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-    <title>Teacher</title>
+    <title>Subject</title>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <meta content="" name="description" />
     <meta content="" name="keywords" />
@@ -65,6 +65,10 @@
       href="Styling/assets/vendor/simple-datatables/style.css"
       rel="stylesheet"
     />
+    <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css"
+        rel="stylesheet"
+        />
 
     <!-- Template Main CSS File -->
     <link href="Styling/assets/css/style.css" rel="stylesheet" />
@@ -340,17 +344,18 @@
 
     <!-- ======= Main ======= -->
     <main id="main" class="main">
+     
       <div class="pagetitle">
         <h1>Subject</h1>
         <nav>
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="dashboard.html">Subject</a></li>
+            <li class="breadcrumb-item"><a href="PageChange?page=subject">Subject</a></li>
             <li class="breadcrumb-item active">All subjects</li>
             <!--<li class="breadcrumb-item ">Add Students</li>-->
           </ol>
         </nav>
         
-        <button class="btn btn-primary"> <a href="PageChange?page=addTeacher" class="text-light"> Add subject </a>  </button>
+        <button class="btn btn-primary"> <a href="PageChange?page=addSubject" class="text-light"> Add subject </a>  </button>
       </div>
       <!-- End Page Title -->
 
@@ -455,6 +460,14 @@
         $("#example").DataTable();
       });
     </script>
+    
+    <script>
+        $(".alert-dismissible").fadeTo(2000, 500).slideUp(500, function(){
+    $(".alert-dismissible").alert('close');
+});
+    </script>
+    
+    
   </body>
 </html>
 
