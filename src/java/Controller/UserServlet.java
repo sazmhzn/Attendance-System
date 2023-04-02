@@ -199,7 +199,9 @@ public class UserServlet extends HttpServlet {
         if( page.equals("addSubject") ) {
             Teacher teacher = new UserServices().getTeacherRow( request.getParameter("teacher"));
             
+            //chceck if the teacher is in the database
             if (teacher != null) {
+                
                 College college = new College();
                 college.setSubject(new Subject(
                         request.getParameter("subject_name"),
@@ -207,12 +209,22 @@ public class UserServlet extends HttpServlet {
                         teacher));
                 college.setCourse(new Course(Integer.parseInt(request.getParameter("course"))));
                 college.setSemester(new Semester(Integer.parseInt( request.getParameter("semester") ), "" ));
-                                
-                new SubjectServices().insertSubject(college);
-
-                session.setAttribute("status", "success");
-                session.setAttribute("msg", "Added succesfully");
+                          
+                boolean similarSubject = new SubjectServices().getSimilarSubject(college);
+                
+                //check if the subject name or code is already inserted int he database
+                if(!similarSubject) {
+                    new SubjectServices().insertSubject(college);
+                } else {
+                  session.setAttribute("status", "fail");
+                session.setAttribute("msg", "Similar subject found");  
+                }
+                
+            } else {
+                RequestDispatcher rd = request.getRequestDispatcher("PageChange?page=addSubject");
+                rd.forward(request, response);
             }
+            
                         
             RequestDispatcher rd = request.getRequestDispatcher("PageChange?page=Subject");
             rd.forward(request, response);

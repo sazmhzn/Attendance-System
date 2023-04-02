@@ -66,6 +66,7 @@ public class SubjectServices {
         System.out.println(query);
         PreparedStatement pstm = new DBConnection().getStatement(query);
         try {
+            
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
                 Section section = new Section(rs.getInt("SECTION_ID"), rs.getString("SECTION_NAME"));
@@ -77,11 +78,30 @@ public class SubjectServices {
         return sectionList;
     }
     
+    
+    public boolean getSimilarSubject(College college) {
+        String query = "SELECT * FROM `subject` where SUB_CODE=? OR SUB_NAME=?";
+        System.out.println(query);
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+        try {
+            pstm.setString(1, college.getSubject().getSubject_code());
+            pstm.setString(2, college.getSubject().getSubject_name());
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
      //This method will insert subject in subject
     public void insertSubject(College college) {
         String query = "INSERT INTO `subject`(`SUB_NAME`, `SUB_CODE`, `TEAC_ID`, `C_ID`, `SEM_id`) VALUES (?,?,?,?,?)";
         PreparedStatement pstm = new DBConnection().getStatement(query);
         try {
+                        
             pstm.setString(1, college.getSubject().getSubject_name());
             pstm.setString(2, college.getSubject().getSubject_code());
             pstm.setInt(3, college.getSubject().getTeacher().getUser().getId());

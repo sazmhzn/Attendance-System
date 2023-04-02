@@ -181,9 +181,7 @@ public class PageChange extends HttpServlet {
         
         if (page.equalsIgnoreCase("editSubject")) {
             
-            College college = new SubjectServices().getSubjectRow();
-            request.setAttribute();
-            
+       
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/EditTeacher.jsp");
             rd.forward(request, response);
         }
