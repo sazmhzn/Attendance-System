@@ -82,13 +82,9 @@ public class SubjectServices {
     
     
     
-    
-    
-    
-    
     public List<College> getSubjectList(int teac_id) {
         List<College> subjectList = new ArrayList<>();
-        String query = "SELECT * FROM `subject` LEFT JOIN teacher on subject.TEAC_ID = teacher.TEAC_ID LEFT JOIN section ON subject.C_ID = section.COURSE_ID where teacher.TEAC_ID=?; ";
+        String query = "SELECT * FROM `subject` LEFT JOIN teacher on subject.TEAC_ID = teacher.TEAC_ID LEFT JOIN section ON subject.C_ID = section.COURSE_ID LEFT JOIN semester on subject.SEM_ID = semester.SEM_ID where teacher.ACC_ID=?; ";
         
         PreparedStatement pstm = new DBConnection().getStatement(query);
         
@@ -112,6 +108,7 @@ public class SubjectServices {
                 ));        
 
                 college.setSection(new Section( rs.getInt("SECTION_ID") , rs.getString("SECTION_NAME")));
+                college.setSemester(new Semester(1, rs.getString("SEM_NAME")));
                 System.out.println("College: " + college.getSubject().getSubject_name());
                 subjectList.add(college);
             }

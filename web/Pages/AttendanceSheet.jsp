@@ -306,7 +306,7 @@
         <nav>
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="dashboard.html">Home</a></li>
-            <li class="breadcrumb-item active">Students</li>
+            <li class="breadcrumb-item active">Subjects</li>
           </ol>
         </nav>
       </div>
@@ -342,6 +342,7 @@
                         <th scope="row">#${college.subject.subject_id}</th>
                         <td>${college.subject.subject_name}</td>
                         <td>${college.subject.subject_code}</td>
+                        <td>${college.semester.name}</td>
                         <td>${college.section.name}</td>
                         <td><a href="PageChange?page=takeAttendanceSheet&subject_id=${college.subject.subject_id}" class="text-light btn btn-primary"> Take attendance</a></td>
                       </tr>

@@ -288,9 +288,7 @@ public class UserServices {
     public void insertUser(Teacher teacher) {
         insertUser(teacher.getUser()); //This method will insert the teacher details in Accout table
         User newUser = getUser(teacher.getUser().getUsername(), teacher.getUser().getPassword());
-
-        System.out.println("\n\n The user id " + teacher.getUser().getId());
-
+        insertUserActivity(newUser.getId());
         String query = "INSERT INTO `teacher`(`TEAC_NAME`, `TEAC_ADDRESS`, `TEAC_EMAIL`, `TEAC_PHONE`, `ACC_ID`) VALUES (?,?,?,?,?)";
         PreparedStatement pstm = new DBConnection().getStatement(query);
         try {
@@ -334,6 +332,26 @@ public class UserServices {
             e.printStackTrace();
         }
     }
+    
+     public void insertUserActivity(int acc_id) {
+        
+        String query = "INSERT INTO `user_activity`(`USER_ID`) VALUES (?)";
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+        try {
+            pstm.setInt(1, acc_id);          
+            
+            System.out.println("insert activity query:" + pstm);
+
+            pstm.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    
+    
+    
+    
     
     /**
      * This method will delete a user from account table

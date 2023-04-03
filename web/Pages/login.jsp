@@ -34,22 +34,44 @@
   <link href="https://fonts.gstatic.com" rel="preconnect">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
-  <!-- Vendor CSS Files -->
-  <link href="Styling/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="Styling/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="Styling/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="Styling/assets/vendor/quill/quill.snow.css" rel="stylesheet">
-  <link href="Styling/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-  <link href="Styling/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="Styling/assets/vendor/simple-datatables/style.css" rel="stylesheet">
-  
-  <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.css">-->
-  
-  <link rel="stylesheet" href="Styling/style.css"/>
-  
-  <!-- Template Main CSS File -->
-  <link href="Styling/assets/css/style.css" rel="stylesheet">
+ <!-- Vendor CSS Files -->
+    <link
+      href="Styling/assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
 
+    <link
+      href="Styling/assets/vendor/boxicons/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="Styling/assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <link href="Styling/assets/vendor/quill/quill.snow.css" rel="stylesheet" />
+
+    <link
+      href="Styling/assets/vendor/quill/quill.bubble.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="Styling/assets/vendor/remixicon/remixicon.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="Styling/assets/vendor/simple-datatables/style.css"
+      rel="stylesheet"
+    />
+
+    <!-- Template Main CSS File -->
+    <link href="Styling/assets/css/style.css" rel="stylesheet" />
+
+    <!-- Template Main CSS File -->
+    <link href="assets/css/style.css" rel="stylesheet" />
   <!-- =======================================================
   * Template Name: NiceAdmin - v2.5.0
   * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
@@ -59,34 +81,21 @@
 
   </head>
   <body>
-      <!-- ======= Header ======= -->
-  <header id="header" class="header fixed-top d-flex align-items-center">
 
-    <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
-        <img src="assets/img/logo.png" alt="">
-        <span class="d-none d-lg-block">Attendify</span>
-      </a>
-    </div><!-- End Logo -->
-
-   
-  </header><!-- End Header -->
+        <!-- ======= Header ======= -->
+    <header id="header" class="header d-flex align-items-center">
+      <div class="d-flex align-items-center justify-content-between">
+        <a href="index.html" class="logo d-flex align-items-center">
+          <img src="assets/img/logo.png" alt="" />
+          <span class="d-none d-lg-block">Attendify</span>
+        </a>
+      </div>
+      <!-- End Logo -->
+      
+    </header>
+    <!-- End Header -->
     <div class="container-fluid h-100">
-      <!-- Just an image -->
-      <nav class="navbar navbar-light bg-light">
-        <div class="container">
-          <a class="navbar-brand" href="#">
-<!--            <img
-              src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
-              height="20"
-              alt="MDB Logo"
-              loading="lazy"
-            />-->
-            Attendify
-          </a>
-        </div>
-      </nav>
-
+ 
       <!-- Section: Design Block -->
       <section class="login-section">
         <!-- Jumbotron -->
@@ -112,53 +121,31 @@
               <div class="col-lg-6 mb-5 mb-lg-0">
                 <div class="card">
                   <div class="card-body py-5 px-md-5">
-                    <form action="RegisterServlet?page=existing" method="POST">
-                      
-                      <% if(session.getAttribute("error_msg") != null)  {%>
-
-                      <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                          <%=session.getAttribute("error_msg")%>
-                          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                      </div>
-
-                      <% } %>
+                    <form class="needs-validation" action="RegisterServlet?page=existing" method="POST" novalidate>
+                      <!---->
+                   
                       
                       <!-- Username input -->
                       <div class="form-outline mb-4">
-                        <label class="form-label" for="form3Example3"
-                          >Username</label
-                        >
-                        <input
-                          type="text"
-                          name="username"
-                          id="username"
-                          class="form-control"
-                          aria-describedby="validationServer03Feedback"
-                          />
-                        <div id="validationServer03Feedback" class="invalid-feedback">
-                            Please provide a valid username.
-                        </div>
+                        <label for="yourUsername" class="form-label">Username</label>
+                        <input type="text" name="username" id="yourUsername" class="form-control" required/>
+                        <div class="invalid-feedback">Please enter your username.</div>                          
                       </div>
 
                       <!-- Password input -->
                       <div class="form-outline mb-4">
-                        <label class="form-label" for="form3Example4"
-                          >Password</label
-                        >
-                        <input
-                          type="password"
-                          id="form3Example4 pswd"
-                          name="password"
-                          class="form-control"
-                          id="pswd"
-                        />
+                        <label for="yourPassword" class="form-label">Password</label>
+                        <input type="password" name="password" class="form-control" id="yourPassword" required />
+                        <div class="invalid-feedback">
+                          Please enter your password!
+                        </div>
                       </div>
 
                       <!-- Submit button -->
-                      <button type="submit" id="submitbtn" class="btn btn-primary btn-block mb-2">Sign in</button>
+                      <button type="submit" class="btn btn-primary btn-block mb-2">Login</button>
                       
                       <p class="small mb-5 pb-lg-2">
-                        <a class="text-muted" href="#!">Forgot password?</a>
+                        <a class="text-muted" href="PageChange?page=forgotPassword">Forgot password?</a>
                       </p>
                       <p>
                         Don't have an account?
@@ -178,7 +165,7 @@
 
     
                       
-                      <!-- Vendor JS Files -->
+  <!-- Vendor JS Files -->
   <script src="Styling/assets/vendor/apexcharts/apexcharts.min.js"></script>
   <script src="Styling/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="Styling/assets/vendor/chart.js/chart.umd.js"></script>
@@ -191,25 +178,17 @@
   <!-- Template Main JS File -->
   <script src="Styling/assets/js/main.js"></script>
 
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-      crossorigin="anonymous"
-    ></script>
-    
-    
     <script>
 // Document is ready
-$(document).ready(function () {
-// Validate Username
-$("#submitbtn").click( function() {
-    $("#username").addClass("is-invalid");   
-    $("#username").values();
-    console.log("Button pressed")
-});
-  
-)};
+//$(document).ready(function () {
+//// Validate Username
+//$("#submitbtn").click( function() {
+//    $("#username").addClass("is-invalid");   
+//    $("#username").values();
+//    console.log("Button pressed")
+//});
+//  
+//)};
 </script><!-- comment -->
 
 

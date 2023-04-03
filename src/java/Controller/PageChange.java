@@ -84,11 +84,17 @@ public class PageChange extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/login.jsp");
             rd.forward(request, response);
         }
+        
+        if ( page.equalsIgnoreCase("forgotPassword") ) {
+            RequestDispatcher rd = request.getRequestDispatcher("/Pages/ForgotPassword.jsp");
+            rd.forward(request, response);
+        }
+        
         if (page.equalsIgnoreCase("attendanceSheet")) {
             System.out.println("\n\n=============== attendance Sheet ==============\n");
-            int id = Integer.parseInt(request.getParameter("teac_id"));
-            System.out.println("The teaacher id int he attencesheet ID: " + id);
-            List<College> subjectList = new SubjectServices().getSubjectList(id);
+            int acc_id = Integer.parseInt(request.getParameter("teac_id"));
+            System.out.println("The teaacher acc_ id in attencesheet ID: " + acc_id);
+            List<College> subjectList = new SubjectServices().getSubjectList(acc_id);
             request.setAttribute("subjectList", subjectList);
             
             for(College c : subjectList) {
@@ -100,6 +106,11 @@ public class PageChange extends HttpServlet {
         }
         
         if (page.equalsIgnoreCase("takeAttendanceSheet")) {
+            System.out.println(" ====================== Taek attendacnce sheet ====================== ");
+            int subject_id = Integer.parseInt(request.getParameter("subject_id"));
+            System.out.println("Subject id: " + subject_id);
+            
+            
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/TakeAttendance.jsp");
             rd.forward(request, response);
         }
