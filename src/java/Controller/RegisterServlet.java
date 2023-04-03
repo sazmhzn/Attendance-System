@@ -94,15 +94,17 @@ public class RegisterServlet extends HttpServlet {
                 
                 //creating cookie to store the id of user
                 //Used for editing the profile of the user
-//                Cookie ck = new Cookie("id", String.valueOf(user.getId()));
-//                Cookie ckName = new Cookie("name", String.valueOf(user.getUsername()));
-//                response.addCookie(ck);
-//                response.addCookie(ckName);
+                Cookie ck = new Cookie("id", String.valueOf(user.getId()));
+                Cookie ckName = new Cookie("name", String.valueOf(user.getUsername()));
+                response.addCookie(ckName);
+                response.addCookie(ck);
                 
+                
+
                     if (session.getAttribute("role").equals("T")) {
-                        RequestDispatcher rd = request.getRequestDispatcher("Pages/AttendanceSheet.jsp");
+                        RequestDispatcher rd = request.getRequestDispatcher("PageChange?page=attendanceSheet&teac_id=" + user.getId());
                         rd.forward(request, response);
-                    } else {
+                    } else if (session.getAttribute("role").equals("A")) {
                         RequestDispatcher rd = request.getRequestDispatcher("PageChange?page=adminDashboard");
                         rd.forward(request, response);
                     }
@@ -130,6 +132,10 @@ public class RegisterServlet extends HttpServlet {
         }
          
          if( page.equalsIgnoreCase("logout") ) {
+             Cookie cookie = new Cookie("name", "");
+             cookie.setMaxAge(0);
+             response.addCookie(cookie);
+
              session.invalidate();
              response.sendRedirect("PageChange?page=login");
          }

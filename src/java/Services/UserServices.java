@@ -35,28 +35,30 @@ public class UserServices {
     public User getUser(String username, String password) {
         User user = null;
         String query = "select * from accounts where ACC_USERNAME=? and ACC_PASSWORD=?";
+        if (!username.equals("") && !password.equals("")) {
+            PreparedStatement pstm = new DBConnection().getStatement(query);
 
-        PreparedStatement pstm = new DBConnection().getStatement(query);
+            try {
+                pstm.setString(1, username);
+                pstm.setString(2, password);
 
-        try {
-            pstm.setString(1, username);
-            pstm.setString(2, password);
+                ResultSet rs = pstm.executeQuery();
+                System.out.println("get User query:" + pstm);
+                while (rs.next()) {
+                    System.out.println("This is a user");
+                    user = new User();
+                    user.setId(rs.getInt("ACC_ID"));
+                    user.setUsername(rs.getString("ACC_USERNAME"));
+                    user.setPassword(rs.getString("ACC_PASSWORD"));
+                    user.setRole(rs.getString("ACC_ROLE"));
+                    System.out.println("Role id " + user.getId() + " role: " + user.getRole());
+                }
 
-            ResultSet rs = pstm.executeQuery();
-            System.out.println("get User query:" + pstm);
-            while (rs.next()) {
-                System.out.println("This is a user");
-                user = new User();
-                user.setId(rs.getInt("ACC_ID"));
-                user.setUsername(rs.getString("ACC_USERNAME"));
-                user.setPassword(rs.getString("ACC_PASSWORD"));
-                user.setRole(rs.getString("ACC_ROLE"));
-                System.out.println("Role id " + user.getId());
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
+
 
         return user;
     }

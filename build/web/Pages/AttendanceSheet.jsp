@@ -56,24 +56,6 @@
       </div>
       <!-- End Logo -->
 
-      <div class="search-bar">
-        <form
-          class="search-form d-flex align-items-center"
-          method="POST"
-          action="#"
-        >
-          <input
-            type="text"
-            name="query"
-            placeholder="Search"
-            title="Enter search keyword"
-          />
-          <button type="submit" title="Search">
-            <i class="bi bi-search"></i>
-          </button>
-        </form>
-      </div>
-      <!-- End Search Bar -->
 
       <nav class="header-nav ms-auto">
         <ul class="d-flex align-items-center">
@@ -171,12 +153,12 @@
                     if( cookies != null ) {            
                     for (Cookie cookie:cookies) {
                         if( cookie.getName().equals("name")) {
-                            out.print(" " + cookie.getValue( )+" <br/>");
+                            out.print(" " + cookie.getValue( )+" ");
                         }
                     }
                     } else {
-                            out.println("<h2>No cookies founds</h2>");
-                            } 
+                            response.sendRedirect("Pages/login.jsp");
+                     } 
                 %>
                             
             </span>
@@ -191,7 +173,7 @@
                     
                     if( cookies != null ) {    
                     for (Cookie cookie:cookies) {
-                        if( cookie.getName().equals("fullName")) {
+                        if( cookie.getName().equals("name")) {
                             out.print(" " + cookie.getValue( ));
                         } 
                     }
@@ -307,9 +289,9 @@
         <!-- End Register Page Nav -->
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="pages-login.html">
+          <a class="nav-link collapsed" href="RegisterServlet?page=Logout">
             <i class="bi bi-box-arrow-in-right"></i>
-            <span>Login</span>
+            <span>Logout</span>
           </a>
         </li>
         <!-- End Login Page Nav -->
@@ -332,137 +314,46 @@
 
       <section class="section dashboard">
         <div class="row">
-          <!-- Left side columns -->
-          <div class="col-lg-12">
-            <form class="row g-3 align-items-bottom">
-              <div class="col-auto">
-                <select
-                  class="form-select form-select-md"
-                  aria-label=".form-select-sm example"
-                >
-                  <option selected>Subject menu</option>
-                  <option value="1">Advance Java</option>
-                  <option value="2">OOP</option>
-             
-                </select>
-              </div>
-
-              <div class="col-auto">
-                <input
-                  type="date"
-                  class="form-control"
-                  aria-label=".form-select-sm example"
-                />
-              </div>
-
-              <div class="col-auto">
-                <select
-                  class="form-select form-select-md"
-                  aria-label=".form-select-sm example"
-                >
-                  <option selected>Section</option>
-                  <option value="1">A</option>
-                  <option value="2">B</option>
-                  <option value="3">All</option>
-                </select>
-              </div>
-
-              <div class="col-auto mb-8">
-                <button type="submit" class="btn btn-primary mb-3">
-                  Show list
-                </button>
-              </div>
-            </form>
-          </div>
-          <!-- End Left side columns -->
+         
 
           <div class="row">
-            <div class="col-12 d-flex justify-content-end">
-              <span class="text-danger">
-                note: check the student to mark attendance
-              </span>
-              
-            </div>
-            <table class="table bg-white">
-              <thead>
-                <tr>
-                  <th scope="col">
-                    <input type="checkbox" class="check-all" />
-                  </th>
-                  <th scope="col">#</th>
-                  <th scope="col">Subject Name</th>
-                  <th scope="col">Subject Code</th>
-                  <th scope="col">Last Attendance</th>
-                  <th scope="col">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">
-                    <input
-                      type="checkbox"
-                      class="check-me"
-                      name="roll"
-                      value="1"
-                    />
-                  </th>
-                  <th>1</th>
-                  <td></td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <th scope="row">
-                    <input
-                      type="checkbox"
-                      class="check-me"
-                      name="roll"
-                      value="2"
-                    />
-                  </th>
-                  <th>2</th>
-                  <td>Sams</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <th scope="row">
-                    <input
-                      type="checkbox"
-                      class="check-me"
-                      name="roll"
-                      value="3"
-                    />
-                  </th>
-                  <th>3</th>
-                  <td>Sams</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <th scope="row">
-                    <input
-                      type="checkbox"
-                      class="check-me"
-                      name="roll"
-                      value="4"
-                    />
-                  </th>
-                  <th>4</th>
-                  <td>Sams</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                </tr>
-              </tbody>
-              <tr>
+                            
+              <!-- Recent Sales -->
+            <div class="col-12">
+              <div class="card recent-sales overflow-auto">
 
+                <div class="card-body">
+                  <h5 class="card-title">Recent Attendance <span>| Today</span></h5>
 
-              </tr>
-            </table>
+                  <table class="table table-borderless datatable">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Subject name</th>
+                        <th scope="col">Subject Code</th>
+                        <th scope="col">Semester</th>
+                        <th scope="col">Section</th>
+                        <th scope="col">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach items="${subjectList}" var="college">
+                        <tr>
+                        <th scope="row">#${college.subject.subject_id}</th>
+                        <td>${college.subject.subject_name}</td>
+                        <td>${college.subject.subject_code}</td>
+                        <td>${college.section.name}</td>
+                        <td><a href="PageChange?page=takeAttendanceSheet&subject_id=${college.subject.subject_id}" class="text-light btn btn-primary"> Take attendance</a></td>
+                      </tr>
+                        </c:forEach>
+                    
+                    </tbody>
+                  </table>
+
+                </div>
+
+              </div>
+            </div><!-- End Recent Sales -->
           </div>
         </div>
       </section>

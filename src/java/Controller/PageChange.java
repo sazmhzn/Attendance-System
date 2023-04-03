@@ -85,10 +85,25 @@ public class PageChange extends HttpServlet {
             rd.forward(request, response);
         }
         if (page.equalsIgnoreCase("attendanceSheet")) {
-
+            System.out.println("\n\n=============== attendance Sheet ==============\n");
+            int id = Integer.parseInt(request.getParameter("teac_id"));
+            System.out.println("The teaacher id int he attencesheet ID: " + id);
+            List<College> subjectList = new SubjectServices().getSubjectList(id);
+            request.setAttribute("subjectList", subjectList);
+            
+            for(College c : subjectList) {
+                System.out.println("Name: " + c.getSubject().getSubject_name() + " code: " + c.getSubject().getSubject_code());
+            }
+            
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/AttendanceSheet.jsp");
             rd.forward(request, response);
         }
+        
+        if (page.equalsIgnoreCase("takeAttendanceSheet")) {
+            RequestDispatcher rd = request.getRequestDispatcher("/Pages/TakeAttendance.jsp");
+            rd.forward(request, response);
+        }
+        
         if (page.equalsIgnoreCase("addTeacher")) {
             List<College> collegeList = new SubjectServices().getCourseList();
             request.setAttribute("collegeList", collegeList);
@@ -180,9 +195,12 @@ public class PageChange extends HttpServlet {
         
         
         if (page.equalsIgnoreCase("editSubject")) {
+            Subject subject = new Subject();
+            College college = new SubjectServices().getCourseRow(Integer.parseInt(request.getParameter("subjectId")),  subject);
+            request.setAttribute("college", college);
             
-       
-            RequestDispatcher rd = request.getRequestDispatcher("/Pages/EditTeacher.jsp");
+            
+            RequestDispatcher rd = request.getRequestDispatcher("/Pages/EditSubject.jsp");
             rd.forward(request, response);
         }
         

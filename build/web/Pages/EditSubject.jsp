@@ -295,6 +295,7 @@
                           id="floatingName"
                           placeholder="Subject Name"
                           name="subject_name"
+                          value="${college.subject.subject_name}"
                         />
                         <label for="floatingName">Subject Name</label>
                       </div>
@@ -308,6 +309,7 @@
                           id="floatingName"
                           placeholder="Subject code"
                           name="subject_code"
+                          value="${college.subject.subject_code}"
                         />
                         <label for="floatingName">Subject code</label>
                       </div>
@@ -321,6 +323,7 @@
                           aria-label="course"
                           name="course"
                         >
+                            <option value="${college.course.id}" selected> ${college.course.name} </option>
                             <c:forEach items="${collegeList}" var="college">
                                 <option value="${college.course.id}">${college.course.name}</option>
                             </c:forEach>

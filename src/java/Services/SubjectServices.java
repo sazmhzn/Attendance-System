@@ -10,6 +10,8 @@ import Model.Course;
 import Model.Section;
 import Model.Semester;
 import Model.Subject;
+import Model.Teacher;
+import Model.User;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -79,6 +81,50 @@ public class SubjectServices {
     }
     
     
+    
+    
+    
+    
+    
+    public List<College> getSubjectList(int teac_id) {
+        List<College> subjectList = new ArrayList<>();
+        String query = "SELECT * FROM `subject` LEFT JOIN teacher on subject.TEAC_ID = teacher.TEAC_ID LEFT JOIN section ON subject.C_ID = section.COURSE_ID where teacher.TEAC_ID=?; ";
+        
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+        
+        try {
+            pstm.setInt(1, teac_id);
+            System.out.println(pstm);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                College college = new College();
+                college.setSubject( new Subject(
+                        rs.getInt("SUB_ID"),
+                        rs.getString("SUB_NAME"), 
+                        rs.getString("SUB_CODE"),
+                        new Teacher(new User(
+                                rs.getInt("TEAC_ID"),
+                                rs.getString("TEAC_NAME"),
+                                rs.getString("TEAC_EMAIL"),
+                                rs.getString("TEAC_PHONE"),
+                                rs.getString("teac_Address")
+                        ))
+                ));        
+
+                college.setSection(new Section( rs.getInt("SECTION_ID") , rs.getString("SECTION_NAME")));
+                System.out.println("College: " + college.getSubject().getSubject_name());
+                subjectList.add(college);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return subjectList;
+    }
+    
+    
+    
+    
+    
     public boolean getSimilarSubject(College college) {
         String query = "SELECT * FROM `subject` where SUB_CODE=? OR SUB_NAME=?";
         System.out.println(query);
@@ -94,6 +140,30 @@ public class SubjectServices {
             e.printStackTrace();
         }
         return false;
+    }
+    
+    public College getCourseRow( int id, Subject subject ) {
+        College college = null;
+        String query = "SELECT SUB_ID, SUB_NAME, teacher.TEAC_ID, teacher.TEAC_NAME, course.C_ID, course.COURSE_NAME, semester.SEM_ID, semester.SEM_NAME FROM `subject` LEFT JOIN teacher on subject.TEAC_ID = teacher.TEAC_ID LEFT JOIN course on subject.C_ID = course.C_ID LEFT JOIN semester on subject.SEM_ID = semester.SEM_ID where SUB_ID=2";
+        
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+        try {
+            pstm.setInt(1, id);
+            System.out.println(pstm);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                college = new College();
+                college.setSubject(new Subject(rs.getInt("SUB_ID"),
+                        rs.getString("SUB_NAME"), 
+                        rs.getString("SUB_CODE")));
+                college.setCourse(new Course(rs.getInt("SEM_ID"), rs.getString("SEM_NAME")));
+                college.setSemester(new Semester(rs.getInt("SEM_ID"), rs.getString("SEM_NAME")));
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return college;
     }
     
      //This method will insert subject in subject

@@ -19,6 +19,7 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="styling/style.css" />
 
     <title>Login!</title>
@@ -129,11 +130,14 @@
                         >
                         <input
                           type="text"
-                          id="form3Example3"
                           name="username"
+                          id="username"
                           class="form-control"
-                          
-                        />
+                          aria-describedby="validationServer03Feedback"
+                          />
+                        <div id="validationServer03Feedback" class="invalid-feedback">
+                            Please provide a valid username.
+                        </div>
                       </div>
 
                       <!-- Password input -->
@@ -151,8 +155,11 @@
                       </div>
 
                       <!-- Submit button -->
-                      <button type="submit" onclick ="verifyPassword()" class="btn btn-primary btn-block mb-2">Sign in</button>
-
+                      <button type="submit" id="submitbtn" class="btn btn-primary btn-block mb-2">Sign in</button>
+                      
+                      <p class="small mb-5 pb-lg-2">
+                        <a class="text-muted" href="#!">Forgot password?</a>
+                      </p>
                       <p>
                         Don't have an account?
                         <a href="PageChange?page=register" class="link-info">Register here</a>
@@ -191,37 +198,19 @@
       crossorigin="anonymous"
     ></script>
     
-    <script>  
-        const btn = document.querySelector(".btn");
-        
-        btn.addEventListener("click", verifyPassword);
-        
-function verifyPassword() {  
-  var pw = document.getElementById("pswd").value;  
-  console.log("inside a function");
-  //check empty password field  
-  if(pw === "") {  
-     document.getElementById("message").innerHTML = "**Fill the password please!";  
-     console.log("Less than 8");
-  }  
-   
- //minimum password length validation  
-  if(pw.length < 8) {  
-      
-     document.getElementById("message").innerHTML = "**Password length must be atleast 8 characters";  
-  }  
+    
+    <script>
+// Document is ready
+$(document).ready(function () {
+// Validate Username
+$("#submitbtn").click( function() {
+    $("#username").addClass("is-invalid");   
+    $("#username").values();
+    console.log("Button pressed")
+});
   
-//maximum length of password validation  
-  if(pw.length > 15) {  
-     document.getElementById("message").innerHTML = "**Password length must not exceed 15 characters";  
-  } else {  
-     alert("Password is correct");  
-  }  
-}  
-
-
-</script>  
-
+)};
+</script><!-- comment -->
 
 
   </body>

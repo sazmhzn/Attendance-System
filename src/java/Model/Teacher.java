@@ -12,7 +12,7 @@ package Model;
 public class Teacher {
     private int acc_id;
     private User user;
-    private Subject[] subject;
+    private Subject subject;
     
     public Teacher() {
     }
@@ -24,6 +24,18 @@ public class Teacher {
     public Teacher(int acc_id, User user) {
         this.acc_id = acc_id;
         this.user = user;
+    }
+
+    public Teacher(Subject subject) {
+        this.subject = subject;
+    }
+
+    public Subject getSubject() {
+        return subject;
+    }
+
+    public void setSubject(Subject subject) {
+        this.subject = subject;
     }
 
     public int getAcc_id() {
@@ -42,12 +54,5 @@ public class Teacher {
         this.user = user;
     }
 
-    public Subject[] getSubjects() {
-        return subject;
-    }
-
-    public void setSubjects(Subject[] subjects) {
-        this.subject = subjects;
-    }
 }
 
