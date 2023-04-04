@@ -62,6 +62,37 @@ public class UserServices {
 
         return user;
     }
+    
+    
+    public User getUser(String username) {
+        User user = null;
+        String query = "select * from accounts where ACC_USERNAME=?";
+        if (!username.equals("")) {
+            PreparedStatement pstm = new DBConnection().getStatement(query);
+
+            try {
+                pstm.setString(1, username);
+
+                ResultSet rs = pstm.executeQuery();
+                System.out.println("get User query:" + pstm);
+                while (rs.next()) {
+                    System.out.println("This is a user");
+                    user = new User();
+                    user.setId(rs.getInt("ACC_ID"));
+                    user.setUsername(rs.getString("ACC_USERNAME"));
+                    user.setRole(rs.getString("ACC_ROLE"));
+                    System.out.println("Role id " + user.getId() + " role: " + user.getRole());
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+        return user;
+    }
+    
 
     /**
      * This method will return the list of teacher from database
@@ -108,6 +139,32 @@ public class UserServices {
         }
         return user;
     }
+    
+    
+    public List<User> getActiveUserList() {
+        List<User> userList = new ArrayList<>();
+        String query = "SELECT * FROM `user_activity` LEFT JOIN `teacher` ON teacher.ACC_ID = user_activity.USER_ID";
+        System.out.println(query);
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+        try {
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                User user = new User();
+                user.setId(rs.getInt("TEAC_ID"));
+                user.setFullName(rs.getString("TEAC_NAME"));
+                user.setStatus(rs.getString("STATUS"));
+                user.setDate(rs.getDate("ACTIVE_DATE"));
+       
+                userList.add(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return userList;
+    }
+    
+    
     
     /**
      * This will return the all the subjects from the database
@@ -408,7 +465,7 @@ public class UserServices {
     
     public void editUser(int id, User user) {
 
-        String query = "update users set ACC_USERNAME=?,ACC_PASSWORD=?, ACC_ROLE=? where ACC_ID=?";
+        String query = "update accounts set ACC_USERNAME=?,ACC_PASSWORD=?, ACC_ROLE=? where ACC_ID=?";
         PreparedStatement pstm = new DBConnection().getStatement(query);
         try {
         pstm.setString(1, user.getUsername());
@@ -465,4 +522,33 @@ public class UserServices {
         return false;
     }
     
+    
+    public void editUserActivity(int acc_id, String status ) {
+
+        String query = "update user_activity set STATUS=? where USER_ID=?";
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+        try {
+            pstm.setString(1, status);
+        pstm.setInt(2, acc_id);
+        
+            System.out.println(pstm);
+        pstm.execute();
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    
+    public void updatePassword(int id, String password) {
+        String query = "update accounts set ACC_PASSWORD=? where ACC_ID=?";
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+        try {
+        pstm.setString(1, password);
+        pstm.setInt(2, id);
+
+        pstm.execute();
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

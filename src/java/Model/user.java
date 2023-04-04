@@ -4,6 +4,8 @@
  */
 package Model;
 
+import java.util.Date;
+
 /**
  *
  * @author lenovo
@@ -22,7 +24,8 @@ public class User {
     private String password;
     private String role;
     private College college;
-
+    private String status;
+    private Date date;
 
     public User() {
     }
@@ -42,6 +45,8 @@ public class User {
         this.phone = phone;
         this.address = address;
     }
+    
+    
 
     /**
      * 
@@ -238,5 +243,23 @@ public class User {
     public void setCollege(College college) {
         this.college = college;
     }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    
     
 }

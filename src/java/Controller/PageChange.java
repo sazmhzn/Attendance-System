@@ -8,6 +8,7 @@ import Model.College;
 import Model.Student;
 import Model.Subject;
 import Model.Teacher;
+import Model.User;
 import Services.SubjectServices;
 import Services.UserServices;
 import jakarta.servlet.RequestDispatcher;
@@ -89,6 +90,7 @@ public class PageChange extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/ForgotPassword.jsp");
             rd.forward(request, response);
         }
+      
         
         if (page.equalsIgnoreCase("attendanceSheet")) {
             System.out.println("\n\n=============== attendance Sheet ==============\n");
@@ -226,10 +228,8 @@ public class PageChange extends HttpServlet {
             request.setAttribute("studentList", studentList);
             request.setAttribute("totalStudent", studentList.size());
             
-            
-            for(Student s : studentList) {
-                System.out.println("student: " + s.getUser().getFullName());
-            }
+            List<User> active = new UserServices().getActiveUserList();
+            request.setAttribute("activeUser", active);
             
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/AdminDashboard.jsp");
             rd.forward(request, response);

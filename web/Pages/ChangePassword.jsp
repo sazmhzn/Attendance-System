@@ -12,7 +12,8 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-    <title>Pages / Login </title>
+    <title>Pages / Login</title>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <meta content="" name="description" />
     <meta content="" name="keywords" />
 
@@ -78,43 +79,36 @@
                   <div class="card-body">
                     <div class="pt-4 pb-2">
                       <h5 class="card-title text-center pb-0 fs-4">
-                        Forgot passowd
+                        Forgot password
                       </h5>
-                      <p class="text-center small">
-                        Enter your username to verify
-                      </p>
+                      <p class="text-center small">Enter a new password</p>
                     </div>
-                      <% if(session.getAttribute("status") != null)  {%>
 
-                      <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                          <%=session.getAttribute("status")%>
-                          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                      </div>
-
-                      <% } %> 
-                      <form class="row g-3 needs-validation" action="RegisterServlet?page=verifyUsername" method="POST" novalidate>
+                      <form class="row g-3 needs-validation" action="RegisterServlet?page=changePassword" method="POST" novalidate>
+                          <input type="hidden" name="id" value="${user.id}"> 
                       <div class="col-12">
                         <label for="yourUsername" class="form-label"
-                          >Username</label
+                          >Password</label
                         >
                         <div class="input-group has-validation">
                          
                           <input
-                            type="text"
-                            name="username"
+                            type="password"
+                            name="password"
                             class="form-control"
-                            id="yourUsername"
+                            id="yourPassword"
+                            
                             required
                           />
                           <div class="invalid-feedback">
-                            Please enter your username.
+                            Please enter your new password.
                           </div>
                         </div>
                       </div>
 
                       <div class="col-12">
                         <button class="btn btn-primary w-100" type="submit">
-                          Verify
+                          Change
                         </button>
                       </div>
                     
@@ -146,9 +140,31 @@
     <script src="Styling/assets/vendor/simple-datatables/simple-datatables.js"></script>
     <script src="Styling/assets/vendor/tinymce/tinymce.min.js"></script>
     <script src="Styling/assets/vendor/php-email-form/validate.js"></script>
-
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
     <!-- Template Main JS File -->
     <script src="Styling/assets/js/main.js"></script>
+    <script>
+    $(document).ready(function(){
+    // Get value on button click and show alert
+    $(".btn").click(function(e){
+        var str = $("#yourPassword").val();
+
+        if (str == "") { 
+            $(".invalid-feedback").html("The value is null")
+        } else {
+            if(str.length < 8) {
+                e.preventDefault();
+                $(".invalid-feedback").html("The length is less than 8").show();
+                $("#yourPassword").addClass("is-invalid")
+                return false;
+            }
+            $("#yourPassword").removeClass("is-invalid")
+            $(".invalid-feedback").hide()
+        }
+
+    });
+});
+</script>
   </body>
 </html>
 

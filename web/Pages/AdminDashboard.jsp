@@ -534,33 +534,21 @@
           <div class="card">
 
             <div class="card-body">
-              <h5 class="card-title">Recent Activity <span>| Today</span></h5>
+              <h5 class="card-title">User Activity <span>| Today</span></h5>
 
               <div class="activity">
 
-                <div class="activity-item d-flex">
-                  <div class="activite-label">32 min</div>
-                  <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
-                  <div class="activity-content">
-                    New teacher created for <a href="#" class="fw-bold text-dark">Software engineering</a>
-                  </div>
-                </div><!-- End activity item-->
-
-                <div class="activity-item d-flex">
-                  <div class="activite-label">56 min</div>
-                  <i class='bi bi-circle-fill activity-badge text-danger align-self-start'></i>
-                  <div class="activity-content">
-                    Attendance Taken for Advance java
-                  </div>
-                </div><!-- End activity item-->
-
-                <div class="activity-item d-flex">
-                  <div class="activite-label">4 weeks</div>
-                  <i class='bi bi-circle-fill activity-badge text-muted align-self-start'></i>
-                  <div class="activity-content">
-                    Student details modified
-                  </div>
-                </div><!-- End activity item-->
+          
+                <c:forEach items="${activeUser}" var="active">
+                    <div class="activity-item d-flex">
+                        <div class="activite-label"> ${active.date}</div>
+                        <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i> 
+                        <div class="activity-content">
+                            <a href="#" class="fw-bold text-dark">${active.fullName}</a> is 
+                            ${active.status}
+                        </div>
+                    </div><!-- End activity item-->
+                </c:forEach>
 
               </div>
 

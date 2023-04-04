@@ -5,11 +5,9 @@
 package Controller;
 
 import Hashing.HashingPassword;
-import Model.Teacher;
 import Model.User;
 import Services.UserServices;
 import jakarta.servlet.RequestDispatcher;
-
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -98,8 +96,10 @@ public class RegisterServlet extends HttpServlet {
                 Cookie ckName = new Cookie("name", String.valueOf(user.getUsername()));
                 response.addCookie(ckName);
                 response.addCookie(ck);
+                user.setStatus("Active");
                 
-                
+                System.out.println("The user detauls: " + user.getId() + " "  +user.getFullName());
+                new UserServices().editUserActivity(user.getId(), "Active");
 
                     if (session.getAttribute("role").equals("T")) {
                         RequestDispatcher rd = request.getRequestDispatcher("PageChange?page=attendanceSheet&teac_id=" + user.getId());
@@ -131,12 +131,46 @@ public class RegisterServlet extends HttpServlet {
             rd.forward(request, response);
         }
          
+         if(page.equalsIgnoreCase("verifyUsername")) {
+             String username = request.getParameter("username");
+             User user = new UserServices().getUser(username);
+             
+             if (user != null) {
+                 session.setAttribute("id", user.getId());
+                 request.setAttribute("user", user);
+                 RequestDispatcher rd = request.getRequestDispatcher("/Pages/ChangePassword.jsp");
+                 rd.forward(request, response);
+             }
+             session.setAttribute("status", "No username found!!");
+             RequestDispatcher rd = request.getRequestDispatcher("/Pages/ForgotPassword.jsp");
+             rd.forward(request, response);
+             
+         }
+         
+         if(page.equalsIgnoreCase("changePassword")) {
+             String password = HashingPassword.hashPassword(request.getParameter("password"));
+             int id = Integer.parseInt( request.getParameter("id") );
+             System.out.println("Getting the session id: "  + session.getAttribute("id"));
+             System.out.println("Getting id: " + id);
+             
+             new UserServices().updatePassword(id, password);
+             
+             RequestDispatcher rd = request.getRequestDispatcher("PageChange?page=login");
+             rd.forward(request, response);
+             
+         }
+         
+         
          if( page.equalsIgnoreCase("logout") ) {
+             System.out.println("The logout id: " + session.getAttribute("uid"));
+             int id = (int) session.getAttribute("uid");
+             new UserServices().editUserActivity(id, "Inactive");
              Cookie cookie = new Cookie("name", "");
              cookie.setMaxAge(0);
              response.addCookie(cookie);
 
              session.invalidate();
+             
              response.sendRedirect("PageChange?page=login");
          }
         
