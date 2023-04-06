@@ -257,7 +257,7 @@
         <li class="nav-heading">Pages</li>
 
         <li class="nav-item">
-          <a class="nav-link" href="./AttendanceSheet.html">
+          <a class="nav-link" href="PageChange?page=attendanceSheet">
             <i class="bi bi-person"></i>
             <span>Attendance Sheet</span>
           </a>

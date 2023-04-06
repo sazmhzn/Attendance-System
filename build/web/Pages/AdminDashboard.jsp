@@ -19,53 +19,17 @@
 
     <!-- Favicons -->
     <link href="Styling/assets/img/favicon.png" rel="icon" />
-    <link
-      href="Styling/assets/img/apple-touch-icon.png"
-      rel="apple-touch-icon"
-    />
+    <link href="Styling/assets/img/apple-touch-icon.png" rel="apple-touch-icon"/>
 
-    <!-- Google Fonts -->
-<!--    <link href="https://fonts.gstatic.com" rel="preconnect" />
-    <link
-      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-      rel="stylesheet"
-    />-->
 
     <!-- Vendor CSS Files -->
-    <link
-        href="Styling/assets/vendor/bootstrap-icons/bootstrap-icons.css"
-        rel="stylesheet"
-        />
-
-    <link
-      href="Styling/assets/vendor/boxicons/css/boxicons.min.css"
-      rel="stylesheet"
-    />
-
-    <link
-      href="Styling/assets/vendor/bootstrap/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-
-    <link
-      href="Styling/assets/vendor/quill/quill.snow.css"
-      rel="stylesheet"
-    />
-
-    <link
-      href="Styling/assets/vendor/quill/quill.bubble.css"
-      rel="stylesheet"
-    />
-
-    <link
-      href="Styling/assets/vendor/remixicon/remixicon.css"
-      rel="stylesheet"
-    />
-
-    <link
-      href="Styling/assets/vendor/simple-datatables/style.css"
-      rel="stylesheet"
-    />
+    <link href="Styling/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet"/>
+    <link href="Styling/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet"/>
+    <link href="Styling/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="Styling/assets/vendor/quill/quill.snow.css" rel="stylesheet"/>
+    <link href="Styling/assets/vendor/quill/quill.bubble.css" rel="stylesheet"/>
+    <link href="Styling/assets/vendor/remixicon/remixicon.css" rel="stylesheet"/>
+    <link href="Styling/assets/vendor/simple-datatables/style.css" rel="stylesheet"/>
 
     <!-- Template Main CSS File -->
     <link href="Styling/assets/css/style.css" rel="stylesheet" />
@@ -82,36 +46,6 @@
         <i class="bi bi-list toggle-sidebar-btn"></i>
       </div>
       <!-- End Logo -->
-
-      <div class="search-bar">
-        <form
-          class="search-form d-flex align-items-center"
-          method="POST"
-          action="#"
-        >
-            
-          <input
-            type="text"
-            name="query"
-            placeholder="Search"
-            title="Enter search keyword"
-            list="student"
-          />
-          <datalist id="student">
-              <c:forEach items="${teacherList}" var="teacher">
-                  <option value="${teacher.user.fullName} (T)">
-              </c:forEach> 
-              
-              <c:forEach items="${studentList}" var="student">
-                  <option value="${student.user.fullName} ">
-              </c:forEach> 
-          </datalist>
-          <button type="submit" title="Search">
-            <i class="bi bi-search"></i>
-          </button>
-        </form>
-      </div>
-      <!-- End Search Bar -->
 
       <nav class="header-nav ms-auto">
         <ul class="d-flex align-items-center">
@@ -255,7 +189,7 @@
 
         <li class="nav-item">
           <a class="nav-link collapsed" href="./AttendanceSheet.html">
-            <i class="bi bi-person"></i>
+            <i class="bi bi-journal-check"></i>
             <span>Attendance Sheet</span>
           </a>
         </li>
@@ -263,7 +197,7 @@
         
         <li class="nav-item">
           <a class="nav-link collapsed" href="PageChange?page=Report">
-            <i class="bi bi-envelope"></i>
+            <i class="bi bi-journal-text"></i>
             <span>Report</span>
           </a>
         </li>
@@ -291,7 +225,12 @@
           </a>
         </li><!-- End Student Nav -->
 
-        
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="PageChange?page=Other">
+            <i class="bi bi-person"></i>
+            <span>Others</span>
+          </a>
+        </li><!-- End Student Nav -->
         
         <li class="nav-heading">Extra</li>
 

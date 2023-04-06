@@ -88,7 +88,6 @@ public class RegisterServlet extends HttpServlet {
                 session.setAttribute("role", user.getRole());
                 request.setAttribute("msg", "Login Successful!");
                 System.out.println(request.getAttribute("msg"));
-               
                 
                 //creating cookie to store the id of user
                 //Used for editing the profile of the user
@@ -98,11 +97,12 @@ public class RegisterServlet extends HttpServlet {
                 response.addCookie(ck);
                 user.setStatus("Active");
                 
-                System.out.println("The user detauls: " + user.getId() + " "  +user.getFullName());
+                System.out.println("The user detauls: " + user.getId() + " "  +user.getUsername());
                 new UserServices().editUserActivity(user.getId(), "Active");
 
                     if (session.getAttribute("role").equals("T")) {
-                        RequestDispatcher rd = request.getRequestDispatcher("PageChange?page=attendanceSheet&teac_id=" + user.getId());
+                        request.setAttribute("teacher",user);
+                        RequestDispatcher rd = request.getRequestDispatcher("PageChange?page=attendanceSheet&teac_id=" + session.getAttribute("uid"));
                         rd.forward(request, response);
                     } else if (session.getAttribute("role").equals("A")) {
                         RequestDispatcher rd = request.getRequestDispatcher("PageChange?page=adminDashboard");
@@ -168,9 +168,7 @@ public class RegisterServlet extends HttpServlet {
              Cookie cookie = new Cookie("name", "");
              cookie.setMaxAge(0);
              response.addCookie(cookie);
-
              session.invalidate();
-             
              response.sendRedirect("PageChange?page=login");
          }
         

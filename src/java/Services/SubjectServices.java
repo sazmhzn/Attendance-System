@@ -9,6 +9,7 @@ import Model.College;
 import Model.Course;
 import Model.Section;
 import Model.Semester;
+import Model.Student;
 import Model.Subject;
 import Model.Teacher;
 import Model.User;
@@ -118,11 +119,7 @@ public class SubjectServices {
         return subjectList;
     }
     
-    
-    
-    
-    
-    public boolean getSimilarSubject(College college) {
+        public boolean getSimilarSubject(College college) {
         String query = "SELECT * FROM `subject` where SUB_CODE=? OR SUB_NAME=?";
         System.out.println(query);
         PreparedStatement pstm = new DBConnection().getStatement(query);
@@ -199,6 +196,33 @@ public class SubjectServices {
     }
 
     
-    //This method will get the subject details
+    
+    
+    public List<Student> getAttendanceSheet( int id ) {
+        
+        List<Student> studentList = new ArrayList<>();
+        String query = "SELECT * FROM subject LEFT JOIN student on subject.C_ID = student.C_ID LEFT JOIN section on student.SEC_ID = section.SECTION_ID where subject.SUB_ID=?;";
+        
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+        try {
+            pstm.setInt(1, id);
+            System.out.println(pstm);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                Student student = new Student();
+                student.setUser(new User(
+                        rs.getInt("STUD_ID"), 
+                        rs.getString("STUD_NAME"), 
+                        rs.getString("STUD_EMAIL"),
+                        rs.getString("STUD_PHONE"),
+                        rs.getString("STUD_ADD")
+                ));
+                studentList.add(student);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return studentList;
+    }
     
 }

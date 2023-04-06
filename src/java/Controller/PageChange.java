@@ -74,6 +74,7 @@ public class PageChange extends HttpServlet {
         response.setContentType("text/html");
 
         String page = request.getParameter("page");
+        HttpSession session = request.getSession();
 
         if (page.equalsIgnoreCase("register")) {
 
@@ -94,7 +95,8 @@ public class PageChange extends HttpServlet {
         
         if (page.equalsIgnoreCase("attendanceSheet")) {
             System.out.println("\n\n=============== attendance Sheet ==============\n");
-            int acc_id = Integer.parseInt(request.getParameter("teac_id"));
+//            int acc_id = Integer.parseInt(request.getParameter("teac_id"));
+            int acc_id = (int) session.getAttribute("uid");
             System.out.println("The teaacher acc_ id in attencesheet ID: " + acc_id);
             List<College> subjectList = new SubjectServices().getSubjectList(acc_id);
             request.setAttribute("subjectList", subjectList);
@@ -108,10 +110,17 @@ public class PageChange extends HttpServlet {
         }
         
         if (page.equalsIgnoreCase("takeAttendanceSheet")) {
-            System.out.println(" ====================== Taek attendacnce sheet ====================== ");
+            System.out.println(" ====================== Take attendacnce sheet ====================== ");
             int subject_id = Integer.parseInt(request.getParameter("subject_id"));
             System.out.println("Subject id: " + subject_id);
             
+            List<Student> studentList = new SubjectServices().getAttendanceSheet(subject_id);
+            request.setAttribute("employeeList", studentList);
+            
+            System.out.println("the name are:");
+            for(Student s : studentList) {
+                System.out.println("Name: " + s.getUser().getFullName());
+            }
             
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/TakeAttendance.jsp");
             rd.forward(request, response);
@@ -147,10 +156,7 @@ public class PageChange extends HttpServlet {
             
             List<Student> employeeList = new UserServices().getStudentList();
             request.setAttribute("employeeList", employeeList);
-            
-            HttpSession session = request.getSession();
-            session.invalidate();
-            
+                        
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/StudentDetails.jsp");
             rd.forward(request, response);
         }
