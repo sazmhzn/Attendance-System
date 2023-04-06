@@ -97,13 +97,9 @@ public class PageChange extends HttpServlet {
             System.out.println("\n\n=============== attendance Sheet ==============\n");
 //            int acc_id = Integer.parseInt(request.getParameter("teac_id"));
             int acc_id = (int) session.getAttribute("uid");
-            System.out.println("The teaacher acc_ id in attencesheet ID: " + acc_id);
+            System.out.println("The teacher acc_ id in attencesheet ID: " + acc_id);
             List<College> subjectList = new SubjectServices().getSubjectList(acc_id);
             request.setAttribute("subjectList", subjectList);
-            
-            for(College c : subjectList) {
-                System.out.println("Name: " + c.getSubject().getSubject_name() + " code: " + c.getSubject().getSubject_code());
-            }
             
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/AttendanceSheet.jsp");
             rd.forward(request, response);
@@ -123,6 +119,13 @@ public class PageChange extends HttpServlet {
             }
             
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/TakeAttendance.jsp");
+            rd.forward(request, response);
+        }
+        
+        if(page.equalsIgnoreCase("studentAttendance")) {
+            List<Student> employeeList = new UserServices().getStudentList();
+            request.setAttribute("employeeList", employeeList);
+            RequestDispatcher rd = request.getRequestDispatcher("/Pages/StudentAttendanceDetails.jsp");
             rd.forward(request, response);
         }
         
@@ -214,9 +217,18 @@ public class PageChange extends HttpServlet {
         
         
         if (page.equalsIgnoreCase("editSubject")) {
-            Subject subject = new Subject();
-            College college = new SubjectServices().getCourseRow(Integer.parseInt(request.getParameter("subjectId")),  subject);
+            College college = new SubjectServices().getCourseRow(Integer.parseInt(request.getParameter("subjectId")));
             request.setAttribute("college", college);
+                    
+            
+            List<College> collegeList = new SubjectServices().getCourseList();
+            request.setAttribute("collegeList", collegeList);
+            
+            List<College> semesterList = new SubjectServices().getSemesterList();
+            request.setAttribute("semesterList", semesterList);
+            
+            List<Teacher> teacherList = new UserServices().getTeacherList();
+            request.setAttribute("teacherList", teacherList);
             
             
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/EditSubject.jsp");

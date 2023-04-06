@@ -230,13 +230,13 @@
         </li><!-- End Student Nav -->
       
       <li class="nav-item">
-          <a class="nav-link " href="PageChange?page=Teacher">
+          <a class="nav-link collapsed" href="PageChange?page=Teacher">
             <i class="bi bi-person"></i>
             <span>Teacher</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link collapsed" href="PageChange?page=Subject">
+          <a class="nav-link " href="PageChange?page=Subject">
             <i class="bi bi-person"></i>
             <span>Subject</span>
           </a>
@@ -260,7 +260,7 @@
     <!-- ======= Main ======= -->
     <main id="main" class="main">
       <div class="pagetitle">
-        <h1>Teacher</h1>
+        <h1>Subject</h1>
         <nav>
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="dashboard.html">Manage</a></li>
@@ -338,6 +338,7 @@
                           id="floatingSelect"
                           name="semester"
                         >
+                            <option value="${college.semester.id}" selected> ${college.semester.name} </option>
                             <c:forEach items="${semesterList}" var="college">
                                 <option value="${college.semester.id}">${college.semester.name}</option>
                             </c:forEach>

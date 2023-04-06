@@ -85,7 +85,7 @@ public class SubjectServices {
     
     public List<College> getSubjectList(int teac_id) {
         List<College> subjectList = new ArrayList<>();
-        String query = "SELECT * FROM `subject` LEFT JOIN teacher on subject.TEAC_ID = teacher.TEAC_ID LEFT JOIN section ON subject.C_ID = section.COURSE_ID LEFT JOIN semester on subject.SEM_ID = semester.SEM_ID where teacher.ACC_ID=?; ";
+        String query = "SELECT * FROM `subject` LEFT JOIN teacher on subject.TEAC_ID = teacher.TEAC_ID LEFT JOIN semester on subject.SEM_ID = semester.SEM_ID where teacher.ACC_ID=?; ";
         
         PreparedStatement pstm = new DBConnection().getStatement(query);
         
@@ -108,7 +108,6 @@ public class SubjectServices {
                         ))
                 ));        
 
-                college.setSection(new Section( rs.getInt("SECTION_ID") , rs.getString("SECTION_NAME")));
                 college.setSemester(new Semester(1, rs.getString("SEM_NAME")));
                 System.out.println("College: " + college.getSubject().getSubject_name());
                 subjectList.add(college);
@@ -136,9 +135,9 @@ public class SubjectServices {
         return false;
     }
     
-    public College getCourseRow( int id, Subject subject ) {
+    public College getCourseRow( int id) {
         College college = null;
-        String query = "SELECT SUB_ID, SUB_NAME, teacher.TEAC_ID, teacher.TEAC_NAME, course.C_ID, course.COURSE_NAME, semester.SEM_ID, semester.SEM_NAME FROM `subject` LEFT JOIN teacher on subject.TEAC_ID = teacher.TEAC_ID LEFT JOIN course on subject.C_ID = course.C_ID LEFT JOIN semester on subject.SEM_ID = semester.SEM_ID where SUB_ID=2";
+        String query = "SELECT SUB_ID, SUB_NAME, SUB_CODE, teacher.TEAC_ID, teacher.TEAC_NAME, course.C_ID, course.COURSE_NAME, semester.SEM_ID, semester.SEM_NAME FROM `subject` LEFT JOIN teacher on subject.TEAC_ID = teacher.TEAC_ID LEFT JOIN course on subject.C_ID = course.C_ID LEFT JOIN semester on subject.SEM_ID = semester.SEM_ID where SUB_ID=?";
         
         PreparedStatement pstm = new DBConnection().getStatement(query);
         try {
@@ -150,7 +149,7 @@ public class SubjectServices {
                 college.setSubject(new Subject(rs.getInt("SUB_ID"),
                         rs.getString("SUB_NAME"), 
                         rs.getString("SUB_CODE")));
-                college.setCourse(new Course(rs.getInt("SEM_ID"), rs.getString("SEM_NAME")));
+                college.setCourse(new Course(rs.getInt("C_ID"), rs.getString("COURSE_NAME")));
                 college.setSemester(new Semester(rs.getInt("SEM_ID"), rs.getString("SEM_NAME")));
 
             }
@@ -202,7 +201,7 @@ public class SubjectServices {
         
         List<Student> studentList = new ArrayList<>();
         String query = "SELECT * FROM subject LEFT JOIN student on subject.C_ID = student.C_ID LEFT JOIN section on student.SEC_ID = section.SECTION_ID where subject.SUB_ID=?;";
-        
+//        String query = "SELECT * FROM `subject` LEFT JOIN teacher on subject.TEAC_ID = teacher.TEAC_ID LEFT JOIN semester on subject.SEM_ID = semester.SEM_ID where teacher.ACC_ID=1; ";
         PreparedStatement pstm = new DBConnection().getStatement(query);
         try {
             pstm.setInt(1, id);

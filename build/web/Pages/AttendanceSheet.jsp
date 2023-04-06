@@ -265,7 +265,7 @@
         <!-- End Profile Page Nav -->
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="./studentList.html">
+          <a class="nav-link collapsed" href="PageChange?page=studentAttendance">
             <i class="bi bi-question-circle"></i>
             <span>Student</span>
           </a>
@@ -332,7 +332,6 @@
                         <th scope="col">Subject name</th>
                         <th scope="col">Subject Code</th>
                         <th scope="col">Semester</th>
-                        <th scope="col">Section</th>
                         <th scope="col">Action</th>
                       </tr>
                     </thead>
@@ -343,7 +342,6 @@
                         <td>${college.subject.subject_name}</td>
                         <td>${college.subject.subject_code}</td>
                         <td>${college.semester.name}</td>
-                        <td>${college.section.name}</td>
                         <td><a href="PageChange?page=takeAttendanceSheet&subject_id=${college.subject.subject_id}" class="text-light btn btn-primary"> Take attendance</a></td>
                       </tr>
                         </c:forEach>

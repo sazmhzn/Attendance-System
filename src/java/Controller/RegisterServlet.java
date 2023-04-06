@@ -162,14 +162,18 @@ public class RegisterServlet extends HttpServlet {
          
          
          if( page.equalsIgnoreCase("logout") ) {
-             System.out.println("The logout id: " + session.getAttribute("uid"));
+             if( session.getAttribute("uid") != null ) {
+               System.out.println("The logout id: " + session.getAttribute("uid"));
              int id = (int) session.getAttribute("uid");
              new UserServices().editUserActivity(id, "Inactive");
              Cookie cookie = new Cookie("name", "");
              cookie.setMaxAge(0);
              response.addCookie(cookie);
              session.invalidate();
-             response.sendRedirect("PageChange?page=login");
+             response.sendRedirect("PageChange?page=login");  
+             }
+             response.sendRedirect("PageChange?page=login");  
+             
          }
         
         

@@ -367,7 +367,7 @@
                                                 <table class="table table-borderless">
                                                     <thead>
                                                         <tr>
-                                                            <th><input type="checkbox"></th>
+                                                            <th><input type="checkbox" id="checkAll"></th>
                                                             <th scope="col"> #</th>
                                                             <th scope="col">Student name</th>
                                                             <th scope="col">Semester</th>
@@ -375,10 +375,10 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                    <form action="AttendnaceServlet" method="POST">
+                                                    <form action="AttendanceServlet?page=takeAttendance" method="POST">
                                                         <c:forEach  items="${employeeList}" var="employee">
                                                             <tr>
-                                                                <td><input type="checkbox"></td>
+                                                                <td><input type="checkbox" name="attendance" value="${employee.user.id}" ></td>
                                                                 <td  scope="row">${employee.user.id}</td>
                                                                 <td>${employee.user.fullName}</td>
                                                                 <td>${employee.user.email}</td>
@@ -424,7 +424,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <c:forEach  items="${employeeList}" var="employee">
+                                                        <c:forEach  items="${employeeListB}" var="employee">
                                                             <tr>
                                                                 <td  scope="row">${employee.user.id}</td>
                                                                 <td>${employee.user.fullName}</td>
@@ -516,6 +516,13 @@
         <script>
             $('.alert').alert()
         </script>
+         <script>
+      $(document).ready(function() {
+        $("#checkAll").click(function() {
+          $("input[type=checkbox]").prop('checked', $(this).prop('checked'));
+        })
+            });
+  </script>
     </body>
 </html>
 

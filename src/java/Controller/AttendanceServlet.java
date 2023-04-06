@@ -4,6 +4,7 @@
  */
 package Controller;
 
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -11,6 +12,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
@@ -47,6 +49,7 @@ public class AttendanceServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        doPost(request, response);
     }
 
     /**
@@ -62,6 +65,22 @@ public class AttendanceServlet extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         
+        System.out.println("\n =============================Youe are in attendnace sevlet ===================\n");
+        
+        
+        String page = request.getParameter("page");
+        HttpSession session = request.getSession();
+        
+        if(page.equalsIgnoreCase("takeAttendance")) {
+           String[] roll = request.getParameterValues("attendance");
+        
+        for( String s : roll ) {
+            System.out.println("The attendance roll: "  + s);
+        }
+        
+        RequestDispatcher rd = request.getRequestDispatcher("/Pages/AttendanceSheet.jsp");
+        rd.forward(request, response); 
+        }
         
         
         
