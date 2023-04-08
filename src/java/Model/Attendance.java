@@ -12,19 +12,22 @@ import java.time.LocalDate;
  */
 public class Attendance {
     private int att_id;
-    private LocalDate date;
+    private String date;
     private boolean status;
-    private Subject subject;
-    private Student student;
+    private int sub_id;
+    private String[] stu_id;
+    private int teac_id;
 
     public Attendance() {
     }
 
-    public Attendance(int att_id, LocalDate date, Subject subject, Student student) {
+    public Attendance(int att_id, String date, boolean status, int sub_id, String[] stu_id, int teac_id) {
         this.att_id = att_id;
         this.date = date;
-        this.subject = subject;
-        this.student = student;
+        this.status = status;
+        this.sub_id = sub_id;
+        this.stu_id = stu_id;
+        this.teac_id = teac_id;
     }
 
     public int getAtt_id() {
@@ -35,11 +38,11 @@ public class Attendance {
         this.att_id = att_id;
     }
 
-    public LocalDate getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -51,20 +54,28 @@ public class Attendance {
         this.status = status;
     }
 
-    public Subject getSubject() {
-        return subject;
+    public int getSub_id() {
+        return sub_id;
     }
 
-    public void setSubject(Subject subject) {
-        this.subject = subject;
+    public void setSub_id(int sub_id) {
+        this.sub_id = sub_id;
     }
 
-    public Student getStudent() {
-        return student;
+    public String[] getStu_id() {
+        return stu_id;
     }
 
-    public void setStudent(Student student) {
-        this.student = student;
+    public void setStu_id(String[] stu_id) {
+        this.stu_id = stu_id;
+    }
+
+    public int getTeac_id() {
+        return teac_id;
+    }
+
+    public void setTeac_id(int teac_id) {
+        this.teac_id = teac_id;
     }
     
     

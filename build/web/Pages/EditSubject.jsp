@@ -284,7 +284,7 @@
                   <!-- Floating Labels Form -->
                   <form
                     class="row g-3 needs-validation"
-                    action="UserServlet?page=addSubject"
+                    action="UserServlet?page=editSubject"
                     method="POST"
                   >
                     <div class="col-md-12">

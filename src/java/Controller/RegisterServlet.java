@@ -1,10 +1,11 @@
-/*
+ /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 package Controller;
 
 import Hashing.HashingPassword;
+import Model.Teacher;
 import Model.User;
 import Services.UserServices;
 import jakarta.servlet.RequestDispatcher;
@@ -86,6 +87,7 @@ public class RegisterServlet extends HttpServlet {
                 session.setAttribute("uid", user.getId());
                 session.setAttribute("username", user.getUsername());
                 session.setAttribute("role", user.getRole());
+                session.setMaxInactiveInterval(2*60*60);
                 request.setAttribute("msg", "Login Successful!");
                 System.out.println(request.getAttribute("msg"));
                 
@@ -95,14 +97,19 @@ public class RegisterServlet extends HttpServlet {
                 Cookie ckName = new Cookie("name", String.valueOf(user.getUsername()));
                 response.addCookie(ckName);
                 response.addCookie(ck);
-                user.setStatus("Active");
                 
+                Cookie[] cookie = request.getCookies();
+                for(Cookie c : cookie) {
+                    if(c.getName().equals("id")) {
+                        System.out.println("Cookie() value id: " + c.getValue());
+                    }
+                }
                 System.out.println("The user detauls: " + user.getId() + " "  +user.getUsername());
                 new UserServices().editUserActivity(user.getId(), "Active");
 
                     if (session.getAttribute("role").equals("T")) {
                         request.setAttribute("teacher",user);
-                        RequestDispatcher rd = request.getRequestDispatcher("PageChange?page=attendanceSheet&teac_id=" + session.getAttribute("uid"));
+                        RequestDispatcher rd = request.getRequestDispatcher("PageChange?page=attendanceSheet");
                         rd.forward(request, response);
                     } else if (session.getAttribute("role").equals("A")) {
                         RequestDispatcher rd = request.getRequestDispatcher("PageChange?page=adminDashboard");
@@ -126,6 +133,11 @@ public class RegisterServlet extends HttpServlet {
              
             System.out.println( user.getFullName() + " " + user.getUsername() + " " + user.getPassword() + " " + user.getRole() );
             new UserServices().insertUser(user);
+            
+            if( user.getRole().equalsIgnoreCase("T") ) {
+                Teacher teacher = new Teacher(user);
+                new UserServices().insertUser(teacher);
+            }
             
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/login.jsp");
             rd.forward(request, response);
@@ -166,13 +178,16 @@ public class RegisterServlet extends HttpServlet {
                System.out.println("The logout id: " + session.getAttribute("uid"));
              int id = (int) session.getAttribute("uid");
              new UserServices().editUserActivity(id, "Inactive");
-             Cookie cookie = new Cookie("name", "");
-             cookie.setMaxAge(0);
-             response.addCookie(cookie);
-             session.invalidate();
-             response.sendRedirect("PageChange?page=login");  
+             Cookie[] cookie = request.getCookies();
+             for(Cookie c : cookie) {
+                 c.setMaxAge(0);
+                 response.addCookie(c);
              }
-             response.sendRedirect("PageChange?page=login");  
+             
+             session.invalidate();
+             }
+             RequestDispatcher rd = request.getRequestDispatcher("/Pages/login.jsp");
+             rd.forward(request, response);
              
          }
         

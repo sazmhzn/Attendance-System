@@ -272,13 +272,6 @@
         <!-- ======= Sidebar ======= -->
         <aside id="sidebar" class="sidebar">
             <ul class="sidebar-nav" id="sidebar-nav">
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="dashboard.html">
-                        <i class="bi bi-grid"></i>
-                        <span>Dashboard</span>
-                    </a>
-                </li>
-                <!-- End Dashboard Nav -->
 
                 <li class="nav-heading">Pages</li>
 
@@ -367,7 +360,7 @@
                                                 <table class="table table-borderless">
                                                     <thead>
                                                         <tr>
-                                                            <th><input type="checkbox" id="checkAll"></th>
+                                                            <th><input type="checkbox"  id="checkAll-a"></th>
                                                             <th scope="col"> #</th>
                                                             <th scope="col">Student name</th>
                                                             <th scope="col">Semester</th>
@@ -375,21 +368,19 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                    <form action="AttendanceServlet?page=takeAttendance" method="POST">
-                                                        <c:forEach  items="${employeeList}" var="employee">
+                                                    <form action="AttendanceServlet?page=takeAttendance&section=A" method="POST">
+                                                        
+                                                        <c:forEach  items="${employeeListA}" var="employeeA">
                                                             <tr>
-                                                                <td><input type="checkbox" name="attendance" value="${employee.user.id}" ></td>
-                                                                <td  scope="row">${employee.user.id}</td>
-                                                                <td>${employee.user.fullName}</td>
-                                                                <td>${employee.user.email}</td>
-                                                                <td>${employee.user.address}</td>
-
+                                                                <td><input type="checkbox" class="ca" name="attendance" value="${employeeA.user.id}" ></td>
+                                                                <td  scope="row">${employeeA.user.id}</td>
+                                                                <td>${employeeA.user.fullName}</td>
+                                                                <td>${employeeA.college.semester.name}</td>
+                                                                <td>${employeeA.college.course.name}</td>
                                                             </tr>
                                                         </c:forEach>
-
                                                             <tr> 
                                                                 <td><button>Submit</button>  </td>
-
                                                             </tr>
                                                     </form>
 
@@ -409,64 +400,35 @@
                                             <div class="card-body pb-0">
                                                 <h5 class="card-title">Student list </h5>
 
-                                                <table class="table table-borderless datatable">
+                                                <table class="table table-borderless">
+                                                    <form action="AttendanceServlet?page=takeAttendance&section=b" method="POST">
+                                                        <tr> <input type="date" name="attendance_date" id="datePicker" min="1997-01-01" max="2023-12-31">  </tr>
                                                     <thead>
+                                                        
                                                         <tr>
+                                                            <th scope="col"><input type="checkbox" class="form-check-input " id="checkAll-b"></th>
                                                             <th scope="col">#</th>
                                                             <th scope="col">Student name</th>
-                                                            <th scope="col">Email</th>
-                                                            <th scope="col">Address</th>
-                                                            <th scope="col">Phone</th>
                                                             <th scope="col">Semester</th>
                                                             <th scope="col">Course</th>
-                                                            <th scope="col">Section</th>
-                                                            <th scope="col">Action</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <c:forEach  items="${employeeListB}" var="employee">
+                                                        
+                                                            
+                                                        <c:forEach  items="${employeeListB}" var="employeeB">
                                                             <tr>
-                                                                <td  scope="row">${employee.user.id}</td>
-                                                                <td>${employee.user.fullName}</td>
-                                                                <td>${employee.user.email}</td>
-                                                                <td>${employee.user.address}</td>
-                                                                <td>${employee.user.phone}</td>
-                                                                <td>${employee.college.semester.name}</td>
-                                                                <td>${employee.college.course.name}</td>
-                                                                <td>${employee.college.section.name}</td>
-                                                                <td>
-                                                                    <button type="button" class="btn btn-primary" >
-                                                                        <a href="PageChange?page=editStudent&userId=${employee.user.id}" class="text-light"> <i class="bi bi-pencil"></i> edit</a>  
-                                                                    </button>
-
-                                                                    <!-- Button trigger modal -->
-                                                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal${employee.user.id}">
-                                                                        <i class="bi bi-trash3"></i> Delete
-                                                                    </button>
-
-                                                                    <!-- Modal -->
-                                                                    <div class="modal fade" id="exampleModal${employee.user.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                        <div class="modal-dialog">
-                                                                            <div class="modal-content">
-                                                                                <div class="modal-header">
-                                                                                    <h5 class="modal-title" id="exampleModalLabel">Are you sure?</h5>
-                                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                                </div>
-                                                                                <div class="modal-body">
-                                                                                    You cannot undo this action
-                                                                                </div>
-                                                                                <div class="modal-footer">
-                                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Nope</button>
-                                                                                    <button type="button" class="btn btn-primary">
-                                                                                        <a href="UserServlet?page=deleteStudent&accId=${employee.roll}" class="text-light">Sure</a> 
-                                                                                    </button>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </td>
+                                                                <td  scope="row"><input type="checkbox" class="cb form-check-input " name="attendance" value="${employeeB.college.student.user.id}" ></td>
+                                                                <td>${employeeB.college.student.user.id}</td>
+                                                                <td>${employeeB.college.student.user.fullName}</td>
+                                                                <td>${employeeB.college.semester.name}</td>
+                                                                <td>${employeeB.college.course.name}</td>
                                                             </tr>
                                                         </c:forEach>
+                                                            <tr> 
+                                                                <td><button>Submit</button>  </td>
+                                                            </tr>
+                                                    </form>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -518,11 +480,21 @@
         </script>
          <script>
       $(document).ready(function() {
-        $("#checkAll").click(function() {
-          $("input[type=checkbox]").prop('checked', $(this).prop('checked'));
+        $("#checkAll-a").click(function() {
+          $("input.ca[type=checkbox]").prop('checked', $(this).prop('checked'));
         })
+        
+        $("#checkAll-b").click(function() {
+          $("input.cb[type=checkbox]").prop('checked', $(this).prop('checked'));
+        });
+        
+    $('#datePicker').val(new Date().toDateInputValue());
             });
   </script>
+  
+  <script>
+      
+      </script>
     </body>
 </html>
 

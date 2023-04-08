@@ -143,7 +143,7 @@ public class UserServices {
     
     public List<User> getActiveUserList() {
         List<User> userList = new ArrayList<>();
-        String query = "SELECT * FROM `user_activity` LEFT JOIN `teacher` ON teacher.ACC_ID = user_activity.USER_ID";
+        String query = "SELECT * FROM `user_activity` RIGHT JOIN `teacher` ON teacher.ACC_ID = user_activity.USER_ID";
         System.out.println(query);
         PreparedStatement pstm = new DBConnection().getStatement(query);
         try {
@@ -482,7 +482,7 @@ public class UserServices {
     
     public void editUser(Teacher teacher) {
 
-        String query = "UPDATE `teacher` SET `TEAC_NAME`=?,`TEAC_ADDRESS`=?,`TEAC_EMAIL`=?,`TEAC_PHONE`=? WHERE ACC_ID=?";
+        String query = "UPDATE `teacher` SET `TEAC_NAME`=?,`TEAC_ADDRESS`=?,`TEAC_EMAIL`=?,`TEAC_PHONE`=? WHERE TEAC_ID=?";
         PreparedStatement pstm = new DBConnection().getStatement(query);
         
         try {

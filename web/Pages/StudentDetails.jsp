@@ -354,22 +354,7 @@
       </div>
       <!-- End Page Title -->
 
-      <% if(session.getAttribute("success") != null)  {%>
-      
-      <div class="alert alert-success alert-dismissible fade show" role="alert">
-          <%=session.getAttribute("success")%>
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-
-      <% } %> 
-       <%else if(session.getAttribute("fail") != null)  {%>
-
-      <div class="alert alert-danger alert-dismissible fade show" role="alert">
-          <%=session.getAttribute("fail")%>
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-
-      <% } %> 
+    
       <section class="section dashboard">
         <div class="row">
              <!-- Top Selling -->

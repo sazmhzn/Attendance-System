@@ -229,6 +229,22 @@ public class UserServlet extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("PageChange?page=Subject");
             rd.forward(request, response);
         }
+        
+        if (page.equalsIgnoreCase("editSubject")) {
+            
+            College college = new College();
+            college.setCourse(new Course(Integer.parseInt(request.getParameter("course")) , ""));
+            college.setSemester(new Semester(Integer.parseInt(request.getParameter("semester")), ""));
+            college.setSubject(new Subject(
+                    request.getParameter("subject_name"),
+                    request.getParameter("subject_code"),
+                    new Teacher(new User(0, request.getParameter("teacher"), page, page, page))));
+            
+            
+            System.out.println("College " + college.getSemester().getId()+ " " + college.getSubject().getSubject_name() + " " + college.getSubject().getTeacher().getUser().getFullName());
+            
+            
+        }
 
     }
 

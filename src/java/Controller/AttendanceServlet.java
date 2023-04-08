@@ -4,11 +4,13 @@
  */
 package Controller;
 
+import Model.Attendance;
+import Services.SubjectServices;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -33,7 +35,7 @@ public class AttendanceServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-      
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -64,36 +66,69 @@ public class AttendanceServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        
+
         System.out.println("\n =============================Youe are in attendnace sevlet ===================\n");
-        
-        
-        String page = request.getParameter("page");
         HttpSession session = request.getSession();
-        
-        if(page.equalsIgnoreCase("takeAttendance")) {
-           String[] roll = request.getParameterValues("attendance");
-        
-        for( String s : roll ) {
-            System.out.println("The attendance roll: "  + s);
+        System.out.println("session: " + session.getAttribute("uid"));
+        int teac_id = 0;
+
+        if (session.getAttribute("uid") != null) {
+            System.out.println("Session is not null");
+            teac_id = (int) session.getAttribute("uid");
+        }
+
+        Cookie[] cookie = request.getCookies();
+        if (cookie != null) {
+            System.out.println("Cookie is not null");
+            for (Cookie c : cookie) {
+                if (c.getName().equalsIgnoreCase("id")) {
+                    teac_id = Integer.parseInt(c.getValue());
+                }
+            }
         }
         
-        RequestDispatcher rd = request.getRequestDispatcher("/Pages/AttendanceSheet.jsp");
-        rd.forward(request, response); 
+
+        String page = request.getParameter("page");
+                
+        if (page.equalsIgnoreCase("takeAttendance")) {
+            System.out.println("Inside takeAttendance");
+            String[] roll = request.getParameterValues("attendance");
+            String date = request.getParameter("attendance_date");
+            
+            Attendance att = new Attendance();
+            att.setTeac_id(teac_id);
+            att.setStu_id(roll);
+            for( Cookie c : cookie ) {
+                if(c.getName().equalsIgnoreCase("subject_id")) {
+                    att.setSub_id( Integer.parseInt( c.getValue()) );
+                }
+            }
+            att.setDate(date);
+            System.out.println("Attendance details: \n\nT_id: " + att.getTeac_id() + " sub_id: "  + att.getSub_id() + " date: " + att.getDate());
+            
+            if( new SubjectServices().checkAttendance(att.getSub_id(), date) ) {
+                System.out.println(" the value is already stored");
+            } else {
+              new SubjectServices().insertAttendance(att);  
+            }
+            
+            
+
         }
-        
-        
-        
+
+        RequestDispatcher rd = request.getRequestDispatcher("PageChange?page=attendanceDetails");
+        rd.forward(request, response);
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
+
+
+/**
+ * Returns a short description of the servlet.
+ *
+ * @return a String containing servlet description
+ */
+@Override
+public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

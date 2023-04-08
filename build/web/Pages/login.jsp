@@ -136,9 +136,10 @@
                       <div class="form-outline mb-4">
                         <label for="yourPassword" class="form-label">Password</label>
                         <input type="password" name="password" class="form-control" id="yourPassword" required />
-                        <div class="invalid-feedback">
-                          Please enter your password!
+                        <div class="invalid-feedback"   id="password-strength-status">
+                          Please enter your password! <span> here</span>
                         </div>
+                        
                       </div>
 
                       <!-- Submit button -->
@@ -174,22 +175,46 @@
   <script src="Styling/assets/vendor/simple-datatables/simple-datatables.js"></script>
   <script src="Styling/assets/vendor/tinymce/tinymce.min.js"></script>
   <script src="Styling/assets/vendor/php-email-form/validate.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
 
   <!-- Template Main JS File -->
   <script src="Styling/assets/js/main.js"></script>
 
-    <script>
-// Document is ready
-//$(document).ready(function () {
-//// Validate Username
-//$("#submitbtn").click( function() {
-//    $("#username").addClass("is-invalid");   
-//    $("#username").values();
-//    console.log("Button pressed")
-//});
-//  
-//)};
-</script><!-- comment -->
+  <script>
+        $(document).ready(function() {
+            var number = /([0-9])/;
+        var alphabets = /([a-zA-Z])/;
+        var special_characters = /([~,!,@,#,$,%,^,&,*,-,_,+,=,?,>,<])/;
+        var password = $('#yourPassword').val().trim();
+        
+            $(".btn").click(function(e) {
+              
+                console.log("Inside")
+        
+        if (password.length < 6) {
+            e.preventDefault();
+            $('#password-strength-status').removeClass();
+                $('#password-strength-status').addClass('weak-password');
+                $('#password-strength-status').html("Weak (should be atleast 6 characters.)");
+        } else {
+                if (password.match(number) && password.match(alphabets) && password.match(special_characters)) {
+                        $('#password-strength-status').removeClass();
+                        $('#password-strength-status').addClass('strong-password');
+                        $('#password-strength-status').html("Strong");
+                }
+                else {
+                    
+                e.preventDefault();
+                        $('#password-strength-status').removeClass();
+                        $('#password-strength-status').addClass('medium-password');
+                        $('#password-strength-status').html("Medium (should include alphabets, numbers and special characters.)");
+                        return false;
+                }
+        }
+    })
+            
+
+  </script><!-- comment -->
 
 
   </body>

@@ -13,6 +13,7 @@ public class College {
     private Course course;
     private Semester semester;
     private Section section;
+    private Student student;
 
     public College() {
     }
@@ -22,6 +23,18 @@ public class College {
         this.semester = semester;
         this.section = section;
     }
+
+    public College(Subject subject, Course course, Semester semester, Section section, Student student) {
+        this.subject = subject;
+        this.course = course;
+        this.semester = semester;
+        this.section = section;
+        this.student = student;
+    }
+
+    
+    
+    
     
     public College(Subject subject) {
         this.subject = subject;
@@ -33,6 +46,10 @@ public class College {
 
     public College(Semester semester) {
         this.semester = semester;
+    }
+
+    public College(Student student) {
+        this.student = student;
     }
 
     public Semester getSemester() {
@@ -66,6 +83,14 @@ public class College {
 
     public void setSection(Section section) {
         this.section = section;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
     }
     
 }
