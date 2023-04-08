@@ -1,9 +1,9 @@
 <%-- 
-    Document   : AttendanceSheet
-    Created on : Mar 8, 2023, 10:06:03 AM
+    Document   : StudentDetails
+    Created on : Mar 17, 2023, 10:31:18 AM
     Author     : lenovo
 --%>
-<%@page import="jakarta.servlet.http.Cookie" %>
+<%@page import="jakarta.servlet.http.HttpSession" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,7 +11,7 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-    <title>Attendify</title>
+    <title>Teacher</title>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <meta content="" name="description" />
     <meta content="" name="keywords" />
@@ -31,21 +31,47 @@
     />
 
     <!-- Vendor CSS Files -->
-  <link href="Styling/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="Styling/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="Styling/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="Styling/assets/vendor/quill/quill.snow.css" rel="stylesheet">
-  <link href="Styling/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-  <link href="Styling/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="Styling/assets/vendor/simple-datatables/style.css" rel="stylesheet">
+    <link
+      href="Styling/assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="Styling/assets/vendor/boxicons/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="Styling/assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="Styling/assets/vendor/quill/quill.snow.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="Styling/assets/vendor/quill/quill.bubble.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="Styling/assets/vendor/remixicon/remixicon.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="Styling/assets/vendor/simple-datatables/style.css"
+      rel="stylesheet"
+    />
 
     <!-- Template Main CSS File -->
     <link href="Styling/assets/css/style.css" rel="stylesheet" />
-
   </head>
 
   <body>
-    <!-- ======= Header ======= -->
+     <!-- ======= Header ======= -->
     <header id="header" class="header fixed-top d-flex align-items-center">
       <div class="d-flex align-items-center justify-content-between">
         <a href="index.html" class="logo d-flex align-items-center">
@@ -251,7 +277,7 @@
         <li class="nav-heading">Pages</li>
 
         <li class="nav-item">
-          <a class="nav-link" href="PageChange?page=attendanceSheet">
+          <a class="nav-link collapsed" href="PageChange?page=attendanceSheet">
             <i class="bi bi-person"></i>
             <span>Attendance Sheet</span>
           </a>
@@ -259,7 +285,7 @@
         <!-- End Profile Page Nav -->
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="PageChange?page=studentDetailsTeac">
+          <a class="nav-link" href="PageChange?page=studentAttendance">
             <i class="bi bi-question-circle"></i>
             <span>Student</span>
           </a>
@@ -273,6 +299,14 @@
           </a>
         </li>
         <!-- End Contact Page Nav -->
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="PageChange?page=addTeacher">
+            <i class="bi bi-card-list"></i>
+            <span>Teacher</span>
+          </a>
+        </li>
+        <!-- End Register Page Nav -->
         
         <li class="nav-heading">Extras</li>
 
@@ -287,61 +321,65 @@
     </aside>
     <!-- End Sidebar-->
 
+    
     <!-- ======= Main ======= -->
     <main id="main" class="main">
       <div class="pagetitle">
-        <h1>Subject</h1>
+        <h1>Student</h1>
         <nav>
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="dashboard.html">Home</a></li>
-            <li class="breadcrumb-item active">Subjects</li>
+            <li class="breadcrumb-item"><a href="dashboard.html">Student</a></li>
+            <li class="breadcrumb-item active">All students</li>
+            <!--<li class="breadcrumb-item ">Add Students</li>-->
           </ol>
         </nav>
+        
+        <button class="btn btn-primary"> <a href="PageChange?page=addStudent" class="text-light"> Add Student </a>  </button>
       </div>
       <!-- End Page Title -->
 
+    
       <section class="section dashboard">
         <div class="row">
-         
-
-          <div class="row">
-                            
-              <!-- Recent Sales -->
+             <!-- Top Selling -->
             <div class="col-12">
-              <div class="card recent-sales overflow-auto">
+              <div class="card top-selling overflow-auto">
 
-                <div class="card-body">
-                  <h5 class="card-title">Recent Attendance <span>| Today</span></h5>
+                <div class="card-body pb-0">
+                  <h5 class="card-title">Student list </h5>
 
                   <table class="table table-borderless datatable">
                     <thead>
                       <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Subject name</th>
-                        <th scope="col">Subject Code</th>
+                        <th scope="col">Student name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Phone</th>
                         <th scope="col">Semester</th>
-                        <th scope="col">Action</th>
+                        <th scope="col">Course</th>
+                        <th scope="col">Section</th>
                       </tr>
                     </thead>
                     <tbody>
-                        <c:forEach items="${subjectList}" var="college">
-                        <tr>
-                        <th scope="row">#${college.subject.subject_id}</th>
-                        <td>${college.subject.subject_name}</td>
-                        <td>${college.subject.subject_code}</td>
-                        <td>${college.semester.name}</td>
-                        <td><a href="PageChange?page=takeAttendanceSheet&subject_id=${college.subject.subject_id}" class="text-light btn btn-primary"> Take attendance</a></td>
-                      </tr>
+                        <c:forEach  items="${employeeList}" var="employee">
+                            <tr>
+                                <td  scope="row">${employee.user.id}</td>
+                                <td>${employee.user.fullName}</td>
+                                <td>${employee.user.email}</td>
+                                <td>${employee.user.address}</td>
+                                <td>${employee.user.phone}</td>
+                                <td>${employee.college.semester.name}</td>
+                                <td>${employee.college.course.name}</td>
+                                <td>${employee.college.section.name}</td>
+                                
+                            </tr>
                         </c:forEach>
-                    
                     </tbody>
                   </table>
-
                 </div>
-
               </div>
-            </div><!-- End Recent Sales -->
-          </div>
+            </div><!-- End Top Selling -->
         </div>
       </section>
     </main>
@@ -352,6 +390,11 @@
       class="back-to-top d-flex align-items-center justify-content-center"
       ><i class="bi bi-arrow-up-short"></i
     ></a>
+
+    <!-- CDN file -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables.net/1.13.3/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-bs5/1.13.3/dataTables.bootstrap5.min.js"></script>
 
     <!-- Vendor JS Files -->
     <script src="Styling/assets/vendor/apexcharts/apexcharts.min.js"></script>
@@ -365,24 +408,16 @@
 
     <!-- Template Main JS File -->
     <script src="Styling/assets/js/main.js"></script>
-       <script>
-      const checkAll = document.querySelector(".check-all");
-      const checkMe = document.querySelectorAll('input[name="roll"]');
 
-      checkAll.addEventListener("click", function () {
-        if (checkAll.checked == true) {
-          console.log("The main check box is checked");
-          let btn = checkMe.forEach((item) => {
-            item.checked = true;
-            console.log(item.value);
-          });
-        } else if (checkAll.checked !== null) {
-          let btn = checkMe.forEach((item) => {
-            item.checked = false;
-          });
-        }
+    <!-- Custome JS File -->
+    <script>
+      $(document).ready(function () {
+        $("#example").DataTable();
       });
     </script>
+    <script> 
+    $('.alert').alert()
+    </script>
   </body>
-  
 </html>
+

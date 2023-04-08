@@ -259,7 +259,7 @@
         <!-- End Profile Page Nav -->
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="PageChange?page=studentAttendance">
+          <a class="nav-link collapsed" href="PageChange?page=studentDetailsTeac">
             <i class="bi bi-question-circle"></i>
             <span>Student</span>
           </a>
@@ -273,14 +273,6 @@
           </a>
         </li>
         <!-- End Contact Page Nav -->
-
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="PageChange?page=addTeacher">
-            <i class="bi bi-card-list"></i>
-            <span>Teacher</span>
-          </a>
-        </li>
-        <!-- End Register Page Nav -->
         
         <li class="nav-heading">Extras</li>
 

@@ -314,8 +314,44 @@ public class UserServices {
 
         return userList;
     }
-      
+     
     
+    /**
+     * This  method will provide the list of student associated with a teacher
+     * @param teac_id
+     * @return 
+     */
+    public List<Student> getStudentList(int teac_id) {
+        List<Student> userList = new ArrayList<>();
+        String query = "SELECT * from teacher LEFT JOIN subject ON teacher.TEAC_ID = subject.TEAC_ID LEFT JOIN student ON subject.SEM_ID = student.SEM_ID LEFT JOIN semester on student.SEM_ID = semester.SEM_ID LEFT JOIN course on semester.C_ID = course.C_ID LEFT JOIN section ON student.SEC_ID = section.SECTION_ID WHERE teacher.ACC_ID=?;";
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+        try {
+            pstm.setInt(1, teac_id);
+            System.out.println("pstm: " + pstm);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                Student student = new Student();
+                student.setUser(new User(
+                        rs.getInt("STUD_ID"), 
+                        rs.getString("STUD_NAME"), 
+                        rs.getString("STUD_EMAIL"), 
+                        rs.getString("STUD_PHONE"), 
+                        rs.getString("STUD_ADD")
+                ));
+                
+                student.setCollege(new College(
+                        (new Course(rs.getInt("C_ID"), rs.getString("COURSE_NAME"))), 
+                        (new Semester(rs.getInt("SEM_ID"), rs.getString("SEM_NAME"))), 
+                        (new Section( rs.getInt("SEC_ID"), rs.getString("SECTION_NAME") ))
+                ));
+                userList.add(student);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return userList;
+    }
     /**
      * This method will insert User in accounts table
   This method is used in addTeacher jsp

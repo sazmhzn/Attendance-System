@@ -215,15 +215,30 @@ public class SubjectServices {
         return false;
     }
 
-    public List<Student> getAttendanceSheet(int id, String sec) {
+    public boolean checkTodayAttendance() {
+        String query = "SELECT * FROM `attendance` where SUB_ID=? AND ATT_DATE=CURRENTDATE()";
+        
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+        try {
+            ResultSet rs = pstm.executeQuery();
+            System.out.println(pstm);
+            while (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
+    public List<Student> getAttendanceSheet(int id, int sec_id) {
 
         List<Student> studentList = new ArrayList<>();
-        String query = "SELECT * FROM subject LEFT JOIN student on subject.C_ID = student.C_ID LEFT JOIN course on course.C_ID = subject.C_ID LEFT JOIN section on student.SEC_ID = section.SECTION_ID LEFT JOIN semester ON semester.SEM_ID = student.SEM_ID where subject.SUB_ID=? and section.SECTION_NAME=?;";
-//        String query = "SELECT * FROM `subject` LEFT JOIN teacher on subject.TEAC_ID = teacher.TEAC_ID LEFT JOIN semester on subject.SEM_ID = semester.SEM_ID where teacher.ACC_ID=1; ";
+        String query = "SELECT * from subject LEFT JOIN semester ON subject.SEM_ID = semester.SEM_ID LEFT JOIN student ON semester.SEM_ID = student.SEM_ID LEFT JOIN course ON course.C_ID = student.C_ID WHERE SUB_ID=? AND SEC_ID=?";
         PreparedStatement pstm = new DBConnection().getStatement(query);
         try {
             pstm.setInt(1, id);
-            pstm.setString(2, sec);
+            pstm.setInt(2, sec_id);
             System.out.println(pstm);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
@@ -232,7 +247,7 @@ public class SubjectServices {
                         (new Subject(rs.getInt("SUB_ID"), rs.getString("SUB_NAME"), rs.getString("SUB_CODE"))),
                         (new Course(rs.getInt("C_ID"), rs.getString("COURSE_NAME"))),
                         (new Semester(rs.getInt("SEM_ID"), rs.getString("SEM_NAME"))),
-                        (new Section(rs.getInt("SEC_ID"), rs.getString("SECTION_NAME"))),
+                        (new Section(rs.getInt("SEC_ID"), "")),
                         (new Student(new User(
                                 rs.getInt("STUD_ID"),
                                 rs.getString("STUD_NAME"),
@@ -261,7 +276,8 @@ public class SubjectServices {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 Date dateObj = sdf.parse(att.getDate());
                 Timestamp timestamp = new Timestamp(dateObj.getTime());
-                pstm.setTimestamp(4, timestamp);
+                System.out.println("timestamp: " + timestamp + " " + dateObj);
+                    pstm.setTimestamp(4, timestamp);
                 pstm.setBoolean(5, true);
                 System.out.println("pst: " + pstm);
                 pstm.execute();

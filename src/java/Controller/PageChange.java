@@ -11,7 +11,6 @@ import Model.Teacher;
 import Model.User;
 import Services.SubjectServices;
 import Services.UserServices;
-import com.oracle.wls.shaded.org.apache.bcel.classfile.Code;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -77,6 +76,7 @@ public class PageChange extends HttpServlet {
 
         String page = request.getParameter("page");
         HttpSession session = request.getSession();
+        Cookie[] cookie = request.getCookies();
 
         if (page.equalsIgnoreCase("register")) {
 
@@ -96,8 +96,6 @@ public class PageChange extends HttpServlet {
 
         if (page.equalsIgnoreCase("attendanceSheet")) {
             System.out.println("\n\n=============== attendance Sheet ==============\n");
-//            int acc_id = Integer.parseInt(request.getParameter("teac_id"));
-
             int acc_id = 0;
             
             if(session.getAttribute("uid") != null) {
@@ -105,7 +103,7 @@ public class PageChange extends HttpServlet {
                acc_id = (int) session.getAttribute("uid");
             }
             
-            Cookie[] cookie = request.getCookies();
+            
             if (cookie != null) {
                 System.out.println("Cookie is not null");
                 for (Cookie c : cookie) {
@@ -131,10 +129,10 @@ public class PageChange extends HttpServlet {
             response.addCookie(subject);
             
             //get the student that take the subject
-            List<Student> studentListA = new SubjectServices().getAttendanceSheet(subject_id, "A");
+            List<Student> studentListA = new SubjectServices().getAttendanceSheet(subject_id, 1);
             request.setAttribute("employeeListA", studentListA);
 
-            List<Student> studentListB = new SubjectServices().getAttendanceSheet(subject_id, "B");
+            List<Student> studentListB = new SubjectServices().getAttendanceSheet(subject_id, 2);
             request.setAttribute("employeeListB", studentListB);
 
             
@@ -143,7 +141,44 @@ public class PageChange extends HttpServlet {
         }
         
         if (page.equalsIgnoreCase("attendanceDetails")) {
+            
+            int acc_id = 0;
+            if (cookie != null) {
+                System.out.println("Cookie is not null");
+                for (Cookie c : cookie) {
+                    if (c.getName().equalsIgnoreCase("id")) {
+                       acc_id = Integer.parseInt(c.getValue());
+                    }
+                }
+            }
+
+            System.out.println("The teacher acc_ id in attencesheet Details: " + acc_id);
+            
+            List<College> subjectList = new SubjectServices().getSubjectList(acc_id);
+            request.setAttribute("subjectList", subjectList);
+            
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/AttendanceDetails.jsp");
+            rd.forward(request, response);
+        }
+        
+        if (page.equalsIgnoreCase("studentDetailsTeac")) {
+            int teac_id = 0;
+            
+            for(Cookie c : cookie) {
+                if(c.getName().equals("id")) {
+                    teac_id = Integer.parseInt(c.getValue()) ;
+                }
+            }
+            System.out.println("You are in studentDetailTeac");
+            System.out.println("Teacher id here is: " + teac_id);
+            List<Student> studentList = new UserServices().getStudentList(teac_id);
+            request.setAttribute("employeeList", studentList);
+            
+            for( Student s : studentList ) {
+                System.out.println("Name: " + s.getUser().getFullName());
+            }
+            
+            RequestDispatcher rd = request.getRequestDispatcher("/Pages/StudentDetailTeac.jsp");
             rd.forward(request, response);
         }
 
