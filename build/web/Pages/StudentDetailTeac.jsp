@@ -285,7 +285,7 @@
         <!-- End Profile Page Nav -->
 
         <li class="nav-item">
-          <a class="nav-link" href="PageChange?page=studentAttendance">
+          <a class="nav-link" href="PageChange?page=studentDetailsTeac">
             <i class="bi bi-question-circle"></i>
             <span>Student</span>
           </a>
@@ -300,14 +300,6 @@
         </li>
         <!-- End Contact Page Nav -->
 
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="PageChange?page=addTeacher">
-            <i class="bi bi-card-list"></i>
-            <span>Teacher</span>
-          </a>
-        </li>
-        <!-- End Register Page Nav -->
-        
         <li class="nav-heading">Extras</li>
 
         <li class="nav-item">
@@ -333,8 +325,6 @@
             <!--<li class="breadcrumb-item ">Add Students</li>-->
           </ol>
         </nav>
-        
-        <button class="btn btn-primary"> <a href="PageChange?page=addStudent" class="text-light"> Add Student </a>  </button>
       </div>
       <!-- End Page Title -->
 
@@ -372,7 +362,7 @@
                                 <td>${employee.college.semester.name}</td>
                                 <td>${employee.college.course.name}</td>
                                 <td>${employee.college.section.name}</td>
-                                
+                                <td> <a href="PageChange?page=studentAttendance"> <button> View Attendance </button> </a></td>
                             </tr>
                         </c:forEach>
                     </tbody>

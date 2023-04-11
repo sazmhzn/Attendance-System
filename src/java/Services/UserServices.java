@@ -323,7 +323,7 @@ public class UserServices {
      */
     public List<Student> getStudentList(int teac_id) {
         List<Student> userList = new ArrayList<>();
-        String query = "SELECT * from teacher LEFT JOIN subject ON teacher.TEAC_ID = subject.TEAC_ID LEFT JOIN student ON subject.SEM_ID = student.SEM_ID LEFT JOIN semester on student.SEM_ID = semester.SEM_ID LEFT JOIN course on semester.C_ID = course.C_ID LEFT JOIN section ON student.SEC_ID = section.SECTION_ID WHERE teacher.ACC_ID=?;";
+        String query = "SELECT * from teacher LEFT JOIN subject ON teacher.TEAC_ID = subject.TEAC_ID LEFT JOIN student ON subject.SEM_ID = student.SEM_ID LEFT JOIN semester on student.SEM_ID = semester.SEM_ID LEFT JOIN course on semester.C_ID = course.C_ID LEFT JOIN section ON student.SEC_ID = section.SECTION_ID WHERE teacher.ACC_ID=? and student.STUD_ID IS NOT null;";
         PreparedStatement pstm = new DBConnection().getStatement(query);
         try {
             pstm.setInt(1, teac_id);
@@ -419,7 +419,7 @@ public class UserServices {
             pstm.setInt(8, newUser.getId());
             
             System.out.println("insert Student query:" + pstm);
-
+            
             pstm.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -440,11 +440,6 @@ public class UserServices {
             e.printStackTrace();
         }
     }
-    
-    
-    
-    
-    
     
     /**
      * This method will delete a user from account table
@@ -586,5 +581,24 @@ public class UserServices {
         } catch(SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    
+    public boolean hasSimilarUser( User user ) {
+        String query = "SELECT * FROM `accounts` LEFT JOIN student on accounts.ACC_ID = student.ACC_ID LEFT JOIN teacher ON accounts.ACC_ID = teacher.ACC_ID where STUD_PHONE=? OR STUD_EMAIL=?";
+        
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+        try {
+            pstm.setString(1, user.getPhone());
+            pstm.setString(2, user.getEmail());
+            ResultSet rs = pstm.executeQuery();
+            System.out.println(pstm);
+            while (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

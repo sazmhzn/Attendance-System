@@ -13,8 +13,14 @@ import java.security.NoSuchAlgorithmException;
 public class HashingPassword {
     
     public static String hashPassword(String pwd) {
+        
+        if( pwd == null ) {
+            return null;
+        }
         String passwordToHash = pwd;
         String generatedPassword = null;
+        
+        
         try {
             // Create MessageDigest instance for MD5
             MessageDigest md = MessageDigest.getInstance("MD5");

@@ -80,6 +80,11 @@ public class RegisterServlet extends HttpServlet {
             String username = request.getParameter("username");
             String password = HashingPassword.hashPassword(request.getParameter("password"));
             
+            if( username == null || password.equalsIgnoreCase("") ) {
+                RequestDispatcher rd = request.getRequestDispatcher("Pages/login.jsp");
+                rd.forward(request, response);
+            }
+            
             User user = new UserServices().getUser(username, password);
             //check if there is User in dadtabse account table
             if (user != null) {

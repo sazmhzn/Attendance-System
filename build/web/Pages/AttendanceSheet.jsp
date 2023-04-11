@@ -320,6 +320,7 @@
                         <th scope="col">Subject name</th>
                         <th scope="col">Subject Code</th>
                         <th scope="col">Semester</th>
+                        <th scope="col">Status</th>
                         <th scope="col">Action</th>
                       </tr>
                     </thead>
@@ -330,8 +331,11 @@
                         <td>${college.subject.subject_name}</td>
                         <td>${college.subject.subject_code}</td>
                         <td>${college.semester.name}</td>
+                        <td> 
+                          ${college.attendance.status ? 'Taken' : 'Not taken'} 
+                        </td>
                         <td><a href="PageChange?page=takeAttendanceSheet&subject_id=${college.subject.subject_id}" class="text-light btn btn-primary"> Take attendance</a></td>
-                      </tr>
+                        </tr>
                         </c:forEach>
                     
                     </tbody>

@@ -14,6 +14,7 @@ public class College {
     private Semester semester;
     private Section section;
     private Student student;
+    private Attendance attendance;
 
     public College() {
     }
@@ -30,6 +31,14 @@ public class College {
         this.semester = semester;
         this.section = section;
         this.student = student;
+    }
+
+    public Attendance getAttendance() {
+        return attendance;
+    }
+
+    public void setAttendance(Attendance attendance) {
+        this.attendance = attendance;
     }
 
     

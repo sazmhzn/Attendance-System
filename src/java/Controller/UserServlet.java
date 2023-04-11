@@ -78,7 +78,6 @@ public class UserServlet extends HttpServlet {
         String page = request.getParameter("page");
 
         HttpSession session = request.getSession();
-        
         /**
          * This condition check if the page is to add a teacher
          */
@@ -145,15 +144,15 @@ public class UserServlet extends HttpServlet {
             Student student = new Student(); //initializing a new student
 
             student.setUser(new User(request.getParameter("fullname"), request.getParameter("email"), request.getParameter("contact"), request.getParameter("address"), request.getParameter("semester"), request.getParameter("section"), request.getParameter("course"), request.getParameter("username"), h.hashPassword(request.getParameter("password")) , "S"));
-            System.out.println(
-                        student.getUser().getFullName() + " " + student.getUser().getAddress() + " " + 
-                        student.getUser().getUsername() + " " + student.getUser().getPassword() +  " " +
-                        student.getUser().getEmail() +  " " + student.getUser().getCourse() +  " " + 
-                        student.getUser().getSection() +  " " + student.getUser().getSemester() + " " +
-                        student.getUser().getPhone()
-                                );
-            
-            new UserServices().insertUser(student); //inserting into user table
+    
+            if(new UserServices().hasSimilarUser(student.getUser())) {
+                session.setAttribute("status", "Same email or phone already exists");
+            } else {
+                new UserServices().insertUser(student); //inserting into user table
+                session.setAttribute("status", "Student added");
+            }
+            System.out.println("\n\n\n==================================\n" + session.getAttribute("status"));
+            session.setMaxInactiveInterval(5);
             
             RequestDispatcher rd = request.getRequestDispatcher("PageChange?page=addStudent");
             rd.forward(request, response);

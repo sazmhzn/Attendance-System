@@ -110,6 +110,7 @@ public class SubjectServices {
                                 rs.getString("teac_Address")
                         ))
                 ));
+                college.setAttendance(new Attendance(checkTodayAttendance(rs.getInt("SUB_ID"))));
 
                 college.setSemester(new Semester(1, rs.getString("SEM_NAME")));
                 System.out.println("College: " + college.getSubject().getSubject_name());
@@ -215,11 +216,12 @@ public class SubjectServices {
         return false;
     }
 
-    public boolean checkTodayAttendance() {
-        String query = "SELECT * FROM `attendance` where SUB_ID=? AND ATT_DATE=CURRENTDATE()";
+    public boolean checkTodayAttendance(int SUB_ID) {
+        String query = "SELECT * FROM `attendance` WHERE SUB_ID=? AND ATT_DATE=CURRENT_DATE; ";
         
         PreparedStatement pstm = new DBConnection().getStatement(query);
         try {
+            pstm.setInt(1, SUB_ID);
             ResultSet rs = pstm.executeQuery();
             System.out.println(pstm);
             while (rs.next()) {
@@ -230,6 +232,8 @@ public class SubjectServices {
         }
         return false;
     }
+    
+    
     
     public List<Student> getAttendanceSheet(int id, int sec_id) {
 
@@ -264,7 +268,8 @@ public class SubjectServices {
         }
         return studentList;
     }
-
+    
+        
     public void insertAttendance(Attendance att) {
         String query = "INSERT INTO `attendance`(`STU_ID`, `ACC_ID`, `SUB_ID`, `ATT_DATE`, `STATUS`) VALUES (?,?,?,?,?)";
         PreparedStatement pstm = new DBConnection().getStatement(query);
@@ -289,4 +294,5 @@ public class SubjectServices {
         }
     }
 
+    
 }

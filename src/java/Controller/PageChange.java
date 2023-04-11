@@ -117,6 +117,8 @@ public class PageChange extends HttpServlet {
             List<College> subjectList = new SubjectServices().getSubjectList(acc_id);
             request.setAttribute("subjectList", subjectList);
 
+            
+            
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/AttendanceSheet.jsp");
             rd.forward(request, response);
         }
@@ -187,6 +189,10 @@ public class PageChange extends HttpServlet {
             request.setAttribute("employeeList", employeeList);
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/StudentAttendanceDetails.jsp");
             rd.forward(request, response);
+        }
+        
+        if( page.equalsIgnoreCase("viewStudentAttendance") ) {
+            
         }
 
         if (page.equalsIgnoreCase("addTeacher")) {
@@ -270,6 +276,10 @@ public class PageChange extends HttpServlet {
 
             List<Teacher> teacherList = new UserServices().getTeacherList();
             request.setAttribute("teacherList", teacherList);
+            
+            for(Teacher r : teacherList) {
+                System.out.println("Teachers: " + r.getUser().getFullName());
+            }
 
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/AddSubject.jsp");
             rd.forward(request, response);

@@ -30,6 +30,11 @@ public class Attendance {
         this.teac_id = teac_id;
     }
 
+    public Attendance(boolean status) {
+        this.status = status;
+    }
+    
+
     public int getAtt_id() {
         return att_id;
     }

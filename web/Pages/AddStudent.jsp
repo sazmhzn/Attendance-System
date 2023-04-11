@@ -1,5 +1,7 @@
 <%-- Document : AddStudent Created on : Mar 27, 2023, 3:53:08 PM Author : lenovo
---%> <%@page contentType="text/html" pageEncoding="UTF-8"%>
+--%> 
+<%@page import="jakarta.servlet.http.HttpSession" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -333,6 +335,11 @@
 
     <!-- ======= Main ======= -->
     <main id="main" class="main">
+        
+        <% if(session.getAttribute("status") != null) { %>
+        <h1> <%=session.getAttribute("status")%> </h1>
+           <% }%>
+        
       <div class="pagetitle">
         <h1>Student</h1>
         <nav>
