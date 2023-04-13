@@ -273,6 +273,7 @@
     <!-- ======= Sidebar ======= -->
     <aside id="sidebar" class="sidebar">
       <ul class="sidebar-nav" id="sidebar-nav">
+      
 
         <li class="nav-heading">Pages</li>
 
@@ -285,7 +286,7 @@
         <!-- End Profile Page Nav -->
 
         <li class="nav-item">
-          <a class="nav-link" href="./studentList.html">
+          <a class="nav-link" href="PageChange?page=studentDetailsTeac">
             <i class="bi bi-question-circle"></i>
             <span>Student</span>
           </a>
@@ -293,12 +294,14 @@
         <!-- End F.A.Q Page Nav -->
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="pages-contact.html">
+          <a class="nav-link collapsed" href="PageChange?page=studentReport">
             <i class="bi bi-envelope"></i>
             <span>Report</span>
           </a>
         </li>
         <!-- End Contact Page Nav -->
+
+        <li class="nav-heading">Extras</li>
 
         <li class="nav-item">
           <a class="nav-link collapsed" href="RegisterServlet?page=Logout">
@@ -341,25 +344,15 @@
                       <tr>
                         <th scope="col">#</th>
                         <th scope="col">Student name</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Address</th>
-                        <th scope="col">Phone</th>
-                        <th scope="col">Semester</th>
-                        <th scope="col">Course</th>
-                        <th scope="col">Section</th>
+                        <th scope="col">Present Days</th>                        
                       </tr>
                     </thead>
                     <tbody>
-                        <c:forEach  items="${employeeList}" var="employee">
+                        <c:forEach  items="${studentReport}" var="studentReport">
                             <tr>
-                                <td  scope="row">${employee.user.id}</td>
-                                <td>${employee.user.fullName}</td>
-                                <td>${employee.user.email}</td>
-                                <td>${employee.user.address}</td>
-                                <td>${employee.user.phone}</td>
-                                <td>${employee.college.semester.name}</td>
-                                <td>${employee.college.course.name}</td>
-                                <td>${employee.college.section.name}</td>
+                                <td  scope="row">${student.roll}</td>
+                                <td  scope="row">${student.user.fullName}</td>
+                                <td  scope="row">${studentReport.attendance.date}</td>
                             
                             </tr>
                         </c:forEach>

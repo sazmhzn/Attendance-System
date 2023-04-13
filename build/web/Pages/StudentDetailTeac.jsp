@@ -25,8 +25,7 @@
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect" />
-    <link
-      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
       rel="stylesheet"
     />
 
@@ -343,12 +342,11 @@
                       <tr>
                         <th scope="col">#</th>
                         <th scope="col">Student name</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Address</th>
                         <th scope="col">Phone</th>
                         <th scope="col">Semester</th>
                         <th scope="col">Course</th>
                         <th scope="col">Section</th>
+                        <th scope="col">Attendance</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -356,13 +354,11 @@
                             <tr>
                                 <td  scope="row">${employee.user.id}</td>
                                 <td>${employee.user.fullName}</td>
-                                <td>${employee.user.email}</td>
-                                <td>${employee.user.address}</td>
                                 <td>${employee.user.phone}</td>
                                 <td>${employee.college.semester.name}</td>
                                 <td>${employee.college.course.name}</td>
                                 <td>${employee.college.section.name}</td>
-                                <td> <a href="PageChange?page=studentAttendance"> <button> View Attendance </button> </a></td>
+                                <td> <a href="PageChange?page=studentAttendance&id=${employee.user.id}"> <button class="btn btn-primary"> View Attendance </button> </a></td>
                             </tr>
                         </c:forEach>
                     </tbody>

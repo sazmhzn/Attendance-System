@@ -8,6 +8,7 @@ import DBConnection.DBConnection;
 import Model.Attendance;
 import Model.College;
 import Model.Course;
+import Model.Report;
 import Model.Section;
 import Model.Semester;
 import Model.Student;
@@ -293,6 +294,80 @@ public class SubjectServices {
             a.printStackTrace();
         }
     }
-
     
+    
+    
+    public List<Report> getAttendanceReport() {
+
+        List<Report> attendanceList = new ArrayList<>();
+        String query = "SELECT ATT_DATE, COUNT(STU_ID) as total_Student, SUB_ID, ACC_ID FROM attendance GROUP BY ATT_DATE, SUB_ID;";
+        System.out.println(query);
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+        try {
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                Report report = new Report();
+                report.setTotal(rs.getInt("total_Student" ));
+                Attendance a = new Attendance();
+                a.setDate(rs.getString("ATT_DATE"));
+                a.setSub_id(rs.getInt("SUB_ID"));
+                a.setTeac_id(rs.getInt("ACC_ID"));
+                report.setAttendance(a);
+                attendanceList.add(report);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return attendanceList;
+    }
+
+    public List<Report> getAttendanceReport(int sub_id) {
+
+        List<Report> attendanceList = new ArrayList<>();
+        String query = "SELECT ATT_DATE, COUNT(STU_ID) as total_Student, SUB_ID, ACC_ID FROM attendance where SUB_ID=? GROUP BY ATT_DATE, SUB_ID;";
+        System.out.println(query);
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+        try {
+            pstm.setInt(1, sub_id);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                Report report = new Report();
+                report.setTotal(rs.getInt("total_Student" ));
+                Attendance a = new Attendance();
+                a.setDate(rs.getString("ATT_DATE"));
+                a.setSub_id(rs.getInt("SUB_ID"));
+                a.setTeac_id(rs.getInt("ACC_ID"));
+                report.setAttendance(a);
+                attendanceList.add(report);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return attendanceList;
+    }
+    //SELECT STU_ID, ATT_DATE, SUB_ID, ACC_ID FROM attendance WHERE STU_ID=1 GROUP BY ATT_DATE, STU_ID ORDER BY STU_ID; 
+    public List<Report> getAttendanceReport(Student student) {
+
+        List<Report> attendanceList = new ArrayList<>();
+        String query = "SELECT STU_ID, ATT_DATE, SUB_ID, ACC_ID FROM attendance WHERE STU_ID=? GROUP BY ATT_DATE, STU_ID ORDER BY STU_ID;";
+        
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+        try {
+            pstm.setInt(1, student.getRoll());
+            System.out.println(pstm);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                Report report = new Report();
+                Attendance a = new Attendance();
+                a.setDate(rs.getString("ATT_DATE"));
+                a.setSub_id(rs.getInt("SUB_ID"));
+                a.setTeac_id(rs.getInt("ACC_ID"));
+                report.setAttendance(a);
+                attendanceList.add(report);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return attendanceList;
+    }
 }

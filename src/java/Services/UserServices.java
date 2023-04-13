@@ -257,7 +257,7 @@ public class UserServices {
             System.out.println("Query: " + pstm);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()){
-                System.out.println("    query : " + pstm);
+                System.out.println("\nquery : " + pstm);
                 student.setRoll(rs.getInt("ACC_ID") );
                 student.setUser(new User( 
                         rs.getInt("STUD_ID"), rs.getString("STUD_NAME"), 

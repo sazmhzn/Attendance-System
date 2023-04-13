@@ -17,6 +17,7 @@ public class Attendance {
     private int sub_id;
     private String[] stu_id;
     private int teac_id;
+    
 
     public Attendance() {
     }
@@ -29,6 +30,8 @@ public class Attendance {
         this.stu_id = stu_id;
         this.teac_id = teac_id;
     }
+    
+    
 
     public Attendance(boolean status) {
         this.status = status;

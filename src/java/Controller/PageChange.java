@@ -5,6 +5,7 @@
 package Controller;
 
 import Model.College;
+import Model.Report;
 import Model.Student;
 import Model.Subject;
 import Model.Teacher;
@@ -185,14 +186,22 @@ public class PageChange extends HttpServlet {
         }
 
         if (page.equalsIgnoreCase("studentAttendance")) {
-            List<Student> employeeList = new UserServices().getStudentList();
-            request.setAttribute("employeeList", employeeList);
+            Student student = new UserServices().getStudentRow(Integer.parseInt(request.getParameter("id")));
+            request.setAttribute("student", student);
+            List<Report> reportList = new SubjectServices().getAttendanceReport(student);
+            request.setAttribute("studentReport", reportList);
+            
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/StudentAttendanceDetails.jsp");
             rd.forward(request, response);
         }
         
-        if( page.equalsIgnoreCase("viewStudentAttendance") ) {
+        
+        
+        if( page.equalsIgnoreCase("studentReport") ) {
+            List<Report> repostList = new SubjectServices().getAttendanceReport();
             
+            RequestDispatcher rd = request.getRequestDispatcher("/Pages/StudentReport.jsp");
+            rd.forward(request, response);
         }
 
         if (page.equalsIgnoreCase("addTeacher")) {

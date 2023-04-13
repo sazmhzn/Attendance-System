@@ -11,7 +11,7 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-    <title>Teacher</title>
+    <title>Report</title>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <meta content="" name="description" />
     <meta content="" name="keywords" />
@@ -25,7 +25,8 @@
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect" />
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
       rel="stylesheet"
     />
 
@@ -70,7 +71,7 @@
   </head>
 
   <body>
-     <!-- ======= Header ======= -->
+      <!-- ======= Header ======= -->
     <header id="header" class="header fixed-top d-flex align-items-center">
       <div class="d-flex align-items-center justify-content-between">
         <a href="index.html" class="logo d-flex align-items-center">
@@ -204,6 +205,7 @@
                     }
                         }else {
                             out.print(" Null ");
+                            response.sendRedirect("PageChange?page=login");
                         }
                     %> 
                 </h6>
@@ -284,7 +286,7 @@
         <!-- End Profile Page Nav -->
 
         <li class="nav-item">
-          <a class="nav-link" href="PageChange?page=studentDetailsTeac">
+          <a class="nav-link collapsed" href="PageChange?page=studentDetailsTeac">
             <i class="bi bi-question-circle"></i>
             <span>Student</span>
           </a>
@@ -292,7 +294,7 @@
         <!-- End F.A.Q Page Nav -->
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="pages-contact.html">
+          <a class="nav-link " href="pages-contact.html">
             <i class="bi bi-envelope"></i>
             <span>Report</span>
           </a>
@@ -316,18 +318,17 @@
     <!-- ======= Main ======= -->
     <main id="main" class="main">
       <div class="pagetitle">
-        <h1>Student</h1>
+        <h1>Report</h1>
         <nav>
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="dashboard.html">Student</a></li>
-            <li class="breadcrumb-item active">All students</li>
+            <li class="breadcrumb-item active">Student Report</li>
             <!--<li class="breadcrumb-item ">Add Students</li>-->
           </ol>
         </nav>
+        
       </div>
       <!-- End Page Title -->
 
-    
       <section class="section dashboard">
         <div class="row">
              <!-- Top Selling -->
@@ -335,30 +336,24 @@
               <div class="card top-selling overflow-auto">
 
                 <div class="card-body pb-0">
-                  <h5 class="card-title">Student list </h5>
+                  <h5 class="card-title">Report </h5>
 
                   <table class="table table-borderless datatable">
                     <thead>
                       <tr>
                         <th scope="col">#</th>
                         <th scope="col">Student name</th>
-                        <th scope="col">Phone</th>
-                        <th scope="col">Semester</th>
-                        <th scope="col">Course</th>
-                        <th scope="col">Section</th>
-                        <th scope="col">Attendance</th>
+                        <th scope="col">Total Present Days</th> 
+                        <th scope="col">Total Absence Days</th> 
                       </tr>
                     </thead>
                     <tbody>
-                        <c:forEach  items="${employeeList}" var="employee">
+                        <c:forEach  items="${studentReport}" var="studentReport">
                             <tr>
-                                <td  scope="row">${employee.user.id}</td>
-                                <td>${employee.user.fullName}</td>
-                                <td>${employee.user.phone}</td>
-                                <td>${employee.college.semester.name}</td>
-                                <td>${employee.college.course.name}</td>
-                                <td>${employee.college.section.name}</td>
-                                <td> <a href="PageChange?page=studentAttendance&id=${employee.user.id}"> <button class="btn btn-primary"> View Attendance </button> </a></td>
+                                <td  scope="row">${student.roll}</td>
+                                <td  scope="row">${student.user.fullName}</td>
+                                <td  scope="row">${studentReport.attendance.date}</td>
+                            
                             </tr>
                         </c:forEach>
                     </tbody>

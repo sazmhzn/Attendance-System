@@ -279,7 +279,6 @@
                     </div>
                     <div class="ps-3">
                       <h6> ${totalTeacher} </h6>
-                      <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
 
                     </div>
                   </div>
@@ -304,7 +303,6 @@
                     </div>
                     <div class="ps-3">
                       <h6>${totalStudent}</h6>
-                      <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span>
 
                     </div>
                   </div>
@@ -329,7 +327,6 @@
                     </div>
                     <div class="ps-3">
                       <h6> ${totalStudent + totalTeacher} </h6>
-                      <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
 
                     </div>
                   </div>
@@ -358,10 +355,7 @@
                         }, {
                           name: 'MBA',
                           data: [11, 32, 45, 32, 34, 52, 41]
-                        }, {
-                          name: 'BCA',
-                          data: [15, 11, 32, 18, 9, 24, 11]
-                        }],
+                        },
                         chart: {
                           height: 350,
                           type: 'area',
