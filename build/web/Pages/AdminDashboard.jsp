@@ -355,7 +355,7 @@
                         }, {
                           name: 'MBA',
                           data: [11, 32, 45, 32, 34, 52, 41]
-                        },
+                        }],
                         chart: {
                           height: 350,
                           type: 'area',
@@ -364,7 +364,7 @@
                           },
                         },
                         markers: {
-                          size: 4
+                          size: 3
                         },
                         colors: ['#4154f1', '#2eca6a', '#ff771d'],
                         fill: {

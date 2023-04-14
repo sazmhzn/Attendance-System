@@ -299,13 +299,6 @@
                 </li>
                 <!-- End Contact Page Nav -->
 
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="PageChange?page=addTeacher">
-                        <i class="bi bi-card-list"></i>
-                        <span>Teacher</span>
-                    </a>
-                </li>
-                <!-- End Register Page Nav -->
                 <li class="nav-heading">Extra</li>
 
                 <li class="nav-item">
@@ -360,9 +353,9 @@
                                                 <table class="table table-borderless">
                                                     <thead>
                                                         <tr>
-                                                            <th><input type="checkbox"  id="checkAll-a"></th>
-                                                            <th scope="col"> #</th>
-                                                            <th scope="col">Student name</th>
+                                                            <th class="w-5"><input type="checkbox"  id="checkAll-a"></th>
+                                                            <th class="w-25" scope="col"> #</th>
+                                                            <th class="w-50" scope="col">Student name</th>
                                                             <th scope="col">Semester</th>
                                                             <th scope="col">Course</th>
                                                         </tr>
@@ -406,9 +399,9 @@
                                                     <thead>
                                                         
                                                         <tr>
-                                                            <th scope="col"><input type="checkbox" class="form-check-input " id="checkAll-b"></th>
-                                                            <th scope="col">#</th>
-                                                            <th scope="col">Student name</th>
+                                                            <th class="w-5" scope="col"><input type="checkbox" class="form-check-input " id="checkAll-b"></th>
+                                                            <th class="w-25" scope="col">#</th>
+                                                            <th class="w-75" scope="col">Student name</th>
                                                             <th scope="col">Semester</th>
                                                             <th scope="col">Course</th>
                                                         </tr>

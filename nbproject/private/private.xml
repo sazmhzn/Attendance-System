@@ -5,8 +5,11 @@
         <group>
             <file>file:/D:/java/Attendance%20System/src/java/Services/SubjectServices.java</file>
             <file>file:/D:/java/Attendance%20System/src/java/Controller/PageChange.java</file>
+            <file>file:/D:/java/Attendance%20System/web/Pages/TakeAttendance.jsp</file>
             <file>file:/D:/java/Attendance%20System/web/Pages/StudentAttendanceDetails.jsp</file>
+            <file>file:/D:/java/Attendance%20System/web/Pages/AdminDashboard.jsp</file>
             <file>file:/D:/java/Attendance%20System/web/Pages/StudentReport.jsp</file>
+            <file>file:/D:/java/Attendance%20System/web/Pages/SubjectDetails.jsp</file>
         </group>
     </open-files>
 </project-private>
