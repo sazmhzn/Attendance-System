@@ -337,7 +337,7 @@ public class PageChange extends HttpServlet {
         
         if (page.equalsIgnoreCase("Report")) {
 
-            RequestDispatcher rd = request.getRequestDispatcher("/Pages/adminReport.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("/Pages/AdminReport.jsp");
             rd.forward(request, response);
         }
 

@@ -276,7 +276,7 @@
         <!-- End Profile Page Nav -->
         
         <li class="nav-item">
-          <a class="nav-link collapsed" href="PageChange?page=Report">
+          <a class="nav-link" href="PageChange?page=Report">
             <i class="bi bi-envelope"></i>
             <span>Report</span>
           </a>
@@ -286,7 +286,7 @@
         <li class="nav-heading">manage</li>
 
         <li class="nav-item">
-            <a class="nav-link " href="PageChange?page=Student">
+            <a class="nav-link collapsed" href="PageChange?page=Student">
                 <i class="bi bi-journal-text"></i><span>Students</span>
             </a>
 
