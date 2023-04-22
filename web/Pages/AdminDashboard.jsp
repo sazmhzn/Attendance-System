@@ -419,36 +419,15 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <th scope="row"><a href="#">#2457</a></th>
-                        <td>Ram singh</td>
-                        <td><a href="#" class="text-primary">Second</a></td>
-                        <td><span class="badge bg-success">Approved</span></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#">#2147</a></th>
-                        <td>Advance Java</td>
-                        <td><a href="#" class="text-primary">Third</a></td>
-                        <td><span class="badge bg-warning">Pending</span></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#">#2049</a></th>
-                        <td>OOP</td>
-                        <td><a href="#" class="text-primary">First</a></td>
-                        <td><span class="badge bg-success">Approved</span></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#">#2644</a></th>
-                        <td>Ram Singh</td>
-                        <td><a href="#" class="text-primar">Fourth</a></td>
-                        <td><span class="badge bg-danger">Rejected</span></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#">#2644</a></th>
-                        <td>Ram Singh</td>
-                        <td><a href="#" class="text-primary">Fourth</a></td>
-                        <td><span class="badge bg-success">Approved</span></td>
-                      </tr>
+                        <c:forEach items="${todayAttendanceList}" var="att">
+                            <tr>
+                                <th scope="row"><a href="#">#2457</a></th>
+                                <td>${att.attendance.subject.subject_name}</td>
+                                <td><a href="#" class="text-primary">Second</a></td>
+                                <td><span class="badge bg-success">Approved</span></td>
+                            </tr>
+                        </c:forEach>
+                  
                     </tbody>
                   </table>
 

@@ -323,7 +323,14 @@ public class PageChange extends HttpServlet {
 
             List<User> active = new UserServices().getActiveUserList();
             request.setAttribute("activeUser", active);
-
+            
+            List<Report> todayAttendanceList = new SubjectServices().getTodayAttendanceReport();
+            request.setAttribute("todayAttendanceList", todayAttendanceList);
+            System.out.println("\n\nTodays attendance");
+            for(Report r : todayAttendanceList) {
+                System.out.println("naem: " + r.getAttendance().getSubject().getSubject_name());
+            }
+            
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/AdminDashboard.jsp");
             rd.forward(request, response);
         }

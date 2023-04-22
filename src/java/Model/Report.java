@@ -25,6 +25,10 @@ public class Report {
         this.teacher = teacher;
     }
 
+    public Report(Attendance attendance) {
+        this.attendance = attendance;
+    }
+    
     public int getId() {
         return id;
     }

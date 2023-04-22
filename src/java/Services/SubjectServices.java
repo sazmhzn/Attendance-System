@@ -186,10 +186,25 @@ public class SubjectServices {
 
     //This method will insert course in subject
     public void insertCourse(Course course) {
-        String query = "INSERT INTO `subject`(`COURSE_NAME`) VALUES (?)";
+        String query = "INSERT INTO `course`(`COURSE_NAME`) VALUES(?)";
         PreparedStatement pstm = new DBConnection().getStatement(query);
         try {
             pstm.setString(1, course.getName());
+
+            System.out.println(pstm);
+
+            pstm.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void insertCourse(Semester semester) {
+        String query = "INSERT INTO `semester`(`SEM_NAME`, `C_ID`) VALUES(?, ?)";
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+        try {
+            pstm.setString(1, semester.getName());
+            pstm.setInt(2, semester.getId());
 
             System.out.println(pstm);
 
@@ -295,8 +310,6 @@ public class SubjectServices {
         }
     }
     
-    
-    
     public List<Report> getAttendanceReport() {
 
         List<Report> attendanceList = new ArrayList<>();
@@ -370,4 +383,31 @@ public class SubjectServices {
         }
         return attendanceList;
     }
+
+
+    // SELECT * FROM `attendance` WHERE ATT_DATE = CURRENT_DATE GROUP BY SUB_ID; 
+    public List<Report> getTodayAttendanceReport() {
+
+        List<Report> attendanceList = new ArrayList<>();
+        String query = "SELECT * FROM `attendance` LEFT JOIN subject on attendance.SUB_ID = subject.SUB_ID LEFT JOIN semester on subject.SEM_ID = semester.SEM_ID WHERE ATT_DATE = CURRENT_DATE GROUP BY attendance.SUB_ID";
+        System.out.println(query);
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+        try {
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                Report report = new Report();
+                Attendance a = new Attendance();
+                Subject sub = new Subject();
+                sub.setSubject_code(rs.getString("SUB_CODE"));
+                sub.setSubject_name(rs.getString("SUB_NAME"));
+                a.setSubject(sub);
+                report.setAttendance(a);
+                attendanceList.add(report);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return attendanceList;
+    }
+    
 }

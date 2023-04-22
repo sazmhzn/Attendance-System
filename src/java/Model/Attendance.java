@@ -17,6 +17,7 @@ public class Attendance {
     private int sub_id;
     private String[] stu_id;
     private int teac_id;
+    private Subject subject;
     
 
     public Attendance() {
@@ -29,6 +30,10 @@ public class Attendance {
         this.sub_id = sub_id;
         this.stu_id = stu_id;
         this.teac_id = teac_id;
+    }
+
+    public Attendance(Subject subject) {
+        this.subject = subject;
     }
     
     
@@ -68,6 +73,14 @@ public class Attendance {
 
     public void setSub_id(int sub_id) {
         this.sub_id = sub_id;
+    }
+
+    public Subject getSubject() {
+        return subject;
+    }
+
+    public void setSubject(Subject subject) {
+        this.subject = subject;
     }
 
     public String[] getStu_id() {
