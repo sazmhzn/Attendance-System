@@ -263,7 +263,7 @@
         <h1>Subject</h1>
         <nav>
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="dashboard.html">Manage</a></li>
+            <li class="breadcrumb-item">Manage</li>
             <li class="breadcrumb-item">
               <a href="PageChange?page=Subject">Subject</a>
             </li>
@@ -287,6 +287,16 @@
                     action="UserServlet?page=editSubject"
                     method="POST"
                   >
+
+                      <input
+                          type="hidden"
+                          class="form-control"
+                          id="floatingName"
+                          placeholder="Subject Name"
+                          name="subject_id"
+                          value="${college.subject.subject_id}"
+                          />
+
                     <div class="col-md-12">
                       <div class="form-floating">
                         <input
@@ -355,6 +365,7 @@
                           list="teacherList"
                           name="teacher"
                           autocomplete="on"
+                          value="${college.subject.teacher.user.username}"
                         >
                         <dataList id="teacherList">
                             <c:forEach items="${teacherList}" var="teacher">

@@ -193,8 +193,6 @@ public class UserServlet extends HttpServlet {
             rd.forward(request, response);
         }
         
-        
-        
         if( page.equals("addSubject") ) {
             Teacher teacher = new UserServices().getTeacherRow( request.getParameter("teacher"));
             
@@ -231,19 +229,29 @@ public class UserServlet extends HttpServlet {
         
         if (page.equalsIgnoreCase("editSubject")) {
             
+            Teacher teacher = new UserServices().getTeacherRow(request.getParameter("teacher"));
+            
             College college = new College();
             college.setCourse(new Course(Integer.parseInt(request.getParameter("course")) , ""));
             college.setSemester(new Semester(Integer.parseInt(request.getParameter("semester")), ""));
             college.setSubject(new Subject(
                     request.getParameter("subject_name"),
                     request.getParameter("subject_code"),
-                    new Teacher(new User(0, request.getParameter("teacher"), page, page, page))));
+                    teacher));
             
             
-            System.out.println("College " + college.getSemester().getId()+ " " + college.getSubject().getSubject_name() + " " + college.getSubject().getTeacher().getUser().getFullName());
+            int sub_id = Integer.parseInt(request.getParameter("subject_id"));
+            System.out.println("Subject id: " + sub_id + " " + request.getParameter("teacher") + " "+ teacher.getUser().getId());
             
+            new SubjectServices().editSubject(college, sub_id);
+            
+            RequestDispatcher rd = request.getRequestDispatcher("PageChange?page=Subject");
+            rd.forward(request, response);
             
         }
+        
+        
+        //report section
 
     }
 

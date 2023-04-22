@@ -1,12 +1,18 @@
-<%-- Document : AddTeacher Created on : Mar 14, 2023, 9:27:23 AM Author : lenovo
---%> <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%-- 
+    Document   : adminReport
+    Created on : Apr 22, 2023, 12:41:48 PM
+    Author     : lenovo
+--%>
+
+<%@page import="jakarta.servlet.http.HttpSession" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-    <title>Teacher</title>
+    <title>Report</title>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <meta content="" name="description" />
     <meta content="" name="keywords" />
@@ -41,7 +47,10 @@
       rel="stylesheet"
     />
 
-    <link href="Styling/assets/vendor/quill/quill.snow.css" rel="stylesheet" />
+    <link
+      href="Styling/assets/vendor/quill/quill.snow.css"
+      rel="stylesheet"
+    />
 
     <link
       href="Styling/assets/vendor/quill/quill.bubble.css"
@@ -63,7 +72,6 @@
   </head>
 
   <body>
-      
     <!-- ======= Header ======= -->
     <header id="header" class="header fixed-top d-flex align-items-center">
       <div class="d-flex align-items-center justify-content-between">
@@ -74,7 +82,6 @@
         <i class="bi bi-list toggle-sidebar-btn"></i>
       </div>
       <!-- End Logo -->
-
 
       <nav class="header-nav ms-auto">
         <ul class="d-flex align-items-center">
@@ -107,6 +114,19 @@
               </li>
 
               <li class="notification-item">
+                <i class="bi bi-exclamation-circle text-warning"></i>
+                <div>
+                  <h4>Lorem Ipsum</h4>
+                  <p>Quae dolorem earum veritatis oditseno</p>
+                  <p>30 min. ago</p>
+                </div>
+              </li>
+
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+
+              <li class="notification-item">
                 <i class="bi bi-x-circle text-danger"></i>
                 <div>
                   <h4>Atque rerum nesciunt</h4>
@@ -128,7 +148,25 @@
                 </div>
               </li>
 
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
 
+              <li class="notification-item">
+                <i class="bi bi-info-circle text-primary"></i>
+                <div>
+                  <h4>Dicta reprehenderit</h4>
+                  <p>Quae dolorem earum veritatis oditseno</p>
+                  <p>4 hrs. ago</p>
+                </div>
+              </li>
+
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li class="dropdown-footer">
+                <a href="#">Show all notifications</a>
+              </li>
             </ul>
             <!-- End Notification Dropdown Items -->
           </li>
@@ -146,13 +184,20 @@
                 class="rounded-circle"
               />
               <span class="d-none d-md-block dropdown-toggle ps-2"
-                ><%=session.getAttribute("username")%></span
+                >K. Anderson</span
               > </a
             ><!-- End Profile Iamge Icon -->
 
             <ul
               class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile"
             >
+              <li class="dropdown-header">
+                <h6>Kevin Anderson</h6>
+                <span>Web Designer</span>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
 
               <li>
                 <a
@@ -168,9 +213,27 @@
               </li>
 
               <li>
+                <a
+                  class="dropdown-item d-flex align-items-center"
+                  href="users-profile.html"
+                >
+                  <i class="bi bi-gear"></i>
+                  <span>Account Settings</span>
+                </a>
+              </li>
+              <li>
                 <hr class="dropdown-divider" />
               </li>
 
+              <li>
+                <a
+                  class="dropdown-item d-flex align-items-center"
+                  href="pages-faq.html"
+                >
+                  <i class="bi bi-question-circle"></i>
+                  <span>Need Help?</span>
+                </a>
+              </li>
               <li>
                 <hr class="dropdown-divider" />
               </li>
@@ -191,7 +254,7 @@
     </header>
     <!-- End Header -->
 
-  <!-- ======= Sidebar ======= -->
+    <!-- ======= Sidebar ======= -->
     <aside id="sidebar" class="sidebar">
       <ul class="sidebar-nav" id="sidebar-nav">
         <li class="nav-item">
@@ -223,7 +286,7 @@
         <li class="nav-heading">manage</li>
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="PageChange?page=Student">
+            <a class="nav-link " href="PageChange?page=Student">
                 <i class="bi bi-journal-text"></i><span>Students</span>
             </a>
 
@@ -236,7 +299,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="PageChange?page=Subject">
+          <a class="nav-link collapsed" href="PageChange?page=Subject">
             <i class="bi bi-person"></i>
             <span>Subject</span>
           </a>
@@ -256,142 +319,78 @@
       </ul>
     </aside>
     <!-- End Sidebar-->
-
+    
     <!-- ======= Main ======= -->
     <main id="main" class="main">
       <div class="pagetitle">
-        <h1>Subject</h1>
+        <h1>Reports</h1>
         <nav>
           <ol class="breadcrumb">
-            <li class="breadcrumb-item">Manage</li>
-            <li class="breadcrumb-item">
-              <a href="PageChange?page=Subject">Subject</a>
-            </li>
-            <li class="breadcrumb-item active">Edit Subject</li>
+            <li class="breadcrumb-item">Pages</li>
+            <li class="breadcrumb-item active">Report</li>
+            <!--<li class="breadcrumb-item ">Add Students</li>-->
           </ol>
         </nav>
+        
       </div>
       <!-- End Page Title -->
 
+    
       <section class="section dashboard">
         <div class="row">
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Subject details Form</h5>
+             <!-- Top Selling -->
+            <div class="col-12">
+              <div class="card overflow-auto">
 
-                  <!-- Floating Labels Form -->
+                <div class="card-body">
+                  <h5 class="card-title">Student list </h5>
                   <form
-                    class="row g-3 needs-validation"
-                    action="UserServlet?page=editSubject"
+                    class="row g-3"
+                    action="UserServlet?page=addStudent"
                     method="POST"
                   >
-
-                      <input
-                          type="hidden"
-                          class="form-control"
-                          id="floatingName"
-                          placeholder="Subject Name"
-                          name="subject_id"
-                          value="${college.subject.subject_id}"
-                          />
-
-                    <div class="col-md-12">
-                      <div class="form-floating">
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="floatingName"
-                          placeholder="Subject Name"
-                          name="subject_name"
-                          value="${college.subject.subject_name}"
-                        />
-                        <label for="floatingName">Subject Name</label>
-                      </div>
-                    </div>
-
                     <div class="col-md-6">
                       <div class="form-floating">
                         <input
-                          type="text"
+                          type="date"
                           class="form-control"
                           id="floatingName"
-                          placeholder="Subject code"
-                          name="subject_code"
-                          value="${college.subject.subject_code}"
+                          placeholder="Your Name"
+                          name="fullname"
                         />
-                        <label for="floatingName">Subject code</label>
+                        <label for="floatingName">From</label>
                       </div>
                     </div>
 
-                    <div class="col-md-6">
-                      <div class="form-floating mb-3">
-                        <select
-                          class="form-select"
-                          id="floatingSelect"
-                          aria-label="course"
-                          name="course"
-                        >
-                            <option value="${college.course.id}" selected> ${college.course.name} </option>
-                            <c:forEach items="${collegeList}" var="college">
-                                <option value="${college.course.id}">${college.course.name}</option>
-                            </c:forEach>
-                        </select>
-                        <label for="floatingSelect">Course</label>
-                      </div>
-                    </div>
-                      <div class="col-md-6">
-                      <div class="form-floating mb-3">
-                        <select
-                          class="form-select"
-                          id="floatingSelect"
-                          name="semester"
-                        >
-                            <option value="${college.semester.id}" selected> ${college.semester.name} </option>
-                            <c:forEach items="${semesterList}" var="college">
-                                <option value="${college.semester.id}">${college.semester.name}</option>
-                            </c:forEach>
-                        </select>
-                        <label for="floatingSelect">Semester</label>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-floating mb-3">
+                    <div class="col-6">
+                      <div class="form-floating">
                         <input
-                            type="text"
+                          type="date"
                           class="form-control"
-                          id="floatingName"
-                          list="teacherList"
-                          name="teacher"
-                          autocomplete="on"
-                          value="${college.subject.teacher.user.username}"
-                        >
-                        <dataList id="teacherList">
-                            <c:forEach items="${teacherList}" var="teacher">
-                                <option value="${teacher.user.fullName}">
-                            </c:forEach>
-                        </dataList>
-                            
-                        <!--</select>-->
-                        <label for="floatingName">Assign Teacher</label>
+                          placeholder="email"
+                          id="floatingEmail"
+                          name="email"
+                        />
+                        <label for="floatingTextarea">To</label>
                       </div>
                     </div>
+                  
                     <div class="text-left">
-                      <button type="submit" class="btn btn-primary">
-                        Submit
+                      <button
+                        type="submit"
+                        id="submitBtn"
+                        class="btn btn-primary"
+                      >
+                        generate
                       </button>
-                      <button type="reset" class="btn btn-secondary">
-                        Reset
-                      </button>
+                     
                     </div>
                   </form>
-                  <!-- End floating Labels Form -->
                 </div>
               </div>
-            </div>
-          </div>
+            </div><!-- End Top Selling -->
         </div>
+          
       </section>
     </main>
     <!-- End #main -->
@@ -420,5 +419,15 @@
     <!-- Template Main JS File -->
     <script src="Styling/assets/js/main.js"></script>
 
+    <!-- Custome JS File -->
+    <script>
+      $(document).ready(function () {
+        $("#example").DataTable();
+      });
+    </script>
+    <script> 
+    $('.alert').alert()
+    </script>
   </body>
 </html>
+

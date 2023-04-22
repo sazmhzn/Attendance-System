@@ -153,7 +153,9 @@ public class SubjectServices {
                 college = new College();
                 college.setSubject(new Subject(rs.getInt("SUB_ID"),
                         rs.getString("SUB_NAME"),
-                        rs.getString("SUB_CODE")));
+                        rs.getString("SUB_CODE"),
+                        new Teacher(new User(rs.getInt("TEAC_ID"), rs.getString("TEAC_NAME"), "T"))
+                ));
                 college.setCourse(new Course(rs.getInt("C_ID"), rs.getString("COURSE_NAME")));
                 college.setSemester(new Semester(rs.getInt("SEM_ID"), rs.getString("SEM_NAME")));
 
@@ -178,6 +180,28 @@ public class SubjectServices {
 
             System.out.println(pstm);
 
+            pstm.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void editSubject(College college, int id) {
+
+        String query = "UPDATE `subject` SET `SUB_NAME`=?,`SUB_CODE`=?,`TEAC_ID`=?,`C_ID`=?, `SEM_ID`=? WHERE SUB_ID="+id;
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+        
+        try {
+            System.out.println("\nname: " + college.getSubject().getSubject_code() +" "+ college.getSemester().getId()+" "+
+                    college.getSubject().getTeacher().getUser().getId());
+            
+            pstm.setString(1, college.getSubject().getSubject_name());
+            pstm.setString(2, college.getSubject().getSubject_code());
+            pstm.setInt(3, college.getSubject().getTeacher().getUser().getId());
+            pstm.setInt(4, college.getCourse().getId());
+            pstm.setInt(5, college.getSemester().getId());
+            
+            System.out.println("The Update query: " + pstm);
             pstm.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -248,8 +272,6 @@ public class SubjectServices {
         }
         return false;
     }
-    
-    
     
     public List<Student> getAttendanceSheet(int id, int sec_id) {
 

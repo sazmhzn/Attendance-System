@@ -112,9 +112,10 @@ public class AttendanceServlet extends HttpServlet {
               new SubjectServices().insertAttendance(att);  
             }
             
-            
-
         }
+        
+        
+        
 
         RequestDispatcher rd = request.getRequestDispatcher("PageChange?page=attendanceDetails");
         rd.forward(request, response);
