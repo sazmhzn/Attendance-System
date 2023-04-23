@@ -278,7 +278,7 @@
         <li class="nav-item">
           <a class="nav-link" href="PageChange?page=Report">
             <i class="bi bi-envelope"></i>
-            <span>Report</span>
+            <span>Reports</span>
           </a>
         </li>
         <!-- End Report Page Nav -->
@@ -343,10 +343,10 @@
               <div class="card overflow-auto">
 
                 <div class="card-body">
-                  <h5 class="card-title">Student list </h5>
+                  <h5 class="card-title">Report date</h5>
                   <form
                     class="row g-3"
-                    action="UserServlet?page=addStudent"
+                    action="UserServlet?page=report"
                     method="POST"
                   >
                     <div class="col-md-6">
@@ -354,9 +354,10 @@
                         <input
                           type="date"
                           class="form-control"
-                          id="floatingName"
                           placeholder="Your Name"
-                          name="fullname"
+                          name="from"
+                          id="date"
+                          onload="getDate()"
                         />
                         <label for="floatingName">From</label>
                       </div>
@@ -369,7 +370,7 @@
                           class="form-control"
                           placeholder="email"
                           id="floatingEmail"
-                          name="email"
+                          name="to"
                         />
                         <label for="floatingTextarea">To</label>
                       </div>
@@ -391,6 +392,41 @@
             </div><!-- End Top Selling -->
         </div>
           
+          <div class="row">
+             <!-- Top Selling -->
+            <div class="col-12">
+              <div class="card top-selling overflow-auto">
+
+                <div class="card-body pb-0">
+                  <h5 class="card-title">Student list </h5>
+
+                  <table class="table table-borderless datatable">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Subject name</th>
+                        <th scope="col">Teacher</th>
+                        <th scope="col">Total present</th>
+                        <th scope="col">Attendance Date</th>
+                       
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach  items="${report}" var="report">
+                            <tr>
+                                <td  scope="row">1</td>
+                                <td>${report.subject.subject_name}</td>
+                                <td>${report.teacher.user.fullName}</td>
+                                <td>${report.total}</td>
+                                <td>${report.attendance.date}</td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div><!-- End Top Selling -->
+        </div>
       </section>
     </main>
     <!-- End #main -->
@@ -426,7 +462,10 @@
       });
     </script>
     <script> 
-    $('.alert').alert()
+       function getDate() {
+  document.getElementById("date").defaultValue = "2014-02-09";
+}
+    
     </script>
   </body>
 </html>

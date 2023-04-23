@@ -7,6 +7,7 @@ package Controller;
 import Hashing.HashingPassword;
 import Model.College;
 import Model.Course;
+import Model.Report;
 import Model.Section;
 import Model.Semester;
 import Model.Student;
@@ -23,6 +24,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 /**
  *
@@ -252,7 +256,38 @@ public class UserServlet extends HttpServlet {
         
         
         //report section
+        if (page.equalsIgnoreCase("report")) {
+            String from =  request.getParameter("from");
+            String to = request.getParameter("to");
+            
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            LocalDateTime now = LocalDateTime.now();
+            System.out.println(dtf.format(now));
+            
+            if (from != null && to != null) {
+                if (from.compareTo(to) > 0) {
+                    System.out.println("Date 1 occurs after Date 2");
+                    System.out.println("Thsi is wrong");
+                } else if (from.compareTo(to) < 0) {
+                    System.out.println("Date 1 occurs before Date 2");
+                } else if (from.compareTo(to) == 0) {
+                    System.out.println("Both dates are equal");
+                }
+            } else {
+                from = dtf.format(now);
+                to = dtf.format(now);
+            }
+            
+            List<Report> report = new SubjectServices().getAttendanceReport(from, to);
+            request.setAttribute("report", report);
+            
+            RequestDispatcher rd = request.getRequestDispatcher("/Pages/AdminReport.jsp");
+            rd.forward(request, response);
 
+        }
+        
+        
+        
     }
 
     

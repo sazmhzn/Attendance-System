@@ -244,9 +244,6 @@ public class UserServices {
         }
         return teacher;
     }
-    
-    
-      
       
       public Student getStudentRow(int id){
         Student student = new Student();

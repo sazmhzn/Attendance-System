@@ -188,7 +188,7 @@
         <li class="nav-heading">Pages</li>
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="./AttendanceSheet.html">
+          <a class="nav-link collapsed" href="PageChange?page=AdminAttendanceSheet">
             <i class="bi bi-journal-check"></i>
             <span>Attendance Sheet</span>
           </a>
@@ -196,7 +196,7 @@
         <!-- End Profile Page Nav -->
         
         <li class="nav-item">
-          <a class="nav-link collapsed" href="PageChange?page=Report">
+          <a class="nav-link collapsed" href="PageChange?page=AdminReport">
             <i class="bi bi-journal-text"></i>
             <span>Report</span>
           </a>

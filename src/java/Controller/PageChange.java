@@ -335,8 +335,16 @@ public class PageChange extends HttpServlet {
             rd.forward(request, response);
         }
         
-        if (page.equalsIgnoreCase("Report")) {
-
+        if (page.equalsIgnoreCase("AdminAttendanceSheet")) {
+            
+            List<College> subjectList = new SubjectServices().getSubjectList();
+            request.setAttribute("subjectList", subjectList);
+            
+            RequestDispatcher rd = request.getRequestDispatcher("/Pages/AdminViewAttendance.jsp");
+            rd.forward(request, response);
+        }
+        
+        if (page.equalsIgnoreCase("AdminReport")) {
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/AdminReport.jsp");
             rd.forward(request, response);
         }

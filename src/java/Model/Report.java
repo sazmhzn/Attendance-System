@@ -13,6 +13,7 @@ public class Report {
     private Attendance attendance;
     private Student student;
     private Teacher teacher;
+    private Subject subject;
     private int Total;
     
     public Report() {
@@ -59,6 +60,14 @@ public class Report {
 
     public void setTeacher(Teacher teacher) {
         this.teacher = teacher;
+    }
+
+    public Subject getSubject() {
+        return subject;
+    }
+
+    public void setSubject(Subject subject) {
+        this.subject = subject;
     }
 
     public int getTotal() {
