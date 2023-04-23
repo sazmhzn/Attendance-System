@@ -257,8 +257,10 @@ public class UserServlet extends HttpServlet {
         
         //report section
         if (page.equalsIgnoreCase("report")) {
+            
             String from =  request.getParameter("from");
             String to = request.getParameter("to");
+            int id = Integer.parseInt(request.getParameter("subject_id"));
             
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             LocalDateTime now = LocalDateTime.now();
@@ -273,15 +275,26 @@ public class UserServlet extends HttpServlet {
                 } else if (from.compareTo(to) == 0) {
                     System.out.println("Both dates are equal");
                 }
-            } else {
+            }
+            if(from == null) {
                 from = dtf.format(now);
+            }
+            
+            if(to == null) {
                 to = dtf.format(now);
             }
             
-            List<Report> report = new SubjectServices().getAttendanceReport(from, to);
+            System.out.println("\n\nreport");
+            System.out.println(from + " " + to + " " + id);
+            List<Report> report = new SubjectServices().getAttendanceReport(from, to, id);
             request.setAttribute("report", report);
             
-            RequestDispatcher rd = request.getRequestDispatcher("/Pages/AdminReport.jsp");
+            System.out.println("\n\n");
+            for(Report r : report) {
+                System.out.println("report.stud.user.name : " + r.getStudent().getUser().getFullName() + " total: " + r.getTotal());
+            }
+            
+            RequestDispatcher rd = request.getRequestDispatcher("PageChange?page=AdminReport");
             rd.forward(request, response);
 
         }

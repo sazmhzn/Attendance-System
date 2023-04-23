@@ -5,6 +5,7 @@
 package Controller;
 
 import Model.College;
+import Model.Message;
 import Model.Report;
 import Model.Student;
 import Model.Subject;
@@ -21,6 +22,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
@@ -78,6 +81,9 @@ public class PageChange extends HttpServlet {
         String page = request.getParameter("page");
         HttpSession session = request.getSession();
         Cookie[] cookie = request.getCookies();
+        
+        List<Message> messages = new UserServices().getStudenMessage();
+        request.setAttribute("messages", messages);
 
         if (page.equalsIgnoreCase("register")) {
 
@@ -337,7 +343,7 @@ public class PageChange extends HttpServlet {
         
         if (page.equalsIgnoreCase("AdminAttendanceSheet")) {
             
-            List<College> subjectList = new SubjectServices().getSubjectList();
+            List<College> subjectList = new SubjectServices().getSubjectListWithAttendanceData();
             request.setAttribute("subjectList", subjectList);
             
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/AdminViewAttendance.jsp");
@@ -345,6 +351,11 @@ public class PageChange extends HttpServlet {
         }
         
         if (page.equalsIgnoreCase("AdminReport")) {
+            
+            
+            List<College> subjectList = new SubjectServices().getSubjectList();
+            request.setAttribute("college", subjectList);
+            
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/AdminReport.jsp");
             rd.forward(request, response);
         }

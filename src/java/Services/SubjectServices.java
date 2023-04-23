@@ -87,7 +87,7 @@ public class SubjectServices {
         return sectionList;
     }
 
-        public List<College> getSubjectList() {
+        public List<College> getSubjectListWithAttendanceData() {
         List<College> subjectList = new ArrayList<>();
         String query = "SELECT * FROM `subject` LEFT JOIN teacher on subject.TEAC_ID = teacher.TEAC_ID LEFT JOIN semester on subject.SEM_ID = semester.SEM_ID; ";
 
@@ -112,6 +112,41 @@ public class SubjectServices {
                 ));
                 college.setAttendance(new Attendance(checkTodayAttendance(rs.getInt("SUB_ID"))));
 
+                college.setSemester(new Semester(1, rs.getString("SEM_NAME")));
+                System.out.println("College: " + college.getSubject().getSubject_name());
+                subjectList.add(college);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return subjectList;
+    }
+        
+        
+        
+        public List<College> getSubjectList() {
+        List<College> subjectList = new ArrayList<>();
+        String query = "SELECT * FROM `subject` LEFT JOIN teacher on subject.TEAC_ID = teacher.TEAC_ID LEFT JOIN semester on subject.SEM_ID = semester.SEM_ID; ";
+
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+
+        try {
+            System.out.println(pstm);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                College college = new College();
+                college.setSubject(new Subject(
+                        rs.getInt("SUB_ID"),
+                        rs.getString("SUB_NAME"),
+                        rs.getString("SUB_CODE"),
+                        new Teacher(new User(
+                                rs.getInt("TEAC_ID"),
+                                rs.getString("TEAC_NAME"),
+                                rs.getString("TEAC_EMAIL"),
+                                rs.getString("TEAC_PHONE"),
+                                rs.getString("teac_Address")
+                        ))
+                ));
                 college.setSemester(new Semester(1, rs.getString("SEM_NAME")));
                 System.out.println("College: " + college.getSubject().getSubject_name());
                 subjectList.add(college);
@@ -160,6 +195,7 @@ public class SubjectServices {
     }
 
     public Subject getSubject(int sub_id) {
+        System.out.println("getSubject\n");
         Subject sub = new Subject();
         String query = "SELECT * FROM `subject` where SUB_ID="+sub_id;
         System.out.println(query);
@@ -312,6 +348,7 @@ public class SubjectServices {
     }
 
     public boolean checkTodayAttendance(int SUB_ID) {
+        System.out.println("checkTodayAttendance\n");
         String query = "SELECT * FROM `attendance` WHERE SUB_ID=? AND ATT_DATE=CURRENT_DATE; ";
         
         PreparedStatement pstm = new DBConnection().getStatement(query);
@@ -468,7 +505,7 @@ public class SubjectServices {
 
     // SELECT * FROM `attendance` WHERE ATT_DATE = CURRENT_DATE GROUP BY SUB_ID; 
     public List<Report> getTodayAttendanceReport() {
-
+        System.out.println("getTodayAttendanceReport\n");
         List<Report> attendanceList = new ArrayList<>();
         String query = "SELECT * FROM `attendance` LEFT JOIN subject on attendance.SUB_ID = subject.SUB_ID LEFT JOIN semester on subject.SEM_ID = semester.SEM_ID WHERE ATT_DATE = CURRENT_DATE GROUP BY attendance.SUB_ID";
         System.out.println(query);
@@ -521,6 +558,39 @@ public class SubjectServices {
                 report.setAttendance(a);
                 report.setTeacher(teacher);
                 report.setSubject(getSubject(rs.getInt("SUB_ID")));
+                attendanceList.add(report);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return attendanceList;
+    }
+    
+    
+    public List<Report> getAttendanceReport(String from, String to, int sub_id) {
+        System.out.println("getAttendanceReport(from,to,int)\n");
+        List<Report> attendanceList = new ArrayList<>();
+        String query = "SELECT *, COUNT(STU_ID) as Total_Present FROM `attendance` LEFT JOIN student on attendance.STU_ID = student.STUD_ID WHERE attendance.SUB_ID = ? AND ATT_DATE BETWEEN ? AND ? GROUP BY stu_id; ";
+        
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+        try {
+            pstm.setInt(1, sub_id);
+            pstm.setString(2, from);
+            pstm.setString(3, to);
+            System.out.println(pstm);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                Report report = new Report();
+                report.setTotal(rs.getInt("total_Present" ));
+                Attendance a = new Attendance();
+                a.setDate(rs.getString("ATT_DATE"));
+                a.setSub_id(rs.getInt("SUB_ID"));
+                a.setTeac_id(rs.getInt("ACC_ID"));
+                
+                report.setAttendance(a);
+                report.setSubject(getSubject(rs.getInt("SUB_ID")));
+//                report.setStudent(new Student(new User(rs.getInt("Stud_id"), rs.getString("STUd_NAME"), rs.getString("STUD_EMAIL"), rs.getString("STUd_PHONE"), rs.getString("STUD_ADD"))));
+                report.setStudent(new UserServices().getStudentRow(rs.getInt("STUD_ID")));
                 attendanceList.add(report);
             }
         } catch (SQLException e) {

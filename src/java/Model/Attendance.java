@@ -18,6 +18,7 @@ public class Attendance {
     private String[] stu_id;
     private int teac_id;
     private Subject subject;
+   
     
 
     public Attendance() {

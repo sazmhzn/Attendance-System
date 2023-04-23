@@ -7,6 +7,7 @@ package Services;
 import DBConnection.DBConnection;
 import Model.College;
 import Model.Course;
+import Model.Message;
 import Model.Section;
 import Model.Semester;
 import Model.Student;
@@ -598,4 +599,37 @@ public class UserServices {
         }
         return false;
     }
+
+    
+    public List<Message> getStudenMessage() {
+        List<Message> messages = new ArrayList<>();
+        String query = "SELECT * FROM `message` left JOIN student on message.STUD_ID = student.STUD_ID where MESSAGE_DATE=CURRENT_DATE ";
+        System.out.println(query);
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+        try {
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                Message message = new Message();
+                
+                Student student = new Student();
+                student.setUser(new User(
+                        rs.getInt("STUD_ID"), 
+                        rs.getString("STUD_NAME"), 
+                        rs.getString("STUD_EMAIL"), 
+                        rs.getString("STUD_PHONE"), 
+                        rs.getString("STUD_ADD")
+                ));
+                message.setId(rs.getInt("M_ID"));
+                message.setMessage(rs.getString("MESSAGE_TEXT"));
+                message.setStudent(student);
+                
+                messages.add(message);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return messages;
+    }
+    
 }
