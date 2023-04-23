@@ -353,6 +353,10 @@ public class SubjectServices {
                                 rs.getString("STUD_ADD")
                         )))
                 ));
+                
+                System.out.println("\nresults: ");
+                System.out.println(" " + student.getCollege().getStudent().getUser().getFullName());
+                
 
                 studentList.add(student);
             }

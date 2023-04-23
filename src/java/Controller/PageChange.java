@@ -348,6 +348,29 @@ public class PageChange extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/AdminReport.jsp");
             rd.forward(request, response);
         }
+        
+        if( page.equalsIgnoreCase("AdminViewAttendanceSheet") ) {
+            
+            Cookie subject = new Cookie("subject_id", request.getParameter("subject_id"));
+            response.addCookie(subject);
+            
+            int subject_id = Integer.parseInt(request.getParameter("subject_id"));
+            System.out.println("\n\nSubject id:"  + subject_id);
+            
+            //get the student that take the subject
+            List<Student> studentListA = new SubjectServices().getAttendanceSheet(subject_id, 1);
+            request.setAttribute("employeeListA", studentListA);
+
+            List<Student> studentListB = new SubjectServices().getAttendanceSheet(subject_id, 2);
+            request.setAttribute("employeeListB", studentListB);
+            System.out.println("sout: ");
+            for(Student s : studentListB) {
+                System.out.println("name: " + s.getCollege().getStudent().getUser().getFullName());
+            }
+            
+            RequestDispatcher rd = request.getRequestDispatcher("/Pages/AdminAttendanceSheet.jsp");
+            rd.forward(request, response);
+        }
 
         if (page.equalsIgnoreCase("Profile")) {
 

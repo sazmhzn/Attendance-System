@@ -260,7 +260,7 @@
               <div class="card recent-sales overflow-auto">
 
                 <div class="card-body">
-                  <h5 class="card-title">Attendance Sheet <span>| Today</span></h5>
+                  <h5 class="card-title">Attendance Sheet </h5>
 
                   <table class="table table-borderless datatable">
                     <thead>
@@ -283,7 +283,7 @@
                         <td> 
                           ${college.attendance.status ? 'Taken' : 'Not taken'} 
                         </td>
-                        <td><a href="PageChange?page=takeAttendanceSheet&subject_id=${college.subject.subject_id}" class="text-light btn btn-primary">View</a></td>
+                        <td><a href="PageChange?page=AdminViewAttendanceSheet&subject_id=${college.subject.subject_id}" class="text-light btn btn-primary">View</a></td>
                         </tr>
                         </c:forEach>
                     

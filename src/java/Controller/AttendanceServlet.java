@@ -84,6 +84,9 @@ public class AttendanceServlet extends HttpServlet {
                 if (c.getName().equalsIgnoreCase("id")) {
                     teac_id = Integer.parseInt(c.getValue());
                 }
+                if (c.getName().equalsIgnoreCase("name")) {
+                    System.out.println("name: " + c.getValue());
+                }
             }
         }
         
@@ -104,21 +107,28 @@ public class AttendanceServlet extends HttpServlet {
                 }
             }
             att.setDate(date);
-            System.out.println("Attendance details: \n\nT_id: " + att.getTeac_id() + " sub_id: "  + att.getSub_id() + " date: " + att.getDate());
+            System.out.println("Attendance details: \n\nT_id(ACC_ID): " + att.getTeac_id() + " sub_id: "  + att.getSub_id() + " date: " + att.getDate());
             
             if( new SubjectServices().checkAttendance(att.getSub_id(), date) ) {
                 System.out.println(" the value is already stored");
             } else {
+                System.out.println("The students: ");
+                for (String r : roll) {
+                    System.out.println("roll: " + r);
+                }
               new SubjectServices().insertAttendance(att);  
             }
-            
+            if( teac_id != 1  ) {
+                System.out.println("Taken by teacher");
+            RequestDispatcher rd = request.getRequestDispatcher("PageChange?page=attendanceDetails");
+            rd.forward(request, response);
         }
-        
-        
-        
-
-        RequestDispatcher rd = request.getRequestDispatcher("PageChange?page=attendanceDetails");
+            System.out.println("taken by admin");
+        RequestDispatcher rd = request.getRequestDispatcher("PageChange?page=AdminAttendanceSheet");
         rd.forward(request, response);
+        }//take attendance ends
+        
+        
     }
 
 

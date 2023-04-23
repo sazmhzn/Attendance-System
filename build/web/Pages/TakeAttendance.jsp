@@ -365,9 +365,9 @@
                                                         
                                                         <c:forEach  items="${employeeListA}" var="employeeA">
                                                             <tr>
-                                                                <td><input type="checkbox" class="ca" name="attendance" value="${employeeA.user.id}" ></td>
-                                                                <td  scope="row">${employeeA.user.id}</td>
-                                                                <td>${employeeA.user.fullName}</td>
+                                                                <td><input type="checkbox" class="ca" name="attendance" value="${employeeA.college.student.user.id}" ></td>
+                                                                <td  scope="row">${employeeA.college.student.user.id}</td>
+                                                                <td>${employeeA.college.student.user.fullName}</td>
                                                                 <td>${employeeA.college.semester.name}</td>
                                                                 <td>${employeeA.college.course.name}</td>
                                                             </tr>
@@ -408,7 +408,6 @@
                                                     </thead>
                                                     <tbody>
                                                         
-                                                            
                                                         <c:forEach  items="${employeeListB}" var="employeeB">
                                                             <tr>
                                                                 <td  scope="row"><input type="checkbox" class="cb form-check-input " name="attendance" value="${employeeB.college.student.user.id}" ></td>
