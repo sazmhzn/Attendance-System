@@ -15,6 +15,7 @@ public class Report {
     private Teacher teacher;
     private Subject subject;
     private int Total;
+    private Course course;
     
     public Report() {
     }
@@ -68,6 +69,14 @@ public class Report {
 
     public void setSubject(Subject subject) {
         this.subject = subject;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
     public int getTotal() {

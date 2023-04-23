@@ -92,7 +92,7 @@ public class RegisterServlet extends HttpServlet {
                 session.setAttribute("uid", user.getId());
                 session.setAttribute("username", user.getUsername());
                 session.setAttribute("role", user.getRole());
-                session.setMaxInactiveInterval(2*60*60);
+                session.setMaxInactiveInterval(3*60*60);
                 request.setAttribute("msg", "Login Successful!");
                 System.out.println(request.getAttribute("msg"));
                 
@@ -100,8 +100,10 @@ public class RegisterServlet extends HttpServlet {
                 //Used for editing the profile of the user
                 Cookie ck = new Cookie("id", String.valueOf(user.getId()));
                 Cookie ckName = new Cookie("name", String.valueOf(user.getUsername()));
+                Cookie cRole = new Cookie("role", String.valueOf(user.getRole()));
                 response.addCookie(ckName);
                 response.addCookie(ck);
+                response.addCookie(cRole);
                 
                 Cookie[] cookie = request.getCookies();
                 for(Cookie c : cookie) {

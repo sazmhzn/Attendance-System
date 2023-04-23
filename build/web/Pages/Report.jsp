@@ -1,8 +1,9 @@
 <%-- 
-    Document   : StudentDetails
-    Created on : Mar 17, 2023, 10:31:18 AM
+    Document   : Report
+    Created on : Apr 23, 2023, 11:25:06 PM
     Author     : lenovo
 --%>
+
 <%@page import="jakarta.servlet.http.HttpSession" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -11,7 +12,7 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-    <title>Teacher</title>
+    <title>Report</title>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <meta content="" name="description" />
     <meta content="" name="keywords" />
@@ -25,7 +26,8 @@
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect" />
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
       rel="stylesheet"
     />
 
@@ -236,7 +238,7 @@
         <!-- End Profile Page Nav -->
 
         <li class="nav-item">
-          <a class="nav-link " href="PageChange?page=studentDetailsTeac">
+          <a class="nav-link collapsed" href="PageChange?page=studentDetailsTeac">
             <i class="bi bi-question-circle"></i>
             <span>Student</span>
           </a>
@@ -244,7 +246,7 @@
         <!-- End F.A.Q Page Nav -->
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="PageChange?page=Report">
+          <a class="nav-link" href="PageChange?page=Report">
             <i class="bi bi-envelope"></i>
             <span>Report</span>
           </a>
@@ -263,25 +265,97 @@
       </ul>
     </aside>
     <!-- End Sidebar-->
-
     
     <!-- ======= Main ======= -->
     <main id="main" class="main">
       <div class="pagetitle">
-        <h1>Student</h1>
+        <h1>Reports</h1>
         <nav>
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="dashboard.html">Student</a></li>
-            <li class="breadcrumb-item active">All students</li>
+            <li class="breadcrumb-item">Pages</li>
+            <li class="breadcrumb-item active">Report</li>
             <!--<li class="breadcrumb-item ">Add Students</li>-->
           </ol>
         </nav>
+        
       </div>
       <!-- End Page Title -->
 
     
       <section class="section dashboard">
         <div class="row">
+             <!-- Top Selling -->
+            <div class="col-12">
+              <div class="card overflow-auto">
+
+                <div class="card-body">
+                  <h5 class="card-title">Report date</h5>
+                  <form
+                    class="row g-3"
+                    action="UserServlet?page=report"
+                    method="POST"
+                  >
+                    <div class="col-md-4">
+                      <div class="form-floating">
+                        <input
+                          type="date"
+                          class="form-control"
+                          placeholder="Your Name"
+                          name="from"
+                          id="date"
+                          onload="getDate()"
+                        />
+                        <label for="floatingName">From</label>
+                      </div>
+                    </div>
+
+                    <div class="col-4">
+                      <div class="form-floating">
+                        <input
+                          type="date"
+                          class="form-control"
+                          placeholder="email"
+                          id="floatingEmail"
+                          name="to"
+                        />
+                        <label for="floatingTextarea">To</label>
+                      </div>
+                    </div>
+                   
+                      <div class="col-md-4">
+                      <div class="form-floating">
+                          <select
+                              class="form-select"
+                          id="floatingSelect"
+                          aria-label="course"
+                          name="subject_id"
+                              >
+                              <c:forEach items="${college}" var="college">
+                                  <option value="${college.subject.subject_id}">${college.subject.subject_name}</option>
+                              </c:forEach>
+                          </select>
+                       
+                      </div>
+                    </div>
+                      
+                    <div class="text-left">
+                      <button
+                        type="submit"
+                        id="submitBtn"
+                        class="btn btn-primary"
+                      >
+                        generate
+                      </button>
+                     
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div><!-- End Top Selling -->
+            
+        </div>
+          
+          <div class="row">
              <!-- Top Selling -->
             <div class="col-12">
               <div class="card top-selling overflow-auto">
@@ -294,23 +368,19 @@
                       <tr>
                         <th scope="col">#</th>
                         <th scope="col">Student name</th>
-                        <th scope="col">Phone</th>
-                        <th scope="col">Semester</th>
-                        <th scope="col">Course</th>
                         <th scope="col">Section</th>
-                        <th scope="col">Attendance</th>
+                        <th scope="col">Total present</th>
+                
+                       
                       </tr>
                     </thead>
                     <tbody>
-                        <c:forEach  items="${employeeList}" var="employee">
+                        <c:forEach  items="${report}" var="report">
                             <tr>
-                                <td  scope="row">${employee.user.id}</td>
-                                <td>${employee.user.fullName}</td>
-                                <td>${employee.user.phone}</td>
-                                <td>${employee.college.semester.name}</td>
-                                <td>${employee.college.course.name}</td>
-                                <td>${employee.college.section.name}</td>
-                                <td> <a href="PageChange?page=studentAttendance&id=${employee.user.id}"> <button class="btn btn-primary"> View Attendance </button> </a></td>
+                                <td  scope="row">${report.student.user.id}</td>
+                                <td>${report.student.user.fullName}</td>
+                                <td>${report.student.college.section.name}</td>
+                                <td>${report.total}</td>
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -354,7 +424,10 @@
       });
     </script>
     <script> 
-    $('.alert').alert()
+       function getDate() {
+  document.getElementById("date").defaultValue = "2014-02-09";
+}
+    
     </script>
   </body>
 </html>

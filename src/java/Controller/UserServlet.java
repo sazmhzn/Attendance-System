@@ -20,6 +20,7 @@ import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -82,6 +83,7 @@ public class UserServlet extends HttpServlet {
         String page = request.getParameter("page");
 
         HttpSession session = request.getSession();
+        Cookie[] cookie = request.getCookies();
         /**
          * This condition check if the page is to add a teacher
          */
@@ -293,9 +295,29 @@ public class UserServlet extends HttpServlet {
             for(Report r : report) {
                 System.out.println("report.stud.user.name : " + r.getStudent().getUser().getFullName() + " total: " + r.getTotal());
             }
+//            Cookie[] cookie = request.getCookies();
+                
+            String role = null;
+            if (cookie != null) {
+                System.out.println("Cookie is not null");
+                for (Cookie c : cookie) {
+                    if (c.getName().equalsIgnoreCase("role")) {
+                        role = c.getValue();
+                    }
+                }
+            }
+            if (role.equals("A")) {
+                RequestDispatcher rd = request.getRequestDispatcher("PageChange?page=AdminReport");
+                rd.forward(request, response);
+            } else if (role.equals("T")) {
+                RequestDispatcher rd = request.getRequestDispatcher("PageChange?page=Report");
+                rd.forward(request, response);
+            } else {
+                RequestDispatcher rd = request.getRequestDispatcher("PageChange?page=404");
+                rd.forward(request, response);
+            }
             
-            RequestDispatcher rd = request.getRequestDispatcher("PageChange?page=AdminReport");
-            rd.forward(request, response);
+            
 
         }
         

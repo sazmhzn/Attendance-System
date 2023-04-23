@@ -529,6 +529,40 @@ public class SubjectServices {
     }
     
     
+    
+    
+    //SELECT COUNT(attendance.STU_ID), course.COURSE_NAME, ATT_DATE FROM `attendance` LEFT JOIN subject on attendance.SUB_ID = subject.SUB_ID LEFT JOIN course on subject.C_ID = course.C_ID GROUP BY attendance.ATT_DATE, course.C_ID; 
+    public List<Report> getDateWiseAttendanceReport(int c_id) {
+        System.out.println("getTodayAttendanceReport\n");
+        
+        List<Report> attendanceList = new ArrayList<>();
+        String query = "SELECT COUNT(attendance.STU_ID) as total, course.COURSE_NAME, ATT_DATE, course.C_ID FROM `attendance` LEFT JOIN subject on attendance.SUB_ID = subject.SUB_ID LEFT JOIN course on subject.C_ID = course.C_ID WHERE course.C_ID = ? GROUP BY attendance.ATT_DATE; ";
+        System.out.println(query);
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+        try {
+            pstm.setInt(1, c_id);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                Report report = new Report();
+                report.setTotal(rs.getInt("total"));
+                report.setCourse(new Course(rs.getInt("C_ID"), rs.getString("COURSE_NAME")));
+                attendanceList.add(report);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return attendanceList;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     /**
      * 
      * @param from

@@ -22,8 +22,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+
 import java.util.List;
 
 /**
@@ -101,12 +100,7 @@ public class PageChange extends HttpServlet {
         if (page.equalsIgnoreCase("attendanceSheet")) {
             System.out.println("\n\n=============== attendance Sheet ==============\n");
             int acc_id = 0;
-            
-            if(session.getAttribute("uid") != null) {
-                System.out.println("Session is not null");
-               acc_id = (int) session.getAttribute("uid");
-            }
-            
+        
             
             if (cookie != null) {
                 System.out.println("Cookie is not null");
@@ -128,6 +122,7 @@ public class PageChange extends HttpServlet {
         }
 
         if (page.equalsIgnoreCase("takeAttendanceSheet")) {
+         
             System.out.println(" ====================== Take attendacnce sheet ====================== ");
             int subject_id = Integer.parseInt(request.getParameter("subject_id"));
             
@@ -149,6 +144,12 @@ public class PageChange extends HttpServlet {
         if (page.equalsIgnoreCase("attendanceDetails")) {
             
             int acc_id = 0;
+            
+            if(session.getAttribute("uid") != null) {
+                System.out.println("Session is not null");
+               acc_id = (int) session.getAttribute("uid");
+            }
+            
             if (cookie != null) {
                 System.out.println("Cookie is not null");
                 for (Cookie c : cookie) {
@@ -170,6 +171,23 @@ public class PageChange extends HttpServlet {
         if (page.equalsIgnoreCase("studentDetailsTeac")) {
             int teac_id = 0;
             
+            int acc_id = 0;
+            
+            if(session.getAttribute("uid") != null) {
+                System.out.println("Session is not null");
+               acc_id = (int) session.getAttribute("uid");
+            }
+            
+            
+            if (cookie != null) {
+                System.out.println("Cookie is not null");
+                for (Cookie c : cookie) {
+                    if (c.getName().equalsIgnoreCase("id")) {
+                        acc_id = Integer.parseInt(c.getValue());
+                    }
+                }
+            }
+            
             for(Cookie c : cookie) {
                 if(c.getName().equals("id")) {
                     teac_id = Integer.parseInt(c.getValue()) ;
@@ -187,6 +205,51 @@ public class PageChange extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/StudentDetailTeac.jsp");
             rd.forward(request, response);
         }
+        
+        if(page.equalsIgnoreCase("Report")) {
+            int acc_id = 0;
+            
+            if(session.getAttribute("uid") != null) {
+                System.out.println("Session is not null");
+               acc_id = (int) session.getAttribute("uid");
+            }
+            
+            
+            if (cookie != null) {
+                System.out.println("Cookie is not null");
+                for (Cookie c : cookie) {
+                    if (c.getName().equalsIgnoreCase("id")) {
+                        acc_id = Integer.parseInt(c.getValue());
+                    }
+                }
+            }
+            int teac_id = 0;
+            if (cookie != null) {
+                System.out.println("Cookie is not null");
+                for (Cookie c : cookie) {
+                    if (c.getName().equalsIgnoreCase("id")) {
+                        teac_id = Integer.parseInt(c.getValue());
+                    }
+                }
+            }
+            
+            
+            List<Message> messages = new UserServices().getStudenMessage();
+            request.setAttribute("messages", messages);
+            int message_size = !messages.isEmpty() ? messages.size() : 0;
+            request.setAttribute("message_size", message_size );
+            
+            List<College> subjectList = new SubjectServices().getSubjectList(teac_id);
+            request.setAttribute("college", subjectList);
+            
+            RequestDispatcher rd = request.getRequestDispatcher("/Pages/Report.jsp");
+            rd.forward(request, response);
+        }
+        
+        
+        
+        
+        
 
         if (page.equalsIgnoreCase("studentAttendance")) {
             Student student = new UserServices().getStudentRow(Integer.parseInt(request.getParameter("id")));
@@ -313,6 +376,7 @@ public class PageChange extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/EditSubject.jsp");
             rd.forward(request, response);
         }
+        
 
         if (page.equalsIgnoreCase("adminDashboard")) {
 
@@ -327,18 +391,29 @@ public class PageChange extends HttpServlet {
             List<User> active = new UserServices().getActiveUserList();
             request.setAttribute("activeUser", active);
             
-            
             List<Message> messages = new UserServices().getStudenMessage();
             request.setAttribute("messages", messages);
             int message_size = !messages.isEmpty() ? messages.size() : 0;
             request.setAttribute("message_size", message_size );
             
+            
+            //date wise attendance
+            
+            List<College> course = new SubjectServices().getCourseList();
+            for(College c: course) {
+                List<Report> report = new SubjectServices().getDateWiseAttendanceReport(c.getCourse().getId());
+                String reportName = report+c.getCourse().getName();
+                request.setAttribute(reportName, report);
+                System.out.println(reportName );
+                for(Report r : report) {
+                  System.out.println("report total" + r.getTotal());  
+                }
+                
+            }
+          
             List<Report> todayAttendanceList = new SubjectServices().getTodayAttendanceReport();
             request.setAttribute("todayAttendanceList", todayAttendanceList);
             System.out.println("\n\nTodays attendance");
-            for(Report r : todayAttendanceList) {
-                System.out.println("naem: " + r.getAttendance().getSubject().getSubject_name());
-            }
             
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/AdminDashboard.jsp");
             rd.forward(request, response);
@@ -354,6 +429,10 @@ public class PageChange extends HttpServlet {
         }
         
         if (page.equalsIgnoreCase("AdminReport")) {
+            List<Message> messages = new UserServices().getStudenMessage();
+            request.setAttribute("messages", messages);
+            int message_size = !messages.isEmpty() ? messages.size() : 0;
+            request.setAttribute("message_size", message_size );
             
             
             List<College> subjectList = new SubjectServices().getSubjectList();
