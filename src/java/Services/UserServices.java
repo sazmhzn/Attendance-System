@@ -603,7 +603,7 @@ public class UserServices {
     
     public List<Message> getStudenMessage() {
         List<Message> messages = new ArrayList<>();
-        String query = "SELECT * FROM `message` left JOIN student on message.STUD_ID = student.STUD_ID where MESSAGE_DATE=CURRENT_DATE ";
+        String query = "SELECT * FROM `message` left JOIN student on message.STUD_ID = student.STUD_ID LIMIT 2";
         System.out.println(query);
         PreparedStatement pstm = new DBConnection().getStatement(query);
         try {
@@ -620,6 +620,7 @@ public class UserServices {
                         rs.getString("STUD_ADD")
                 ));
                 message.setId(rs.getInt("M_ID"));
+                message.setDate(rs.getString("MESSAGE_DATE"));
                 message.setMessage(rs.getString("MESSAGE_TEXT"));
                 message.setStudent(student);
                 

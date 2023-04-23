@@ -59,47 +59,30 @@
           <li class="nav-item dropdown">
             <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
               <i class="bi bi-bell"></i>
-              <span class="badge bg-primary badge-number">4</span> </a
+              <span class="badge bg-primary badge-number">${message_size}</span> </a
             ><!-- End Notification Icon -->
 
             <ul
               class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications"
             >
               <li class="dropdown-header">
-                You have 4 new notifications
-                <a href="#"
-                  ><span class="badge rounded-pill bg-primary p-2 ms-2"
-                    >View all</span
-                  ></a
-                >
+                You have ${message_size} new notifications
+               
               </li>
               <li>
                 <hr class="dropdown-divider" />
               </li>
-
-              <li class="notification-item">
-                <i class="bi bi-x-circle text-danger"></i>
-                <div>
-                  <h4>Atque rerum nesciunt</h4>
-                  <p>Quae dolorem earum veritatis oditseno</p>
-                  <p>1 hr. ago</p>
-                </div>
-              </li>
-
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
-
-              <li class="notification-item">
-                <i class="bi bi-check-circle text-success"></i>
-                <div>
-                  <h4>Sit rerum fuga</h4>
-                  <p>Quae dolorem earum veritatis oditseno</p>
-                  <p>2 hrs. ago</p>
-                </div>
-              </li>
-
-
+              <c:forEach items="${messages}" var="message">
+                  <li class="notification-item">
+                      <i class="bi bi-x-circle text-danger"></i>
+                      <div>
+                          <h4>${message.student.user.fullName}</h4>
+                          <p>${message.message}</p>
+                          <p>1 hr. ago</p>
+                      </div>
+                  </li>
+              </c:forEach>
+            
             </ul>
             <!-- End Notification Dropdown Items -->
           </li>
@@ -132,7 +115,8 @@
                   <i class="bi bi-person"></i>
                   <span>
                       
-                      <%=session.getAttribute("role")%>
+                      <%=session.getAttribute("role")%>dmin
+                      
                   </span>
                 </a>
               </li>
@@ -349,15 +333,17 @@
                   <script>
                     document.addEventListener("DOMContentLoaded", () => {
                       new ApexCharts(document.querySelector("#reportsChart"), {
-                        series: [{
+                        series: [
+                            {
                           name: 'BICT',
-                          data: [31, 40, 28, 51, 42, 82, 56],
+                          data: [31, 40, 28, 51, 42, 82, 56]
                         }, {
                           name: 'MBA',
                           data: [11, 32, 45, 32, 34, 52, 41]
-                        }],
+                        }
+                    ],
                         chart: {
-                          height: 350,
+                          height: 365,
                           type: 'area',
                           toolbar: {
                             show: false

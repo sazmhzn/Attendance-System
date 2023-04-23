@@ -82,9 +82,6 @@ public class PageChange extends HttpServlet {
         HttpSession session = request.getSession();
         Cookie[] cookie = request.getCookies();
         
-        List<Message> messages = new UserServices().getStudenMessage();
-        request.setAttribute("messages", messages);
-
         if (page.equalsIgnoreCase("register")) {
 
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/register.jsp");
@@ -329,6 +326,12 @@ public class PageChange extends HttpServlet {
 
             List<User> active = new UserServices().getActiveUserList();
             request.setAttribute("activeUser", active);
+            
+            
+            List<Message> messages = new UserServices().getStudenMessage();
+            request.setAttribute("messages", messages);
+            int message_size = !messages.isEmpty() ? messages.size() : 0;
+            request.setAttribute("message_size", message_size );
             
             List<Report> todayAttendanceList = new SubjectServices().getTodayAttendanceReport();
             request.setAttribute("todayAttendanceList", todayAttendanceList);

@@ -11,13 +11,15 @@ package Model;
 public class Message {
     private int id;
     private String message;
+    private String date;
     private Student student;
 
     public Message() {
     }
 
-    public Message(String message, Student student) {
+    public Message(String message, String date, Student student) {
         this.message = message;
+        this.date = date;
         this.student = student;
     }
 
@@ -35,6 +37,14 @@ public class Message {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public Student getStudent() {
