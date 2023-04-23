@@ -74,33 +74,6 @@
       </div>
       <!-- End Logo -->
 
-      <div class="search-bar">
-        <form
-          class="search-form d-flex align-items-center"
-          method="POST"
-          action="#"
-        >
-          <input
-            type="text"
-            name="query"
-            placeholder="Search"
-            title="Enter search keyword"
-            list="student"
-          />
-          <datalist id="student">
-              <option value="Angeels">
-              <option value="Surohan">
-              <option value="Mithlesh">
-              <option value="Susmit">
-              <option value="Subin">
-          </datalist>
-          <button type="submit" title="Search">
-            <i class="bi bi-search"></i>
-          </button>
-        </form>
-      </div>
-      <!-- End Search Bar -->
-
       <nav class="header-nav ms-auto">
         <ul class="d-flex align-items-center">
           <li class="nav-item d-block d-lg-none">
@@ -132,19 +105,6 @@
               </li>
 
               <li class="notification-item">
-                <i class="bi bi-exclamation-circle text-warning"></i>
-                <div>
-                  <h4>Lorem Ipsum</h4>
-                  <p>Quae dolorem earum veritatis oditseno</p>
-                  <p>30 min. ago</p>
-                </div>
-              </li>
-
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
-
-              <li class="notification-item">
                 <i class="bi bi-x-circle text-danger"></i>
                 <div>
                   <h4>Atque rerum nesciunt</h4>
@@ -166,25 +126,7 @@
                 </div>
               </li>
 
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
 
-              <li class="notification-item">
-                <i class="bi bi-info-circle text-primary"></i>
-                <div>
-                  <h4>Dicta reprehenderit</h4>
-                  <p>Quae dolorem earum veritatis oditseno</p>
-                  <p>4 hrs. ago</p>
-                </div>
-              </li>
-
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
-              <li class="dropdown-footer">
-                <a href="#">Show all notifications</a>
-              </li>
             </ul>
             <!-- End Notification Dropdown Items -->
           </li>
@@ -202,19 +144,24 @@
                 class="rounded-circle"
               />
               <span class="d-none d-md-block dropdown-toggle ps-2"
-                >K. Anderson</span
+                ><%=session.getAttribute("username")%></span
               > </a
             ><!-- End Profile Iamge Icon -->
 
             <ul
               class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile"
             >
-              <li class="dropdown-header">
-                <h6>Kevin Anderson</h6>
-                <span>Web Designer</span>
-              </li>
-              <li>
-                <hr class="dropdown-divider" />
+                <li>
+                <a
+                  class="dropdown-item d-flex align-items-center"
+                  href="users-profile.html"
+                >
+                  <i class="bi bi-person"></i>
+                  <span>
+                      
+                      <%=session.getAttribute("role")%>
+                  </span>
+                </a>
               </li>
 
               <li>
@@ -231,27 +178,9 @@
               </li>
 
               <li>
-                <a
-                  class="dropdown-item d-flex align-items-center"
-                  href="users-profile.html"
-                >
-                  <i class="bi bi-gear"></i>
-                  <span>Account Settings</span>
-                </a>
-              </li>
-              <li>
                 <hr class="dropdown-divider" />
               </li>
 
-              <li>
-                <a
-                  class="dropdown-item d-flex align-items-center"
-                  href="pages-faq.html"
-                >
-                  <i class="bi bi-question-circle"></i>
-                  <span>Need Help?</span>
-                </a>
-              </li>
               <li>
                 <hr class="dropdown-divider" />
               </li>
@@ -272,11 +201,11 @@
     </header>
     <!-- End Header -->
 
-   <!-- ======= Sidebar ======= -->
+    <!-- ======= Sidebar ======= -->
     <aside id="sidebar" class="sidebar">
       <ul class="sidebar-nav" id="sidebar-nav">
-        <li class="nav-item">
-          <a class="nav-link collapsed " href="PageChange?page=adminDashboard">
+        <li class="nav-item ">
+          <a class="nav-link collapsed" href="PageChange?page=adminDashboard">
             <i class="bi bi-grid"></i>
             <span>Dashboard</span>
           </a>
@@ -286,16 +215,16 @@
         <li class="nav-heading">Pages</li>
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="./AttendanceSheet.html">
-            <i class="bi bi-person"></i>
+          <a class="nav-link collapsed" href="PageChange?page=AdminAttendanceSheet">
+            <i class="bi bi-journal-check"></i>
             <span>Attendance Sheet</span>
           </a>
         </li>
         <!-- End Profile Page Nav -->
         
         <li class="nav-item">
-          <a class="nav-link collapsed" href="PageChange?page=Report">
-            <i class="bi bi-envelope"></i>
+          <a class="nav-link collapsed" href="PageChange?page=AdminReport">
+            <i class="bi bi-journal-text"></i>
             <span>Report</span>
           </a>
         </li>
@@ -311,19 +240,24 @@
         </li><!-- End Student Nav -->
       
       <li class="nav-item">
-          <a class="nav-link" href="PageChange?page=Teacher">
+          <a class="nav-link collapsed" href="PageChange?page=Teacher">
             <i class="bi bi-person"></i>
             <span>Teacher</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link collapsed" href="PageChange?page=Subject">
+          <a class="nav-link" href="PageChange?page=Subject">
             <i class="bi bi-person"></i>
             <span>Subject</span>
           </a>
         </li><!-- End Student Nav -->
 
-        
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="PageChange?page=Other">
+            <i class="bi bi-person"></i>
+            <span>Others</span>
+          </a>
+        </li><!-- End Student Nav -->
         
         <li class="nav-heading">Extra</li>
 

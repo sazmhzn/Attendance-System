@@ -114,19 +114,6 @@
               </li>
 
               <li class="notification-item">
-                <i class="bi bi-exclamation-circle text-warning"></i>
-                <div>
-                  <h4>Lorem Ipsum</h4>
-                  <p>Quae dolorem earum veritatis oditseno</p>
-                  <p>30 min. ago</p>
-                </div>
-              </li>
-
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
-
-              <li class="notification-item">
                 <i class="bi bi-x-circle text-danger"></i>
                 <div>
                   <h4>Atque rerum nesciunt</h4>
@@ -148,25 +135,7 @@
                 </div>
               </li>
 
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
 
-              <li class="notification-item">
-                <i class="bi bi-info-circle text-primary"></i>
-                <div>
-                  <h4>Dicta reprehenderit</h4>
-                  <p>Quae dolorem earum veritatis oditseno</p>
-                  <p>4 hrs. ago</p>
-                </div>
-              </li>
-
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
-              <li class="dropdown-footer">
-                <a href="#">Show all notifications</a>
-              </li>
             </ul>
             <!-- End Notification Dropdown Items -->
           </li>
@@ -184,19 +153,24 @@
                 class="rounded-circle"
               />
               <span class="d-none d-md-block dropdown-toggle ps-2"
-                >K. Anderson</span
+                ><%=session.getAttribute("username")%></span
               > </a
             ><!-- End Profile Iamge Icon -->
 
             <ul
               class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile"
             >
-              <li class="dropdown-header">
-                <h6>Kevin Anderson</h6>
-                <span>Web Designer</span>
-              </li>
-              <li>
-                <hr class="dropdown-divider" />
+                <li>
+                <a
+                  class="dropdown-item d-flex align-items-center"
+                  href="users-profile.html"
+                >
+                  <i class="bi bi-person"></i>
+                  <span>
+                      
+                      <%=session.getAttribute("role")%>
+                  </span>
+                </a>
               </li>
 
               <li>
@@ -213,27 +187,9 @@
               </li>
 
               <li>
-                <a
-                  class="dropdown-item d-flex align-items-center"
-                  href="users-profile.html"
-                >
-                  <i class="bi bi-gear"></i>
-                  <span>Account Settings</span>
-                </a>
-              </li>
-              <li>
                 <hr class="dropdown-divider" />
               </li>
 
-              <li>
-                <a
-                  class="dropdown-item d-flex align-items-center"
-                  href="pages-faq.html"
-                >
-                  <i class="bi bi-question-circle"></i>
-                  <span>Need Help?</span>
-                </a>
-              </li>
               <li>
                 <hr class="dropdown-divider" />
               </li>
@@ -258,7 +214,7 @@
     <aside id="sidebar" class="sidebar">
       <ul class="sidebar-nav" id="sidebar-nav">
         <li class="nav-item">
-          <a class="nav-link collapsed " href="PageChange?page=adminDashboard">
+          <a class="nav-link collapsed" href="PageChange?page=adminDashboard">
             <i class="bi bi-grid"></i>
             <span>Dashboard</span>
           </a>
@@ -268,17 +224,17 @@
         <li class="nav-heading">Pages</li>
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="./AttendanceSheet.html">
-            <i class="bi bi-person"></i>
+          <a class="nav-link collapsed" href="PageChange?page=AdminAttendanceSheet">
+            <i class="bi bi-journal-check"></i>
             <span>Attendance Sheet</span>
           </a>
         </li>
         <!-- End Profile Page Nav -->
         
         <li class="nav-item">
-          <a class="nav-link" href="PageChange?page=Report">
-            <i class="bi bi-envelope"></i>
-            <span>Reports</span>
+          <a class="nav-link" href="PageChange?page=AdminReport">
+            <i class="bi bi-journal-text"></i>
+            <span>Report</span>
           </a>
         </li>
         <!-- End Report Page Nav -->
@@ -305,7 +261,12 @@
           </a>
         </li><!-- End Student Nav -->
 
-        
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="PageChange?page=Other">
+            <i class="bi bi-person"></i>
+            <span>Others</span>
+          </a>
+        </li><!-- End Student Nav -->
         
         <li class="nav-heading">Extra</li>
 
@@ -349,7 +310,7 @@
                     action="UserServlet?page=report"
                     method="POST"
                   >
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                       <div class="form-floating">
                         <input
                           type="date"
@@ -363,7 +324,7 @@
                       </div>
                     </div>
 
-                    <div class="col-6">
+                    <div class="col-4">
                       <div class="form-floating">
                         <input
                           type="date"
@@ -375,7 +336,23 @@
                         <label for="floatingTextarea">To</label>
                       </div>
                     </div>
-                  
+                   
+                      <div class="col-md-4">
+                      <div class="form-floating">
+                          <select
+                              class="form-select"
+                          id="floatingSelect"
+                          aria-label="course"
+                          name="subject_id"
+                              >
+                              <c:forEach items="${college}" var="college">
+                                  <option value="${college.subject.subject_id}">${college.subject.subject_name}</option>
+                              </c:forEach>
+                          </select>
+                       
+                      </div>
+                    </div>
+                      
                     <div class="text-left">
                       <button
                         type="submit"
@@ -390,6 +367,7 @@
                 </div>
               </div>
             </div><!-- End Top Selling -->
+            
         </div>
           
           <div class="row">
@@ -404,21 +382,20 @@
                     <thead>
                       <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Subject name</th>
-                        <th scope="col">Teacher</th>
+                        <th scope="col">Student name</th>
+                        <th scope="col">Section</th>
                         <th scope="col">Total present</th>
-                        <th scope="col">Attendance Date</th>
+                
                        
                       </tr>
                     </thead>
                     <tbody>
                         <c:forEach  items="${report}" var="report">
                             <tr>
-                                <td  scope="row">1</td>
-                                <td>${report.subject.subject_name}</td>
-                                <td>${report.teacher.user.fullName}</td>
+                                <td  scope="row">${report.student.user.id}</td>
+                                <td>${report.student.user.fullName}</td>
+                                <td>${report.student.college.section.name}</td>
                                 <td>${report.total}</td>
-                                <td>${report.attendance.date}</td>
                             </tr>
                         </c:forEach>
                     </tbody>
