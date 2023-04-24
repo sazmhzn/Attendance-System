@@ -63,7 +63,7 @@
   </head>
 
   <body>
-    <!-- ======= Header ======= -->
+   <!-- ======= Header ======= -->
     <header id="header" class="header fixed-top d-flex align-items-center">
       <div class="d-flex align-items-center justify-content-between">
         <a href="index.html" class="logo d-flex align-items-center">
@@ -86,47 +86,30 @@
           <li class="nav-item dropdown">
             <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
               <i class="bi bi-bell"></i>
-              <span class="badge bg-primary badge-number">4</span> </a
+              <span class="badge bg-primary badge-number">${message_size}</span> </a
             ><!-- End Notification Icon -->
 
             <ul
               class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications"
             >
               <li class="dropdown-header">
-                You have 4 new notifications
-                <a href="#"
-                  ><span class="badge rounded-pill bg-primary p-2 ms-2"
-                    >View all</span
-                  ></a
-                >
+                You have ${message_size} new notifications
+               
               </li>
               <li>
                 <hr class="dropdown-divider" />
               </li>
-
-              <li class="notification-item">
-                <i class="bi bi-x-circle text-danger"></i>
-                <div>
-                  <h4>Atque rerum nesciunt</h4>
-                  <p>Quae dolorem earum veritatis oditseno</p>
-                  <p>1 hr. ago</p>
-                </div>
-              </li>
-
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
-
-              <li class="notification-item">
-                <i class="bi bi-check-circle text-success"></i>
-                <div>
-                  <h4>Sit rerum fuga</h4>
-                  <p>Quae dolorem earum veritatis oditseno</p>
-                  <p>2 hrs. ago</p>
-                </div>
-              </li>
-
-
+              <c:forEach items="${messages}" var="message">
+                  <li class="notification-item">
+                      <i class="bi bi-x-circle text-danger"></i>
+                      <div>
+                          <h4>${message.student.user.fullName}</h4>
+                          <p>${message.message}</p>
+                          <p>1 hr. ago</p>
+                      </div>
+                  </li>
+              </c:forEach>
+            
             </ul>
             <!-- End Notification Dropdown Items -->
           </li>
@@ -144,7 +127,21 @@
                 class="rounded-circle"
               />
               <span class="d-none d-md-block dropdown-toggle ps-2"
-                ><%=session.getAttribute("username")%></span
+                >
+              <%
+                   Cookie[] cookies = request.getCookies();
+         
+                    if( cookies != null ) {            
+                    for (Cookie cookie:cookies) {
+                        if( cookie.getName().equals("name")) {
+                            out.print(" " + cookie.getValue( )+" ");
+                        }
+                    }
+                    } else {
+                            response.sendRedirect("Pages/login.jsp");
+                     } 
+                %>
+              </span
               > </a
             ><!-- End Profile Iamge Icon -->
 
@@ -159,7 +156,23 @@
                   <i class="bi bi-person"></i>
                   <span>
                       
-                      <%=session.getAttribute("role")%>
+                      <%         
+                    if( cookies != null ) {            
+                    for (Cookie cookie:cookies) {
+                        if( cookie.getName().equals("role")) {
+                        if(cookie.getValue().equals("A")) {
+                            out.print("Admin");
+                          } else {
+                          out.print("Null");
+                          }
+                            
+                        }
+                    }
+                    } else {
+                            response.sendRedirect("Pages/login.jsp");
+                     } 
+                %>
+                      
                   </span>
                 </a>
               </li>
@@ -204,7 +217,7 @@
     <!-- ======= Sidebar ======= -->
     <aside id="sidebar" class="sidebar">
       <ul class="sidebar-nav" id="sidebar-nav">
-        <li class="nav-item ">
+        <li class="nav-item">
           <a class="nav-link collapsed" href="PageChange?page=adminDashboard">
             <i class="bi bi-grid"></i>
             <span>Dashboard</span>
@@ -223,8 +236,16 @@
         <!-- End Profile Page Nav -->
         
         <li class="nav-item">
+          <a class="nav-link collapsed" href="PageChange?page=AdminAbsenceReport">
+            <i class="bi bi-journal-x"></i>
+            <span>Absence Application</span>
+          </a>
+        </li>
+        <!-- End Profile Page Nav -->
+        
+        <li class="nav-item">
           <a class="nav-link collapsed" href="PageChange?page=AdminReport">
-            <i class="bi bi-journal-text"></i>
+            <i class="bi bi-journals"></i>
             <span>Report</span>
           </a>
         </li>
@@ -234,27 +255,28 @@
 
         <li class="nav-item">
             <a class="nav-link collapsed" href="PageChange?page=Student">
-                <i class="bi bi-journal-text"></i><span>Students</span>
+                <i class="bi bi-mortarboard"></i></i>
+            <span>Students</span>
             </a>
 
         </li><!-- End Student Nav -->
       
       <li class="nav-item">
           <a class="nav-link collapsed" href="PageChange?page=Teacher">
-            <i class="bi bi-person"></i>
+            <i class="bi bi-person-workspace"></i>
             <span>Teacher</span>
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="PageChange?page=Subject">
-            <i class="bi bi-person"></i>
+            <i class="bi bi-stickies"></i>
             <span>Subject</span>
           </a>
         </li><!-- End Student Nav -->
 
         <li class="nav-item">
           <a class="nav-link collapsed" href="PageChange?page=Other">
-            <i class="bi bi-person"></i>
+            <i class="bi bi-journals"></i>
             <span>Others</span>
           </a>
         </li><!-- End Student Nav -->

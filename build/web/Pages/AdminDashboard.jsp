@@ -101,16 +101,21 @@
                 class="rounded-circle"
               />
               <span class="d-none d-md-block dropdown-toggle ps-2"
-                ><%
-                    Cookie[] cookies = request.getCookies();
-                    if( cookies != null ) {    
+                >
+              <%
+                   Cookie[] cookies = request.getCookies();
+         
+                    if( cookies != null ) {            
                     for (Cookie cookie:cookies) {
                         if( cookie.getName().equals("name")) {
-                            out.print(" " + cookie.getValue());
-                        } 
+                            out.print(" " + cookie.getValue( )+" ");
+                        }
                     }
-                    }
-                    %> </span
+                    } else {
+                            response.sendRedirect("Pages/login.jsp");
+                     } 
+                %>
+              </span
               > </a
             ><!-- End Profile Iamge Icon -->
 
@@ -125,18 +130,7 @@
                   <i class="bi bi-person"></i>
                   <span>
                       
-                      <%
-                    
-                    if( cookies != null ) {    
-                    for (Cookie cookie:cookies) {
-                        if( cookie.getName().equals("role")) {
-                            out.print(" " + cookie.getValue());
-                        } 
-                    }
-                        }else {
-                            out.print(" Null ");
-                        }
-                    %> 
+                      <%=session.getAttribute("role")%>dmin
                       
                   </span>
                 </a>
@@ -183,7 +177,7 @@
     <aside id="sidebar" class="sidebar">
       <ul class="sidebar-nav" id="sidebar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="PageChange?page=adminDashboard">
+          <a class="nav-link " href="PageChange?page=adminDashboard">
             <i class="bi bi-grid"></i>
             <span>Dashboard</span>
           </a>
@@ -202,7 +196,7 @@
         
         <li class="nav-item">
           <a class="nav-link collapsed" href="PageChange?page=AdminAbsenceReport">
-            <i class="bi bi-journal-check"></i>
+            <i class="bi bi-journal-x"></i>
             <span>Absence Application</span>
           </a>
         </li>
@@ -210,7 +204,7 @@
         
         <li class="nav-item">
           <a class="nav-link collapsed" href="PageChange?page=AdminReport">
-            <i class="bi bi-journal-text"></i>
+            <i class="bi bi-journals"></i>
             <span>Report</span>
           </a>
         </li>
@@ -220,27 +214,27 @@
 
         <li class="nav-item">
             <a class="nav-link collapsed" href="PageChange?page=Student">
-                <i class="bi bi-journal-text"></i><span>Students</span>
+                <i class="bi bi-mortarboard"></i></i><span>Students</span>
             </a>
 
         </li><!-- End Student Nav -->
       
       <li class="nav-item">
           <a class="nav-link collapsed" href="PageChange?page=Teacher">
-            <i class="bi bi-person"></i>
+            <i class="bi bi-person-workspace"></i>
             <span>Teacher</span>
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link collapsed" href="PageChange?page=Subject">
-            <i class="bi bi-person"></i>
+            <i class="bi bi-stickies"></i>
             <span>Subject</span>
           </a>
         </li><!-- End Student Nav -->
 
         <li class="nav-item">
           <a class="nav-link collapsed" href="PageChange?page=Other">
-            <i class="bi bi-person"></i>
+            <i class="bi bi-journals"></i>
             <span>Others</span>
           </a>
         </li><!-- End Student Nav -->
@@ -505,7 +499,7 @@
                                 <th scope="row"><a href="#">#${message.id}</a></th>
                                 <td>${message.student.user.fullName}</td>
                                 <td>${message.category}</td>
-                                <td><span class="badge ${message.status == "pennding" ? "bg-success" : "bg-warning"}">${message.status}</span></td>
+                                <td><span class="badge ${message.status == "pending" ? "bg-warning" :  message.status == "approved" ? "bg-success" : "bg-danger"}">${message.status}</span></td>
                             </tr>
                         </c:forEach>
                   
