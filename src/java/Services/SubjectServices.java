@@ -8,6 +8,7 @@ import DBConnection.DBConnection;
 import Model.Attendance;
 import Model.College;
 import Model.Course;
+import Model.Message;
 import Model.Report;
 import Model.Section;
 import Model.Semester;
@@ -756,6 +757,49 @@ public class SubjectServices {
             e.printStackTrace();
         }
         return attendanceList;
+    }
+    
+    
+    
+    
+    
+    public List<Message> getStudentMessages(int acc_id) {
+        List<Message> messages = new ArrayList<>();
+        String query = "SELECT * FROM `message` left join student on message.stud_id = student.acc_id where student.acc_id = ?";
+
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+
+        try {
+            pstm.setInt(1, acc_id);
+            System.out.println(pstm);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                Message message = new Message(rs.getString("MESSAGE_TEXT"), rs.getString("MESSAGE_DATE"), rs.getString("CATEGORY"), new Student());
+                messages.add(message);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return messages;
+    }
+    
+    
+    
+    public void insertMessage(Message message) {
+        String query = "INSERT INTO `message`(`MESSAGE_TEXT`, `STUD_ID`, `CATEGORY`) VALUES(?, ?, ?)";
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+        try {
+            pstm.setString(1, message.getMessage());
+            pstm.setInt(2, message.getStudent().getUser().getId());
+            pstm.setString(3, message.getCategory());
+            System.out.println(pstm);
+
+            pstm.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        
     }
     
 }

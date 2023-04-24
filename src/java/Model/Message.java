@@ -12,14 +12,16 @@ public class Message {
     private int id;
     private String message;
     private String date;
+    private String category;
     private Student student;
 
     public Message() {
     }
 
-    public Message(String message, String date, Student student) {
+    public Message(String message, String date, String category, Student student) {
         this.message = message;
         this.date = date;
+        this.category = category;
         this.student = student;
     }
 
@@ -45,6 +47,14 @@ public class Message {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public Student getStudent() {

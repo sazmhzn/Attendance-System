@@ -1,6 +1,6 @@
 <%-- 
-    Document   : StudentViewAttendance
-    Created on : Apr 24, 2023, 11:16:39 AM
+    Document   : SendApplication
+    Created on : Apr 24, 2023, 2:03:00 PM
     Author     : lenovo
 --%>
 
@@ -12,30 +12,57 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-    <title>Absence Application</title>
+    <title>Absence</title>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <meta content="" name="description" />
     <meta content="" name="keywords" />
 
     <!-- Favicons -->
     <link href="Styling/assets/img/favicon.png" rel="icon" />
-    <link href="Styling/assets/img/apple-touch-icon.png" rel="apple-touch-icon"
+    <link
+      href="Styling/assets/img/apple-touch-icon.png"
+      rel="apple-touch-icon"
     />
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect" />
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-      rel="stylesheet"/>
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet"
+    />
 
     <!-- Vendor CSS Files -->
-    <link href="Styling/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet"/>
+    <link
+      href="Styling/assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
 
-    <link href="Styling/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet"/>
-    <link href="Styling/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="Styling/assets/vendor/quill/quill.snow.css" rel="stylesheet"/>
-    <link href="Styling/assets/vendor/quill/quill.bubble.css" rel="stylesheet"/>
-    <link href="Styling/assets/vendor/remixicon/remixicon.css" rel="stylesheet"/>
-    <link href="Styling/assets/vendor/simple-datatables/style.css" rel="stylesheet"/>
+    <link
+      href="Styling/assets/vendor/boxicons/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="Styling/assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <link href="Styling/assets/vendor/quill/quill.snow.css" rel="stylesheet" />
+
+    <link
+      href="Styling/assets/vendor/quill/quill.bubble.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="Styling/assets/vendor/remixicon/remixicon.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="Styling/assets/vendor/simple-datatables/style.css"
+      rel="stylesheet"
+    />
 
     <!-- Template Main CSS File -->
     <link href="Styling/assets/css/style.css" rel="stylesheet" />
@@ -193,63 +220,85 @@
     </aside>
     <!-- End Sidebar-->
 
-    
+
     <!-- ======= Main ======= -->
     <main id="main" class="main">
+        
+        <% if(session.getAttribute("status") != null) { %>
+        <h1> <%=session.getAttribute("status")%> </h1>
+        <% }%>
+        
       <div class="pagetitle">
-        <h1>Student</h1>
+        <h1>Absence Application</h1>
         <nav>
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="dashboard.html">Student</a></li>
-            <li class="breadcrumb-item active">Attendance History</li>
-            <!--<li class="breadcrumb-item ">Add Students</li>-->
+            <li class="breadcrumb-item"><a href="dashboard.html">Pages</a></li>
+            <li class="breadcrumb-item">
+              <a href="PageChange?page=Student">Absence</a>
+            </li>
+            <li class="breadcrumb-item active">Application form</li>
           </ol>
         </nav>
-        <button class="btn btn-primary"> <a href="PageChange?page=sendApplication" class="text-light"> send application </a>  </button>
       </div>
       <!-- End Page Title -->
 
-    
       <section class="section dashboard">
         <div class="row">
           <div class="row">
-                            
-              <!-- Recent Sales -->
-            <div class="col-12">
-              <div class="card recent-sales overflow-auto">
-
+            <div class="col-lg-6">
+              <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">Attendance Sheet </h5>
+                  <h5 class="card-title">Application Form</h5>
 
-                  <table class="table table-borderless datatable">
-                    <thead>
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Absence sent on</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Status</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach items="${subjectList}" var="message">
-                        <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        
-                        </tr>
-                        </c:forEach>
-                    
-                    </tbody>
-                  </table>
-
+                  <!-- Floating Labels Form -->
+                  <form
+                    class="row g-3"
+                    action="AttendanceServlet?page=sendApplication"
+                    method="POST"
+                  >
+                      <div class="col-md-12">
+                          <div class="form-floating mb-3">
+                              <select
+                                  class="form-select"
+                                  id="floatingSelect"
+                                  name="leave"
+                                  >
+                                  
+                                      <option value="sick leave">Sick leave</option>
+                                      <option value="casusal leave">casual leave</option>
+                                      <option value="study break">Study break</option>
+                                      <option value="vacation">Vacation</option>
+                                      <option value="short trip">Short trip</option>                  
+                              </select>
+                              <label for="floatingSelect">Leave</label>
+                          </div>
+                      </div>
+                    <div class="col-md-12">
+                      <div class="form-floating">
+                        <textarea class="form-control" id="exampleFormControlTextarea1" name="details" rows="5"></textarea>
+                        <label for="floatingName">Reason</label>
+                      </div>
+                    </div>
+                      
+                    <div class="text-left">
+                      <button
+                        type="submit"
+                        id="submitBtn"
+                        class="btn btn-primary"
+                      >
+                        Apply   
+                      </button>
+                      <button type="reset" class="btn btn-secondary">
+                        Reset
+                      </button>
+                    </div>
+                  </form>
+                  <!-- End floating Labels Form -->
                 </div>
-
               </div>
-            </div><!-- End Recent Sales -->
+            </div>
           </div>
-
-      </div>
+        </div>
       </section>
     </main>
     <!-- End #main -->
@@ -279,14 +328,28 @@
     <script src="Styling/assets/js/main.js"></script>
 
     <!-- Custome JS File -->
+
+    <script>
+      const contactField = document.getElementById("floatingNumber");
+      const btn = document.querySelector("#submitBtn");
+      const inputField = document.querySelectorAll()
+
+      btn.addEventListener("click", function () {
+        console.log("The button s clicked");
+        if (contactField.value.length === 0) {
+          alert("Enter contact detailas");
+          console.log("The contact field is empty");
+        }
+        //  else if (contactField.value.length < 10) {
+        //   alert("Enter a valid number")
+        // }
+      });
+    </script>
+
     <script>
       $(document).ready(function () {
         $("#example").DataTable();
       });
     </script>
-    <script> 
-    $('.alert').alert()
-    </script>
   </body>
 </html>
-

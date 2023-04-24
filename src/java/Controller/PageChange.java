@@ -81,6 +81,11 @@ public class PageChange extends HttpServlet {
         HttpSession session = request.getSession();
         Cookie[] cookie = request.getCookies();
         
+        if( cookie == null ) {
+          RequestDispatcher rd = request.getRequestDispatcher("/Pages/login.jsp");
+            rd.forward(request, response);  
+        }
+        
         if (page.equalsIgnoreCase("register")) {
 
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/register.jsp");
@@ -511,9 +516,9 @@ public class PageChange extends HttpServlet {
                     }
                 }
             }
-            
             List<Report> subjects = new SubjectServices().getStudentAttendanceReport(acc_id, subject_id);
             request.setAttribute("subjectList", subjects);
+           
             
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/StudentViewAttendance.jsp");
             rd.forward(request, response);
@@ -537,14 +542,18 @@ public class PageChange extends HttpServlet {
                 }
             }
             
-        
+            List<Message> messages = new SubjectServices().getStudentMessages(acc_id);
+            request.setAttribute("messages", messages);
             
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/AbsenceApplication.jsp");
             rd.forward(request, response);
         }
         
         
-        
+        if(page.equalsIgnoreCase("sendApplication")) {
+            RequestDispatcher rd = request.getRequestDispatcher("/Pages/SendApplication.jsp");
+            rd.forward(request, response);
+        }
         
         
     }

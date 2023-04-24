@@ -5,7 +5,10 @@
 package Controller;
 
 import Model.Attendance;
+import Model.Message;
+import Model.Student;
 import Services.SubjectServices;
+import Services.UserServices;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -127,6 +130,26 @@ public class AttendanceServlet extends HttpServlet {
         RequestDispatcher rd = request.getRequestDispatcher("PageChange?page=AdminAttendanceSheet");
         rd.forward(request, response);
         }//take attendance ends
+        
+        if (page.equalsIgnoreCase("sendApplication")) {
+            
+            int acc_id = 0;
+            if(cookie != null) {
+                for(Cookie c : cookie) {
+                    if(c.getName().equals("id")) {
+                        acc_id = Integer.parseInt( c.getValue());
+                    }
+                }
+            }
+            
+            Student student = new UserServices().getStudentRowByAccID(acc_id);
+            Message message = new Message(request.getParameter("details"),page, request.getParameter("leave"), student);
+            
+            new SubjectServices().insertMessage(message);
+            
+            RequestDispatcher rd = request.getRequestDispatcher("PageChange?page=sendApplication");
+            rd.forward(request, response);
+        }
         
         
     }

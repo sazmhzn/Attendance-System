@@ -275,7 +275,42 @@ public class UserServices {
         return student;
     }
       
+      
+      
+      public Student getStudentRowByAccID(int id){
+        Student student = new Student();
+        String query = "SELECT * FROM `student` left JOIN course on student.C_ID = course.C_ID LEFT JOIN semester ON semester.SEM_ID = student.SEM_ID LEFT JOIN section on student.SEC_ID = section.SECTION_ID where student.ACC_ID=?";
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+        try {
+            pstm.setInt(1,id);
+            System.out.println("Query: " + pstm);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()){
+                System.out.println("\nquery : " + pstm);
+                student.setRoll(rs.getInt("STUD_ID"));
+                student.setUser(new User( 
+                        rs.getInt("ACC_ID"), rs.getString("STUD_NAME"), 
+                        rs.getString("STUD_EMAIL"), rs.getString("STUD_PHONE"), 
+                        rs.getString("STUD_ADD")));
+                
+                student.setCollege(new College(
+                        (new Course(rs.getInt("C_ID"), rs.getString("COURSE_NAME"))),
+                        (new Semester(rs.getInt("SEM_ID"), rs.getString("SEM_NAME"))), 
+                        (new Section(rs.getInt("SEC_ID"), rs.getString("SECTION_NAME")))
+                ));
+            }
+            
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return student;
+    }
+      
     
+      
+      
+      
+      
       /**
      * This method will get get the list of student 
      * @return 

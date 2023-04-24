@@ -205,6 +205,7 @@
             <!--<li class="breadcrumb-item ">Add Students</li>-->
           </ol>
         </nav>
+        <button class="btn btn-primary"> <a href="PageChange?page=sendApplication" class="text-light"> send application </a>  </button>
       </div>
       <!-- End Page Title -->
 
@@ -224,16 +225,17 @@
                     <thead>
                       <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Attendance Date</th>
-                        <th scope="col">Taken by</th>
+                        <th scope="col">Absence sent on</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Status</th>
                       </tr>
                     </thead>
                     <tbody>
-                        <c:forEach items="${subjectList}" var="report">
+                        <c:forEach items="${subjectList}" var="message">
                         <tr>
-                            <td>${report.attendance.att_id}</td>
-                        <td>${report.attendance.date}</td>
-                        <td>${report.teacher.user.fullName != null ? report.teacher.user.fullName: "admin"}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                         
                         </tr>
                         </c:forEach>
