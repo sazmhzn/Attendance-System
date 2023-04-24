@@ -560,8 +560,6 @@ public class SubjectServices {
     }
     
     
-    
-    
     //SELECT COUNT(attendance.STU_ID), course.COURSE_NAME, ATT_DATE FROM `attendance` LEFT JOIN subject on attendance.SUB_ID = subject.SUB_ID LEFT JOIN course on subject.C_ID = course.C_ID GROUP BY attendance.ATT_DATE, course.C_ID; 
     public List<Report> getDateWiseAttendanceReport(int c_id) {
         System.out.println("getTodayAttendanceReport\n");
@@ -587,6 +585,98 @@ public class SubjectServices {
         }
         return attendanceList;
     }
+    
+    
+    
+    
+    
+    
+    
+    public List<Report> getStudentAttendanceReport(int acc_id) {
+
+        List<Report> attendanceList = new ArrayList<>();
+        String query = "SELECT * FROM `attendance` LEFT JOIN student on attendance.STU_ID = student.STUD_ID WHERE student.ACC_ID = ?; ";
+        System.out.println(query);
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+        try {
+            pstm.setInt(1, acc_id);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                Report report = new Report();
+                report.setTotal(rs.getInt("total_Student" ));
+                Attendance a = new Attendance();
+                a.setDate(rs.getString("ATT_DATE"));
+                a.setSub_id(rs.getInt("SUB_ID"));
+                a.setTeac_id(rs.getInt("ACC_ID"));
+                report.setAttendance(a);
+                report.setStudent(new Student(new User(acc_id, rs.getString("STUD_NAME"), rs.getString("STUD_EMAIL"), rs.getString("STUD_PHONE"), rs.getString("STUD_ADD"))));
+                attendanceList.add(report);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return attendanceList;
+    }
+    
+    
+    public List<Report> getStudentAttendanceReport(int acc_id, int sub_id) {
+
+        List<Report> attendanceList = new ArrayList<>();
+        String query = "SELECT * FROM `attendance` LEFT JOIN student on attendance.STU_ID = student.STUD_ID WHERE student.ACC_ID = ? AND SUB_ID=?; ";
+        System.out.println(query);
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+        try {
+            pstm.setInt(1, acc_id);
+            pstm.setInt(2, sub_id);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                Report report = new Report();
+                report.setTotal(rs.getInt("total_Student" ));
+                Attendance a = new Attendance();
+                a.setDate(rs.getString("ATT_DATE"));
+                a.setSub_id(rs.getInt("SUB_ID"));
+                a.setTeac_id(rs.getInt("ACC_ID"));
+                report.setAttendance(a);
+                report.setStudent(new Student(new User(acc_id, rs.getString("STUD_NAME"), rs.getString("STUD_EMAIL"), rs.getString("STUD_PHONE"), rs.getString("STUD_ADD"))));
+                attendanceList.add(report);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return attendanceList;
+    }
+    
+    
+    public List<Report> getStudentSubject(int acc_id) {
+        List<Report> subjectList = new ArrayList<>();
+        String query = "SELECT subject.SUB_ID, subject.SUB_NAME, subject.SUB_CODE, COUNT(student.STUD_ID) as total FROM `attendance` LEFT JOIN student on attendance.STU_ID = student.STUD_ID LEFT JOIN `subject` ON student.SEM_ID = subject.SEM_ID WHERE student.ACC_ID=? GROUP BY subject.SUB_ID; ";
+
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+
+        try {
+            pstm.setInt(1, acc_id);
+            System.out.println(pstm);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                Report report = new Report();
+                College college = new College();
+                college.setSubject(new Subject(
+                        rs.getInt("SUB_ID"),
+                        rs.getString("SUB_NAME"),
+                        rs.getString("SUB_CODE")
+                ));
+                college.setAttendance(new Attendance(checkTodayAttendance(rs.getInt("SUB_ID"))));
+                
+                report.setCollege(college);
+                report.setTotal(rs.getInt("total"));
+                subjectList.add(report);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return subjectList;
+    }
+    
     
     
     

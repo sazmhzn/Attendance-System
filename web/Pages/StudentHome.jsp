@@ -63,42 +63,6 @@
           </li>
           <!-- End Search Icon-->
 
-          <li class="nav-item dropdown">
-            <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-              <i class="bi bi-bell"></i>
-              <span class="badge bg-primary badge-number">${message_size}</span> </a
-            ><!-- End Notification Icon -->
-
-            <ul
-              class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications"
-            >
-              <li class="dropdown-header">
-                You have ${message_size} new notifications
-               
-              </li>
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
-              
-              <c:forEach items="${messages}" var="message">
-                  <li class="notification-item">
-                      <i class="bi bi-x-circle text-danger"></i>
-                      <div>
-                          <h4>${message.student.user.fullName}</h4>
-                          <p>${message.message}</p>
-                          <p>1 hr. ago</p>
-                      </div>
-                  </li>
-              </c:forEach>
-
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
-             
-            </ul>
-            <!-- End Notification Dropdown Items -->
-          </li>
-          <!-- End Notification Nav -->
 
           <li class="nav-item dropdown pe-3">
               <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
@@ -200,7 +164,7 @@
         <li class="nav-heading">Pages</li>
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="PageChange?page=studentViewAttendance">
+          <a class="nav-link " href="PageChange?page=studentViewAttendance">
             <i class="bi bi-person"></i>
             <span>Attendance Report</span>
           </a>
@@ -208,7 +172,7 @@
         <!-- End Profile Page Nav -->
 
         <li class="nav-item">
-          <a class="nav-link " href="PageChange?page=AbsenceApplication">
+          <a class="nav-link collapsed" href="PageChange?page=AbsenceApplication">
             <i class="bi bi-question-circle"></i>
             <span>Absence Application</span>
           </a>
@@ -247,43 +211,50 @@
     
       <section class="section dashboard">
         <div class="row">
-             <!-- Top Selling -->
+          <div class="row">
+                            
+              <!-- Recent Sales -->
             <div class="col-12">
-              <div class="card top-selling overflow-auto">
+              <div class="card recent-sales overflow-auto">
 
-                <div class="card-body pb-0">
-                  <h5 class="card-title">Student list </h5>
+                <div class="card-body">
+                  <h5 class="card-title">Attendance Sheet </h5>
 
                   <table class="table table-borderless datatable">
                     <thead>
                       <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Student name</th>
-                        <th scope="col">Phone</th>
-                        <th scope="col">Semester</th>
-                        <th scope="col">Course</th>
-                        <th scope="col">Section</th>
-                        <th scope="col">Attendance</th>
+                        <th scope="col">Subject name</th>
+                        <th scope="col">Subject Code</th>
+                        <th scope="col">Total Attendance</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Action</th>
                       </tr>
                     </thead>
                     <tbody>
-                        <c:forEach  items="${employeeList}" var="employee">
-                            <tr>
-                                <td  scope="row">${employee.user.id}</td>
-                                <td>${employee.user.fullName}</td>
-                                <td>${employee.user.phone}</td>
-                                <td>${employee.college.semester.name}</td>
-                                <td>${employee.college.course.name}</td>
-                                <td>${employee.college.section.name}</td>
-                                <td> <a href="PageChange?page=studentAttendance&id=${employee.user.id}"> <button class="btn btn-primary"> View Attendance </button> </a></td>
-                            </tr>
+                        <c:forEach items="${subjectList}" var="report">
+                        <tr>
+                        <th scope="row">#${report.college.subject.subject_id}</th>
+                        <td>${report.college.subject.subject_name}</td>
+                        <td>${report.college.subject.subject_code}</td>
+                        <td>${report.total}</td>
+                        <td> 
+                          ${college.attendance.status ? 'Taken' : 'Not taken'} 
+                        </td>
+                        <td><a href="PageChange?page=StudentViewAttendance&subject_id=${report.college.subject.subject_id}" class="text-light btn btn-primary">View</a></td>
+                        </tr>
                         </c:forEach>
+                    
                     </tbody>
                   </table>
+
                 </div>
+
               </div>
-            </div><!-- End Top Selling -->
-        </div>
+            </div><!-- End Recent Sales -->
+          </div>
+
+      </div>
       </section>
     </main>
     <!-- End #main -->

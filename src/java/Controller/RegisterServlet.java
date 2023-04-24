@@ -121,6 +121,9 @@ public class RegisterServlet extends HttpServlet {
                     } else if (session.getAttribute("role").equals("A")) {
                         RequestDispatcher rd = request.getRequestDispatcher("PageChange?page=adminDashboard");
                         rd.forward(request, response);
+                    } else if (session.getAttribute("role").equals("S")) {
+                        RequestDispatcher rd = request.getRequestDispatcher("PageChange?page=studentHome");
+                        rd.forward(request, response);
                     }
             } else {
                 session.setAttribute("error_msg", "Invalid username or passowrd");
