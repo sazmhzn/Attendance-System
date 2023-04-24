@@ -622,7 +622,7 @@ public class SubjectServices {
     public List<Report> getStudentAttendanceReport(int acc_id, int sub_id) {
 
         List<Report> attendanceList = new ArrayList<>();
-        String query = "SELECT * FROM `attendance` LEFT JOIN student on attendance.STU_ID = student.STUD_ID WHERE student.ACC_ID = ? AND SUB_ID=?; ";
+        String query = "SELECT * FROM `attendance` LEFT JOIN student on attendance.STU_ID = student.STUD_ID LEFT JOIN teacher on attendance.ACC_ID = teacher.ACC_ID WHERE student.ACC_ID = ? AND SUB_ID=?;  ";
         System.out.println(query);
         PreparedStatement pstm = new DBConnection().getStatement(query);
         try {
@@ -631,13 +631,19 @@ public class SubjectServices {
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
                 Report report = new Report();
-                report.setTotal(rs.getInt("total_Student" ));
+                
+                //attendance details
                 Attendance a = new Attendance();
+                a.setAtt_id(rs.getInt("ATT_ID"));
                 a.setDate(rs.getString("ATT_DATE"));
                 a.setSub_id(rs.getInt("SUB_ID"));
                 a.setTeac_id(rs.getInt("ACC_ID"));
+                int id = rs.getInt("TEAC_ID");
+             
+                report.setTeacher(new Teacher(new User(rs.getInt("TEAC_ID"), rs.getString("TEAC_NAME"), query, query, query)));
                 report.setAttendance(a);
                 report.setStudent(new Student(new User(acc_id, rs.getString("STUD_NAME"), rs.getString("STUD_EMAIL"), rs.getString("STUD_PHONE"), rs.getString("STUD_ADD"))));
+                
                 attendanceList.add(report);
             }
         } catch (SQLException e) {

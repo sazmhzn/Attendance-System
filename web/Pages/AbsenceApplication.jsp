@@ -12,7 +12,7 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-    <title>Student</title>
+    <title>Absence Application</title>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <meta content="" name="description" />
     <meta content="" name="keywords" />
@@ -110,7 +110,7 @@
                     for (Cookie cookie:cookies) {
                         if( cookie.getName().equals("role")) {
                        
-                        out.print( cookie.getValue().equals("T")?" Teacher" : null);
+                        out.print( cookie.getValue().equals("S")? "student": null);
                         } 
                     }
                         }else {
@@ -164,7 +164,7 @@
         <li class="nav-heading">Pages</li>
 
         <li class="nav-item">
-          <a class="nav-link " href="PageChange?page=studentViewAttendance">
+          <a class="nav-link collapsed" href="PageChange?page=studentHome">
             <i class="bi bi-person"></i>
             <span>Attendance Report</span>
           </a>
@@ -172,7 +172,7 @@
         <!-- End Profile Page Nav -->
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="PageChange?page=AbsenceApplication">
+          <a class="nav-link " href="PageChange?page=AbsenceApplication">
             <i class="bi bi-question-circle"></i>
             <span>Absence Application</span>
           </a>

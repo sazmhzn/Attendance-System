@@ -515,9 +515,35 @@ public class PageChange extends HttpServlet {
             List<Report> subjects = new SubjectServices().getStudentAttendanceReport(acc_id, subject_id);
             request.setAttribute("subjectList", subjects);
             
-            RequestDispatcher rd = request.getRequestDispatcher("/Pages/StudentHome.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("/Pages/StudentViewAttendance.jsp");
             rd.forward(request, response);
         }
+        
+        
+        
+        
+        
+        
+        if(page.equalsIgnoreCase("AbsenceApplication")) {
+            
+            int acc_id = 0;
+            
+            if (cookie != null) {
+                System.out.println("Cookie is not null");
+                for (Cookie c : cookie) {
+                    if (c.getName().equalsIgnoreCase("id")) {
+                        acc_id = Integer.parseInt(c.getValue());
+                    }
+                }
+            }
+            
+        
+            
+            RequestDispatcher rd = request.getRequestDispatcher("/Pages/AbsenceApplication.jsp");
+            rd.forward(request, response);
+        }
+        
+        
         
         
         
