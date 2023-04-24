@@ -259,6 +259,9 @@ public class SubjectServices {
 
     //This method will insert subject in subject
     public void insertSubject(College college) {
+        
+        insertTotalAttendance(college.getSubject());
+        
         String query = "INSERT INTO `subject`(`SUB_NAME`, `SUB_CODE`, `TEAC_ID`, `C_ID`, `SEM_id`) VALUES (?,?,?,?,?)";
         PreparedStatement pstm = new DBConnection().getStatement(query);
         try {
@@ -403,8 +406,33 @@ public class SubjectServices {
         return studentList;
     }
     
+    
+    public void insertTotalAttendance(Subject sub) {
+        String query = "INSERT INTO `total_attendance`( `SUB_ID`, `count`) VALUES (?,0)";
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+        try {
+                pstm.setInt(1, sub.getSubject_id());
+                System.out.println("pst: " + pstm);
+                pstm.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } 
+    }
+    
+    public void updateTotalAttendance(Attendance att) {
+        String query = "UPDATE total_attendance set count = count + 1 where sub_id=?";
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+        try {
+                pstm.setInt(1, att.getSub_id());
+                System.out.println("pst: " + pstm);
+                pstm.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } 
+    }
         
     public void insertAttendance(Attendance att) {
+        updateTotalAttendance(att);
         String query = "INSERT INTO `attendance`(`STU_ID`, `ACC_ID`, `SUB_ID`, `ATT_DATE`, `STATUS`) VALUES (?,?,?,?,?)";
         PreparedStatement pstm = new DBConnection().getStatement(query);
         try {
@@ -515,10 +543,13 @@ public class SubjectServices {
             while (rs.next()) {
                 Report report = new Report();
                 Attendance a = new Attendance();
+                College c = new College(new Semester(rs.getInt("SEM_ID"), rs.getString("SEM_NAME")));
                 Subject sub = new Subject();
                 sub.setSubject_code(rs.getString("SUB_CODE"));
                 sub.setSubject_name(rs.getString("SUB_NAME"));
+                
                 a.setSubject(sub);
+                report.setCollege(c);
                 report.setAttendance(a);
                 attendanceList.add(report);
             }
@@ -543,9 +574,12 @@ public class SubjectServices {
             pstm.setInt(1, c_id);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
+                Attendance attendance = new Attendance();
+                attendance.setDate(rs.getString("ATT_DATE"));
                 Report report = new Report();
                 report.setTotal(rs.getInt("total"));
-                report.setCourse(new Course(rs.getInt("C_ID"), rs.getString("COURSE_NAME")));
+                report.setAttendance(attendance);
+                report.setCollege(new College( new Course(rs.getInt("C_ID"), rs.getString("COURSE_NAME")) ) );
                 attendanceList.add(report);
             }
         } catch (SQLException e) {
@@ -553,11 +587,6 @@ public class SubjectServices {
         }
         return attendanceList;
     }
-    
-    
-    
-    
-    
     
     
     

@@ -336,34 +336,35 @@
                         series: [
                             {
                           name: 'BICT',
-                          data: [31, 40, 28, 51, 42, 82, 56]
-                        }, {
+                          data: [ <c:forEach items="${report}" var="report">${report.total}, </c:forEach> ]
+                        },
+                                {
                           name: 'MBA',
-                          data: [11, 32, 45, 32, 34, 52, 41]
-                        }
+                          data: [ <c:forEach items="${reportM}" var="reportm">${reportm.total}, </c:forEach> ]
+                        },
                     ],
                         chart: {
                           height: 365,
                           type: 'area',
                           toolbar: {
-                            show: false
+                            show: true
                           },
                         },
                         markers: {
                           size: 3
                         },
-                        colors: ['#4154f1', '#2eca6a', '#ff771d'],
+                        colors: ['#4154f1', '#ff771d'],
                         fill: {
                           type: "gradient",
                           gradient: {
                             shadeIntensity: 1,
                             opacityFrom: 0.3,
                             opacityTo: 0.4,
-                            stops: [0, 90, 100]
+                            stops: [0, 9, 60]
                           }
                         },
                         dataLabels: {
-                          enabled: false
+                          enabled: true
                         },
                         stroke: {
                           curve: 'smooth',
@@ -371,7 +372,7 @@
                         },
                         xaxis: {
                           type: 'datetime',
-                          categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
+                          categories: [<c:forEach items="${report}" var="report">"${report.attendance.date}", </c:forEach>]
                         },
                         tooltip: {
                           x: {
@@ -409,8 +410,8 @@
                             <tr>
                                 <th scope="row"><a href="#">#2457</a></th>
                                 <td>${att.attendance.subject.subject_name}</td>
-                                <td><a href="#" class="text-primary">Second</a></td>
-                                <td><span class="badge bg-success">Approved</span></td>
+                                <td><a href="#" class="text-primary">${att.college.semester.name}</a></td>
+                                <td><span class="badge bg-success">Completed</span></td>
                             </tr>
                         </c:forEach>
                   

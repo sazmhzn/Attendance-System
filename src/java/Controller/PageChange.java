@@ -399,17 +399,12 @@ public class PageChange extends HttpServlet {
             
             //date wise attendance
             
-            List<College> course = new SubjectServices().getCourseList();
-            for(College c: course) {
-                List<Report> report = new SubjectServices().getDateWiseAttendanceReport(c.getCourse().getId());
-                String reportName = report+c.getCourse().getName();
-                request.setAttribute(reportName, report);
-                System.out.println(reportName );
-                for(Report r : report) {
-                  System.out.println("report total" + r.getTotal());  
-                }
-                
-            }
+                List<College> course = new SubjectServices().getCourseList();
+                List<Report> report = new SubjectServices().getDateWiseAttendanceReport(1);
+                request.setAttribute("report", report);
+            
+                List<Report> reportm = new SubjectServices().getDateWiseAttendanceReport(2);
+                request.setAttribute("reportm", reportm);
           
             List<Report> todayAttendanceList = new SubjectServices().getTodayAttendanceReport();
             request.setAttribute("todayAttendanceList", todayAttendanceList);
@@ -464,7 +459,18 @@ public class PageChange extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/AdminAttendanceSheet.jsp");
             rd.forward(request, response);
         }
-
+        if(page.equalsIgnoreCase("Other")) {
+            
+            List<College> college = new SubjectServices().getCourseList();
+            request.setAttribute("college", college);
+            
+            List<College> semester = new SubjectServices().getSemesterList();
+            request.setAttribute("semester", semester);
+                    
+            RequestDispatcher rd = request.getRequestDispatcher("/Pages/Others.jsp");
+            rd.forward(request, response);
+        }
+        
         if (page.equalsIgnoreCase("Profile")) {
 
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/TeacherProfile.jsp");
