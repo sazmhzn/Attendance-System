@@ -1,11 +1,10 @@
 <%-- 
-    Document   : AddTeacher
+    Document   : AdminAbsenceReport
     Created on : Mar 14, 2023, 9:27:23 AM
     Author     : lenovo
 --%>
 
 <%@page import="jakarta.servlet.http.Cookie" %>
-<%@page import="jakarta.servlet.http.HttpSession" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +12,7 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-    <title>Teacher</title>
+    <title>Absence Report</title>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <meta content="" name="description" />
     <meta content="" name="keywords" />
@@ -101,16 +100,21 @@
                 class="rounded-circle"
               />
               <span class="d-none d-md-block dropdown-toggle ps-2"
-                ><%
-                    Cookie[] cookies = request.getCookies();
-                    if( cookies != null ) {    
+                >
+              <%
+                   Cookie[] cookies = request.getCookies();
+         
+                    if( cookies != null ) {            
                     for (Cookie cookie:cookies) {
                         if( cookie.getName().equals("name")) {
-                            out.print(" " + cookie.getValue());
-                        } 
+                            out.print(" " + cookie.getValue( )+" ");
+                        }
                     }
-                    }
-                    %> </span
+                    } else {
+                            response.sendRedirect("Pages/login.jsp");
+                     } 
+                %>
+              </span
               > </a
             ><!-- End Profile Iamge Icon -->
 
@@ -125,18 +129,7 @@
                   <i class="bi bi-person"></i>
                   <span>
                       
-                      <%
-                    
-                    if( cookies != null ) {    
-                    for (Cookie cookie:cookies) {
-                        if( cookie.getName().equals("role")) {
-                            out.print(" " + cookie.getValue());
-                        } 
-                    }
-                        }else {
-                            out.print(" Null ");
-                        }
-                    %> 
+                      <%=session.getAttribute("role")%>dmin
                       
                   </span>
                 </a>
@@ -183,7 +176,7 @@
     <aside id="sidebar" class="sidebar">
       <ul class="sidebar-nav" id="sidebar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="PageChange?page=adminDashboard">
+          <a class="nav-link collapsed" href="PageChange?page=adminDashboard">
             <i class="bi bi-grid"></i>
             <span>Dashboard</span>
           </a>
@@ -201,8 +194,8 @@
         <!-- End Profile Page Nav -->
         
         <li class="nav-item">
-          <a class="nav-link collapsed" href="PageChange?page=AdminAbsenceReport">
-            <i class="bi bi-journal-check"></i>
+          <a class="nav-link" href="PageChange?page=AdminAbsenceReport">
+            <i class="bi bi-journal-x"></i>
             <span>Absence Application</span>
           </a>
         </li>
@@ -210,7 +203,7 @@
         
         <li class="nav-item">
           <a class="nav-link collapsed" href="PageChange?page=AdminReport">
-            <i class="bi bi-journal-text"></i>
+            <i class="bi bi-journals"></i>
             <span>Report</span>
           </a>
         </li>
@@ -220,27 +213,27 @@
 
         <li class="nav-item">
             <a class="nav-link collapsed" href="PageChange?page=Student">
-                <i class="bi bi-journal-text"></i><span>Students</span>
+                <i class="bi bi-mortarboard"></i></i><span>Students</span>
             </a>
 
         </li><!-- End Student Nav -->
       
       <li class="nav-item">
           <a class="nav-link collapsed" href="PageChange?page=Teacher">
-            <i class="bi bi-person"></i>
+            <i class="bi bi-person-workspace"></i>
             <span>Teacher</span>
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link collapsed" href="PageChange?page=Subject">
-            <i class="bi bi-person"></i>
+            <i class="bi bi-stickies"></i>
             <span>Subject</span>
           </a>
         </li><!-- End Student Nav -->
 
         <li class="nav-item">
           <a class="nav-link collapsed" href="PageChange?page=Other">
-            <i class="bi bi-person"></i>
+            <i class="bi bi-journals"></i>
             <span>Others</span>
           </a>
         </li><!-- End Student Nav -->
@@ -261,254 +254,54 @@
     <!-- ======= Main ======= -->
     <main id="main" class="main">
       <div class="pagetitle">
-      <h1>Dashboard</h1>
+      <h1>Absence Application</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="dashboard.html">Home</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
+          <li class="breadcrumb-item">Pages</li>
+          <li class="breadcrumb-item active">Absence report</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
     
     <section class="section dashboard">
-      <div class="row">
-
-        <!-- Left side columns -->
-        <div class="col-lg-8">
+        <div class="row">
           <div class="row">
-
-            <!-- Sales Card -->
-            <div class="col-xxl-4 col-md-6">
-              <div class="card info-card sales-card">
-
-                <div class="card-body">
-                  <h5 class="card-title">Teachers 
-                      <!--<span>| Today</span>-->
-                  </h5>
-
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-bookmark-check"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6> ${totalTeacher} </h6>
-
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div><!-- End Sales Card -->
-
-            <!-- Revenue Card -->
-            <div class="col-xxl-4 col-md-6">
-              <div class="card info-card revenue-card">
-
-                <div class="card-body">
-                  <h5 class="card-title">Student 
-                      <!--<span>| This Month</span>-->
-                  </h5>
-
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-bookmark"></i> 
-
-                    </div>
-                    <div class="ps-3">
-                      <h6>${totalStudent}</h6>
-
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div><!-- End Revenue Card -->
-
-            <!-- Customers Card -->
-            <div class="col-xxl-4 col-xl-12">
-
-              <div class="card info-card customers-card">
-
-                <div class="card-body">
-                  <h5 class="card-title">Total 
-                      <!--<span>| This Year</span>-->
-                  </h5>
-
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-bookmark-fill"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6> ${totalStudent + totalTeacher} </h6>
-
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-
-            </div><!-- End Customers Card -->
-
-            <!-- Reports -->
-            <div class="col-12">
-              <div class="card">
-
-                <div class="card-body">
-                  <h5 class="card-title">Reports <span>/Today</span></h5>
-
-                  <!-- Line Chart -->
-                  <div id="reportsChart"></div>
-
-                  <script>
-                    document.addEventListener("DOMContentLoaded", () => {
-                      new ApexCharts(document.querySelector("#reportsChart"), {
-                        series: [
-                            {
-                          name: 'BICT',
-                          data: [ <c:forEach items="${report}" var="report">${report.total}, </c:forEach> ]
-                        },
-                                {
-                          name: 'MBA',
-                          data: [ <c:forEach items="${reportM}" var="reportm">${reportm.total}, </c:forEach> ]
-                        },
-                    ],
-                        chart: {
-                          height: 365,
-                          type: 'area',
-                          toolbar: {
-                            show: true
-                          },
-                        },
-                        markers: {
-                          size: 3
-                        },
-                        colors: ['#4154f1', '#ff771d'],
-                        fill: {
-                          type: "gradient",
-                          gradient: {
-                            shadeIntensity: 1,
-                            opacityFrom: 0.3,
-                            opacityTo: 0.4,
-                            stops: [0, 9, 60]
-                          }
-                        },
-                        dataLabels: {
-                          enabled: true
-                        },
-                        stroke: {
-                          curve: 'smooth',
-                          width: 2
-                        },
-                        xaxis: {
-                          type: 'datetime',
-                          categories: [<c:forEach items="${report}" var="report">"${report.attendance.date}", </c:forEach>]
-                        },
-                        tooltip: {
-                          x: {
-                            format: 'dd/MM/yy HH:mm'
-                          },
-                        }
-                      }).render();
-                    });
-                  </script>
-                  <!-- End Line Chart -->
-
-                </div>
-
-              </div>
-            </div><!-- End Reports -->
-
-            <!-- Recent Sales -->
+                            
+              <!-- Recent Sales -->
             <div class="col-12">
               <div class="card recent-sales overflow-auto">
 
                 <div class="card-body">
-                  <h5 class="card-title"> Attendance Report</h5>
+                  <h5 class="card-title">Absence Applications</h5>
 
                   <table class="table table-borderless datatable">
                     <thead>
                       <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Subject</th>
+                        <th scope="col">Student name</th>
                         <th scope="col">Semester</th>
-                        <th scope="col">Status</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach items="${todayAttendanceList}" var="att">
-                            <tr>
-                                <th scope="row"><a href="#">#2457</a></th>
-                                <td>${att.attendance.subject.subject_name}</td>
-                                <td><a href="#" class="text-primary">${att.college.semester.name}</a></td>
-                                <td><span class="badge bg-success">Completed</span></td>
-                            </tr>
-                        </c:forEach>
-                  
-                    </tbody>
-                  </table>
-
-                </div>
-
-              </div>
-            </div><!-- End Recent Sales -->
-
-          </div>
-        </div><!-- End Left side columns -->
-
-        <!-- Right side columns -->
-        <div class="col-lg-4">
-
-          <!-- Recent Activity -->
-          <div class="card">
-
-            <div class="card-body">
-              <h5 class="card-title">User Activity <span>| Today</span></h5>
-
-              <div class="activity">
-
-          
-                <c:forEach items="${activeUser}" var="active">
-                    <div class="activity-item d-flex">
-                        <div class="activite-label"> ${active.date}</div>
-                        <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i> 
-                        <div class="activity-content">
-                            <a href="#" class="fw-bold text-dark">${active.fullName}</a> is 
-                            ${active.status}
-                        </div>
-                    </div><!-- End activity item-->
-                </c:forEach>
-
-              </div>
-
-            </div>
-          </div><!-- End Recent Activity -->
-
-          <!-- Budget Report -->
-          <div class="col-12">
-              <div class="card recent-sales overflow-auto">
-
-                <div class="card-body">
-                  <h5 class="card-title"> Application Report</h5>
-
-                  <table class="table table-borderless">
-                    <thead>
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Student</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Reason</th>
                         <th scope="col">Category</th>
                         <th scope="col">Status</th>
+                        <th scope="col">Action</th>
                       </tr>
                     </thead>
                     <tbody>
                         <c:forEach items="${messages}" var="message">
-                            <tr>
-                                <th scope="row"><a href="#">#${message.id}</a></th>
-                                <td>${message.student.user.fullName}</td>
-                                <td>${message.category}</td>
-                                <td><span class="badge ${message.status == "pennding" ? "bg-success" : "bg-warning"}">${message.status}</span></td>
-                            </tr>
+                        <tr>
+                        <td>${message.student.user.fullName}</td>
+                        <td>${message.student.college.semester.name}</td>
+                        <td>${message.date}</td>
+                        <td>${message.message}</td>
+                        <td>${message.category}</td>
+                        <td> <span class="badge ${message.status == "pending" ? "bg-warning" :  message.status == "approved" ? "bg-success" : "bg-danger"}"> ${message.status}</span></td>
+                        <td>
+                            <a href="AttendanceServlet?page=approveApplication&id=${message.id}"> <button class="btn btn-success btn-sm"> <i class="bi bi-check"></i> Approve </button> </a>
+                            <a href="AttendanceServlet?page=rejectApplication&id=${message.id}"> <button class="btn btn-danger btn-sm"> <i class="bi bi-x"></i> reject </button> </a>
+                        </td>
+                        </tr>
                         </c:forEach>
-                  
+                    
                     </tbody>
                   </table>
 
@@ -516,11 +309,12 @@
 
               </div>
             </div><!-- End Recent Sales -->
-
-        </div><!-- End Right side columns -->
+            
+            
+          </div>
 
       </div>
-    </section>
+      </section>
 
     </main>
     <!-- End #main -->

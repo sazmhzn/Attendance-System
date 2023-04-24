@@ -4,6 +4,7 @@
     Author     : lenovo
 --%>
 
+<%@page import="jakarta.servlet.http.Cookie" %>
 <%@page import="jakarta.servlet.http.HttpSession" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -100,7 +101,16 @@
                 class="rounded-circle"
               />
               <span class="d-none d-md-block dropdown-toggle ps-2"
-                ><%=session.getAttribute("username")%></span
+                ><%
+                    Cookie[] cookies = request.getCookies();
+                    if( cookies != null ) {    
+                    for (Cookie cookie:cookies) {
+                        if( cookie.getName().equals("name")) {
+                            out.print(" " + cookie.getValue());
+                        } 
+                    }
+                    }
+                    %> </span
               > </a
             ><!-- End Profile Iamge Icon -->
 
@@ -115,7 +125,18 @@
                   <i class="bi bi-person"></i>
                   <span>
                       
-                      <%=session.getAttribute("role")%>dmin
+                      <%
+                    
+                    if( cookies != null ) {    
+                    for (Cookie cookie:cookies) {
+                        if( cookie.getName().equals("role")) {
+                            out.print(" " + cookie.getValue());
+                        } 
+                    }
+                        }else {
+                            out.print(" Null ");
+                        }
+                    %> 
                       
                   </span>
                 </a>
@@ -175,6 +196,14 @@
           <a class="nav-link collapsed" href="PageChange?page=AdminAttendanceSheet">
             <i class="bi bi-journal-check"></i>
             <span>Attendance Sheet</span>
+          </a>
+        </li>
+        <!-- End Profile Page Nav -->
+        
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="PageChange?page=AdminAbsenceReport">
+            <i class="bi bi-journal-check"></i>
+            <span>Absence Application</span>
           </a>
         </li>
         <!-- End Profile Page Nav -->
@@ -455,63 +484,38 @@
           </div><!-- End Recent Activity -->
 
           <!-- Budget Report -->
-          <div class="card">
+          <div class="col-12">
+              <div class="card recent-sales overflow-auto">
 
-            <div class="card-body pb-0">
-              <h5 class="card-title">Weekly Report </h5>
+                <div class="card-body">
+                  <h5 class="card-title"> Application Report</h5>
 
-              <div id="budgetChart" style="min-height: 400px;" class="echart"></div>
+                  <table class="table table-borderless">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Student</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach items="${messages}" var="message">
+                            <tr>
+                                <th scope="row"><a href="#">#${message.id}</a></th>
+                                <td>${message.student.user.fullName}</td>
+                                <td>${message.category}</td>
+                                <td><span class="badge ${message.status == "pennding" ? "bg-success" : "bg-warning"}">${message.status}</span></td>
+                            </tr>
+                        </c:forEach>
+                  
+                    </tbody>
+                  </table>
 
-              <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                  var budgetChart = echarts.init(document.querySelector("#budgetChart")).setOption({
-                    legend: {
-                      data: ['Present student', 'Absent Students']
-                    },
-                    radar: {
-                      // shape: 'circle',
-                      indicator: [{
-                          name: 'Mon',
-                          max: 6500
-                        },
-                        {
-                          name: 'Tues',
-                          max: 16000
-                        },
-                        {
-                          name: 'Wed',
-                          max: 30000
-                        },
-                        {
-                          name: 'Thu',
-                          max: 38000
-                        },
-                        {
-                          name: 'Fri',
-                          max: 52000
-                        },
-                   
-                      ]
-                    },
-                    series: [{
-                      name: 'present vs Absesnt',
-                      type: 'radar',
-                      data: [{
-                          value: [4200, 3000, 20000, 35000, 50000, 18000],
-                          name: 'Present student'
-                        },
-                        {
-                          value: [5000, 14000, 28000, 26000, 42000, 21000],
-                          name: 'Absent Students'
-                        }
-                      ]
-                    }]
-                  });
-                });
-              </script>
+                </div>
 
-            </div>
-          </div><!-- End Budget Report -->
+              </div>
+            </div><!-- End Recent Sales -->
 
         </div><!-- End Right side columns -->
 

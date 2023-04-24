@@ -41,10 +41,6 @@ public class College {
         this.attendance = attendance;
     }
 
-    
-    
-    
-    
     public College(Subject subject) {
         this.subject = subject;
     }

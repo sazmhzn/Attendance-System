@@ -13,15 +13,18 @@ public class Message {
     private String message;
     private String date;
     private String category;
+    private String status;
     private Student student;
 
     public Message() {
     }
 
-    public Message(String message, String date, String category, Student student) {
+    public Message(int id, String message, String date, String category, String status, Student student) {
+        this.id = id;
         this.message = message;
         this.date = date;
         this.category = category;
+        this.status = status;
         this.student = student;
     }
 
@@ -55,6 +58,14 @@ public class Message {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Student getStudent() {

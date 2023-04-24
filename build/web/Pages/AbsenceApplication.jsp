@@ -225,18 +225,20 @@
                     <thead>
                       <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Absence sent on</th>
                         <th scope="col">Description</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Absence sent on</th>
                         <th scope="col">Status</th>
                       </tr>
                     </thead>
                     <tbody>
-                        <c:forEach items="${subjectList}" var="message">
+                        <c:forEach items="${messages}" var="messages">
                         <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        
+                        <td>${messages.id}</td>
+                        <td>${messages.message}</td>
+                        <td>${messages.category}</td>
+                        <td>${messages.date}</td>
+                        <td> <span class="badge ${messages.status == "pennding" ? "bg-success" : "bg-warning"}"> ${messages.status}</span></td>
                         </tr>
                         </c:forEach>
                     

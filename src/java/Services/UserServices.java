@@ -634,38 +634,103 @@ public class UserServices {
         }
         return false;
     }
-
     
-    public List<Message> getStudenMessage() {
+    
+     public List<Message> getStudentMessages() {
         List<Message> messages = new ArrayList<>();
-        String query = "SELECT * FROM `message` left JOIN student on message.STUD_ID = student.STUD_ID LIMIT 2";
-        System.out.println(query);
+        String query = "SELECT * FROM `message` left join student on message.stud_id = student.acc_id";
+
         PreparedStatement pstm = new DBConnection().getStatement(query);
+
         try {
+            System.out.println(pstm);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
-                Message message = new Message();
-                
-                Student student = new Student();
-                student.setUser(new User(
-                        rs.getInt("STUD_ID"), 
-                        rs.getString("STUD_NAME"), 
-                        rs.getString("STUD_EMAIL"), 
-                        rs.getString("STUD_PHONE"), 
-                        rs.getString("STUD_ADD")
-                ));
-                message.setId(rs.getInt("M_ID"));
-                message.setDate(rs.getString("MESSAGE_DATE"));
-                message.setMessage(rs.getString("MESSAGE_TEXT"));
-                message.setStudent(student);
-                
+                Message message = new Message(rs.getInt("M_ID"), rs.getString("MESSAGE_TEXT"), rs.getString("MESSAGE_DATE"), rs.getString("CATEGORY"), rs.getString("STATUS"), new Student());
                 messages.add(message);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return messages;
     }
     
+        public List<Message> getStudentMessages(int acc_id) {
+        List<Message> messages = new ArrayList<>();
+        String query = "SELECT * FROM `message` left join student on message.stud_id = student.acc_id where student.acc_id = ?";
+
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+
+        try {
+            pstm.setInt(1, acc_id);
+            System.out.println(pstm);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                Message message = new Message(rs.getInt("M_ID"), rs.getString("MESSAGE_TEXT"), rs.getString("MESSAGE_DATE"), rs.getString("CATEGORY"), rs.getString("STATUS"), new Student());
+                messages.add(message);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return messages;
+    }
+    
+    public List<Message> getTodayMessages() {
+        List<Message> messages = new ArrayList<>();
+        String query = "SELECT * FROM `message` left join student on message.stud_id = student.acc_id LEFT JOIN SEMESTER on student.sem_id = semester.sem_id where DATE(`MESSAGE_DATE`) = CURDATE()";
+
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+
+        try {
+            System.out.println(pstm);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                Student student = new Student();
+                student.setUser(new User(rs.getInt("STUD_ID"), rs.getString("STUD_NAME"), query, query, query));
+                student.setCollege(new College(new Semester(rs.getString("SEM_NAME"))));
+                Message message = new Message(rs.getInt("M_ID"), 
+                        rs.getString("MESSAGE_TEXT"), 
+                        rs.getString("MESSAGE_DATE"), 
+                        rs.getString("CATEGORY"), 
+                        rs.getString("STATUS"),
+                        student
+                        );
+                System.out.println("Testing here");
+                System.out.println("message: " + message.getDate());
+                System.out.println("\n\nsemester added: " + message.getStudent().getCollege().getSemester());
+                messages.add(message);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return messages;
+    }
+    
+    public void insertMessage(Message message) {
+        String query = "INSERT INTO `message`(`MESSAGE_TEXT`, `STUD_ID`, `CATEGORY`) VALUES(?, ?, ?)";
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+        try {
+            pstm.setString(1, message.getMessage());
+            pstm.setInt(2, message.getStudent().getUser().getId());
+            pstm.setString(3, message.getCategory());
+            System.out.println(pstm);
+
+            pstm.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } 
+    }
+    
+    public void updateMessageStatus(int m_id, String status) {
+        String query = "UPDATE message set status= ? where m_id=?" ;
+        PreparedStatement pstm = new DBConnection().getStatement(query);
+        try {
+            pstm.setString(1, status);
+            pstm.setInt(2, m_id);
+            pstm.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } 
+    }
+
 }

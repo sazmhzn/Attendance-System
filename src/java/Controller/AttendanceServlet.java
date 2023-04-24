@@ -143,15 +143,29 @@ public class AttendanceServlet extends HttpServlet {
             }
             
             Student student = new UserServices().getStudentRowByAccID(acc_id);
-            Message message = new Message(request.getParameter("details"),page, request.getParameter("leave"), student);
-            
-            new SubjectServices().insertMessage(message);
+            Message message = new Message(0, request.getParameter("details"), page, request.getParameter("leave"), page, student);
+            new UserServices().insertMessage(message);
             
             RequestDispatcher rd = request.getRequestDispatcher("PageChange?page=sendApplication");
             rd.forward(request, response);
         }
         
         
+        if(page.equalsIgnoreCase("approveApplication")) {
+            
+            new UserServices().updateMessageStatus(Integer.parseInt(request.getParameter("id")), "approved" );
+            
+            RequestDispatcher rd = request.getRequestDispatcher("PageChange?page=AdminAbsenceReport");
+            rd.forward(request, response);
+        }
+        
+        if(page.equalsIgnoreCase("rejectApplication")) {
+            
+            new UserServices().updateMessageStatus(Integer.parseInt(request.getParameter("id")), "rejected" );
+            
+            RequestDispatcher rd = request.getRequestDispatcher("PageChange?page=AdminAbsenceReport");
+            rd.forward(request, response);
+        }
     }
 
 

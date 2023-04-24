@@ -286,6 +286,7 @@
                         id="submitBtn"
                         class="btn btn-primary"
                       >
+                          <i class="bi bi-send"></i>
                         Apply   
                       </button>
                       <button type="reset" class="btn btn-secondary">

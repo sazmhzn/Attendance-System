@@ -331,7 +331,7 @@
           </ol>
         </nav>
         
-        <button class="btn btn-primary"> <a href="PageChange?page=addStudent" class="text-light"> Add Student </a>  </button>
+        <button class="btn btn-primary"> <a href="PageChange?page=addStudent" class="text-light"><i class="bi bi-person-add"></i> Add Student </a>  </button>
       </div>
       <!-- End Page Title -->
 

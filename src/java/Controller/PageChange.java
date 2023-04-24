@@ -239,7 +239,7 @@ public class PageChange extends HttpServlet {
             }
             
             
-            List<Message> messages = new UserServices().getStudenMessage();
+            List<Message> messages = new UserServices().getStudentMessages();
             request.setAttribute("messages", messages);
             int message_size = !messages.isEmpty() ? messages.size() : 0;
             request.setAttribute("message_size", message_size );
@@ -396,11 +396,10 @@ public class PageChange extends HttpServlet {
             List<User> active = new UserServices().getActiveUserList();
             request.setAttribute("activeUser", active);
             
-            List<Message> messages = new UserServices().getStudenMessage();
+            List<Message> messages = new UserServices().getTodayMessages();
             request.setAttribute("messages", messages);
             int message_size = !messages.isEmpty() ? messages.size() : 0;
             request.setAttribute("message_size", message_size );
-            
             
             //date wise attendance
             
@@ -429,7 +428,8 @@ public class PageChange extends HttpServlet {
         }
         
         if (page.equalsIgnoreCase("AdminReport")) {
-            List<Message> messages = new UserServices().getStudenMessage();
+            
+            List<Message> messages = new UserServices().getStudentMessages();
             request.setAttribute("messages", messages);
             int message_size = !messages.isEmpty() ? messages.size() : 0;
             request.setAttribute("message_size", message_size );
@@ -464,6 +464,24 @@ public class PageChange extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/AdminAttendanceSheet.jsp");
             rd.forward(request, response);
         }
+        
+        
+        
+        if(page.equalsIgnoreCase("AdminAbsenceReport")) {
+            
+                       
+           List<Message> messages = new UserServices().getTodayMessages();
+           request.setAttribute("messages", messages);
+                
+           List<Message> allMessages = new UserServices().getStudentMessages();
+           request.setAttribute("messagesList", allMessages);
+            
+            RequestDispatcher rd = request.getRequestDispatcher("/Pages/AdminAbsenceReport.jsp");
+            rd.forward(request, response);
+        }
+        
+        
+        
         if(page.equalsIgnoreCase("Other")) {
             
             List<College> college = new SubjectServices().getCourseList();
@@ -526,9 +544,6 @@ public class PageChange extends HttpServlet {
         
         
         
-        
-        
-        
         if(page.equalsIgnoreCase("AbsenceApplication")) {
             
             int acc_id = 0;
@@ -542,7 +557,7 @@ public class PageChange extends HttpServlet {
                 }
             }
             
-            List<Message> messages = new SubjectServices().getStudentMessages(acc_id);
+            List<Message> messages = new UserServices().getStudentMessages(acc_id);
             request.setAttribute("messages", messages);
             
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/AbsenceApplication.jsp");

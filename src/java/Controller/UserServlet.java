@@ -313,7 +313,7 @@ public class UserServlet extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher("PageChange?page=Report");
                 rd.forward(request, response);
             } else {
-                RequestDispatcher rd = request.getRequestDispatcher("PageChange?page=404");
+                RequestDispatcher rd = request.getRequestDispatcher("PageChange?page=login");
                 rd.forward(request, response);
             }
             
