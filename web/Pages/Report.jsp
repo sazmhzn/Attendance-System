@@ -18,7 +18,7 @@
     <meta content="" name="keywords" />
 
     <!-- Favicons -->
-    <link href="Styling/assets/img/favicon.png" rel="icon" />
+    <link href="Styling/assets/img/log.png" rel="icon" />
     <link
       href="Styling/assets/img/apple-touch-icon.png"
       rel="apple-touch-icon"
@@ -72,7 +72,7 @@
   </head>
 
   <body>
-    <!-- ======= Header ======= -->
+<!-- ======= Header ======= -->
     <header id="header" class="header fixed-top d-flex align-items-center">
       <div class="d-flex align-items-center justify-content-between">
         <a href="index.html" class="logo d-flex align-items-center">
@@ -231,7 +231,7 @@
 
         <li class="nav-item">
           <a class="nav-link collapsed" href="PageChange?page=attendanceSheet">
-            <i class="bi bi-person"></i>
+            <i class="bi bi-journal-check"></i>
             <span>Attendance Sheet</span>
           </a>
         </li>
@@ -239,7 +239,7 @@
 
         <li class="nav-item">
           <a class="nav-link collapsed" href="PageChange?page=studentDetailsTeac">
-            <i class="bi bi-question-circle"></i>
+            <i class="bi bi-stickies"></i>
             <span>Student</span>
           </a>
         </li>
@@ -247,7 +247,7 @@
 
         <li class="nav-item">
           <a class="nav-link" href="PageChange?page=Report">
-            <i class="bi bi-envelope"></i>
+            <i class="bi bi-journals"></i>
             <span>Report</span>
           </a>
         </li>
@@ -264,8 +264,7 @@
         <!-- End Login Page Nav -->
       </ul>
     </aside>
-    <!-- End Sidebar-->
-    
+    <!-- End Sidebar-->    
     <!-- ======= Main ======= -->
     <main id="main" class="main">
       <div class="pagetitle">

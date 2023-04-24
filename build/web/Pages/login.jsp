@@ -27,7 +27,7 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
   <!-- Favicons -->
-  <link rel="icon" href="Styling/assets/img/favicon.png"/>
+  <link rel="icon" href="Styling/assets/img/log.png"/>
   <link href="Styling/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->

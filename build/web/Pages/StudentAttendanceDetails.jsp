@@ -17,7 +17,7 @@
     <meta content="" name="keywords" />
 
     <!-- Favicons -->
-    <link href="Styling/assets/img/favicon.png" rel="icon" />
+    <link href="Styling/assets/img/log.png" rel="icon" />
     <link
       href="Styling/assets/img/apple-touch-icon.png"
       rel="apple-touch-icon"
@@ -71,7 +71,7 @@
   </head>
 
   <body>
-      <!-- ======= Header ======= -->
+    <!-- ======= Header ======= -->
     <header id="header" class="header fixed-top d-flex align-items-center">
       <div class="d-flex align-items-center justify-content-between">
         <a href="index.html" class="logo d-flex align-items-center">
@@ -95,75 +95,35 @@
           <li class="nav-item dropdown">
             <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
               <i class="bi bi-bell"></i>
-              <span class="badge bg-primary badge-number">4</span> </a
+              <span class="badge bg-primary badge-number">${message_size}</span> </a
             ><!-- End Notification Icon -->
 
             <ul
               class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications"
             >
               <li class="dropdown-header">
-                You have 4 new notifications
-                <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a
-                >
+                You have ${message_size} new notifications
+               
               </li>
               <li>
                 <hr class="dropdown-divider" />
               </li>
-
-              <li class="notification-item">
-                <i class="bi bi-exclamation-circle text-warning"></i>
-                <div>
-                  <h4>Lorem Ipsum</h4>
-                  <p>Quae dolorem earum veritatis oditseno</p>
-                  <p>30 min. ago</p>
-                </div>
-              </li>
-
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
-
-              <li class="notification-item">
-                <i class="bi bi-x-circle text-danger"></i>
-                <div>
-                  <h4>Atque rerum nesciunt</h4>
-                  <p>Quae dolorem earum veritatis oditseno</p>
-                  <p>1 hr. ago</p>
-                </div>
-              </li>
+              
+              <c:forEach items="${messages}" var="message">
+                  <li class="notification-item">
+                      <i class="bi bi-x-circle text-danger"></i>
+                      <div>
+                          <h4>${message.student.user.fullName}</h4>
+                          <p>${message.message}</p>
+                          <p>1 hr. ago</p>
+                      </div>
+                  </li>
+              </c:forEach>
 
               <li>
                 <hr class="dropdown-divider" />
               </li>
-
-              <li class="notification-item">
-                <i class="bi bi-check-circle text-success"></i>
-                <div>
-                  <h4>Sit rerum fuga</h4>
-                  <p>Quae dolorem earum veritatis oditseno</p>
-                  <p>2 hrs. ago</p>
-                </div>
-              </li>
-
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
-
-              <li class="notification-item">
-                <i class="bi bi-info-circle text-primary"></i>
-                <div>
-                  <h4>Dicta reprehenderit</h4>
-                  <p>Quae dolorem earum veritatis oditseno</p>
-                  <p>4 hrs. ago</p>
-                </div>
-              </li>
-
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
-              <li class="dropdown-footer">
-                <a href="#">Show all notifications</a>
-              </li>
+             
             </ul>
             <!-- End Notification Dropdown Items -->
           </li>
@@ -188,7 +148,7 @@
                 %>
                             
             </span>
-          </a><!-- End Profile Iamge Icon -->
+          </a><!-- End Profile Image Icon -->
           
             <ul
               class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile"
@@ -205,11 +165,24 @@
                     }
                         }else {
                             out.print(" Null ");
-                            response.sendRedirect("PageChange?page=login");
                         }
                     %> 
                 </h6>
-                <span>Web Designer</span>
+                <span>
+                    <%
+                    
+                    if( cookies != null ) {    
+                    for (Cookie cookie:cookies) {
+                        if( cookie.getName().equals("role")) {
+                       
+                        out.print( cookie.getValue().equals("T")?" Teacher" : null);
+                        } 
+                    }
+                        }else {
+                            out.print(" Null ");
+                        }
+                    %> 
+                </span>
               </li>
               <li>
                 <hr class="dropdown-divider" />
@@ -229,33 +202,11 @@
               </li>
 
               <li>
-                <a
-                  class="dropdown-item d-flex align-items-center"
-                  href="users-profile.html"
-                >
-                  <i class="bi bi-gear"></i>
-                  <span>Account Settings</span>
-                </a>
-              </li>
-              <li>
                 <hr class="dropdown-divider" />
               </li>
 
               <li>
-                <a
-                  class="dropdown-item d-flex align-items-center"
-                  href="pages-faq.html"
-                >
-                  <i class="bi bi-question-circle"></i>
-                  <span>Need Help?</span>
-                </a>
-              </li>
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
-
-              <li>
-                <a class="dropdown-item d-flex align-items-center" href="#">
+                <a class="dropdown-item d-flex align-items-center" href="PageChange?page=Logout">
                   <i class="bi bi-box-arrow-right"></i>
                   <span>Sign Out</span>
                 </a>
@@ -279,7 +230,7 @@
 
         <li class="nav-item">
           <a class="nav-link collapsed" href="PageChange?page=attendanceSheet">
-            <i class="bi bi-person"></i>
+            <i class="bi bi-journal-check"></i>
             <span>Attendance Sheet</span>
           </a>
         </li>
@@ -287,20 +238,20 @@
 
         <li class="nav-item">
           <a class="nav-link" href="PageChange?page=studentDetailsTeac">
-            <i class="bi bi-question-circle"></i>
+            <i class="bi bi-stickies"></i>
             <span>Student</span>
           </a>
         </li>
         <!-- End F.A.Q Page Nav -->
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="PageChange?page=studentReport">
-            <i class="bi bi-envelope"></i>
+          <a class="nav-link collapsed" href="PageChange?page=Report">
+            <i class="bi bi-journals"></i>
             <span>Report</span>
           </a>
         </li>
         <!-- End Contact Page Nav -->
-
+        
         <li class="nav-heading">Extras</li>
 
         <li class="nav-item">

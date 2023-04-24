@@ -17,7 +17,7 @@
     <meta content="" name="keywords" />
 
     <!-- Favicons -->
-    <link href="Styling/assets/img/favicon.png" rel="icon" />
+    <link href="Styling/assets/img/log.png" rel="icon" />
     <link
       href="Styling/assets/img/apple-touch-icon.png"
       rel="apple-touch-icon"
