@@ -99,6 +99,15 @@ public class AttendanceServlet extends HttpServlet {
         if (page.equalsIgnoreCase("takeAttendance")) {
             System.out.println("Inside takeAttendance");
             String[] roll = request.getParameterValues("attendance");
+            
+            if(roll == null) {
+                
+                session.setAttribute("status", "no attendance taken");
+                
+                RequestDispatcher rd = request.getRequestDispatcher("PageChange?page=attendanceSheet");
+                rd.forward(request, response);
+            }
+            
             String date = request.getParameter("attendance_date");
             
             Attendance att = new Attendance();
@@ -123,13 +132,18 @@ public class AttendanceServlet extends HttpServlet {
             }
             if( teac_id != 1  ) {
                 System.out.println("Taken by teacher");
-            RequestDispatcher rd = request.getRequestDispatcher("PageChange?page=attendanceDetails");
+            RequestDispatcher rd = request.getRequestDispatcher("PageChange?page=attendanceSheet");
             rd.forward(request, response);
         }
             System.out.println("taken by admin");
         RequestDispatcher rd = request.getRequestDispatcher("PageChange?page=AdminAttendanceSheet");
         rd.forward(request, response);
         }//take attendance ends
+        
+        
+        
+        
+        
         
         if (page.equalsIgnoreCase("sendApplication")) {
             

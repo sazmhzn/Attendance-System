@@ -1,8 +1,9 @@
 <%-- 
-    Document   : AdminViewAttendance
-    Created on : Apr 22, 2023, 11:51:11 PM
+    Document   : AddSemester
+    Created on : Apr 25, 2023, 8:50:58 AM
     Author     : lenovo
 --%>
+
 <%@page import="jakarta.servlet.http.HttpSession" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -11,24 +12,57 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-    <title>Attendance | Admin</title>
+    <title>Semester</title>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <meta content="" name="description" />
     <meta content="" name="keywords" />
 
     <!-- Favicons -->
     <link href="Styling/assets/img/log.png" rel="icon" />
-    <link href="Styling/assets/img/apple-touch-icon.png" rel="apple-touch-icon"/>
+    <link
+      href="Styling/assets/img/apple-touch-icon.png"
+      rel="apple-touch-icon"
+    />
 
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet"
+    />
 
     <!-- Vendor CSS Files -->
-    <link href="Styling/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet"/>
-    <link href="Styling/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet"/>
-    <link href="Styling/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="Styling/assets/vendor/quill/quill.snow.css" rel="stylesheet"/>
-    <link href="Styling/assets/vendor/quill/quill.bubble.css" rel="stylesheet"/>
-    <link href="Styling/assets/vendor/remixicon/remixicon.css" rel="stylesheet"/>
-    <link href="Styling/assets/vendor/simple-datatables/style.css" rel="stylesheet"/>
+    <link
+      href="Styling/assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="Styling/assets/vendor/boxicons/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="Styling/assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <link href="Styling/assets/vendor/quill/quill.snow.css" rel="stylesheet" />
+
+    <link
+      href="Styling/assets/vendor/quill/quill.bubble.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="Styling/assets/vendor/remixicon/remixicon.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="Styling/assets/vendor/simple-datatables/style.css"
+      rel="stylesheet"
+    />
 
     <!-- Template Main CSS File -->
     <link href="Styling/assets/css/style.css" rel="stylesheet" />
@@ -200,7 +234,7 @@
         <li class="nav-heading">Pages</li>
 
         <li class="nav-item">
-          <a class="nav-link" href="PageChange?page=AdminAttendanceSheet">
+          <a class="nav-link collapsed" href="PageChange?page=AdminAttendanceSheet">
             <i class="bi bi-journal-check"></i>
             <span>Attendance Sheet</span>
           </a>
@@ -227,7 +261,8 @@
 
         <li class="nav-item">
             <a class="nav-link collapsed" href="PageChange?page=Student">
-                <i class="bi bi-mortarboard"></i></i><span>Students</span>
+                <i class="bi bi-mortarboard"></i></i>
+            <span>Students</span>
             </a>
 
         </li><!-- End Student Nav -->
@@ -246,7 +281,7 @@
         </li><!-- End Student Nav -->
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="PageChange?page=Other">
+          <a class="nav-link" href="PageChange?page=Other">
             <i class="bi bi-journals"></i>
             <span>Others</span>
           </a>
@@ -265,66 +300,88 @@
     </aside>
     <!-- End Sidebar-->
 
+
     <!-- ======= Main ======= -->
     <main id="main" class="main">
+     
+        
       <div class="pagetitle">
-      <h1>Attendance</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">Pages</li>
-          <li class="breadcrumb-item active">Attendance Sheet</li>
-        </ol>
-      </nav>
-    </div><!-- End Page Title -->
-    
-    <section class="section dashboard">
-      <div class="row">
-          <div class="row">
-                            
-              <!-- Recent Sales -->
-            <div class="col-12">
-              <div class="card recent-sales overflow-auto">
-
-                <div class="card-body">
-                  <h5 class="card-title">Subject Attendance</h5>
-
-                  <table class="table table-borderless datatable">
-                    <thead>
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Subject name</th>
-                        <th scope="col">Subject Code</th>
-                        <th scope="col">Semester</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach items="${subjectList}" var="college">
-                        <tr>
-                        <th scope="row">#${college.subject.subject_id}</th>
-                        <td>${college.subject.subject_name}</td>
-                        <td>${college.subject.subject_code}</td>
-                        <td>${college.semester.name}</td>
-                        <td> 
-                          ${college.attendance.status ? 'Taken' : 'Not taken'} 
-                        </td>
-                        <td><a href="PageChange?page=AdminViewAttendanceSheet&subject_id=${college.subject.subject_id}" class="text-light btn btn-primary">View</a></td>
-                        </tr>
-                        </c:forEach>
-                    
-                    </tbody>
-                  </table>
-
-                </div>
-
-              </div>
-            </div><!-- End Recent Sales -->
-          </div>
-
+        <h1>Others</h1>
+        <nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">Manage</li>
+            <li class="breadcrumb-item">
+              <a href="PageChange?page=Other">semester</a>
+            </li>
+            <li class="breadcrumb-item active">Add Semester</li>
+          </ol>
+        </nav>
       </div>
-    </section>
+      <!-- End Page Title -->
 
+      <section class="section dashboard">
+        <div class="row">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Semester details Form</h5>
+
+                  <!-- Floating Labels Form -->
+                  <form
+                    class="row g-3"
+                    action="UserServlet?page=addStudent"
+                    method="POST"
+                  >
+                    <div class="col-md-12">
+                      <div class="form-floating">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="floatingName"
+                          placeholder="Your Name"
+                          name="sem_name"
+                        />
+                        <label for="floatingName">Semester Name</label>
+                      </div>
+                    </div>
+                      
+                      <div class="col-md-4">
+                      <div class="form-floating mb-3">
+                        <select
+                          class="form-select"
+                          id="floatingSelect"
+                          aria-label="course"
+                          name="course"
+                        >
+                          <c:forEach items="${collegeList}" var="college">
+                            <option value="${college.course.id}">
+                              ${college.course.name}
+                            </option>
+                          </c:forEach>
+                        </select>
+                        <label for="floatingSelect">Course</label>
+                      </div>
+                    </div>
+
+                    <div class="text-left">
+                      <button
+                        type="submit"
+                        id="submitBtn"
+                        class="btn btn-primary"
+                      >
+                        Submit
+                      </button>
+                     
+                    </div>
+                  </form>
+                  <!-- End floating Labels Form -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
     <!-- End #main -->
 
@@ -352,7 +409,29 @@
     <!-- Template Main JS File -->
     <script src="Styling/assets/js/main.js"></script>
 
-   
+    <!-- Custome JS File -->
+
+    <script>
+      const contactField = document.getElementById("floatingNumber");
+      const btn = document.querySelector("#submitBtn");
+      const inputField = document.querySelectorAll()
+
+      btn.addEventListener("click", function () {
+        console.log("The button s clicked");
+        if (contactField.value.length === 0) {
+          alert("Enter contact detailas");
+          console.log("The contact field is empty");
+        }
+        //  else if (contactField.value.length < 10) {
+        //   alert("Enter a valid number")
+        // }
+      });
+    </script>
+
+    <script>
+      $(document).ready(function () {
+        $("#example").DataTable();
+      });
+    </script>
   </body>
 </html>
-

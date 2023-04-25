@@ -47,7 +47,7 @@
       <div class="d-flex align-items-center justify-content-between">
         <a href="index.html" class="logo d-flex align-items-center">
           <img src="assets/img/logo.png" alt="" />
-          <span class="d-none d-lg-block">Attendance</span>
+          <span class="d-none d-lg-block">Attendify</span>
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
       </div>
@@ -110,7 +110,7 @@
                     for (Cookie cookie:cookies) {
                         if( cookie.getName().equals("role")) {
                        
-                        out.print( cookie.getValue().equals("S")? "student": null);
+                        out.print( cookie.getValue().equals("T")?" Teacher" : cookie.getValue().equals("S")?" Student": null);
                         } 
                     }
                         }else {
@@ -164,21 +164,20 @@
         <li class="nav-heading">Pages</li>
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="PageChange?page=studentHome">
-            <i class="bi bi-person"></i>
+          <a class="nav-link collapsed" href="PageChange?page=StudentHome">
+            <i class="bi bi-journal-check"></i>
             <span>Attendance Report</span>
           </a>
         </li>
         <!-- End Profile Page Nav -->
 
         <li class="nav-item">
-          <a class="nav-link " href="PageChange?page=AbsenceApplication">
-            <i class="bi bi-question-circle"></i>
+          <a class="nav-link" href="PageChange?page=AbsenceApplication">
+            <i class="bi bi-journal-x"></i>
             <span>Absence Application</span>
           </a>
         </li>
         <!-- End F.A.Q Page Nav -->
-
         
         <li class="nav-heading">Extras</li>
 
@@ -197,11 +196,11 @@
     <!-- ======= Main ======= -->
     <main id="main" class="main">
       <div class="pagetitle">
-        <h1>Student</h1>
+        <h1>Absence</h1>
         <nav>
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="dashboard.html">Student</a></li>
-            <li class="breadcrumb-item active">Attendance History</li>
+            <li class="breadcrumb-item"><a href="dashboard.html">Page</a></li>
+            <li class="breadcrumb-item active">Absence History</li>
             <!--<li class="breadcrumb-item ">Add Students</li>-->
           </ol>
         </nav>
@@ -219,7 +218,7 @@
               <div class="card recent-sales overflow-auto">
 
                 <div class="card-body">
-                  <h5 class="card-title">Attendance Sheet </h5>
+                  <h5 class="card-title">Application status </h5>
 
                   <table class="table table-borderless datatable">
                     <thead>
@@ -238,7 +237,7 @@
                         <td>${messages.message}</td>
                         <td>${messages.category}</td>
                         <td>${messages.date}</td>
-                        <td> <span class="badge ${messages.status == "pennding" ? "bg-success" : "bg-warning"}"> ${messages.status}</span></td>
+                        <td> <span class="badge ${messages.status == "pending" ? "bg-warning" :  messages.status == "approved" ? "bg-success" : "bg-danger"}"> ${messages.status}</span></td>
                         </tr>
                         </c:forEach>
                     

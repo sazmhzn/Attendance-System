@@ -325,7 +325,7 @@
               <div class="card overflow-auto">
 
                 <div class="card-body">
-                  <h5 class="card-title">Report date</h5>
+                  <h5 class="card-title">Reporting</h5>
                   <form
                     class="row g-3"
                     action="UserServlet?page=report"

@@ -76,7 +76,7 @@
       <div class="d-flex align-items-center justify-content-between">
         <a href="index.html" class="logo d-flex align-items-center">
           <img src="assets/img/logo.png" alt="" />
-          <span class="d-none d-lg-block">Attendance</span>
+          <span class="d-none d-lg-block">Attendify</span>
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
       </div>
@@ -268,11 +268,10 @@
         <!-- ======= Main ======= -->
         <main id="main" class="main">
             <div class="pagetitle">
-                <h1>Student</h1>
+                <h1>Attendance</h1>
                 <nav>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="dashboard.html">Student</a></li>
-                        <li class="breadcrumb-item ">Subjects</li>
+                        <li class="breadcrumb-item">Pages</li>
                         <li class="breadcrumb-item active">Take Attendance</li>
                     </ol>
                 </nav>
@@ -282,6 +281,14 @@
 
             <section class="section dashboard">
                 <div class="row">
+                    
+                    <% if(session.getAttribute("status") == null) {%>
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <%=session.getAttribute("Status")%>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                        
+                    <%}%>
                     <!-- Top Selling -->
                     <div class="col-12">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -326,7 +333,7 @@
                                                             </tr>
                                                         </c:forEach>
                                                             <tr> 
-                                                                <td><button>Submit</button>  </td>
+                                                                <td><button class="btn btn-primary btn-sm">Submit</button>  </td>
                                                             </tr>
                                                     </form>
 
@@ -371,7 +378,7 @@
                                                             </tr>
                                                         </c:forEach>
                                                             <tr> 
-                                                                <td><button>Submit</button>  </td>
+                                                                <td><button class="btn btn-primary btn-sm">Submit</button>  </td>
                                                             </tr>
                                                     </form>
                                                     </tbody>

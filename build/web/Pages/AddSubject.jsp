@@ -300,7 +300,7 @@
         <h1>Subject</h1>
         <nav>
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="dashboard.html">Manage</a></li>
+            <li class="breadcrumb-item">Manage</li>
             <li class="breadcrumb-item">
               <a href="PageChange?page=Subject">Subject</a>
             </li>

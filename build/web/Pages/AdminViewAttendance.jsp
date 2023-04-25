@@ -11,7 +11,7 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-    <title>Teacher</title>
+    <title>Attendance | Admin</title>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <meta content="" name="description" />
     <meta content="" name="keywords" />
@@ -272,7 +272,7 @@
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item">Pages</li>
-          <li class="breadcrumb-item active">AttendanceSheet</li>
+          <li class="breadcrumb-item active">Attendance Sheet</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -286,7 +286,7 @@
               <div class="card recent-sales overflow-auto">
 
                 <div class="card-body">
-                  <h5 class="card-title">Attendance Sheet </h5>
+                  <h5 class="card-title">Subject Attendance</h5>
 
                   <table class="table table-borderless datatable">
                     <thead>

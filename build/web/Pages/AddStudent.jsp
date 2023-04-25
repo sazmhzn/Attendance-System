@@ -299,16 +299,13 @@
 
     <!-- ======= Main ======= -->
     <main id="main" class="main">
-        
-        <% if(session.getAttribute("status") != null) { %>
-        <h1> <%=session.getAttribute("status")%> </h1>
-           <% }%>
+     
         
       <div class="pagetitle">
         <h1>Student</h1>
         <nav>
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="dashboard.html">Home</a></li>
+            <li class="breadcrumb-item">Pages</li>
             <li class="breadcrumb-item">
               <a href="PageChange?page=Student">Student</a>
             </li>

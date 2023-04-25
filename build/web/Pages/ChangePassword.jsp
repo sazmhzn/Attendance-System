@@ -12,7 +12,7 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-    <title>Pages / Login</title>
+    <title>Login | Change Password</title>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <meta content="" name="description" />
     <meta content="" name="keywords" />
@@ -70,7 +70,7 @@
                     href="index.html"
                     class="logo d-flex align-items-center w-auto"
                   >
-                    <span class="d-none d-lg-block">Attendify</span>
+                      <span class="d-none d-lg-block"> <a href="PageChange?page=Login">Attendify</a> </span>
                   </a>
                 </div>
                 <!-- End Logo -->

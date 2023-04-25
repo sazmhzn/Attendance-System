@@ -280,11 +280,11 @@
     <!-- ======= Main ======= -->
     <main id="main" class="main">
       <div class="pagetitle">
-        <h1>Subject</h1>
+        <h1>Attendance Sheet</h1>
         <nav>
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="dashboard.html">Home</a></li>
-            <li class="breadcrumb-item active">Subjects</li>
+            <li class="breadcrumb-item"><a href="dashboard.html">Pages</a></li>
+            <li class="breadcrumb-item active">Attendance Sheet</li>
           </ol>
         </nav>
       </div>

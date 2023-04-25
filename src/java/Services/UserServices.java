@@ -667,6 +667,7 @@ public class UserServices {
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
                 Message message = new Message(rs.getInt("M_ID"), rs.getString("MESSAGE_TEXT"), rs.getString("MESSAGE_DATE"), rs.getString("CATEGORY"), rs.getString("STATUS"), new Student());
+                System.out.println("name: " + message.getDate());
                 messages.add(message);
             }
         } catch (SQLException e) {

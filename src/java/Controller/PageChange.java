@@ -382,6 +382,22 @@ public class PageChange extends HttpServlet {
             rd.forward(request, response);
         }
         
+        
+        if (page.equalsIgnoreCase("addCourse")) {
+        
+            RequestDispatcher rd = request.getRequestDispatcher("/Pages/AddCourse.jsp");
+            rd.forward(request, response);
+        }
+        
+        if (page.equalsIgnoreCase("addSemester")) {
+            
+            List<College> collegeList = new SubjectServices().getCourseList();
+            request.setAttribute("collegeList", collegeList);
+            
+            RequestDispatcher rd = request.getRequestDispatcher("/Pages/AddSemester.jsp");
+            rd.forward(request, response);
+        }
+        
 
         if (page.equalsIgnoreCase("adminDashboard")) {
 
@@ -522,7 +538,7 @@ public class PageChange extends HttpServlet {
         
         
         if(page.equalsIgnoreCase("studentViewAttendance")) {
-            int subject_id = Integer.parseInt(request.getParameter("subject_id"));
+//            int subject_id = Integer.parseInt(request.getParameter("subject_id"));
             
             int acc_id = 0;
             
@@ -534,8 +550,8 @@ public class PageChange extends HttpServlet {
                     }
                 }
             }
-            List<Report> subjects = new SubjectServices().getStudentAttendanceReport(acc_id, subject_id);
-            request.setAttribute("subjectList", subjects);
+//            List<Report> subjects = new SubjectServices().getStudentAttendanceReport(acc_id, subject_id);
+//            request.setAttribute("subjectList", subjects);
            
             
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/StudentViewAttendance.jsp");
@@ -559,6 +575,9 @@ public class PageChange extends HttpServlet {
             
             List<Message> messages = new UserServices().getStudentMessages(acc_id);
             request.setAttribute("messages", messages);
+            for(Message m : messages) {
+                System.out.println("mesage: " + m.getMessage());
+            }
             
             RequestDispatcher rd = request.getRequestDispatcher("/Pages/AbsenceApplication.jsp");
             rd.forward(request, response);
