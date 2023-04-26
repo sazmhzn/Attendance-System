@@ -24,7 +24,7 @@ import java.util.List;
  *
  * @author lenovo
  */
-public class UserServices {
+public class UserServices implements UserInterface{
 
     /**
      * This will get the User from account table
@@ -33,6 +33,7 @@ public class UserServices {
      * @param password
      * @return
      */
+    @Override
     public User getUser(String username, String password) {
         User user = null;
         String query = "select * from accounts where ACC_USERNAME=? and ACC_PASSWORD=?";
@@ -65,6 +66,7 @@ public class UserServices {
     }
     
     
+    @Override
     public User getUser(String username) {
         User user = null;
         String query = "select * from accounts where ACC_USERNAME=?";
@@ -99,6 +101,7 @@ public class UserServices {
      * This method will return the list of teacher from database
      * @return userList
      */
+    @Override
     public List<Teacher> getTeacherList() {
         List<Teacher> userList = new ArrayList<>();
         String query = "SELECT * FROM `teacher` LEFT JOIN `accounts` ON teacher.ACC_ID = accounts.ACC_ID";
@@ -121,6 +124,7 @@ public class UserServices {
         return userList;
     }
 
+    @Override
     public User getUserRow(int id){
         User user = new User();
         String query = "select * from account where ACC_ID=?";
@@ -142,6 +146,7 @@ public class UserServices {
     }
     
     
+    @Override
     public List<User> getActiveUserList() {
         List<User> userList = new ArrayList<>();
         String query = "SELECT * FROM `user_activity` RIGHT JOIN `teacher` ON teacher.ACC_ID = user_activity.USER_ID";
@@ -171,6 +176,7 @@ public class UserServices {
      * This will return the all the subjects from the database
      * @return 
      */
+    @Override
     public List<Subject> getSubjectList() {
         List<Subject> userList = new ArrayList<>();
         String query = "SELECT * FROM `subject` LEFT JOIN teacher ON subject.TEAC_ID = teacher.TEAC_ID; ";
@@ -208,6 +214,7 @@ public class UserServices {
      * @param id
      * @return 
      */
+    @Override
       public Teacher getTeacherRow(int id){
         Teacher teacher = new Teacher();
         String query = "SELECT * FROM `teacher` LEFT JOIN `accounts` ON teacher.ACC_ID = accounts.ACC_ID where teacher.ACC_ID=?";
@@ -227,6 +234,7 @@ public class UserServices {
         return teacher;
     }
       
+    @Override
       public Teacher getTeacherRow(String name){
         Teacher teacher = null;
         String query = "SELECT * FROM `teacher` LEFT JOIN `accounts` ON teacher.ACC_ID = accounts.ACC_ID where teacher.TEAC_NAME=?";
@@ -246,6 +254,7 @@ public class UserServices {
         return teacher;
     }
       
+    @Override
       public Student getStudentRow(int id){
         Student student = new Student();
         String query = "SELECT * FROM `student` left JOIN course on student.C_ID = course.C_ID LEFT JOIN semester ON semester.SEM_ID = student.SEM_ID LEFT JOIN section on student.SEC_ID = section.SECTION_ID where STUD_ID=?";
@@ -276,7 +285,7 @@ public class UserServices {
     }
       
       
-      
+    @Override
       public Student getStudentRowByAccID(int id){
         Student student = new Student();
         String query = "SELECT * FROM `student` left JOIN course on student.C_ID = course.C_ID LEFT JOIN semester ON semester.SEM_ID = student.SEM_ID LEFT JOIN section on student.SEC_ID = section.SECTION_ID where student.ACC_ID=?";
@@ -306,15 +315,12 @@ public class UserServices {
         return student;
     }
       
-    
-      
-      
-      
-      
+     
       /**
      * This method will get get the list of student 
      * @return 
      */
+    @Override
     public List<Student> getStudentList() {
         List<Student> userList = new ArrayList<>();
         String query = "SELECT * FROM `student` left JOIN course on student.C_ID = course.C_ID LEFT JOIN semester ON semester.SEM_ID = student.SEM_ID LEFT JOIN section on student.SEC_ID = section.SECTION_ID; ";
@@ -354,6 +360,7 @@ public class UserServices {
      * @param teac_id
      * @return 
      */
+    @Override
     public List<Student> getStudentList(int teac_id) {
         List<Student> userList = new ArrayList<>();
         String query = "SELECT * from teacher LEFT JOIN subject ON teacher.TEAC_ID = subject.TEAC_ID LEFT JOIN student ON subject.SEM_ID = student.SEM_ID LEFT JOIN semester on student.SEM_ID = semester.SEM_ID LEFT JOIN course on semester.C_ID = course.C_ID LEFT JOIN section ON student.SEC_ID = section.SECTION_ID WHERE teacher.ACC_ID=? and student.STUD_ID IS NOT null;";
@@ -390,6 +397,7 @@ public class UserServices {
   This method is used in addTeacher jsp
      * @param user 
      */
+    @Override
     public void insertUser(User user) {
         String query = "insert into accounts (ACC_USERNAME,ACC_PASSWORD,ACC_ROLE)"
                 + "values(?,?,?)";
@@ -411,6 +419,7 @@ public class UserServices {
      * This method will insert teacher details in account and teacher table
      * @param teacher 
      */
+    @Override
     public void insertUser(Teacher teacher) {
         insertUser(teacher.getUser()); //This method will insert the teacher details in Accout table
         User newUser = getUser(teacher.getUser().getUsername(), teacher.getUser().getPassword());
@@ -435,6 +444,7 @@ public class UserServices {
      * This method will insert student in student and account tables
      * @param student 
      */
+    @Override
     public void insertUser(Student student) {
         insertUser(student.getUser()); //This method will insert the student details in Accout table
         User newUser = getUser(student.getUser().getUsername(), student.getUser().getPassword());
@@ -459,6 +469,7 @@ public class UserServices {
         }
     }
     
+    @Override
      public void insertUserActivity(int acc_id) {
         
         String query = "INSERT INTO `user_activity`(`USER_ID`) VALUES (?)";
@@ -478,6 +489,7 @@ public class UserServices {
      * This method will delete a user from account table
      * @param acc_id 
      */
+    @Override
     public void deleteUser(int acc_id) {
         String query = "DELETE FROM `accounts` WHERE ACC_ID = ?";
         PreparedStatement pstm = new DBConnection().getStatement(query);
@@ -494,6 +506,7 @@ public class UserServices {
      * This method will delete the teacher from teacher and account table
      * @param acc_id 
      */
+    @Override
     public void deleteTeacher(int acc_id) {
         deleteUser(acc_id);
         String query = "DELETE FROM `teacher` WHERE ACC_ID = ?";
@@ -512,6 +525,7 @@ public class UserServices {
      * This method is used for deleting a student completely
      * @param acc_id 
      */
+    @Override
     public void deleteStudent(int acc_id) {
         deleteUser(acc_id);
         String query = "DELETE FROM `student` WHERE ACC_ID = ?";
@@ -527,6 +541,7 @@ public class UserServices {
     }
     
     
+    @Override
     public void editUser(int id, User user) {
 
         String query = "update accounts set ACC_USERNAME=?,ACC_PASSWORD=?, ACC_ROLE=? where ACC_ID=?";
@@ -544,6 +559,7 @@ public class UserServices {
     }
     
     
+    @Override
     public void editUser(Teacher teacher) {
 
         String query = "UPDATE `teacher` SET `TEAC_NAME`=?,`TEAC_ADDRESS`=?,`TEAC_EMAIL`=?,`TEAC_PHONE`=? WHERE TEAC_ID=?";
@@ -563,6 +579,7 @@ public class UserServices {
         }
     }
    
+    @Override
     public boolean editUser(Student student) {
         String query = "UPDATE `student` SET `STUD_NAME`=?,`STUD_ADD`=?,`STUD_EMAIL`=?,`STUD_PHONE`=?, `SEM_ID`=?, `C_ID`=?, `SEC_ID`=? WHERE `STUD_ID`=?";
         PreparedStatement pstm = new DBConnection().getStatement(query);
@@ -587,6 +604,7 @@ public class UserServices {
     }
     
     
+    @Override
     public void editUserActivity(int acc_id, String status ) {
 
         String query = "update user_activity set STATUS=? where USER_ID=?";
@@ -603,6 +621,7 @@ public class UserServices {
     }
     
     
+    @Override
     public void updatePassword(int id, String password) {
         String query = "update accounts set ACC_PASSWORD=? where ACC_ID=?";
         PreparedStatement pstm = new DBConnection().getStatement(query);
@@ -617,6 +636,7 @@ public class UserServices {
     }
 
     
+    @Override
     public boolean hasSimilarUser( User user ) {
         String query = "SELECT * FROM `accounts` LEFT JOIN student on accounts.ACC_ID = student.ACC_ID LEFT JOIN teacher ON accounts.ACC_ID = teacher.ACC_ID where STUD_PHONE=? OR STUD_EMAIL=?";
         
@@ -636,6 +656,7 @@ public class UserServices {
     }
     
     
+    @Override
      public List<Message> getStudentMessages() {
         List<Message> messages = new ArrayList<>();
         String query = "SELECT * FROM `message` left join student on message.stud_id = student.acc_id";
@@ -655,6 +676,12 @@ public class UserServices {
         return messages;
     }
     
+    /**
+     *
+     * @param acc_id
+     * @return
+     */
+    @Override
         public List<Message> getStudentMessages(int acc_id) {
         List<Message> messages = new ArrayList<>();
         String query = "SELECT * FROM `message` left join student on message.stud_id = student.acc_id where student.acc_id = ?";
@@ -676,6 +703,7 @@ public class UserServices {
         return messages;
     }
     
+    @Override
     public List<Message> getTodayMessages() {
         List<Message> messages = new ArrayList<>();
         String query = "SELECT * FROM `message` left join student on message.stud_id = student.acc_id LEFT JOIN SEMESTER on student.sem_id = semester.sem_id where DATE(`MESSAGE_DATE`) = CURDATE()";
@@ -707,6 +735,7 @@ public class UserServices {
         return messages;
     }
     
+    @Override
     public void insertMessage(Message message) {
         String query = "INSERT INTO `message`(`MESSAGE_TEXT`, `STUD_ID`, `CATEGORY`) VALUES(?, ?, ?)";
         PreparedStatement pstm = new DBConnection().getStatement(query);
@@ -722,6 +751,7 @@ public class UserServices {
         } 
     }
     
+    @Override
     public void updateMessageStatus(int m_id, String status) {
         String query = "UPDATE message set status= ? where m_id=?" ;
         PreparedStatement pstm = new DBConnection().getStatement(query);
@@ -734,4 +764,5 @@ public class UserServices {
         } 
     }
 
+ 
 }

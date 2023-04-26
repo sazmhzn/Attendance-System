@@ -114,6 +114,9 @@ public class PageChange extends HttpServlet {
                         acc_id = Integer.parseInt(c.getValue());
                     }
                 }
+            } else {
+                RequestDispatcher rd = request.getRequestDispatcher("/Pages/login.jsp");
+                rd.forward(request, response);
             }
 
             System.out.println("The teacher acc_ id in attencesheet ID: " + acc_id);
@@ -162,6 +165,9 @@ public class PageChange extends HttpServlet {
                        acc_id = Integer.parseInt(c.getValue());
                     }
                 }
+            }  else {
+                RequestDispatcher rd = request.getRequestDispatcher("/Pages/login.jsp");
+                rd.forward(request, response);
             }
 
             System.out.println("The teacher acc_ id in attencesheet Details: " + acc_id);
@@ -191,6 +197,9 @@ public class PageChange extends HttpServlet {
                         acc_id = Integer.parseInt(c.getValue());
                     }
                 }
+            }  else {
+                RequestDispatcher rd = request.getRequestDispatcher("/Pages/login.jsp");
+                rd.forward(request, response);
             }
             
             for(Cookie c : cookie) {
@@ -236,6 +245,9 @@ public class PageChange extends HttpServlet {
                         teac_id = Integer.parseInt(c.getValue());
                     }
                 }
+            }  else {
+                RequestDispatcher rd = request.getRequestDispatcher("/Pages/login.jsp");
+                rd.forward(request, response);
             }
             
             
@@ -400,7 +412,19 @@ public class PageChange extends HttpServlet {
         
 
         if (page.equalsIgnoreCase("adminDashboard")) {
-
+            int teac_id = 0;
+            if (cookie != null) {
+                System.out.println("Cookie is not null");
+                for (Cookie c : cookie) {
+                    if (c.getName().equalsIgnoreCase("id")) {
+                        teac_id = Integer.parseInt(c.getValue());
+                    }
+                }
+            }  else {
+                RequestDispatcher rd = request.getRequestDispatcher("/Pages/login.jsp");
+                rd.forward(request, response);
+            }
+            
             List<Teacher> teacherList = new UserServices().getTeacherList();
             request.setAttribute("totalTeacher", teacherList.size());
             request.setAttribute("teacherList", teacherList);
